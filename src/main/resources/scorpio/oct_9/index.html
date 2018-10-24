@@ -1,0 +1,3174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Tonnage</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/material-bootstrap-wizard-custom.css">
+	<link rel="stylesheet" type="text/css" href="css/datepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="css/email.css">
+	<link rel="icon" href="images/icon-img.png" type="image/x-icon"/>
+ 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+</head>
+<body> 
+    <div class="container-fluid">
+        <div class="row">
+	        <div class="col-sm-12">
+	            <div class="wizard-container">
+	                <div class="card wizard-card" data-color="red" id="wizard">
+	                    <form action="" method="" class="">
+	                    	<div class="wizard-header">
+	                    		<div class="row">
+	                    			<div class="col-sm-12 logo-text">
+	                    				<h2 class="m-0">Tonnage</h2>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+							<div class="wizard-navigation">
+								<ul>
+		                            <li><a href="#tonnage" class="tonnage" data-toggle="tab">Tonnage</a></li>
+		                            <li><a href="#spot" class="createNewF" data-toggle="tab">Spot</a></li>
+		                            <li><a href="#tc-reports" class="sf-objects" data-toggle="tab">TC Reports</a></li>
+		                            <li><a href="#error-list" class="externalDataF" data-toggle="tab">Error List</a></li>
+		                            <li><a href="#email-client" class="transformationF" data-toggle="tab">Email Client</a></li>
+		                        </ul>
+							</div>
+
+	                        <div class="tab-content">
+	                            <div class="tab-pane" id="tonnage">
+	                            	<div class="row">
+		                            	<div class="col-sm-12">
+			                            	<div class="row">
+				                            	<div class="col-sm-12">
+				                                	<h4 class="info-text"> 
+				                                	    Tonnage Page
+				                                		<div id="tonnageExcelUrl">
+					                                		</div>
+				                            			<!--  <a href="#" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>-->
+				                                	</h4>
+				                            	</div>
+				                            	<div class="col-sm-12">
+				                            		<div class="row" id="draggable" class="draggable-table">
+			                            				<div class="col-sm-1 more-tr text-right col-md-1-width">
+			                            					<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i class="fa fa-plus"></i></a>
+			                            					<a class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i class="fa fa-minus"></i></a>
+			                            				</div>
+			                            				<div class="col-sm-10 draggable-table p-0">
+												            <table class="table-bordered table-hover bg-light table-add-rules find-table">
+												                <thead class="btn-info">
+												                  	<tr>
+												                    	<th>SR No</th>
+												                    	<th>Report Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Reposition Region <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Cargo Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Vessel Name <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Vessel Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Built <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>DWT <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Cubics <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>LOA <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>ICE <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Stern Line <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Owners <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Operators <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Employment Status <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Open Port <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Open Date <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>ETA Basis <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Comment <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Source <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Report Timestamp <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Check Email <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th class="display-none"></th>
+												                    	<th>Actions </th>
+												                  	</tr>
+												                </thead>
+												                <tbody id="tonnageTable">
+												                  <!--  	<tr>
+												                  		<td>1</td>
+												                  		<td>
+												                  			<span>Position List</span>
+												                  			<input type="text" name="" class="td-input" value="Position List">
+												                  		</td>
+												                  		<td>
+												                  			<span>AG</span>
+												                  			<input type="text" name="" class="td-input" value="AG">
+												                  		</td>
+												                  		<td>
+												                  			<span>Clean/CPP</span>
+												                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+												                  		</td>
+												                  		<td>
+												                  			<span>ACE</span>
+												                  			<input type="text" name="" class="td-input" value="ACE">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>IMS</span>
+												                  			<input type="text" name="" class="td-input" value="IMS">
+												                  		</td>
+												                  		<td>
+												                  			<span>Unfixed</span>
+												                  			<input type="text" name="" class="td-input" value="Unfixed">
+												                  		</td>
+												                  		<td>
+												                  			<span>SOHAR</span>
+												                  			<input type="text" name="" class="td-input" value="SOHAR">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>LGO</span>
+												                  			<input type="text" name="" class="td-input" value="LGO">
+												                  		</td>
+												                  		<td>
+												                  			<span>Affinity</span>
+												                  			<input type="text" name="" class="td-input" value="Affinity">
+												                  		</td>
+												                  		<td>
+												                  			<span>#####</span>
+												                  			<input type="text" name="" class="td-input" value="#####">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>2</td>
+												                  		<td class="simple-td boxWidth">
+												                  			<span>Position List</span>
+												                  			<input type="text" name="" class="td-input" value="Position List">
+												                  			<input type="text" name="" hidden="hidden" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>AG</span>
+												                  			<input type="text" name="" class="td-input" value="AG">
+												                  		</td>
+												                  		<td>
+												                  			<span>Clean/CPP</span>
+												                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+												                  		</td>
+												                  		<td>
+												                  			<span>ACE</span>
+												                  			<input type="text" name="" class="td-input" value="ACE">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>IMS</span>
+												                  			<input type="text" name="" class="td-input" value="IMS">
+												                  		</td>
+												                  		<td>
+												                  			<span>Unfixed</span>
+												                  			<input type="text" name="" class="td-input" value="Unfixed">
+												                  		</td>
+												                  		<td>
+												                  			<span>SOHAR</span>
+												                  			<input type="text" name="" class="td-input" value="SOHAR">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>LGO</span>
+												                  			<input type="text" name="" class="td-input" value="LGO">
+												                  		</td>
+												                  		<td>
+												                  			<span>Affinity</span>
+												                  			<input type="text" name="" class="td-input" value="Affinity">
+												                  		</td>
+												                  		<td>
+												                  			<span>#####</span>
+												                  			<input type="text" name="" class="td-input" value="#####">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>3</td>
+												                  		<td class="simple-td boxWidth">
+												                  			<span>Position List</span>
+												                  			<input type="text" name="" class="td-input" value="Position List">
+												                  			<input type="text" name="" hidden="hidden" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>AG</span>
+												                  			<input type="text" name="" class="td-input" value="AG">
+												                  		</td>
+												                  		<td>
+												                  			<span>Clean/CPP</span>
+												                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+												                  		</td>
+												                  		<td>
+												                  			<span>ACE</span>
+												                  			<input type="text" name="" class="td-input" value="ACE">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>IMS</span>
+												                  			<input type="text" name="" class="td-input" value="IMS">
+												                  		</td>
+												                  		<td>
+												                  			<span>Unfixed</span>
+												                  			<input type="text" name="" class="td-input" value="Unfixed">
+												                  		</td>
+												                  		<td>
+												                  			<span>SOHAR</span>
+												                  			<input type="text" name="" class="td-input" value="SOHAR">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>LGO</span>
+												                  			<input type="text" name="" class="td-input" value="LGO">
+												                  		</td>
+												                  		<td>
+												                  			<span>Affinity</span>
+												                  			<input type="text" name="" class="td-input" value="Affinity">
+												                  		</td>
+												                  		<td>
+												                  			<span>#####</span>
+												                  			<input type="text" name="" class="td-input" value="#####">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>4</td>
+												                  		<td class="simple-td boxWidth">
+												                  			<span>Position List</span>
+												                  			<input type="text" name="" class="td-input" value="Position List">
+												                  			<input type="text" name="" hidden="hidden" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>AG</span>
+												                  			<input type="text" name="" class="td-input" value="AG">
+												                  		</td>
+												                  		<td>
+												                  			<span>Clean/CPP</span>
+												                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+												                  		</td>
+												                  		<td>
+												                  			<span>ACE</span>
+												                  			<input type="text" name="" class="td-input" value="ACE">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span></span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>IMS</span>
+												                  			<input type="text" name="" class="td-input" value="IMS">
+												                  		</td>
+												                  		<td>
+												                  			<span>Unfixed</span>
+												                  			<input type="text" name="" class="td-input" value="Unfixed">
+												                  		</td>
+												                  		<td>
+												                  			<span>SOHAR</span>
+												                  			<input type="text" name="" class="td-input" value="SOHAR">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>30-jul-18</span>
+												                  			<input type="text" name="" class="td-input" value="30-jul-18">
+												                  		</td>
+												                  		<td>
+												                  			<span>LGO</span>
+												                  			<input type="text" name="" class="td-input" value="LGO">
+												                  		</td>
+												                  		<td>
+												                  			<span>Affinity</span>
+												                  			<input type="text" name="" class="td-input" value="Affinity">
+												                  		</td>
+												                  		<td>
+												                  			<span>#####</span>
+												                  			<input type="text" name="" class="td-input" value="#####">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr class="firstTr" style="display: none;">
+												                  		<td>4</td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	-->
+												                </tbody>
+												            </table>       
+												  		</div>
+												  	</div>
+												  	<div class="row">
+												  		<div class="col-sm-10 col-sm-offset-1">
+												  			<br>
+												  			<!--  <a href="#" class="btn btn-success" >Save</a>-->
+														  	<button type="button" class="btn btn-success" id="TonnageUi">Save</button>
+												  		</div>
+												  	</div>
+				                            	</div>
+				                            </div>
+				                        </div>
+				                    </div>        	
+	                            </div>
+	                            <div class="tab-pane" id="spot">
+	                            	<div class="row">
+		                            	<div class="col-sm-12">
+			                            	<div class="row">
+				                            	<div class="col-sm-12">
+				                                	<h4 class="info-text"> 
+				                                		Spot Page
+				                                		<div id="spotExcelUrl">
+					                                		</div>
+														<!--  <a href="#" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>-->
+														
+													</h4>
+				                            	</div>
+				                            	<div class="col-sm-12">
+				                            		<div class="row" id="draggable" class="draggable-table">
+			                            				<div class="col-sm-1 more-tr text-right">
+			                            					<a class="btn add-new-tab-btn1 add-new-tab-btn1-new btn-success p-0 m-0 sm0-btn-custom add"><i class="fa fa-plus"></i></a>
+			                            					<a class="btn add-new-tab-btn2  btn-success p-0 m-0 sm0-btn-custom remove"><i class="fa fa-minus"></i></a>
+			                            				</div>
+			                            				<div class="col-sm-10 draggable-table p-0">
+												            <table class="table table-bordered table-hover bg-light table-add-rules">
+												                <thead class="btn-info new-th">
+												                  	<tr>
+												                    	<th>SR No</th>
+												                    	<th>Information <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Fixture Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Charterer <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Status <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Cargo Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Cargo Grade <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Cargo Qty <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>LC Start <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>LC End <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Load Port <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Disc Port <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Vessel Name <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Rate Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Rate <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Comments <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Report Date <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Source <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Vessel type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th>Check Email <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+												                    	<th class="display-none"></th>
+												                    	<th>Actions</th>
+												                  	</tr>
+												                </thead>
+												                <tbody id ="SpotTable">
+												                  <!-- 	<tr>
+												                  		<td>1</td>
+												                  		<td>
+												                  			<span>Market</span>
+												                  			<input type="text" name="" class="td-input" value="Market">
+												                  		</td>
+												                  		<td>
+												                  			<span>Spot</span>
+												                  			<input type="text" name="" class="td-input" value="Spot">
+												                  		</td>
+												                  		<td>
+												                  			<span>BBNAFT</span>
+												                  			<input type="text" name="" class="td-input" value="BBNAFT">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>CPP/Clean</span>
+												                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+												                  		</td>
+												                  		<td>
+												                  			<span>Naptha</span>
+												                  			<input type="text" name="" class="td-input" value="Naptha">
+												                  		</td>
+												                  		<td>
+												                  			<span>30</span>
+												                  			<input type="text" name="" class="td-input" value="30">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/5/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/5/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/6/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/6/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>Riga</span>
+												                  			<input type="text" name="" class="td-input" value="Riga">
+												                  		</td>
+												                  		<td>
+												                  			<span>UKC</span>
+												                  			<input type="text" name="" class="td-input" value="UKC">
+												                  		</td>
+												                  		<td>
+												                  			<span>Hans Scholl</span>
+												                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+												                  		</td>
+												                  		<td>
+												                  			<span>WS</span>
+												                  			<input type="text" name="" class="td-input" value="WS">
+												                  		</td>
+												                  		<td>
+												                  			<span>125</span>
+												                  			<input type="text" name="" class="td-input" value="125">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/3/2018  10:30:00 PM</span>
+												                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+												                  		</td>
+												                  		<td>
+												                  			<span>Braemar</span>
+												                  			<input type="text" name="" class="td-input" value="Braemar">
+												                  		</td>
+												                  		<td>
+												                  			<span>This will be picked from Vessel Databse</span>
+												                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>2</td>
+												                  		<td>
+												                  			<span>Market</span>
+												                  			<input type="text" name="" class="td-input" value="Market">
+												                  		</td>
+												                  		<td>
+												                  			<span>Spot</span>
+												                  			<input type="text" name="" class="td-input" value="Spot">
+												                  		</td>
+												                  		<td>
+												                  			<span>BBNAFT</span>
+												                  			<input type="text" name="" class="td-input" value="BBNAFT">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>CPP/Clean</span>
+												                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+												                  		</td>
+												                  		<td>
+												                  			<span>Naptha</span>
+												                  			<input type="text" name="" class="td-input" value="Naptha">
+												                  		</td>
+												                  		<td>
+												                  			<span>30</span>
+												                  			<input type="text" name="" class="td-input" value="30">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/5/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/5/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/6/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/6/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>Riga</span>
+												                  			<input type="text" name="" class="td-input" value="Riga">
+												                  		</td>
+												                  		<td>
+												                  			<span>UKC</span>
+												                  			<input type="text" name="" class="td-input" value="UKC">
+												                  		</td>
+												                  		<td>
+												                  			<span>Hans Scholl</span>
+												                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+												                  		</td>
+												                  		<td>
+												                  			<span>WS</span>
+												                  			<input type="text" name="" class="td-input" value="WS">
+												                  		</td>
+												                  		<td>
+												                  			<span>125</span>
+												                  			<input type="text" name="" class="td-input" value="125">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/3/2018  10:30:00 PM</span>
+												                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+												                  		</td>
+												                  		<td>
+												                  			<span>Braemar</span>
+												                  			<input type="text" name="" class="td-input" value="Braemar">
+												                  		</td>
+												                  		<td>
+												                  			<span>This will be picked from Vessel Databse</span>
+												                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>3</td>
+												                  		<td>
+												                  			<span>Market</span>
+												                  			<input type="text" name="" class="td-input" value="Market">
+												                  		</td>
+												                  		<td>
+												                  			<span>Spot</span>
+												                  			<input type="text" name="" class="td-input" value="Spot">
+												                  		</td>
+												                  		<td>
+												                  			<span>BBNAFT</span>
+												                  			<input type="text" name="" class="td-input" value="BBNAFT">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>CPP/Clean</span>
+												                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+												                  		</td>
+												                  		<td>
+												                  			<span>Naptha</span>
+												                  			<input type="text" name="" class="td-input" value="Naptha">
+												                  		</td>
+												                  		<td>
+												                  			<span>30</span>
+												                  			<input type="text" name="" class="td-input" value="30">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/5/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/5/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/6/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/6/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>Riga</span>
+												                  			<input type="text" name="" class="td-input" value="Riga">
+												                  		</td>
+												                  		<td>
+												                  			<span>UKC</span>
+												                  			<input type="text" name="" class="td-input" value="UKC">
+												                  		</td>
+												                  		<td>
+												                  			<span>Hans Scholl</span>
+												                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+												                  		</td>
+												                  		<td>
+												                  			<span>WS</span>
+												                  			<input type="text" name="" class="td-input" value="WS">
+												                  		</td>
+												                  		<td>
+												                  			<span>125</span>
+												                  			<input type="text" name="" class="td-input" value="125">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/3/2018  10:30:00 PM</span>
+												                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+												                  		</td>
+												                  		<td>
+												                  			<span>Braemar</span>
+												                  			<input type="text" name="" class="td-input" value="Braemar">
+												                  		</td>
+												                  		<td>
+												                  			<span>This will be picked from Vessel Databse</span>
+												                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>4</td>
+												                  		<td>
+												                  			<span>Market</span>
+												                  			<input type="text" name="" class="td-input" value="Market">
+												                  		</td>
+												                  		<td>
+												                  			<span>Spot</span>
+												                  			<input type="text" name="" class="td-input" value="Spot">
+												                  		</td>
+												                  		<td>
+												                  			<span>BBNAFT</span>
+												                  			<input type="text" name="" class="td-input" value="BBNAFT">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>CPP/Clean</span>
+												                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+												                  		</td>
+												                  		<td>
+												                  			<span>Naptha</span>
+												                  			<input type="text" name="" class="td-input" value="Naptha">
+												                  		</td>
+												                  		<td>
+												                  			<span>30</span>
+												                  			<input type="text" name="" class="td-input" value="30">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/5/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/5/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/6/2018</span>
+												                  			<input type="text" name="" class="td-input" value="8/6/2018">
+												                  		</td>
+												                  		<td>
+												                  			<span>Riga</span>
+												                  			<input type="text" name="" class="td-input" value="Riga">
+												                  		</td>
+												                  		<td>
+												                  			<span>UKC</span>
+												                  			<input type="text" name="" class="td-input" value="UKC">
+												                  		</td>
+												                  		<td>
+												                  			<span>Hans Scholl</span>
+												                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+												                  		</td>
+												                  		<td>
+												                  			<span>WS</span>
+												                  			<input type="text" name="" class="td-input" value="WS">
+												                  		</td>
+												                  		<td>
+												                  			<span>125</span>
+												                  			<input type="text" name="" class="td-input" value="125">
+												                  		</td>
+												                  		<td>
+												                  			<span>Subs</span>
+												                  			<input type="text" name="" class="td-input" value="Subs">
+												                  		</td>
+												                  		<td>
+												                  			<span>8/3/2018  10:30:00 PM</span>
+												                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+												                  		</td>
+												                  		<td>
+												                  			<span>Braemar</span>
+												                  			<input type="text" name="" class="td-input" value="Braemar">
+												                  		</td>
+												                  		<td>
+												                  			<span>This will be picked from Vessel Databse</span>
+												                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+												                  		</td>
+												                  		<td>
+												                  			<span>Link</span>
+												                  			<input type="text" name="" class="td-input" value="Link">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<tr  class="firstTr" style="display: none;">
+												                  		<td>4</td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a href="#">
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a href="#">
+												                  		</td>
+												                  	</tr>
+												                  	 -->
+												                  	
+												                </tbody>
+												            </table>       
+												  		</div>
+												  	</div>
+												  	<div class="row">
+												  		<div class="col-sm-10 col-sm-offset-1">
+												  			<br>
+												  			<!--  <a href="#" class="btn btn-success" >Save</a>-->
+														  	<button type="button" class="btn btn-success" id="SpotUi">Save</button>
+												  		</div>
+												  	</div>
+				                            	</div>
+				                            </div>
+				                        </div>
+				                    </div>  
+	                            </div>
+	                            <div class="tab-pane" id="tc-reports">
+	                            	<div class="row">
+	                            		<div class="col-sm-4 col-sm-offset-4">
+                                			<h4 class="info-text">TC Management</h4>
+	                            		</div>
+										<div class="col-sm-12">
+											<ul class="nav-tabs-custom" role="tablist">
+											  	<li class="active"><a href="#time-charter-report" role="tab" data-toggle="tab">Time Charter Report</a></li>
+											  	<li><a href="#brokertc-rate" role="tab" data-toggle="tab">Broker TC Rate</a></li>
+											</ul>
+
+											<div class="tab-content tab-content-second">
+											  	<div class="tab-pane active" id="time-charter-report">
+											  		<div class="col-sm-12">
+					                                	<h4 class="info-text"> 
+					                                		Time Charter Report
+															<div id="TimecharterReportsExcelUrl">
+					                                		</div>
+															<!-- <a href="#" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a> -->
+														</h4>
+				                            		</div>
+											  		<div class="col-md-12">
+														<div class="tab-pane active" id="time-charter-report">
+															<div class="row" id="draggable" class="draggable-table">
+																<div class="col-sm-1 more-tr-first-add text-right">
+																	<a class="btn add-new-tab-btn1 btn-success p-0 m-0 pull-left sm0-btn-custom add-first-new"><i class="fa fa-plus"></i></a>
+																	<a class="btn add-new-tab-btn2 btn-success p-0 m-0 ull-right sm0-btn-custom remove-first-new"><i class="fa fa-minus"></i></a>
+																</div>
+																<div class="col-sm-11 draggable-table p-0">
+													            	<table class="table table-bordered table-hover bg-light table-add-rules">
+													                	<thead class="btn-info new-th">
+														                  	<tr>
+														                    	<th>SR No</th>
+														                    	<th>Information <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Spot / TC <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Date <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Vessel Name <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>CPP/DPP <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Charterer <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Delivery <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Delivery Place <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Period <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Period unit <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Redelivery <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>TC Rate <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Rate <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Unit <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Comments <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Source <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Vessel Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Time Stamp <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Check Email <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th class="display-none"></th>
+														                    	<th>Actions</th>
+														                  	</tr>
+													                	</thead>
+													                	<tbody id="TimeCharterReportsTable">
+														                  <!--  	<tr>
+														                  		<td>1</td>
+														                  		<td>
+														                  			<span>Market</span>
+														                  			<input type="text" name="" class="td-input" value="Market">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>TC</span>
+														                  			<input type="text" name="" class="td-input" value="TC">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>7/27/2018</span>
+														                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>C. Spirit</span>
+														                  			<input type="text" name="" class="td-input" value="C. Spirit">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Dirty/DPP</span>
+														                  			<input type="text" name="" class="td-input" value="Dirty/DPP">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Reliance</span>
+														                  			<input type="text" name="" class="td-input" value="Reliance">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Q3</span>
+														                  			<input type="text" name="" class="td-input" value="Q3">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>India</span>
+														                  			<input type="text" name="" class="td-input" value="India">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>12+12</span>
+														                  			<input type="text" name="" class="td-input" value="12+12">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>months</span>
+														                  			<input type="text" name="" class="td-input" value="months">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>7/1/2019</span>
+														                  			<input type="text" name="" class="td-input" value="7/1/2019">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>RNR</span>
+														                  			<input type="text" name="" class="td-input" value="RNR">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>RNR</span>
+														                  			<input type="text" name="" class="td-input" value="RNR">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>USD</span>
+														                  			<input type="text" name="" class="td-input" value="USD">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>DTY Del India</span>
+														                  			<input type="text" name="" class="td-input" value="DTY Del India">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Braemar</span>
+														                  			<input type="text" name="" class="td-input" value="Braemar">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>from Vessel Database</span>
+														                  			<input type="text" name="" class="td-input" value="from Vessel Database">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>7/27/2018</span>
+														                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Link</span>
+														                  			<input type="text" name="" class="td-input" value="Link">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td class="display-none"></td>
+														                  		<td>
+														                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+														                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+														                  		</td>
+														                  	</tr>
+														                  	<tr>
+														                  		<td>2</td>
+														                  		<td>
+														                  			<span>Market</span>
+														                  			<input type="text" name="" class="td-input" value="Market">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>TC</span>
+														                  			<input type="text" name="" class="td-input" value="TC">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>7/27/2018</span>
+														                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>C. Spirit</span>
+														                  			<input type="text" name="" class="td-input" value="C. Spirit">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Dirty/DPP</span>
+														                  			<input type="text" name="" class="td-input" value="Dirty/DPP">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Reliance</span>
+														                  			<input type="text" name="" class="td-input" value="Reliance">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Q3</span>
+														                  			<input type="text" name="" class="td-input" value="Q3">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>India</span>
+														                  			<input type="text" name="" class="td-input" value="India">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>12+12</span>
+														                  			<input type="text" name="" class="td-input" value="12+12">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>months</span>
+														                  			<input type="text" name="" class="td-input" value="months">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>7/1/2019</span>
+														                  			<input type="text" name="" class="td-input" value="7/1/2019">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>RNR</span>
+														                  			<input type="text" name="" class="td-input" value="RNR">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>RNR</span>
+														                  			<input type="text" name="" class="td-input" value="RNR">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>USD</span>
+														                  			<input type="text" name="" class="td-input" value="USD">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>DTY Del India</span>
+														                  			<input type="text" name="" class="td-input" value="DTY Del India">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Braemar</span>
+														                  			<input type="text" name="" class="td-input" value="Braemar">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>from Vessel Database</span>
+														                  			<input type="text" name="" class="td-input" value="from Vessel Database">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>7/27/2018</span>
+														                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Link</span>
+														                  			<input type="text" name="" class="td-input" value="Link">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td class="display-none"></td>
+														                  		<td>
+														                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+														                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+														                  		</td>
+														                  	</tr>
+														                  	<tr class="firstTr" style="display: none;">
+														                  		<td>2</td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="display-none"></td>
+														                  		<td>
+														                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+														                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+														                  		</td>
+													                  		</tr>
+													                  		-->
+													                	</tbody>
+													            	</table>       
+													  			</div>
+													  		</div>
+													  		<div class="row">
+														  		<div class="col-sm-10 col-sm-offset-1">
+														  			<br>
+														  			<!--  <a href="#" class="btn btn-success" >Save</a>-->
+														  			<button type="button" class="btn btn-success" id="TimeCharterReportsUi">Save</button>
+														  		</div>
+														  	</div>
+													  	</div>
+													</div>
+											  	</div>
+											  	<div class="tab-pane" id="brokertc-rate">
+											  		<div class="col-sm-12">
+					                                	<h4 class="info-text"> 
+					                                		Broker TC Rate
+															<div id="brokertcrateExcelUrl">
+					                                		</div>
+															<!-- <a href="#" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>-->
+														</h4>
+				                            		</div>
+											  		<div class="col-md-12">
+														<div class="tab-pane-new active" id="time-charter-report">
+															<div class="row" id="draggable" class="draggable-table">
+																<div class="col-sm-1 more-tr-add text-right">
+																	<a class="btn btn-success p-0 m-0 add-new-tab-btn1 sm0-btn-custom add-new"><i class="fa fa-plus"></i></a>
+																	<a class="btn btn-success p-0 m-0 add-new-tab-btn2 sm0-btn-custom remove-new"><i class="fa fa-minus"></i></a>
+																</div>
+																<div class="col-sm-11 draggable-table p-0">
+													            	<table class="table table-bordered table-hover bg-light table-add-rules">
+													                	<thead class="btn-info new-th">
+														                  	<tr>
+														                    	<th>SR No</th>
+														                    	<th>Broker <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Vessel Type <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Month-Year <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>1 yr <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>2 yr <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>3 yr <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>5 yr <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th>Check Email <a class="add-class"><i class="fa fa-minus" aria-hidden="true"></i></a></th>
+														                    	<th class="display-none"></th>
+														                    	<th>Actions</th>
+														                  	</tr>
+													                	</thead>
+													                	<tbody id="BrokerTcRate">
+														                  <!--  	<tr>
+														                  		<td>1</td>
+														                  		<td>
+														                  			<span>Braemar</span>
+														                  			<input type="text" name="" class="td-input" value="Braemar">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Handymax</span>
+														                  			<input type="text" name="" class="td-input" value="Handymax">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>jan-18</span>
+														                  			<input type="text" name="" class="td-input" value="jan-18">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>12000</span>
+														                  			<input type="text" name="" class="td-input" value="12000">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>13250</span>
+														                  			<input type="text" name="" class="td-input" value="13250">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>14000</span>
+														                  			<input type="text" name="" class="td-input" value="14000">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>-</span>
+														                  			<input type="text" name="" class="td-input" value="-">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Link</span>
+														                  			<input type="text" name="" class="td-input" value="Link">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td class="display-none"></td>
+														                  		<td>
+														                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+														                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+														                  		</td>
+														                  	</tr>
+														                  	<tr>
+														                  		<td>2</td>
+														                  		<td>
+														                  			<span>Braemar</span>
+														                  			<input type="text" name="" class="td-input" value="Braemar">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Handymax</span>
+														                  			<input type="text" name="" class="td-input" value="Handymax">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>jan-18</span>
+														                  			<input type="text" name="" class="td-input" value="jan-18">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>12000</span>
+														                  			<input type="text" name="" class="td-input" value="12000">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>13250</span>
+														                  			<input type="text" name="" class="td-input" value="13250">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>14000</span>
+														                  			<input type="text" name="" class="td-input" value="14000">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>13500</span>
+														                  			<input type="text" name="" class="td-input" value="13500">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td>
+														                  			<span>Link</span>
+														                  			<input type="text" name="" class="td-input" value="Link">
+																					<input type="text" name="" hidden="hidden" value="">
+														                  		</td>
+														                  		<td class="display-none"></td>
+														                  		<td>
+														                  			<a href="#" class="btn btn-success btn-sm edit-table-btn" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+														                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+														                  		</td>
+														                  	</tr>
+														                  	
+														                  	<tr class="firstTr" style="display: none;">
+														                  		<td>2</td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+														                  		<td class="display-none"></td>
+														                  		<td>
+														                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+														                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+														                  		</td>
+													                  		</tr>
+													                  		-->
+													                	</tbody>
+													            	</table>       
+													  			</div>
+													  		</div>
+													  		<div class="row">
+														  		<div class="col-sm-10 col-sm-offset-1">
+														  			<br>
+														  			<!--  <a href="#" class="btn btn-success" >Save</a>-->
+														  			<button type="button" class="btn btn-success" id="BrokerTcRateUi">Save</button>
+														  		</div>
+														  	</div>
+													  	</div>
+													</div>
+											  	</div>
+											</div>
+										</div>
+									</div>
+	                            </div>
+	                            <div class="tab-pane" id="error-list">
+	                            	<div class="row">
+		                            	<div class="col-sm-12">
+			                            	<div class="row">
+				                            	<div class="col-sm-12">
+				                                	<h4 class="info-text"> 
+				                                		Error List
+														<a href="#" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>
+													</h4>
+				                            	</div>
+				                            	<div class="col-sm-12">
+				                            		<div class="row" id="draggable" class="draggable-table">
+			                            				<div class="col-sm-1 more-tr text-right col-md-1-width">
+			                            					<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i class="fa fa-plus"></i></a>
+			                            					<a class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i class="fa fa-minus"></i></a>
+			                            				</div>
+			                            				<div class="col-sm-10 draggable-table p-0">
+												            <table class="table table-bordered table-hover bg-light table-add-rules">
+												                <thead class="btn-info">
+												                  	<tr class="not-dubble-text">
+												                    	<th>SR No</th>
+												                    	<th>Description</th>
+												                    	<th>Check Email</th>
+												                    	<th class="display-none"></th>
+												                  	</tr>
+												                </thead>
+												                <tbody>
+												                  	<tr class="not-dubble-text">
+												                  		<td>1</td>
+												                  		<td>Position List</td>
+												                  		<td>Link</td>
+												                  		<td class="display-none"></td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>2</td>
+												                  		<td>Position List</td>
+												                  		<td>Link</td>
+												                  		<td class="display-none"></td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>3</td>
+												                  		<td>Position List</td>
+												                  		<td>Link</td>
+												                  		<td class="display-none"></td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>4</td>
+												                  		<td>Position List</td>
+												                  		<td>Link</td>
+												                  		<td class="display-none"></td>
+												                  	</tr>
+												                  	<tr>
+												                  		<td>5</td>
+												                  		<td>Position List</td>
+												                  		<td>Link</td>
+												                  		<td class="display-none"></td>
+												                  	</tr>
+												                  	<tr  class="firstTr" style="display: none;">
+												                  		<td>5</td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="display-none"></td>
+												                  	</tr>
+												                </tbody>
+												            </table>       
+												  		</div>
+												  	</div>
+												  	<div class="row">
+												  		<div class="col-sm-10 col-sm-offset-1">
+												  			<br>
+												  			<a href="#" class="btn btn-success">Save</a>
+												  		</div>
+												  	</div>
+				                            	</div>
+				                            </div>
+				                        </div>
+				                    </div>
+	                            </div>
+	                            <div class="tab-pane" id="email-client">
+                            		<div class="row">
+                            			<div id="email-body">
+										    <div id="e-email-box">
+										      <div id="e-mail-body">
+										        <div id="e-mail-summary">
+										          <div class="mail-sorting dropdown">
+										            <a href="#" class="dropdownmenu" data-toggle="dropdown">Sort by: Date <span class="glyphicon glyphicon-triangle-bottom"></span></a>
+										            <ul class="dropdown-menu">
+										              <li><a href="#"><strong>Date</strong></a></li>
+										              <li><a href="#">Priority</a></li>
+										              <li><a href="#">Size</a></li>
+										            </ul>
+										            <h2 class="pagetitle">Inbox</h2>
+										          </div>
+										          <ul>
+										            <li class="attached unread active">
+										              <a href="#mail1" data-toggle="tab">
+										                <span class="received-date">20:24</span>
+										                <span class="sender-name">Angelo Mathew</span>
+										                <span class="sender-subject">New issue came while testing new product</span>
+										                <span class="sender-msg-excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown</span>
+										              </a>
+										              <div class="btn-group mail-quick-labeling" role="group">
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Personal/</button>
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span> Create Case</button>
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span> Do Nothing</button>
+										              </div>
+										            </li>
+										            <li class="attached unread">
+										              <a href="#mail2" data-toggle="tab">
+										                <span class="received-date">20:24</span>
+										                <span class="sender-name">Mary Grace</span>
+										                <span class="sender-subject">Require details of product 123</span>
+										                <span class="sender-msg-excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown</span>
+										              </a>
+										              <div class="btn-group mail-quick-labeling" role="group">
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Personal/</button>
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span> Create Case</button>
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span> Do Nothing</button>
+										              </div>
+										            </li>
+										            <li class="attached unread">
+										              <a href="#mail3" data-toggle="tab">
+										                <span class="received-date">02:24</span>
+										                <span class="sender-name">Rahul Dravid</span>
+										                <span class="sender-subject">Complaint of product 8898</span>
+										                <span class="sender-msg-excerpt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown</span>
+										              </a>
+										              <div class="btn-group mail-quick-labeling" role="group">
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Personal/</button>
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"></span> Create Case</button>
+										                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span> Do Nothing</button>
+										              </div>
+										            </li>
+										          </ul>
+										        </div>
+										        <div id="e-mail-main">
+										          <div id="e-topbar">
+										            <form class="navbar-form" role="search">
+													    <div class="input-group add-on">
+													      <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+													      <div class="input-group-btn">
+													        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+													      </div>
+													    </div>
+													  </form>
+										          </div>
+										          <div class="indiv-email tab-content">
+										            <div class="tab-pane active" id="mail1">
+										              <div class="email-subject">New issue came while testing new product</div>
+										              <div class="email-thread seen">
+										                <div class="email-sender">
+										                  <span class="received-stamp">20:24</span>
+										                  <img src="images/user.png" class="thumb" />
+										                  <div class="email-names-pull">
+										                    <span class="name">Rahul</span>
+										                    <div class="email-receiver">
+										                      <span class="email-to">Rahul; Ajay;</span>
+										                      <span class="email-cc">Ashok;</span>
+										                      <span class="email-bcc">UF;</span>
+										                    </div>
+										                  </div>
+										                </div>
+										                <div class="email-content">
+										                  <p>Hello Team</p>
+										                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										                </div>
+										              </div>
+										              <div class="email-thread delievered">
+										                <div class="email-sender">
+										                  <span class="received-stamp received">10:24</span>
+										                  <img src="images/user.png" class="thumb" />
+										                  <div class="email-names-pull">
+										                    <span class="name">Mary Grace</span>
+										                    <div class="email-receiver">
+										                      <span class="email-to">Mary Grace; Ajay;</span>
+										                      <span class="email-cc">Ashok;</span>
+										                      <span class="email-bcc">UF;</span>
+										                    </div>
+										                  </div>
+										                </div>
+										                <div class="email-content">
+										                  <p>Hello Rahul</p>
+										                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+										                </div>
+										              </div>
+												    </div>
+												    <div class="tab-pane" id="mail2">
+												      <div class="email-subject">Require details of product 123</div>
+												      <div class="email-thread spam">
+												        <div class="email-sender">
+												          <span class="received-stamp">20:24</span>
+												          <img src="images/user.png" class="thumb" />
+												          <div class="email-names-pull">
+												            <span class="name">Angelo Mathew</span>
+												            <div class="email-receiver">
+												              <span class="email-to">Umar Faruk;</span>
+												              <span class="email-cc">(100+)</span>
+												            </div>
+												          </div>
+												        </div>
+												        <div class="email-content">
+												          <p>Hello Man</p>
+												          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+												        </div>
+												      </div>
+										      
+													</div>
+													<div class="tab-pane" id="mail3">
+													  <div class="email-subject">Complaint of product 8898</div>
+													  <div class="email-thread not-delievered">
+													    <div class="email-sender">
+													      <span class="received-stamp">02:24</span>
+													      <img src="images/user.png" class="thumb" />
+													      <div class="email-names-pull">
+													        <span class="name">Rahul Dravid</span>
+													        <div class="email-receiver">
+													          <span class="email-to">Umar Faruk;</span>
+													          <span class="email-cc"></span>
+													        </div>
+													      </div>
+													    </div>
+													    <div class="email-content">
+													      <p>Hello Umar</p>
+													      <ul>
+													        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+													        <li>Curabitur eget lectus tempor, bibendum mi in, tempor sem.</li>
+													        <li>Vivamus quis erat laoreet mi blandit faucibus nec sed tortor.</li>
+													        <li>Mauris eget leo sit amet nisl pharetra porttitor sed at sem.</li>
+													        <li>Sed tincidunt diam sit amet egestas tincidunt.</li>
+													      </ul>
+													    </div>
+													   </div>
+													 </div>
+												    </div>
+												  </div>
+											   </div>
+											</div>
+										</div>
+                            		</div>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	            </div> <!-- wizard container -->
+	        </div>
+    	</div> <!-- row -->
+	</div> 
+	<script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="js/jquery.bootstrap.js" type="text/javascript"></script>
+	<script src="js/material-bootstrap-wizard.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<script src="js/jquery-ui-1.12.1.js"></script>
+	<script src="js/custom.js"></script>
+	
+  	<script type="text/javascript">
+  		$(document).ready(function(){
+  			var height = $(window).height();
+  			height = height - 45;
+  			$('.wizard-card').css('min-height', height+'px');
+  		});
+  	</script>
+  	
+  	<script>
+	
+	$(document).ready(function(){
+		
+		EmailFetchData();
+		TonnageUifetchdata();
+		
+		$("#TonnageUi").click(function() {
+			saveDataUiTonnage();
+			
+		});
+		
+		SpotUifetchdata();
+		
+		$("#SpotUi").click(function() {
+			saveDataUispot();
+		});
+		
+		    TimeCharterReportsUifetchdata();
+		
+		 $("#TimeCharterReportsUi").click(function() {
+			 saveDataUiTimeCharterReports();
+		 });
+		
+	     BrokerTcUifetchdata();
+	 	 
+		 $("#BrokerTcRateUi").click(function(e) {
+				saveDataUibrokertcrate();
+			   // editDataUibrokertcrate();
+			   
+	 			});  // submint ajax 
+	 		  	
+	});  // main document ready close
+	
+	
+	function EmailFetchData(){
+		
+		 var EmailUrl = 'http://35.199.31.139:8080/bernhard/testtoday';
+		$.get(EmailUrl, function (data) {
+			 alert("EmailData: "+data);
+			
+			 var jsonStr = data;
+	 			jsonStr = JSON.parse(jsonStr);
+	 			
+	 			alert("jsonStr: "+jsonStr);
+	 			var email = "";
+	 			  for(var i=0;i<jsonStr.emailList.length;i++){ 
+	 				
+	 				
+	     			 for(var i = 0;i < jsonStr.emailList.email.length ; i++){ 
+	        			
+	     				var from="";
+		 				var xml_file_link="";
+		 				
+	     				if(i==0){
+                                 xml_file_link = jsonStr.emailList.email[i].xml_file_link;
+	        				
+	        				if(jsonStr.emailList.email[i].hasOwnProperty("from")){
+		            			from = jsonStr.emailList.email[i].from;
+		            			}
+	     				}else{
+	     					  xml_file_link = jsonStr.emailList.email[i].xml_file_link;
+		        				
+		        				if(jsonStr.emailList.email[i].hasOwnProperty("from")){
+			            			from = jsonStr.emailList.email[i].from;
+			            			}
+	     				}
+	     				
+	        				
+	        				
+	        				
+	        			}
+	        			
+	     			alert("xml_file_link:  "+xml_file_link);
+        			alert("from:  "+from);
+	        			
+	        			
+	        			
+	        			
+	        		}// 
+	 			 
+	 			});
+	 			
+		
+	}
+	
+	
+	function removeUiBrokerTcRate(subnodename) {
+         $.get("http://35.199.31.139:8080/bernhard/removeUiBrokerTcRate?id="+subnodename, function(data){
+				type: 'GET',	
+				BrokerTcUifetchdata();
+				
+	    		});
+	}
+	
+	function removeUiSpot(subnodename) {
+        $.get("http://35.199.31.139:8080/bernhard/removeUiSpot?id="+subnodename, function(data){
+				type: 'GET',	
+				SpotUifetchdata();
+				
+	    		});
+	}
+	
+	function removeUiTonnage(subnodename) {
+        $.get("http://35.199.31.139:8080/bernhard/removeUiTonnage?id="+subnodename, function(data){
+				type: 'GET',	
+				TonnageUifetchdata();
+				
+	    		});
+	}
+	
+	function removeUiTimeCharterReports(subnodename) {
+        $.get("http://35.199.31.139:8080/bernhard/removeUiTimeCharterReports?id="+subnodename, function(data){
+				type: 'GET',	
+				TimeCharterReportsUifetchdata();
+				
+	    		});
+	}
+	
+	
+	
+	function TonnageUifetchdata(){
+		$.ajax({
+			 
+ 			url: 'http://35.199.31.139:8080/bernhard/Tonnage',
+ 			type:'GET',
+ 			success: function (data) {
+     		var jsonStr = data;
+     		//alert("jsonStr: " + jsonStr);
+     		jsonStr = JSON.parse(jsonStr);
+     		var tonnageTable="";
+     		var size="";
+		    var parseId="";
+		    var forid="";
+		    var summary_url="";
+ 			
+     		for(var i=0;i<jsonStr.tonnageList.length;i++){
+     			
+     			 var tonnageId = "";
+     			if(jsonStr.tonnageList[i].hasOwnProperty("tonnageId")){
+     				tonnageId = jsonStr.tonnageList[i].tonnageId;
+     				//alert("tonnageId:  "+tonnageId);
+        			}
+     			
+     			if(jsonStr.tonnageList[i].hasOwnProperty("size")){
+     				size = jsonStr.tonnageList[i].size;
+     				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+        			}
+     			
+     			if(jsonStr.tonnageList[i].hasOwnProperty("parseId")){
+     				parseId = jsonStr.tonnageList[i].parseId;
+     				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+        			}
+     			
+     			var subNodeName = "";
+     			if(jsonStr.tonnageList[i].hasOwnProperty("subNodeName")){
+     				subNodeName = jsonStr.tonnageList[i].subNodeName;
+     				//alert("subNodeName:  "+subNodeName);
+        			}
+     			
+     			if(jsonStr.tonnageList[i].hasOwnProperty("i")){
+    				forid = jsonStr.tonnageList[i].i;
+    				//alert("subNodeName:  "+subNodeName);
+       			}
+     			
+     			if(jsonStr.tonnageList[i].hasOwnProperty("summary_url")){
+     				summary_url = jsonStr.tonnageList[i].summary_url;
+     				//alert("summary_url:  "+summary_url);
+        			}
+     			
+     			if(jsonStr.tonnageList[i].hasOwnProperty("EmploymentStatusJsonarray")){
+     				EmploymentStatusJsonarray = jsonStr.tonnageList[i].EmploymentStatusJsonarray;
+        			}
+     			
+     			var EmploymentStatusJsonarray = "";
+     			for(var EmploymentStatus = 0;EmploymentStatus < jsonStr.tonnageList[i].EmploymentStatusJsonarray.length ; EmploymentStatus++){
+        			if(EmploymentStatus == 0){
+        				EmploymentStatusJsonarray = jsonStr.tonnageList[i].EmploymentStatusJsonarray[EmploymentStatus].EmploymentStatus;	
+        			}else{
+        				EmploymentStatusJsonarray = EmploymentStatusJsonarray + '<br>' + jsonStr.tonnageList[i].EmploymentStatusJsonarray[EmploymentStatus].EmploymentStatus;
+        			}
+        			
+        			//alert("EmploymentStatusJsonarray:  "+EmploymentStatusJsonarray);
+        		}// EmploymentStatusJsonarray close
+     			
+        		
+     			var OwnersJsonarray = "";
+     			for(var Owners = 0;Owners < jsonStr.tonnageList[i].OwnersJsonarray.length ; Owners++){
+        			if(Owners == 0){
+        				OwnersJsonarray = jsonStr.tonnageList[i].OwnersJsonarray[Owners].Owners;	
+        			}else{
+        				OwnersJsonarray = OwnersJsonarray + '<br>' + jsonStr.tonnageList[i].OwnersJsonarray[Owners].Owners;
+        			}
+        			
+        			//alert("OwnersJsonarray:  "+OwnersJsonarray);
+        		}// OwnersJsonarray close
+     			
+        		
+     			var OpenPortJsonarray = "";
+     			for(var OpenPort = 0;OpenPort < jsonStr.tonnageList[i].OpenPortJsonarray.length ; OpenPort++){
+        			if(OpenPort == 0){
+        				OpenPortJsonarray = jsonStr.tonnageList[i].OpenPortJsonarray[OpenPort].OpenPort;	
+        			}else{
+        				OpenPortJsonarray = OpenPortJsonarray + '<br>' + jsonStr.tonnageList[i].OpenPortJsonarray[OpenPort].OpenPort;
+        			}
+        			
+        			//alert("OpenPortJsonarray:  "+OpenPortJsonarray);
+        		}// OpenPortJsonarray close
+        		
+     			var OperatorsJsonarray = "";
+     			for(var Operators = 0;Operators < jsonStr.tonnageList[i].OperatorsJsonarray.length ; Operators++){
+        			if(Operators == 0){
+        				OperatorsJsonarray = jsonStr.tonnageList[i].OperatorsJsonarray[Operators].Operators;	
+        			}else{
+        				OperatorsJsonarray = OperatorsJsonarray + '<br>' + jsonStr.tonnageList[i].OperatorsJsonarray[Operators].Operators;
+        			}
+        			
+        			//alert("OperatorsJsonarray:  "+OperatorsJsonarray);
+        		}// OperatorsJsonarray close
+        		
+     			var CargoTypeJsonarray = "";
+     			for(var CargoType = 0;CargoType < jsonStr.tonnageList[i].CargoTypeJsonarray.length ; CargoType++){
+        			if(CargoType == 0){
+        				CargoTypeJsonarray = jsonStr.tonnageList[i].CargoTypeJsonarray[CargoType].CargoType;	
+        			}else{
+        				CargoTypeJsonarray = CargoTypeJsonarray + '<br>' + jsonStr.tonnageList[i].CargoTypeJsonarray[CargoType].CargoType;
+        			}
+        			
+        			//alert("CargoTypeJsonarray:  "+CargoTypeJsonarray);
+        		}// CargoTypeJsonarray close
+        		
+        		
+     			var CommentJsonarray = "";
+     			for(var Comment = 0;Comment < jsonStr.tonnageList[i].CommentJsonarray.length ; Comment++){
+        			if(Comment == 0){
+        				CommentJsonarray = jsonStr.tonnageList[i].CommentJsonarray[Comment].Comment;	
+        			}else{
+        				CommentJsonarray = CommentJsonarray + '<br>' + jsonStr.tonnageList[i].CommentJsonarray[Comment].Comment;
+        			}
+        			
+        			//alert("CommentJsonarray:  "+CommentJsonarray);
+        		}// CommentJsonarray close
+        		
+     			var ETABasisJsonarray = "";
+     			for(var ETABasis = 0;ETABasis < jsonStr.tonnageList[i].ETABasisJsonarray.length ; ETABasis++){
+        			if(ETABasis == 0){
+        				ETABasisJsonarray = jsonStr.tonnageList[i].ETABasisJsonarray[ETABasis].ETABasis;	
+        			}else{
+        				ETABasisJsonarray = ETABasisJsonarray + '<br>' + jsonStr.tonnageList[i].ETABasisJsonarray[ETABasis].ETABasis;
+        			}
+        			
+        			//alert("ETABasisJsonarray:  "+ETABasisJsonarray);
+        		}// ETABasisJsonarray close
+        		
+     			var OpenDateJsonarray = "";
+     			for(var OpenDate = 0;OpenDate < jsonStr.tonnageList[i].OpenDateJsonarray.length ; OpenDate++){
+        			if(OpenDate == 0){
+        				OpenDateJsonarray = jsonStr.tonnageList[i].OpenDateJsonarray[OpenDate].OpenDate;	
+        			}else{
+        				OpenDateJsonarray = OpenDateJsonarray + '<br>' + jsonStr.tonnageList[i].OpenDateJsonarray[OpenDate].OpenDate;
+        			}
+        			
+        			//alert("OpenDateJsonarray:  "+OpenDateJsonarray);
+        		}// OpenDateJsonarray close
+        		
+     			var ReportTypeJsonarray = "";
+     			for(var ReportType = 0;ReportType < jsonStr.tonnageList[i].ReportTypeJsonarray.length ; ReportType++){
+        			if(ReportType == 0){
+        				ReportTypeJsonarray = jsonStr.tonnageList[i].ReportTypeJsonarray[ReportType].ReportType;	
+        			}else{
+        				ReportTypeJsonarray = ReportTypeJsonarray + '<br>' + jsonStr.tonnageList[i].ReportTypeJsonarray[ReportType].ReportType;
+        			}
+        			
+        			//alert("ReportTypeJsonarray:  "+ReportTypeJsonarray);
+        		}// ReportTypeJsonarray close
+        		
+     			var ReportTimestampJsonarray = "";
+     			for(var ReportTimestamp = 0;ReportTimestamp < jsonStr.tonnageList[i].ReportTimestampJsonarray.length ; ReportTimestamp++){
+        			if(ReportTimestamp == 0){
+        				ReportTimestampJsonarray = jsonStr.tonnageList[i].ReportTimestampJsonarray[ReportTimestamp].ReportTimestamp;	
+        			}else{
+        				ReportTimestampJsonarray = ReportTimestampJsonarray + '<br>' + jsonStr.tonnageList[i].ReportTimestampJsonarray[ReportTimestamp].ReportTimestamp;
+        			}
+        			
+        			//alert("ReportTimestampJsonarray:  "+ReportTimestampJsonarray);
+        		}// ReportTimestampJsonarray close
+        		
+     			var RepositionRegionJsonarray = "";
+     			for(var RepositionRegion = 0;RepositionRegion < jsonStr.tonnageList[i].RepositionRegionJsonarray.length ; RepositionRegion++){
+        			if(RepositionRegion == 0){
+        				RepositionRegionJsonarray = jsonStr.tonnageList[i].RepositionRegionJsonarray[RepositionRegion].RepositionRegion;	
+        			}else{
+        				RepositionRegionJsonarray = RepositionRegionJsonarray + '<br>' + jsonStr.tonnageList[i].RepositionRegionJsonarray[RepositionRegion].RepositionRegion;
+        			}
+        			
+        			//alert("RepositionRegionJsonarray:  "+RepositionRegionJsonarray);
+        		}// RepositionRegionJsonarray close
+        		
+        		
+     			var SourceJsonarray = "";
+     			for(var Source = 0;Source < jsonStr.tonnageList[i].SourceJsonarray.length ; Source++){
+        			if(Source == 0){
+        				SourceJsonarray = jsonStr.tonnageList[i].SourceJsonarray[Source].Source;	
+        			}else{
+        				SourceJsonarray = SourceJsonarray + '<br>' + jsonStr.tonnageList[i].SourceJsonarray[Source].Source;
+        			}
+        			
+        			//alert("SourceJsonarray:  "+SourceJsonarray);
+        		}// SourceJsonarray close
+        		
+     			var VesselNameJsonarray = "";
+     			for(var VesselName = 0;VesselName < jsonStr.tonnageList[i].VesselNameJsonarray.length ; VesselName++){
+        			if(VesselName == 0){
+        				VesselNameJsonarray = jsonStr.tonnageList[i].VesselNameJsonarray[VesselName].VesselName;	
+        			}else{
+        				VesselNameJsonarray = VesselNameJsonarray + '<br>' + jsonStr.tonnageList[i].VesselNameJsonarray[VesselName].VesselName;
+        			}
+        			
+        			//alert("VesselNameJsonarray:  "+VesselNameJsonarray);
+        		}// VesselNameJsonarray close
+        		
+     			var VesselNameJsonarray = "";
+     			for(var VesselName = 0;VesselName < jsonStr.tonnageList[i].VesselNameJsonarray.length ; VesselName++){
+        			if(VesselName == 0){
+        				VesselNameJsonarray = jsonStr.tonnageList[i].VesselNameJsonarray[VesselName].VesselName;	
+        			}else{
+        				VesselNameJsonarray = VesselNameJsonarray + '<br>' + jsonStr.tonnageList[i].VesselNameJsonarray[VesselName].VesselName;
+        			}
+        			
+        			//alert("VesselNameJsonarray:  "+VesselNameJsonarray);
+        		}// VesselNameJsonarray close
+        		
+     			var BuiltJsonarray = "";
+     			for(var Built = 0;Built < jsonStr.tonnageList[i].BuiltJsonarray.length ; Built++){
+        			if(Built == 0){
+        				BuiltJsonarray = jsonStr.tonnageList[i].BuiltJsonarray[Built].Built;	
+        			}else{
+        				BuiltJsonarray = BuiltJsonarray + '<br>' + jsonStr.tonnageList[i].BuiltJsonarray[Built].Built;
+        			}
+        			
+        			//alert("BuiltJsonarray:  "+BuiltJsonarray);
+        		}// VesselNameJsonarray close
+        		
+     			var DWTJsonarray = "";
+     			for(var DWT = 0;DWT < jsonStr.tonnageList[i].DWTJsonarray.length ; DWT++){
+        			if(DWT == 0){
+        				DWTJsonarray = jsonStr.tonnageList[i].DWTJsonarray[DWT].DWT;	
+        			}else{
+        				DWTJsonarray = DWTJsonarray + '<br>' + jsonStr.tonnageList[i].DWTJsonarray[DWT].DWT;
+        			}
+        			
+        			//alert("DWTJsonarray:  "+DWTJsonarray);
+        		}// DWTJsonarray close
+        		
+     			var CubicsJsonarray = "";
+     			for(var Cubics = 0;Cubics < jsonStr.tonnageList[i].CubicsJsonarray.length ; Cubics++){
+        			if(Cubics == 0){
+        				CubicsJsonarray = jsonStr.tonnageList[i].CubicsJsonarray[Cubics].Cubics;	
+        			}else{
+        				CubicsJsonarray = CubicsJsonarray + '<br>' + jsonStr.tonnageList[i].CubicsJsonarray[Cubics].Cubics;
+        			}
+        			
+        			//alert("CubicsJsonarray:  "+CubicsJsonarray);
+        		}// CubicsJsonarray close
+        		
+     			var LOAJsonarray = "";
+     			for(var LOA = 0;LOA < jsonStr.tonnageList[i].LOAJsonarray.length ; LOA++){
+        			if(LOA == 0){
+        				LOAJsonarray = jsonStr.tonnageList[i].LOAJsonarray[LOA].LOA;	
+        			}else{
+        				LOAJsonarray = LOAJsonarray + '<br>' + jsonStr.tonnageList[i].LOAJsonarray[LOA].LOA;
+        			}
+        			
+        			//alert("LOAJsonarray:  "+LOAJsonarray);
+        		}// LOAJsonarray close
+        		
+     			var ICEJsonarray = "";
+     			for(var ICE = 0;ICE < jsonStr.tonnageList[i].ICEJsonarray.length ; ICE++){
+        			if(ICE == 0){
+        				ICEJsonarray = jsonStr.tonnageList[i].ICEJsonarray[ICE].ICE;	
+        			}else{
+        				ICEJsonarray = ICEJsonarray + '<br>' + jsonStr.tonnageList[i].ICEJsonarray[ICE].ICE;
+        			}
+        			
+        			//alert("ICEJsonarray:  "+ICEJsonarray);
+        		}// ICEJsonarray close
+        		
+     			var SternLinejsonarray = "";
+     			for(var SternLine = 0;SternLine < jsonStr.tonnageList[i].SternLinejsonarray.length ; SternLine++){
+        			if(SternLine == 0){
+        				SternLinejsonarray = jsonStr.tonnageList[i].SternLinejsonarray[SternLine].SternLine;	
+        			}else{
+        				SternLinejsonarray = SternLinejsonarray + '<br>' + jsonStr.tonnageList[i].SternLinejsonarray[SternLine].SternLine;
+        			}
+        			
+        			//alert("SternLinejsonarray:  "+SternLinejsonarray);
+        		}// SternLinejsonarray close
+        		
+     			var VesselTypejsonarray = "";
+     			for(var VesselType = 0;VesselType < jsonStr.tonnageList[i].VesselTypejsonarray.length ; VesselType++){
+        			if(VesselType == 0){
+        				VesselTypejsonarray = jsonStr.tonnageList[i].VesselTypejsonarray[VesselType].VesselType;	
+        			}else{
+        				VesselTypejsonarray = VesselTypejsonarray + '<br>' + jsonStr.tonnageList[i].VesselTypejsonarray[VesselType].VesselType;
+        			}
+        			
+        			//alert("VesselTypejsonarray:  "+VesselTypejsonarray);
+        		}// VesselTypejsonarray close
+        		
+        		
+        		
+     			tonnageTable=tonnageTable + '<tr><td>'+forid+'</td><td><span>'+ReportTypeJsonarray+'</span><input type="text" name="" class="td-input"  value="'+ReportTypeJsonarray+'"></td><td><span>'+RepositionRegionJsonarray+'</span><input type="text" name="" class="td-input" value="'+RepositionRegionJsonarray+'"></td><td><span>'+CargoTypeJsonarray+'</span><input type="text" name="" class="td-input" value="'+CargoTypeJsonarray+'"></td><td><span>'+VesselNameJsonarray+'</span><input type="text" name="" class="td-input" value="'+VesselNameJsonarray+'"></td><td><span>'+VesselTypejsonarray+'</span><input type="text" name="" class="td-input" value="'+VesselTypejsonarray+'"></td><td><span>'+BuiltJsonarray+'</span><input type="text" name="" class="td-input" value="'+BuiltJsonarray+'"></td><td><span>'+DWTJsonarray+'</span><input type="text" name="" class="td-input" value="'+DWTJsonarray+'"></td><td><span>'+CubicsJsonarray+'</span><input type="text" name="" class="td-input" value="'+CubicsJsonarray+'"></td><td><span>'+LOAJsonarray+'</span><input type="text" name="" class="td-input" value="'+LOAJsonarray+'"></td><td><span>'+ICEJsonarray+'</span><input type="text" name="" class="td-input" value="'+ICEJsonarray+'"></td><td><span>'+SternLinejsonarray+'</span><input type="text" name="" class="td-input" value="'+SternLinejsonarray+'"></td><td><span>'+OwnersJsonarray+'</span><input type="text" name="" class="td-input" value="'+OwnersJsonarray+'"></td><td><span>'+OperatorsJsonarray+'</span><input type="text" name="" class="td-input" value="'+OperatorsJsonarray+'"></td><td><span>'+EmploymentStatusJsonarray+'</span><input type="text" name="" class="td-input" value="'+EmploymentStatusJsonarray+'"></td><td><span>'+OpenPortJsonarray+'</span><input type="text" name="" class="td-input" value="'+OpenPortJsonarray+'"></td><td><span>'+OpenDateJsonarray+'</span><input type="text" name="" class="td-input" value="'+OpenDateJsonarray+'"></td><td><span>'+ETABasisJsonarray+'</span><input type="text" name="" class="td-input" value="'+ETABasisJsonarray+'"></td><td><span>'+CommentJsonarray+'</span><input type="text" name="" class="td-input" value="'+CommentJsonarray+'"></td><td><span>'+SourceJsonarray+'</span><input type="text" name="" class="td-input" value="'+SourceJsonarray+'"></td><td><span>'+ReportTimestampJsonarray+'</span><input type="text" name="" class="td-input" value="'+ReportTimestampJsonarray+'"></td><td><span>Link</span><input type="text" name="" class="td-input" value="Link"></td><td class="display-none"><span>subNodeName</span><input type="text" name="" class="td-input" value="'+subNodeName+'"></td><td class="display-none"></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn" onclick="removeUiTonnage('+subNodeName+');"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>';
+        		
+     		}// main for
+
+     		    tonnageTable=tonnageTable + '<tr class="firstTr" style="display: none;"><td>'+forid+'</td><td class="dblclick"><input type="text" name="reporttype" class="display-block-input display-none" id="reporttype"></td><td class="dblclick"><input type="text" name="repositionregion" class="display-block-input display-none" id="repositionregion"></td><td class="dblclick"><input type="text" name="cargotype" class="display-block-input display-none" id="cargotype"></td><td class="dblclick"><input type="text" name="vesselname" class="display-block-input display-none" id="vesselname"></td><td class="dblclick"><input type="text" name="vesseltype" class="display-block-input display-none" id="vesseltype"></td><td class="dblclick"><input type="text" name="built" class="display-block-input display-none" id="built"></td><td class="dblclick"><input type="text" name="dwt" class="display-block-input display-none" id="dwt"></td><td class="dblclick"><input type="text" name="cubics" class="display-block-input display-none" id="cubics"></td><td class="dblclick"><input type="text" name="loa" class="display-block-input display-none" id="loa"></td><td class="dblclick"><input type="text" name="ice" class="display-block-input display-none" id="ice"></td><td class="dblclick"><input type="text" name="sternline" class="display-block-input display-none" id="sternline"></td><td class="dblclick"><input type="text" name="owners" class="display-block-input display-none" id="owners"></td><td class="dblclick"><input type="text" name="operators" class="display-block-input display-none" id="operators"></td><td class="dblclick"><input type="text" name="employementstatus" class="display-block-input display-none" id="employementstatus"></td><td class="dblclick"><input type="text" name="openport" class="display-block-input display-none" id="openport"></td><td class="dblclick"><input type="text" name="opendate" class="display-block-input display-none" id="opendate"></td><td class="dblclick"><input type="text" name="etabasis" class="display-block-input display-none" id="etabasis"></td><td class="dblclick"><input type="text" name="comment" class="display-block-input display-none" id="comment"></td><td class="dblclick"><input type="text" name="source" class="display-block-input display-none" id="source"></td><td class="dblclick"><input type="text" name="reporttimestamp" class="display-block-input display-none" id="reporttimestamp"></td><td class="dblclick"><input type="text" name="" class="display-block-input display-none" id=""></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>';
+     		    document.getElementById("tonnageTable").innerHTML = tonnageTable;
+     		    
+     		   var summaryRec = "";
+    			
+    			if(summary_url != ""){
+    				summaryRec='<a href="'+summary_url+'" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>';
+    				
+    				document.getElementById("tonnageExcelUrl").innerHTML = summaryRec;
+    			}
+
+ 			},
+ 			//async: false
+			}); // Tonnage ajax close
+		}
+		
+	
+	          function saveDataUiTonnage(){
+        
+				var reporttype=document.getElementsByName("reporttype");
+				var repositionregion=document.getElementsByName("repositionregion");
+				var cargotype=document.getElementsByName("cargotype");
+				var vesselname=document.getElementsByName("vesselname");
+				var vesseltype=document.getElementsByName("vesseltype");
+				var built=document.getElementsByName("built");
+				var dwt=document.getElementsByName("dwt");
+				
+				var cubics=document.getElementsByName("cubics");
+				var loa=document.getElementsByName("loa");
+				var ice=document.getElementsByName("ice");
+				var sternline=document.getElementsByName("sternline");
+				var owners=document.getElementsByName("owners");
+				var operators=document.getElementsByName("operators");
+				var employementstatus=document.getElementsByName("employementstatus");
+				var openport=document.getElementsByName("openport");
+				var opendate=document.getElementsByName("opendate");
+				var etabasis=document.getElementsByName("etabasis");
+				var comment=document.getElementsByName("comment");
+				var source=document.getElementsByName("source");
+				var reporttimestamp=document.getElementsByName("reporttimestamp");
+				
+				 var employees = {
+					    accounting: []
+					}; 
+					
+				for(var i=1;i<reporttype.length;i++){
+					//alert("reporttype: "+reporttype[i].value);	
+					//alert("vesseltype: "+repositionregion[i].value);
+	 				//alert("repositionregion: "+cargotype[i].value);
+	 				//alert("vesselname: "+vesselname[i].value);
+	 				//alert("vesseltype: "+vesseltype[i].value);
+	 				//alert("built: "+built[i].value);
+	 				//alert("dwt: "+dwt[i].value);
+	 				
+	 				 employees.accounting.push({ 
+	 			        "reporttype" :       reporttype[i].value,
+	 			        "repositionregion"  :  repositionregion[i].value,
+	 			        "cargotype"       : cargotype[i].value ,
+	 			         "vesselname"       : vesselname[i].value,
+	 			        "vesseltype"       :vesseltype[i].value,
+	 			        "built"       : built[i].value,
+	 			        "dwt"       : dwt[i].value,
+	 			      "cubics"       : cubics[i].value,
+	 			    "loa"       : loa[i].value,
+	 	 			 "ice"       : ice[i].value,
+	 	 			"sternline"       : sternline[i].value,
+	 	 			"owners"       : owners[i].value,
+	 	 			"operators"       : operators[i].value,
+	 	 			"employementstatus"       : employementstatus[i].value,
+	 	 			"openport"       : openport[i].value,
+	 	 			"opendate"       : opendate[i].value,
+	 	 			"etabasis"       : etabasis[i].value,
+	 	 			"comment"       : comment[i].value,
+	 	 			"source"       : source[i].value,
+	 	 			"reporttimestamp"       : reporttimestamp[i].value,
+	 	 			
+	 			         
+	 			    }); 
+	 				
+				}
+				
+				var json=JSON.stringify(employees);
+				//alert("employees: "+json);
+				
+				
+				$.ajax({
+				 
+					url: "http://35.199.31.139:8080/bernhard/saveUiTonnage",	
+					type: 'GET',
+					//data: 'broker'+broker+, 'vesseltype':vesseltype, 'monthyear':monthyear, 'firstyr':firstyr, 'secondyr':secondyr, 'thirdyr':thirdyr, 'fifthyr':fifthyr,
+				   //  data:'broker='+ broker+'&vesseltype='+ vesseltype+'&monthyear='+ monthyear+'&firstyr='+ firstyr+'&secondyr='+ secondyr+'&thirdyr='+ thirdyr+'&fifthyr='+ fifthyr,
+					data:{'employees':json},
+				   
+					success: function(data) {
+						TonnageUifetchdata();
+						//window.location="http://35.199.31.139:8080/bernhard/oct_9/index.html";
+						
+					}
+					
+			}); // function on click
+			 
+		}
+	
+	
+	function SpotUifetchdata(){
+		 var spot = 'http://35.199.31.139:8080/bernhard/Spot';
+		
+		$.get(spot, function (data) {
+			// alert("Spot: "+data);
+			  var SpotTable="";
+			  var jsonStr = data;
+	 			jsonStr = JSON.parse(jsonStr);
+	 			
+	 			var forid="";
+	 			var size="";
+			    var parseId="";
+			    var summary_url="";
+	 			
+	 			for(var i=0;i<jsonStr.spotList.length;i++){
+	 				
+	 				 var spotId = "";
+	     			if(jsonStr.spotList[i].hasOwnProperty("spotId")){
+	     				
+	     				spotId = jsonStr.spotList[i].spotId;
+	     				//alert("spotId:  "+spotId);
+	        			}
+	     			
+	     			if(jsonStr.spotList[i].hasOwnProperty("size")){
+	     				size = jsonStr.spotList[i].size;
+	     				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+	        			}
+	     			
+	     			if(jsonStr.spotList[i].hasOwnProperty("parseId")){
+	     				parseId = jsonStr.spotList[i].parseId;
+	     				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+	        			}
+	     			
+	     			var subNodeName = "";
+	     			if(jsonStr.spotList[i].hasOwnProperty("subNodeName")){
+	     				subNodeName = jsonStr.spotList[i].subNodeName;
+	     				//alert("subNodeName:  "+subNodeName);
+	        			}
+	     			
+	     			if(jsonStr.spotList[i].hasOwnProperty("i")){
+	    				forid = jsonStr.spotList[i].i;
+	    				//alert("subNodeName:  "+subNodeName);
+	       			}
+	     			
+	     			if(jsonStr.spotList[i].hasOwnProperty("summary_url")){
+	     				summary_url = jsonStr.spotList[i].summary_url;
+	     			//	alert("summary_url:  "+summary_url);
+	        			}
+	     			
+	     			var InformationJsonarray = "";
+	     			for(var Information = 0;Information < jsonStr.spotList[i].InformationJsonarray.length ; Information++){
+	        			if(Information == 0){
+	        				InformationJsonarray = jsonStr.spotList[i].InformationJsonarray[Information].Information;	
+	        			}else{
+	        				InformationJsonarray = InformationJsonarray + '<br>' + jsonStr.spotList[i].InformationJsonarray[Information].Information;
+	        			}
+	        			
+	        			//alert("InformationJsonarray:  "+InformationJsonarray);
+	        		}// InformationJsonarray close
+	     			
+	     			var FixtureTypeJsonarray = "";
+	     			for(var FixtureType = 0;FixtureType < jsonStr.spotList[i].FixtureTypeJsonarray.length ; FixtureType++){
+	        			if(FixtureType == 0){
+	        				FixtureTypeJsonarray = jsonStr.spotList[i].FixtureTypeJsonarray[FixtureType].FixtureType;	
+	        			}else{
+	        				FixtureTypeJsonarray = FixtureTypeJsonarray + '<br>' + jsonStr.spotList[i].FixtureTypeJsonarray[FixtureType].FixtureType;
+	        			}
+	        			
+	        			//alert("FixtureTypeJsonarray:  "+FixtureTypeJsonarray);
+	        		}// FixtureTypeJsonarray close
+	 				
+	     			var LCStartJsonarray = "";
+	     			for(var LCStart = 0;LCStart < jsonStr.spotList[i].LCStartJsonarray.length ; LCStart++){
+	        			if(LCStart == 0){
+	        				LCStartJsonarray = jsonStr.spotList[i].LCStartJsonarray[LCStart].LCStart;	
+	        			}else{
+	        				LCStartJsonarray = LCStartJsonarray + '<br>' + jsonStr.spotList[i].LCStartJsonarray[LCStart].LCStart;
+	        			}
+	        			
+	        			//alert("LCStartJsonarray:  "+LCStartJsonarray);
+	        		}// LCStartJsonarray close
+	        		
+	     			var LCEndJsonarray = "";
+	     			for(var LCEnd = 0;LCEnd < jsonStr.spotList[i].LCEndJsonarray.length ; LCEnd++){
+	        			if(LCEnd == 0){
+	        				LCEndJsonarray = jsonStr.spotList[i].LCEndJsonarray[LCEnd].LCEnd;	
+	        			}else{
+	        				LCEndJsonarray = LCEndJsonarray + '<br>' + jsonStr.spotList[i].LCEndJsonarray[LCEnd].LCEnd;
+	        			}
+	        			
+	        			//alert("LCEndJsonarray:  "+LCEndJsonarray);
+	        		}// LCEndJsonarray close
+	        		
+	     			var LoadPortJsonarray = "";
+	     			for(var LoadPort = 0;LoadPort < jsonStr.spotList[i].LoadPortJsonarray.length ; LoadPort++){
+	        			if(LoadPort == 0){
+	        				LoadPortJsonarray = jsonStr.spotList[i].LoadPortJsonarray[LoadPort].LoadPort;	
+	        			}else{
+	        				LoadPortJsonarray = LoadPortJsonarray + '<br>' + jsonStr.spotList[i].LoadPortJsonarray[LoadPort].LoadPort;
+	        			}
+	        			
+	        			//alert("LoadPortJsonarray:  "+LoadPortJsonarray);
+	        		}// LoadPortJsonarray close
+	        		
+	     			var DiscPortJsonarray = "";
+	     			for(var DiscPort = 0;DiscPort < jsonStr.spotList[i].DiscPortJsonarray.length ; DiscPort++){
+	        			if(DiscPort == 0){
+	        				DiscPortJsonarray = jsonStr.spotList[i].DiscPortJsonarray[DiscPort].DiscPort;	
+	        			}else{
+	        				DiscPortJsonarray = DiscPortJsonarray + '<br>' + jsonStr.spotList[i].DiscPortJsonarray[DiscPort].DiscPort;
+	        			}
+	        			
+	        			//alert("DiscPortJsonarray:  "+DiscPortJsonarray);
+	        		}// DiscPortJsonarray close
+	        		
+	     			var VesselNameJsonarray = "";
+	     			for(var VesselName = 0;VesselName < jsonStr.spotList[i].VesselNameJsonarray.length ; VesselName++){
+	        			if(VesselName == 0){
+	        				VesselNameJsonarray = jsonStr.spotList[i].VesselNameJsonarray[VesselName].VesselName;	
+	        			}else{
+	        				VesselNameJsonarray = VesselNameJsonarray + '<br>' + jsonStr.spotList[i].VesselNameJsonarray[VesselName].VesselName;
+	        			}
+	        			
+	        			//alert("VesselNameJsonarray:  "+VesselNameJsonarray);
+	        		}// VesselNameJsonarray close
+	        		
+	     			var ChartererJsonarray = "";
+	     			for(var Charterer = 0;Charterer < jsonStr.spotList[i].ChartererJsonarray.length ; Charterer++){
+	        			if(Charterer == 0){
+	        				ChartererJsonarray = jsonStr.spotList[i].ChartererJsonarray[Charterer].Charterer;	
+	        			}else{
+	        				ChartererJsonarray = ChartererJsonarray + '<br>' + jsonStr.spotList[i].ChartererJsonarray[Charterer].Charterer;
+	        			}
+	        			
+	        			//alert("ChartererJsonarray:  "+ChartererJsonarray);
+	        		}// ChartererJsonarray close
+	        		
+	     			var StatusJsonarray = "";
+	     			for(var Status = 0;Status < jsonStr.spotList[i].StatusJsonarray.length ; Status++){
+	        			if(Status == 0){
+	        				StatusJsonarray = jsonStr.spotList[i].StatusJsonarray[Status].Status;	
+	        			}else{
+	        				StatusJsonarray = StatusJsonarray + '<br>' + jsonStr.spotList[i].StatusJsonarray[Status].Status;
+	        			}
+	        			
+	        			//alert("StatusJsonarray:  "+StatusJsonarray);
+	        		}// StatusJsonarray close
+	        		
+	     			var CargoTypeJsonarray = "";
+	     			for(var CargoType = 0;CargoType < jsonStr.spotList[i].CargoTypeJsonarray.length ; CargoType++){
+	        			if(CargoType == 0){
+	        				CargoTypeJsonarray = jsonStr.spotList[i].CargoTypeJsonarray[CargoType].CargoType;	
+	        			}else{
+	        				CargoTypeJsonarray = CargoTypeJsonarray + '<br>' + jsonStr.spotList[i].CargoTypeJsonarray[CargoType].CargoType;
+	        			}
+	        			
+	        			//alert("CargoTypeJsonarray:  "+CargoTypeJsonarray);
+	        		}// CargoTypeJsonarray close
+	        		
+	     			var CargoGradeJsonarray = "";
+	     			for(var CargoGrade = 0;CargoGrade < jsonStr.spotList[i].CargoGradeJsonarray.length ; CargoGrade++){
+	        			if(CargoGrade == 0){
+	        				CargoGradeJsonarray = jsonStr.spotList[i].CargoGradeJsonarray[CargoGrade].CargoGrade;	
+	        			}else{
+	        				CargoGradeJsonarray = CargoGradeJsonarray + '<br>' + jsonStr.spotList[i].CargoGradeJsonarray[CargoGrade].CargoGrade;
+	        			}
+	        			
+	        			//alert("CargoGradeJsonarray:  "+CargoGradeJsonarray);
+	        		}// CargoGradeJsonarray close
+	        		
+	     			var CargoQtyJsonarray = "";
+	     			for(var CargoQty = 0;CargoQty < jsonStr.spotList[i].CargoQtyJsonarray.length ; CargoQty++){
+	        			if(CargoQty == 0){
+	        				CargoQtyJsonarray = jsonStr.spotList[i].CargoQtyJsonarray[CargoQty].CargoQty;	
+	        			}else{
+	        				CargoQtyJsonarray = CargoQtyJsonarray + '<br>' + jsonStr.spotList[i].CargoQtyJsonarray[CargoQty].CargoQty;
+	        			}
+	        			
+	        			//alert("CargoQtyJsonarray:  "+CargoQtyJsonarray);
+	        		}// CargoQtyJsonarray close
+	        		
+	     			var RateTypeJsonarray = "";
+	     			for(var RateType = 0;RateType < jsonStr.spotList[i].RateTypeJsonarray.length ; RateType++){
+	        			if(RateType == 0){
+	        				RateTypeJsonarray = jsonStr.spotList[i].RateTypeJsonarray[RateType].RateType;	
+	        			}else{
+	        				RateTypeJsonarray = RateTypeJsonarray + '<br>' + jsonStr.spotList[i].RateTypeJsonarray[RateType].RateType;
+	        			}
+	        			
+	        			//alert("RateTypeJsonarray:  "+RateTypeJsonarray);
+	        		}// RateTypeJsonarray close
+	        		
+	     			var RateJsonarray = "";
+	     			for(var Rate = 0;Rate < jsonStr.spotList[i].RateJsonarray.length ; Rate++){
+	        			if(Rate == 0){
+	        				RateJsonarray = jsonStr.spotList[i].RateJsonarray[Rate].Rate;	
+	        			}else{
+	        				RateJsonarray = RateJsonarray + '<br>' + jsonStr.spotList[i].RateJsonarray[Rate].Rate;
+	        			}
+	        			
+	        			//alert("RateJsonarray:  "+RateJsonarray);
+	        		}// RateJsonarray close
+	        		
+	     			var CommentsJsonarray = "";
+	     			for(var Comments = 0;Comments < jsonStr.spotList[i].CommentsJsonarray.length ; Comments++){
+	        			if(Comments == 0){
+	        				CommentsJsonarray = jsonStr.spotList[i].CommentsJsonarray[Comments].Comments;	
+	        			}else{
+	        				CommentsJsonarray = CommentsJsonarray + '<br>' + jsonStr.spotList[i].CommentsJsonarray[Comments].Comments;
+	        			}
+	        			
+	        			//alert("CommentsJsonarray:  "+CommentsJsonarray);
+	        		}// CommentsJsonarray close
+	        		
+	     			var ReportDateJsonarray = "";
+	     			for(var ReportDate = 0;ReportDate < jsonStr.spotList[i].ReportDateJsonarray.length ; ReportDate++){
+	        			if(ReportDate == 0){
+	        				ReportDateJsonarray = jsonStr.spotList[i].ReportDateJsonarray[ReportDate].ReportDate;	
+	        			}else{
+	        				ReportDateJsonarray = ReportDateJsonarray + '<br>' + jsonStr.spotList[i].ReportDateJsonarray[ReportDate].ReportDate;
+	        			}
+	        			
+	        			//alert("ReportDateJsonarray:  "+ReportDateJsonarray);
+	        		}// ReportDateJsonarray close
+	        		
+	     			var SourceJsonarray = "";
+	     			for(var Source = 0;Source < jsonStr.spotList[i].SourceJsonarray.length ; Source++){
+	        			if(Source == 0){
+	        				SourceJsonarray = jsonStr.spotList[i].SourceJsonarray[Source].Source;	
+	        			}else{
+	        				SourceJsonarray = SourceJsonarray + '<br>' + jsonStr.spotList[i].SourceJsonarray[Source].Source;
+	        			}
+	        			
+	        			//alert("SourceJsonarray:  "+SourceJsonarray);
+	        		}// SourceJsonarray close
+	        		
+	     			var VesseltypeJsonarray = "";
+	     			for(var Vesseltype = 0;Vesseltype < jsonStr.spotList[i].VesseltypeJsonarray.length ; Vesseltype++){
+	        			if(Vesseltype == 0){
+	        				VesseltypeJsonarray = jsonStr.spotList[i].VesseltypeJsonarray[Vesseltype].Vesseltype;	
+	        			}else{
+	        				VesseltypeJsonarray = VesseltypeJsonarray + '<br>' + jsonStr.spotList[i].VesseltypeJsonarray[Vesseltype].Vesseltype;
+	        			}
+	        			
+	        			//alert("VesseltypeJsonarray:  "+VesseltypeJsonarray);
+	        		}// VesseltypeJsonarray close
+	        		
+	     			SpotTable=SpotTable + '<tr><td>'+forid+'</td><td><span>'+InformationJsonarray+'</span><input type="text" name="" class="td-input" value="'+InformationJsonarray+'"></td><td><span>'+FixtureTypeJsonarray+'</span><input type="text" name="" class="td-input" value="'+FixtureTypeJsonarray+'"></td><td><span>'+LCStartJsonarray+'</span><input type="text" name="" class="td-input" value="'+LCStartJsonarray+'"></td><td><span>'+LCEndJsonarray+'</span><input type="text" name="" class="td-input" value="'+LCEndJsonarray+'"></td><td><span>'+LoadPortJsonarray+'</span><input type="text" name="" class="td-input" value="'+LoadPortJsonarray+'"></td><td><span>'+DiscPortJsonarray+'</span><input type="text" name="" class="td-input" value="'+DiscPortJsonarray+'"></td><td><span>'+VesselNameJsonarray+'</span><input type="text" name="" class="td-input" value="'+VesselNameJsonarray+'"></td><td><span>'+ChartererJsonarray+'</span><input type="text" name="" class="td-input" value="'+ChartererJsonarray+'"></td><td><span>'+StatusJsonarray+'</span><input type="text" name="" class="td-input" value="'+StatusJsonarray+'"></td><td><span>'+CargoTypeJsonarray+'</span><input type="text" name="" class="td-input" value="'+CargoTypeJsonarray+'"></td><td><span>'+CargoGradeJsonarray+'</span><input type="text" name="" class="td-input" value="'+CargoGradeJsonarray+'"></td><td><span>'+CargoQtyJsonarray+'</span><input type="text" name="" class="td-input" value="'+CargoQtyJsonarray+'"></td><td><span>'+RateTypeJsonarray+'</span><input type="text" name="" class="td-input" value="'+RateTypeJsonarray+'"></td><td><span>'+RateJsonarray+'</span><input type="text" name="" class="td-input" value="'+RateJsonarray+'"></td><td><span>'+CommentsJsonarray+'</span><input type="text" name="" class="td-input" value="'+CommentsJsonarray+'"></td><td><span>'+ReportDateJsonarray+'</span><input type="text" name="" class="td-input" value="'+ReportDateJsonarray+'"></td><td><span>'+SourceJsonarray+'</span><input type="text" name="" class="td-input" value="'+SourceJsonarray+'"></td><td><span>'+VesseltypeJsonarray+'</span><input type="text" name="" class="td-input" value="'+VesseltypeJsonarray+'"></td><td><span>Link</span><input type="text" name="" class="td-input" value="Link"></td><td class="display-none"><span>'+subNodeName+'</span><input type="text" name="" class="td-input" value="'+subNodeName+'"></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn" onclick="removeUiSpot('+subNodeName+');"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>';
+	        		
+	 			} // main for close
+	 			
+	 			SpotTable=SpotTable + '<tr  class="firstTr" style="display: none;"><td>'+forid+'</td><td class="dblclick"><input type="text" name="info" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="fixturetype" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="Charterer" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="status" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="CargoType" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="cargograde" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="cargoqty" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="lcstart" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="lcend" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="loadport" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="discport" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="VesselName" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="ratetype" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="Rate" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="Comments" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="reportdate" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="Source" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="VesselType" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="" class="display-block-input display-none"></td><td class="display-none"></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a href="#"><a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a href="#"></td></tr>'; 
+	 			document.getElementById("SpotTable").innerHTML = SpotTable;
+	 			
+	 			var summaryRec = "";
+    			
+    			if(summary_url != ""){
+    				summaryRec='<a href="'+summary_url+'" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>';
+    				
+    				document.getElementById("spotExcelUrl").innerHTML = summaryRec;
+    			}
+
+			
+		 }); // Spot close
+		}
+	
+	 function saveDataUispot(){
+			     var info=document.getElementsByName("info");
+ 				 var fixturetype=document.getElementsByName("fixturetype");
+ 				var charterer=document.getElementsByName("Charterer");
+ 				var status=document.getElementsByName("status");
+ 				var cargotype=document.getElementsByName("CargoType");
+ 				var cargograde=document.getElementsByName("cargograde");
+ 				var cargoqty=document.getElementsByName("cargoqty");
+ 				
+ 				var lcstart=document.getElementsByName("lcstart");
+ 				var lcend=document.getElementsByName("lcend");
+ 				var loadport=document.getElementsByName("loadport");
+ 				var discport=document.getElementsByName("discport");
+ 				var vesselname=document.getElementsByName("VesselName");
+ 				var ratetype=document.getElementsByName("ratetype");
+ 				var rate=document.getElementsByName("Rate");
+ 				var comments=document.getElementsByName("Comments");
+ 				var reportdate=document.getElementsByName("reportdate");
+ 				var source=document.getElementsByName("Source");
+ 				var vesseltype=document.getElementsByName("VesselType"); 
+ 				
+ 				
+ 				 var employees = {
+ 					    accounting: []
+ 					}; 
+ 					
+ 				for(var i=1;i<info.length;i++){
+ 					//alert("info: "+info[i].value);	
+ 					//alert("fixturetype: "+fixturetype[i].value);	
+ 	 				
+ 	 				 employees.accounting.push({ 
+ 	 			        "info" :       info[i].value,
+ 	 			        "fixturetype"  :  fixturetype[i].value,
+ 	 			        "Charterer"       : charterer[i].value ,
+ 	 			         "status"       : status[i].value,
+ 	 			        "CargoType"       :cargotype[i].value,
+ 	 			        "cargograde"       : cargograde[i].value,
+ 	 			        "cargoqty"       : cargoqty[i].value,
+ 	 			      "lcstart"       : lcstart[i].value,
+ 	 			    "lcend"       : lcend[i].value,
+	 	 			 "loadport"       : loadport[i].value,
+	 	 			"discport"       : discport[i].value,
+	 	 			"VesselName"       : vesselname[i].value,
+	 	 			"ratetype"       : ratetype[i].value,
+	 	 			"Rate"       : rate[i].value,
+	 	 			"Comments"       : comments[i].value,
+	 	 			"reportdate"       : reportdate[i].value,
+	 	 			"Source"       : source[i].value,
+	 	 			"VesselType"       : vesseltype[i].value, 
+	 	 			
+	 	 			     
+ 	 			    }); 
+ 	 				
+ 				}
+ 				
+ 				var json=JSON.stringify(employees);
+ 				//alert("employees: "+json);
+ 				
+ 				
+ 				$.ajax({
+ 				 
+ 					url: "http://35.199.31.139:8080/bernhard/saveUiSpot",	
+ 					type: 'GET',
+ 					//data: 'broker'+broker+, 'vesseltype':vesseltype, 'monthyear':monthyear, 'firstyr':firstyr, 'secondyr':secondyr, 'thirdyr':thirdyr, 'fifthyr':fifthyr,
+ 				   //  data:'broker='+ broker+'&vesseltype='+ vesseltype+'&monthyear='+ monthyear+'&firstyr='+ firstyr+'&secondyr='+ secondyr+'&thirdyr='+ thirdyr+'&fifthyr='+ fifthyr,
+ 					data:{'employees':json},
+ 				   
+ 					success: function(data) {
+ 						SpotUifetchdata();
+ 						//window.location="http://35.199.31.139:8080/bernhard/oct_9/index.html";
+ 					 
+ 					}
+ 					
+ 			}); // function on click
+ 			
+	 }
+	 
+	 
+	 function TimeCharterReportsUifetchdata(){
+	 var urlTimeCharterReports = 'http://35.199.31.139:8080/bernhard/TimeCharterReports';
+		 
+		 $.get(urlTimeCharterReports, function (data) {
+	       
+	       //  alert("urlTimeCharterReports: "+data);
+	    	 var TimeCharterReportsTable="";
+	    	
+		    var size=""; 
+		    var parseId="";
+		    var summary_url="";
+		    var forid="";
+	    	
+		     var jsonStr = data;
+			jsonStr = JSON.parse(jsonStr);
+			for(var i=0;i<jsonStr.TimeCharterReportsList.length;i++){
+				
+				var TimeCharterReportsId = "";
+  			if(jsonStr.TimeCharterReportsList[i].hasOwnProperty("TimeCharterReportsId")){
+  				TimeCharterReportsId = jsonStr.TimeCharterReportsList[i].TimeCharterReportsId;
+  				//alert("TimeCharterReportsId:  "+TimeCharterReportsId);
+     			}
+  			
+  			if(jsonStr.TimeCharterReportsList[i].hasOwnProperty("size")){
+ 				size = jsonStr.TimeCharterReportsList[i].size;
+ 				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+    			}
+ 			
+ 			if(jsonStr.TimeCharterReportsList[i].hasOwnProperty("parseId")){
+ 				parseId = jsonStr.TimeCharterReportsList[i].parseId;
+ 				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+    			}
+ 			
+ 			var subNodeName = "";
+ 			if(jsonStr.TimeCharterReportsList[i].hasOwnProperty("subNodeName")){
+ 				subNodeName = jsonStr.TimeCharterReportsList[i].subNodeName;
+ 				//alert("subNodeName:  "+subNodeName);
+    			}
+ 			
+ 			if(jsonStr.TimeCharterReportsList[i].hasOwnProperty("i")){
+				forid = jsonStr.TimeCharterReportsList[i].i;
+				//alert("subNodeName:  "+subNodeName);
+   			}
+  			
+ 			if(jsonStr.TimeCharterReportsList[i].hasOwnProperty("summary_url")){
+ 				summary_url = jsonStr.TimeCharterReportsList[i].summary_url;
+ 				//alert("summary_url:  "+summary_url);
+    			}
+ 			
+  			var InformationJsonarray = "";
+  			for(var Information = 0;Information < jsonStr.TimeCharterReportsList[i].InformationJsonarray.length ; Information++){
+     			if(Information == 0){
+     				InformationJsonarray = jsonStr.TimeCharterReportsList[i].InformationJsonarray[Information].Information;	
+     			}else{
+     				InformationJsonarray = InformationJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].InformationJsonarray[Information].Information;
+     			}
+     			
+     			//alert("InformationJsonarray:  "+InformationJsonarray);
+     		}// InformationJsonarray close
+     		
+  			var Spot_TCJsonarray = "";
+  			for(var Spot_TC = 0;Spot_TC < jsonStr.TimeCharterReportsList[i].Spot_TCJsonarray.length ; Spot_TC++){
+     			if(Spot_TC == 0){
+     				Spot_TCJsonarray = jsonStr.TimeCharterReportsList[i].Spot_TCJsonarray[Spot_TC].Spot_TC;	
+     			}else{
+     				Spot_TCJsonarray = Spot_TCJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].Spot_TCJsonarray[Spot_TC].Spot_TC;
+     			}
+     			
+     			//alert("Spot_TCJsonarray:  "+Spot_TCJsonarray);
+     		}// Spot_TCJsonarray close
+     		
+  			var DateJsonarray = "";
+  			for(var Date = 0;Date < jsonStr.TimeCharterReportsList[i].DateJsonarray.length ; Date++){
+     			if(Date == 0){
+     				DateJsonarray = jsonStr.TimeCharterReportsList[i].DateJsonarray[Date].Date;	
+     			}else{
+     				DateJsonarray = DateJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].DateJsonarray[Date].Date;
+     			}
+     			
+     			//alert("DateJsonarray:  "+DateJsonarray);
+     		}// DateJsonarray close
+     		
+  			var VesselNameJsonarray = "";
+  			for(var VesselName = 0;VesselName < jsonStr.TimeCharterReportsList[i].VesselNameJsonarray.length ; VesselName++){
+     			if(VesselName == 0){
+     				VesselNameJsonarray = jsonStr.TimeCharterReportsList[i].VesselNameJsonarray[VesselName].VesselName;	
+     			}else{
+     				VesselNameJsonarray = VesselNameJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].VesselNameJsonarray[VesselName].VesselName;
+     			}
+     			
+     			//alert("VesselNameJsonarray:  "+VesselNameJsonarray);
+     		}// VesselNameJsonarray close
+     		
+  			var CPP_DPPJsonarray = "";
+  			for(var CPP_DPP = 0;CPP_DPP < jsonStr.TimeCharterReportsList[i].CPP_DPPJsonarray.length ; CPP_DPP++){
+     			if(CPP_DPP == 0){
+     				CPP_DPPJsonarray = jsonStr.TimeCharterReportsList[i].CPP_DPPJsonarray[CPP_DPP].CPP_DPP;	
+     			}else{
+     				CPP_DPPJsonarray = CPP_DPPJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].CPP_DPPJsonarray[CPP_DPP].CPP_DPP;
+     			}
+     			
+     			//alert("CPP_DPPJsonarray:  "+CPP_DPPJsonarray);
+     		}// CPP_DPPJsonarray close
+     		
+  			var ChartererJsonarray = "";
+  			for(var Charterer = 0;Charterer < jsonStr.TimeCharterReportsList[i].ChartererJsonarray.length ; Charterer++){
+     			if(Charterer == 0){
+     				ChartererJsonarray = jsonStr.TimeCharterReportsList[i].ChartererJsonarray[Charterer].Charterer;	
+     			}else{
+     				ChartererJsonarray = ChartererJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].ChartererJsonarray[Charterer].Charterer;
+     			}
+     			
+     			//alert("ChartererJsonarray:  "+ChartererJsonarray);
+     		}// ChartererJsonarray close
+     		
+  			var DeliveryJsonarray = "";
+  			for(var Delivery = 0;Delivery < jsonStr.TimeCharterReportsList[i].DeliveryJsonarray.length ; Delivery++){
+     			if(Delivery == 0){
+     				DeliveryJsonarray = jsonStr.TimeCharterReportsList[i].DeliveryJsonarray[Delivery].Delivery;	
+     			}else{
+     				DeliveryJsonarray = DeliveryJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].DeliveryJsonarray[Delivery].Delivery;
+     			}
+     			
+     			//alert("DeliveryJsonarray:  "+DeliveryJsonarray);
+     		}// DeliveryJsonarray close
+     		
+  			var DeliveryPlaceJsonarray = "";
+  			for(var DeliveryPlace = 0;DeliveryPlace < jsonStr.TimeCharterReportsList[i].DeliveryPlaceJsonarray.length ; DeliveryPlace++){
+     			if(DeliveryPlace == 0){
+     				DeliveryPlaceJsonarray = jsonStr.TimeCharterReportsList[i].DeliveryPlaceJsonarray[DeliveryPlace].DeliveryPlace;	
+     			}else{
+     				DeliveryPlaceJsonarray = DeliveryPlaceJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].DeliveryPlaceJsonarray[DeliveryPlace].DeliveryPlace;
+     			}
+     			
+     			//alert("DeliveryPlaceJsonarray:  "+DeliveryPlaceJsonarray);
+     		}// DeliveryPlaceJsonarray close
+     		
+  			var PeriodJsonarray = "";
+  			for(var Period = 0;Period < jsonStr.TimeCharterReportsList[i].PeriodJsonarray.length ; Period++){
+     			if(Period == 0){
+     				PeriodJsonarray = jsonStr.TimeCharterReportsList[i].PeriodJsonarray[Period].Period;	
+     			}else{
+     				PeriodJsonarray = PeriodJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].PeriodJsonarray[Period].Period;
+     			}
+     			
+     			//alert("PeriodJsonarray:  "+PeriodJsonarray);
+     		}// PeriodJsonarray close
+     		
+  			var PeriodunitJsonarray = "";
+  			for(var Periodunit = 0;Periodunit < jsonStr.TimeCharterReportsList[i].PeriodunitJsonarray.length ; Periodunit++){
+     			if(Periodunit == 0){
+     				PeriodunitJsonarray = jsonStr.TimeCharterReportsList[i].PeriodunitJsonarray[Periodunit].Periodunit;	
+     			}else{
+     				PeriodunitJsonarray = PeriodunitJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].PeriodunitJsonarray[Periodunit].Periodunit;
+     			}
+     			
+     			//alert("PeriodunitJsonarray:  "+PeriodunitJsonarray);
+     		}// PeriodunitJsonarray close
+     		
+  			var RedeliveryJsonarray = "";
+  			for(var Redelivery = 0;Redelivery < jsonStr.TimeCharterReportsList[i].RedeliveryJsonarray.length ; Redelivery++){
+     			if(Redelivery == 0){
+     				RedeliveryJsonarray = jsonStr.TimeCharterReportsList[i].RedeliveryJsonarray[Redelivery].Redelivery;	
+     			}else{
+     				RedeliveryJsonarray = RedeliveryJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].RedeliveryJsonarray[Redelivery].Redelivery;
+     			}
+     			
+     			//alert("RedeliveryJsonarray:  "+RedeliveryJsonarray);
+     		}// RedeliveryJsonarray close
+     		
+  			var TCRateJsonarray = "";
+  			for(var TCRate = 0;TCRate < jsonStr.TimeCharterReportsList[i].TCRateJsonarray.length ; TCRate++){
+     			if(TCRate == 0){
+     				TCRateJsonarray = jsonStr.TimeCharterReportsList[i].TCRateJsonarray[TCRate].TCRate;	
+     			}else{
+     				TCRateJsonarray = TCRateJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].TCRateJsonarray[TCRate].TCRate;
+     			}
+     			
+     			//alert("TCRateJsonarray:  "+TCRateJsonarray);
+     		}// TCRateJsonarray close
+     		
+  			var RateJsonarray = "";
+  			for(var Rate = 0;Rate < jsonStr.TimeCharterReportsList[i].RateJsonarray.length ; Rate++){
+     			if(Rate == 0){
+     				RateJsonarray = jsonStr.TimeCharterReportsList[i].RateJsonarray[Rate].Rate;	
+     			}else{
+     				RateJsonarray = RateJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].RateJsonarray[Rate].Rate;
+     			}
+     			
+     			//alert("RateJsonarray:  "+RateJsonarray);
+     		}// RateJsonarray close
+     		
+  			var UnitJsonarray = "";
+  			for(var Unit = 0;Unit < jsonStr.TimeCharterReportsList[i].UnitJsonarray.length ; Unit++){
+     			if(Unit == 0){
+     				UnitJsonarray = jsonStr.TimeCharterReportsList[i].UnitJsonarray[Unit].Unit;	
+     			}else{
+     				UnitJsonarray = UnitJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].UnitJsonarray[Unit].Unit;
+     			}
+     			
+     			//alert("UnitJsonarray:  "+UnitJsonarray);
+     		}// UnitJsonarray close
+     		
+  			var CommentsJsonarray = "";
+  			for(var Comments = 0;Comments < jsonStr.TimeCharterReportsList[i].CommentsJsonarray.length ; Comments++){
+     			if(Comments == 0){
+     				CommentsJsonarray = jsonStr.TimeCharterReportsList[i].CommentsJsonarray[Comments].Comments;	
+     			}else{
+     				CommentsJsonarray = CommentsJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].CommentsJsonarray[Comments].Comments;
+     			}
+     			
+     			//alert("CommentsJsonarray:  "+CommentsJsonarray);
+     		}// CommentsJsonarray close
+     		
+  			var SourceJsonarray = "";
+  			for(var Source = 0;Source < jsonStr.TimeCharterReportsList[i].SourceJsonarray.length ; Source++){
+     			if(Source == 0){
+     				SourceJsonarray = jsonStr.TimeCharterReportsList[i].SourceJsonarray[Source].Source;	
+     			}else{
+     				SourceJsonarray = SourceJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].SourceJsonarray[Source].Source;
+     			}
+     			
+     			//alert("SourceJsonarray:  "+SourceJsonarray);
+     		}// SourceJsonarray close
+     		
+  			var VesseltypeJsonarray = "";
+  			for(var Vesseltype = 0;Vesseltype < jsonStr.TimeCharterReportsList[i].VesseltypeJsonarray.length ; Vesseltype++){
+     			if(Vesseltype == 0){
+     				VesseltypeJsonarray = jsonStr.TimeCharterReportsList[i].VesseltypeJsonarray[Vesseltype].Vesseltype;	
+     			}else{
+     				VesseltypeJsonarray = VesseltypeJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].VesseltypeJsonarray[Vesseltype].Vesseltype;
+     			}
+     			
+     			//alert("VesseltypeJsonarray:  "+VesseltypeJsonarray);
+     		}// VesseltypeJsonarray close
+     		
+  			var TimeStampJsonarray = "";
+  			for(var TimeStamp = 0;TimeStamp < jsonStr.TimeCharterReportsList[i].TimeStampJsonarray.length ; TimeStamp++){
+     			if(TimeStamp == 0){
+     				TimeStampJsonarray = jsonStr.TimeCharterReportsList[i].TimeStampJsonarray[TimeStamp].TimeStamp;	
+     			}else{
+     				TimeStampJsonarray = TimeStampJsonarray + '<br>' + jsonStr.TimeCharterReportsList[i].TimeStampJsonarray[TimeStamp].TimeStamp;
+     			}
+     			
+     			//alert("TimeStampJsonarray:  "+TimeStampJsonarray);
+     		}// TimeStampJsonarray close
+     		
+     		
+  			TimeCharterReportsTable=TimeCharterReportsTable + '<tr><td>'+forid+'</td><td><span>'+InformationJsonarray+'</span><input type="text" name="" class="td-input" value="'+InformationJsonarray+'"></td><td><span>'+Spot_TCJsonarray+'</span><input type="text" name="" class="td-input" value="'+Spot_TCJsonarray+'"></td><td><span>'+DateJsonarray+'</span><input type="text" name="" class="td-input" value="'+DateJsonarray+'"></td><td><span>'+VesselNameJsonarray+'</span><input type="text" name="" class="td-input" value="'+VesselNameJsonarray+'"></td><td><span>'+CPP_DPPJsonarray+'</span><input type="text" name="" class="td-input" value="'+CPP_DPPJsonarray+'"></td><td><span>'+ChartererJsonarray+'</span><input type="text" name="" class="td-input" value="'+ChartererJsonarray+'"></td><td><span>'+DeliveryJsonarray+'</span><input type="text" name="" class="td-input" value="'+DeliveryJsonarray+'"></td><td><span>'+DeliveryPlaceJsonarray+'</span><input type="text" name="" class="td-input" value="'+DeliveryPlaceJsonarray+'"></td><td><span>'+PeriodJsonarray+'</span><input type="text" name="" class="td-input" value="'+PeriodJsonarray+'"></td><td><span>'+PeriodunitJsonarray+'</span><input type="text" name="" class="td-input" value="'+PeriodunitJsonarray+'"></td><td><span>'+RedeliveryJsonarray+'</span><input type="text" name="" class="td-input" value="'+RedeliveryJsonarray+'"></td><td><span>'+TCRateJsonarray+'</span><input type="text" name="" class="td-input" value="'+TCRateJsonarray+'"></td><td><span>'+RateJsonarray+'</span><input type="text" name="" class="td-input" value="'+RateJsonarray+'"></td><td><span>'+UnitJsonarray+'</span><input type="text" name="" class="td-input" value="'+UnitJsonarray+'"></td><td><span>'+CommentsJsonarray+'</span><input type="text" name="" class="td-input" value="'+CommentsJsonarray+'"></td><td><span>'+SourceJsonarray+'</span><input type="text" name="" class="td-input" value="'+SourceJsonarray+'"></td><td><span>'+VesseltypeJsonarray+'</span><input type="text" name="" class="td-input" value="'+VesseltypeJsonarray+'"></td><td><span>'+TimeStampJsonarray+'</span><input type="text" name="" class="td-input" value="'+TimeStampJsonarray+'"></td><td><span>Link</span><input type="text" name="" class="td-input" value="Link"></td><td class="display-none"><span>subNodeName</span><input type="text" name="" class="td-input" value="'+subNodeName+'"></td><td class="display-none"></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn" onclick="removeUiTimeCharterReports('+subNodeName+');"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>';
+     		
+			}// main for
+			
+			 TimeCharterReportsTable=TimeCharterReportsTable + '<tr class="firstTr" style="display: none;"><td>'+forid+'</td><td class="dblclick"><input type="text" name="informatio" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="spottc" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="date" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="vesselnam" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="cppdpp" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="chartere" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="delivery" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="deliveryplace" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="period" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="periodunit" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="redelivery" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="tcrate" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="rat" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="unit" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="commentobj" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="sourc" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="vesseltyp" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="timestamp" class="display-block-input display-none"></td><td class="dblclick"><input type="text" name="" class="display-block-input display-none"></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>';
+			 document.getElementById("TimeCharterReportsTable").innerHTML = TimeCharterReportsTable;
+			 
+           var summaryRec = "";
+		
+		if(summary_url != ""){
+			summaryRec='<a href="'+summary_url+'" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>';
+			
+			document.getElementById("TimecharterReportsExcelUrl").innerHTML = summaryRec;
+		}
+	         
+	     }); // urlTimeCharterReports close
+	     }
+	 
+	 function saveDataUiTimeCharterReports(){
+	
+   	  // alert("success");
+				
+				var information=document.getElementsByName("informatio");
+				 var spottc=document.getElementsByName("spottc");
+				var date=document.getElementsByName("date");
+				var vesselname=document.getElementsByName("vesselnam");
+				var cppdpp=document.getElementsByName("cppdpp");
+				var charterer=document.getElementsByName("chartere");
+				var delivery=document.getElementsByName("delivery");
+				
+				var deliveryplace=document.getElementsByName("deliveryplace");
+				var period=document.getElementsByName("period");
+				var periodunit=document.getElementsByName("periodunit");
+				var redelivery=document.getElementsByName("redelivery");
+				var tcrate=document.getElementsByName("tcrate");
+				var rate=document.getElementsByName("rat");
+				var unit=document.getElementsByName("unit");
+				var comments=document.getElementsByName("commentobj");
+				var source=document.getElementsByName("sourc");
+				var vesseltype=document.getElementsByName("vesseltyp");
+				var timestamp=document.getElementsByName("timestamp"); 
+				
+				
+				 var employees = {
+					    accounting: []
+					}; 
+					
+				for(var i=1;i<information.length;i++){
+					
+					//alert("informatio: "+information[i].value);
+	 				
+	 				 employees.accounting.push({ 
+	 			        "informatio" :       information[i].value,
+	 			         "spottc"  :  spottc[i].value,
+	 			        "date"       : date[i].value ,
+	 			         "vesselnam"       : vesselname[i].value,
+	 			        "cppdpp"       :cppdpp[i].value,
+	 			        "chartere"       : charterer[i].value,
+	 			        "delivery"       : delivery[i].value,
+	 			      "deliveryplace"       : deliveryplace[i].value,
+	 			    "period"       : period[i].value,
+	 	 			 "periodunit"       : periodunit[i].value,
+	 	 			"redelivery"       : redelivery[i].value,
+	 	 			"tcrate"       : tcrate[i].value,
+	 	 			"rat"       : rate[i].value,
+	 	 			"unit"       : unit[i].value,
+	 	 			"commentobj"       : comments[i].value,
+	 	 			"sourc"       : source[i].value,
+	 	 			"vesseltyp"       : vesseltype[i].value,
+	 	 			"timestamp"       : timestamp[i].value, 
+	 	 			
+	 	 			     
+	 			    }); 
+	 				
+				}
+				
+				var json=JSON.stringify(employees);
+				//alert("employees: "+json);
+				
+				
+				$.ajax({
+				 
+					url: "http://35.199.31.139:8080/bernhard/saveUiTimeCharterReports",	
+					type: 'GET',
+					//data: 'broker'+broker+, 'vesseltype':vesseltype, 'monthyear':monthyear, 'firstyr':firstyr, 'secondyr':secondyr, 'thirdyr':thirdyr, 'fifthyr':fifthyr,
+				   //  data:'broker='+ broker+'&vesseltype='+ vesseltype+'&monthyear='+ monthyear+'&firstyr='+ firstyr+'&secondyr='+ secondyr+'&thirdyr='+ thirdyr+'&fifthyr='+ fifthyr,
+					data:{'employees':json},
+				   
+					success: function(data) {
+						
+						window.location="http://35.199.31.139:8080/bernhard/newUi/index.html";
+						
+					}
+					
+			}); // function on click
+	 }
+	 
+	
+	function BrokerTcUifetchdata(){
+			
+		var urlBrokerTcRate = 'http://35.199.31.139:8080/bernhard/BrokerTcRate';
+	     
+		 $.get(urlBrokerTcRate, function (data) {
+		     // use response from url1
+             var brokertcratedataTable="";
+		   //  alert("brokertcratedata: "+data);
+		     var size="";
+		     var parseId="";
+		     
+		     var summary_url = "";
+		     var forid = "";
+		     
+		     var jsonStr = data;
+			jsonStr = JSON.parse(jsonStr);
+			for(var i=0;i<jsonStr.BrokerTcRateList.length;i++){
+				var BrokerTcRateId = "";
+    			if(jsonStr.BrokerTcRateList[i].hasOwnProperty("BrokerTcRateId")){
+    				BrokerTcRateId = jsonStr.BrokerTcRateList[i].BrokerTcRateId;
+    				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+       			}
+    			
+    			if(jsonStr.BrokerTcRateList[i].hasOwnProperty("size")){
+    				size = jsonStr.BrokerTcRateList[i].size;
+    				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+       			}
+    			
+    			if(jsonStr.BrokerTcRateList[i].hasOwnProperty("parseId")){
+    				parseId = jsonStr.BrokerTcRateList[i].parseId;
+    				//alert("BrokerTcRateId:  "+BrokerTcRateId);
+       			}
+    			
+    			var subNodeName = "";
+    			if(jsonStr.BrokerTcRateList[i].hasOwnProperty("subNodeName")){
+    				subNodeName = jsonStr.BrokerTcRateList[i].subNodeName;
+    				//alert("subNodeName:  "+subNodeName);
+       			}
+    			
+    			
+    			if(jsonStr.BrokerTcRateList[i].hasOwnProperty("i")){
+    				forid = jsonStr.BrokerTcRateList[i].i;
+    				//alert("subNodeName:  "+subNodeName);
+       			}
+    			
+    			if(jsonStr.BrokerTcRateList[i].hasOwnProperty("summary_url")){
+    				summary_url = jsonStr.BrokerTcRateList[i].summary_url;
+    				//alert("summary_url:  "+summary_url);
+       			}
+    			
+    			var BrokerJsonarray = "";
+    			for(var Broker = 0;Broker < jsonStr.BrokerTcRateList[i].BrokerJsonarray.length ; Broker++){
+       			if(Broker == 0){
+       				BrokerJsonarray = jsonStr.BrokerTcRateList[i].BrokerJsonarray[Broker].Broker;	
+       			}else{
+       				BrokerJsonarray = BrokerJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].BrokerJsonarray[Broker].Broker;
+       			}
+       			
+       			//alert("BrokerJsonarray:  "+BrokerJsonarray);
+       		}// BrokerJsonarray close
+    			
+    			var VesselTypeJsonarray = "";
+    			for(var VesselType = 0;VesselType < jsonStr.BrokerTcRateList[i].VesselTypeJsonarray.length ; VesselType++){
+       			if(VesselType == 0){
+       				VesselTypeJsonarray = jsonStr.BrokerTcRateList[i].VesselTypeJsonarray[VesselType].VesselType;	
+       			}else{
+       				VesselTypeJsonarray = VesselTypeJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].VesselTypeJsonarray[VesselType].VesselType;
+       			}
+       			
+       			//alert("VesselTypeJsonarray:  "+VesselTypeJsonarray);
+       		}// VesselTypeJsonarray close
+    			
+    			var Month_YearJsonarray = "";
+    			for(var Month_Year = 0;Month_Year < jsonStr.BrokerTcRateList[i].Month_YearJsonarray.length ; Month_Year++){
+       			if(Month_Year == 0){
+       				Month_YearJsonarray = jsonStr.BrokerTcRateList[i].Month_YearJsonarray[Month_Year].Month_Year;	
+       			}else{
+       				Month_YearJsonarray = Month_YearJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].Month_YearJsonarray[Month_Year].Month_Year;
+       			}
+       			
+       			//alert("Month_YearJsonarray:  "+Month_YearJsonarray);
+       		}// Month_YearJsonarray close
+       		
+    			var first_yrJsonarray = "";
+    			for(var first_yr = 0;first_yr < jsonStr.BrokerTcRateList[i].first_yrJsonarray.length ; first_yr++){
+       			if(first_yr == 0){
+       				first_yrJsonarray = jsonStr.BrokerTcRateList[i].first_yrJsonarray[first_yr].first_yr;	
+       			}else{
+       				first_yrJsonarray = first_yrJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].first_yrJsonarray[first_yr].first_yr;
+       			}
+       			
+       			//alert("first_yrJsonarray:  "+first_yrJsonarray);
+       		}// first_yrJsonarray close
+       		
+    			var second_yrJsonarray = "";
+    			for(var second_yr = 0;second_yr < jsonStr.BrokerTcRateList[i].second_yrJsonarray.length ; second_yr++){
+       			if(second_yr == 0){
+       				second_yrJsonarray = jsonStr.BrokerTcRateList[i].second_yrJsonarray[second_yr].second_yr;	
+       			}else{
+       				second_yrJsonarray = second_yrJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].second_yrJsonarray[second_yr].second_yr;
+       			}
+       			
+       			//alert("second_yrJsonarray:  "+second_yrJsonarray);
+       		}// second_yrJsonarray close
+				
+    			var third_yrJsonarray = "";
+    			for(var third_yr = 0;third_yr < jsonStr.BrokerTcRateList[i].third_yrJsonarray.length ; third_yr++){
+       			if(third_yr == 0){
+       				third_yrJsonarray = jsonStr.BrokerTcRateList[i].third_yrJsonarray[third_yr].third_yr;	
+       			}else{
+       				third_yrJsonarray = third_yrJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].third_yrJsonarray[third_yr].third_yr;
+       			}
+       			
+       			//alert("third_yrJsonarray:  "+third_yrJsonarray);
+       		}// third_yrJsonarray close
+       		
+    			var fifth_yrJsonarray = "";
+    			for(var fifth_yr = 0;fifth_yr < jsonStr.BrokerTcRateList[i].fifth_yrJsonarray.length ; fifth_yr++){
+       			if(fifth_yr == 0){
+       				fifth_yrJsonarray = jsonStr.BrokerTcRateList[i].fifth_yrJsonarray[fifth_yr].fifth_yr;	
+       			}else{
+       				fifth_yrJsonarray = fifth_yrJsonarray + '<br>' + jsonStr.BrokerTcRateList[i].fifth_yrJsonarray[fifth_yr].fifth_yr;
+       			}
+       			
+       			//alert("fifth_yrJsonarray:  "+fifth_yrJsonarray);
+       		}// fifth_yrJsonarray close
+       		
+       		
+    			brokertcratedataTable=brokertcratedataTable + '<tr><td>'+forid+'</td><td><span>'+BrokerJsonarray+'</span><input type="text" name="broker" class="td-input" value="'+BrokerJsonarray+'"></td><td><span>'+VesselTypeJsonarray+'</span><input type="text" name="vesselty" class="td-input" value="'+VesselTypeJsonarray+'"></td><td><span>'+Month_YearJsonarray+'</span><input type="text" name="monthyear" class="td-input" value="'+Month_YearJsonarray+'"></td><td><span>'+first_yrJsonarray+'</span><input type="text" name="firstyr" class="td-input" value="'+first_yrJsonarray+'"></td><td><span>'+second_yrJsonarray+'</span><input type="text" name="secondyr" class="td-input" value="'+second_yrJsonarray+'"></td><td><span>'+third_yrJsonarray+'</span><input type="text" name="thirdyr" class="td-input" value="'+third_yrJsonarray+'"></td><td><span>'+fifth_yrJsonarray+'</span><input type="text" name="fifthyr" class="td-input" value="'+fifth_yrJsonarray+'"></td><td class="display-none"><span>'+subNodeName+'</span><input type="text" name="editnodename" class="td-input" value="'+subNodeName+'"></td><td><span>Link</span><input type="text" name="" class="td-input" value="Link"></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn" onclick="removeUiBrokerTcRate('+subNodeName+');"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr> ';
+       		 
+			}// main for
+			
+			  brokertcratedataTable='<tr class="firstTr" style="display: none;"><td>'+forid+'</td><td class="dblclick"><input type="text" name="broker" class="display-block-input display-none" id="broker"></td><td class="dblclick"><input type="text" name="vesselty" class="display-block-input display-none" id="vesseltype"></td><td class="dblclick"><input type="text" name="monthyear" class="display-block-input display-none" id="monthyear"></td><td class="dblclick"><input type="text" name="firstyr" class="display-block-input display-none" id="firstyr"></td><td class="dblclick"><input type="text" name="secondyr" class="display-block-input display-none" id="secondyr"></td><td class="dblclick"><input type="text" name="thirdyr" class="display-block-input display-none" id="thirdyr"></td><td class="dblclick"><input type="text" name="fifthyr" class="display-block-input display-none" id="fifthyr"></td><td class="dblclick"><input type="text" name="" class="display-block-input display-none"></td><td class="display-none"><span>subNodeName</span><input type="text" name="editnodename" class="td-input" value=""></td><td><a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td></tr>' + brokertcratedataTable;
+			  document.getElementById("BrokerTcRate").innerHTML = brokertcratedataTable;
+			 
+			var summaryRec = "";
+			
+			if(summary_url != ""){
+				summaryRec='<a href="'+summary_url+'" class="btn btn-info m-0" style="position: absolute; right: 60px; top: 0px;"> <i class="fa fa-download"></i> </a>';
+				
+				document.getElementById("brokertcrateExcelUrl").innerHTML = summaryRec;
+			}
+			
+			
+			
+		 });// broker tc rate close jquery
+		 
+	}
+	
+	
+	function saveDataUibrokertcrate(){
+		 
+	    var broker=document.getElementsByName("broker");
+		var vesseltype=document.getElementsByName("vesselty");
+		var monthyear=document.getElementsByName("monthyear");
+		var firstyr=document.getElementsByName("firstyr");
+		var secondyr=document.getElementsByName("secondyr");
+		var thirdyr=document.getElementsByName("thirdyr");
+		var fifthyr=document.getElementsByName("fifthyr");
+		var editnodename=document.getElementsByName("editnodename");
+		
+		/* var ee = broker = vesseltype = monthyear = firstyr = secondyr = thirdyr = fifthyr="";
+		if(ee=="null" || ee.length==0 || !ee)
+		{
+		    alert("all fields must be filled out");
+		    return false;
+		} */
+		
+		
+		 if(broker == "" && vesseltype =="" && monthyear =="" && firstyr == "" && secondyr == "" && thirdyr == "" && fifthyr == ""){
+	        alert("Enter at least one search parameter!");
+	        return false;
+	    } 
+		 
+		 var employees = {
+			    accounting: []
+			}; 
+			
+			
+
+		for(var i=1;i<broker.length;i++){
+			/* alert("broker: "+broker[i].value);	
+			alert("vesseltype: "+vesseltype[i].value);
+				alert("monthyear: "+monthyear[i].value);
+				alert("firstyr: "+firstyr[i].value);
+				alert("secondyr: "+secondyr[i].value);
+				alert("thirdyr: "+thirdyr[i].value);
+				alert("fifthyr: "+fifthyr[i].value); */
+				
+				 employees.accounting.push({ 
+			        "broker" :           broker[i].value,
+			        "vesselty"  :     vesseltype[i].value,
+			        "monthyear"       : monthyear[i].value ,
+			         "firstyr"       : firstyr[i].value,
+			        "secondyr"       :secondyr[i].value,
+			        "thirdyr"       : thirdyr[i].value,
+			        "fifthyr"       : fifthyr[i].value,
+			        "editnodename"       : editnodename[i].value,
+			    }); 
+				
+		}
+		
+		var json=JSON.stringify(employees);
+		alert("employees: "+json);
+		
+		$.ajax({
+		 
+			url: "http://35.199.31.139:8080/bernhard/saveUiBrokerTcRate",	
+			type: 'GET',
+			//data: 'broker'+broker+, 'vesseltype':vesseltype, 'monthyear':monthyear, 'firstyr':firstyr, 'secondyr':secondyr, 'thirdyr':thirdyr, 'fifthyr':fifthyr,
+		   //  data:'broker='+ broker+'&vesseltype='+ vesseltype+'&monthyear='+ monthyear+'&firstyr='+ firstyr+'&secondyr='+ secondyr+'&thirdyr='+ thirdyr+'&fifthyr='+ fifthyr,
+			data:{'employees':json},
+		   
+			success: function(data) {
+				//alert(data);
+				//window.location="http://35.199.31.139:8080/bernhard/oct_9/index.html";
+				BrokerTcUifetchdata();
+				
+			}
+			
+	}); // function on click
+	 
+ }
+	
+	
+	function editDataUibrokertcrate(){
+		 
+	    var broker=document.getElementsByName("brokerupdate");
+		var vesseltype=document.getElementsByName("vt");
+		var monthyear=document.getElementsByName("my");
+		var firstyr=document.getElementsByName("fy");
+		var secondyr=document.getElementsByName("sy");
+		var thirdyr=document.getElementsByName("ty");
+		var fifthyr=document.getElementsByName("fifyr");
+		
+		var editnodename=document.getElementsByName("editnodename");
+		
+		 var employees = {
+			    accounting: []
+			}; 
+		
+		for(var i=1;i<broker.length;i++){
+			//alert("broker: "+broker[i].value);
+			//alert("editnodename: "+editnodename[i].value);
+			/* alert("broker: "+broker[i].value);	
+			alert("vesseltype: "+vesseltype[i].value);
+				alert("monthyear: "+monthyear[i].value);
+				alert("firstyr: "+firstyr[i].value);
+				alert("secondyr: "+secondyr[i].value);
+				alert("thirdyr: "+thirdyr[i].value);
+				alert("fifthyr: "+fifthyr[i].value); */
+				
+				 employees.accounting.push({ 
+			        "brokerupdate" :           broker[i].value,
+			        "vt"  :     vesseltype[i].value,
+			        "my"       : monthyear[i].value ,
+			         "fy"       : firstyr[i].value,
+			        "sy"       :secondyr[i].value,
+			        "ty"       : thirdyr[i].value,
+			        "fifyr"       : fifthyr[i].value,
+			       "editnodename"       : editnodename[i].value,
+			    }); 
+				
+		}
+		
+		var json=JSON.stringify(employees);
+		alert("employees: "+json);
+		
+		$.ajax({
+		 
+			url: "http://35.199.31.139:8080/bernhard/updateUibroker",	
+			type: 'GET',
+			//data: 'broker'+broker+, 'vesseltype':vesseltype, 'monthyear':monthyear, 'firstyr':firstyr, 'secondyr':secondyr, 'thirdyr':thirdyr, 'fifthyr':fifthyr,
+		   //  data:'broker='+ broker+'&vesseltype='+ vesseltype+'&monthyear='+ monthyear+'&firstyr='+ firstyr+'&secondyr='+ secondyr+'&thirdyr='+ thirdyr+'&fifthyr='+ fifthyr,
+			data:{'employees':json},
+		   
+			success: function(data) {
+				//alert(data);
+				//window.location="http://35.199.31.139:8080/bernhard/oct_9/index.html";
+				
+				
+			}
+			
+	}); // function on click
+	 
+ }
+	
+	
+	</script>
+  	
+</body>
+</html>
