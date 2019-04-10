@@ -406,11 +406,17 @@ public static JSONObject formatDate_Month_Year_Day(Date date, PrintWriter out)  
 	int day=cal.get(Calendar.DATE);
 	int month=(cal.get(Calendar.MONTH)+1);
 	int year=cal.get(Calendar.YEAR);
+	int hours=cal.get(Calendar.HOUR_OF_DAY);
+	int Minute=cal.get(Calendar.MINUTE);
+	int seconds=cal.get(Calendar.SECOND);
 	
 	 dateJsonObject=new JSONObject();
 	 dateJsonObject.put("day", day);
 	 dateJsonObject.put("month", month);
 	 dateJsonObject.put("year", year);
+	 dateJsonObject.put("hours", hours);
+	 dateJsonObject.put("seconds", seconds);
+	 dateJsonObject.put("Minute", Minute);
 	
 	}
 	}catch(Exception e){
@@ -1924,8 +1930,9 @@ public static void readGmailDatafromsling_fetchallMails(PrintWriter out, Session
 }
 
 
-public static JSONObject readGmailDatafromsling(PrintWriter out, Session session){
-	JSONObject s=null;
+public static JSONArray readGmailDatafromsling(PrintWriter out, Session session){
+//	JSONObject s=null;
+	JSONArray dataarray=null;
 	try {
 		
 		Node GmaildataCreatedRootnodeSling=null;
@@ -1934,7 +1941,7 @@ public static JSONObject readGmailDatafromsling(PrintWriter out, Session session
 		if (session.getRootNode().hasNode("SentMailTime")) {
 			GmaildataCreatedRootnodeSling = session.getRootNode().getNode("SentMailTime");
 		}
-		JSONArray dataarray=null;
+//		JSONArray dataarray=null;
 		 dataarray=new JSONArray();
 		 
 		 
@@ -2012,14 +2019,14 @@ public static JSONObject readGmailDatafromsling(PrintWriter out, Session session
 		}// check rootfolder has node
 //		out.println("dataarray: "+dataarray);  
 		
-		s=new JSONObject();
-		s.put("emailList", dataarray);
+		/*s=new JSONObject();
+		s.put("emailList", dataarray);*/
 		
 	} catch (Exception e) {
 	   out.println(e.getMessage());
 	}
 	
-	return s;
+	return dataarray;
 }
 
 public static String downloadEmail(String link) throws IOException {
@@ -2072,6 +2079,484 @@ public static void readGmailDataFromSlingNode(PrintWriter out, Session session){
 	} catch (Exception e) {
 	   out.println(e.getMessage());
 	}
+}
+
+
+public  JSONObject fetchTonnageDaywiseDataNew(PrintWriter out, Session session){
+	
+	JSONObject mainJsonobj=null;
+	JSONArray keyNameObjectJsonarray=new JSONArray();
+	try {
+		Node scorpio = session.getRootNode().getNode("scorpioDataBase");
+		Node ReportData=scorpio.getNode("ReportData");
+		Node Tonnage=ReportData.getNode("Tonnage");
+		
+		if(Tonnage.hasNodes()){
+			long size=Tonnage.getNodes().getSize();
+			
+			JSONObject keyNameObject=null;
+			
+			
+			boolean nodeFlag = false;
+			NodeIterator itr=Tonnage.getNodes();
+			int i=0;
+			String netChangedPointer="";
+			String limit ="";
+			if(Tonnage.hasProperty("netChangedPointer")){
+				netChangedPointer=Tonnage.getProperty("netChangedPointer").getString();
+				limit= String.valueOf(Integer.parseInt(netChangedPointer)+1);
+			}
+			keyNameObjectJsonarray=new JSONArray();
+			while(Tonnage.hasNode(limit)){
+				nodeFlag = true;
+				Node nextnode=Tonnage.getNode(limit);
+				i++;
+				
+				keyNameObject= displayTonnageList(size, i, nextnode);
+				keyNameObjectJsonarray.put(keyNameObject);
+				limit= String.valueOf(Integer.parseInt(limit)+1);
+				
+			}
+			
+			if(!nodeFlag)
+			{
+				while(itr.hasNext())
+				{
+			Node nextnode=itr.nextNode();
+			
+			i++;
+			keyNameObject=displayTonnageList(size, i, nextnode);
+			keyNameObjectJsonarray.put(keyNameObject);
+			
+			}// while close 
+		}
+			if(keyNameObjectJsonarray.length()>0){
+				 mainJsonobj=new JSONObject();
+				 mainJsonobj.put("tonnageList", keyNameObjectJsonarray);
+				
+//				out.println("mainJsonobj: "+mainJsonobj);
+			}
+			Tonnage.setProperty("netChangedPointer",String.valueOf(size));
+			session.save();
+			
+			/*Node ExcelSummaryRecord=null;
+			if(Tonnage.hasNode("ExcelSummaryRecord")){
+				ExcelSummaryRecord = Tonnage.getNode("ExcelSummaryRecord");
+			}else{
+				ExcelSummaryRecord = Tonnage.addNode("ExcelSummaryRecord");
+				session.save();
+			}
+			
+			String resultExcel=CreateExcelMethods.createExcelTonnage(out, mainJsonobj.toString());
+			JSONObject jsonResExcel= new JSONObject(resultExcel);
+			if(jsonResExcel.has("status") && jsonResExcel.getString("status").equals("S")) {
+				
+				 String fileName="";
+				if(jsonResExcel.has("fileName")){
+					 fileName=jsonResExcel.getString("fileName");
+				}
+				
+				Node ExcelSummaryRecord_SubNode=null;
+				if(ExcelSummaryRecord.hasNode(fileName)){
+					ExcelSummaryRecord_SubNode = ExcelSummaryRecord.getNode(fileName);
+				}else{
+					ExcelSummaryRecord_SubNode = ExcelSummaryRecord.addNode(fileName);
+					session.save();
+				}
+				
+				ExcelSummaryRecord_SubNode.setProperty("summary_url", jsonResExcel.getString("fileUrl"));
+				session.save();
+				keyNameObject.put("summary_url", jsonResExcel.getString("fileUrl"));
+				 
+			 }else if(jsonResExcel.has("status") && jsonResExcel.getString("status").equals("E")) {
+				
+			 }*/
+			
+		} // node check close if
+		
+	} catch (Exception e) {
+	   out.println(e.getMessage());
+	   
+	}
+	 return mainJsonobj;
+	
+}
+
+private static JSONObject displayTonnageList(long size, int i, Node nextnode) {
+	
+	JSONObject keyNameObject=null;
+	try{
+				int parseId=0;
+				i++;
+				String subNodeName=nextnode.getName();
+	
+				String EmploymentStatus="";
+				String Owners="";
+				String OpenPort="";
+				String Operators="";
+				String Id="";
+				String CargoType="";
+				String Comment="";
+				String ETABasis="";
+				String OpenDate="";
+				String ReportType="";
+				String ReportTimestamp="";
+				String RepositionRegion="";
+				String Source="";
+				String VesselName="";
+				String dateAndTime="";
+				
+				
+				JSONArray EmploymentStatusJsonarray=new JSONArray();
+				JSONArray OwnersJsonarray=new JSONArray();
+				JSONArray OpenPortJsonarray=new JSONArray();
+				JSONArray OperatorsJsonarray=new JSONArray();
+				JSONArray CargoTypeJsonarray=new JSONArray();
+				JSONArray CommentJsonarray=new JSONArray();
+				JSONArray ETABasisJsonarray=new JSONArray();
+				JSONArray OpenDateJsonarray=new JSONArray();
+				JSONArray ReportTypeJsonarray=new JSONArray();
+				JSONArray ReportTimestampJsonarray=new JSONArray();
+				JSONArray RepositionRegionJsonarray=new JSONArray();
+				JSONArray SourceJsonarray=new JSONArray();
+				JSONArray VesselNameJsonarray=new JSONArray();
+				JSONArray BuiltJsonarray=new JSONArray();
+				JSONArray DWTJsonarray=new JSONArray();
+				JSONArray CubicsJsonarray=new JSONArray();
+				JSONArray LOAJsonarray=new JSONArray();
+				JSONArray ICEJsonarray=new JSONArray();
+				JSONArray SternLinejsonarray=new JSONArray();
+				JSONArray VesselTypejsonarray=new JSONArray();
+				
+				
+				if(nextnode.hasProperty("Id")){
+					Id=nextnode.getProperty("Id").getString();
+				}
+				if(nextnode.hasProperty("dateAndTime")){
+					dateAndTime=nextnode.getProperty("dateAndTime").getString();
+				}
+				if(nextnode.hasProperty("EmploymentStatus")){
+					EmploymentStatus=nextnode.getProperty("EmploymentStatus").getString();
+					
+					JSONObject EmploymentStatusJsonObject=new JSONObject();
+					EmploymentStatusJsonObject.put("EmploymentStatus", EmploymentStatus);
+					if(EmploymentStatusJsonObject.length()>0){
+					EmploymentStatusJsonarray.put(EmploymentStatusJsonObject);
+					}
+				}
+				if(nextnode.hasProperty("Owners")){
+					Owners=nextnode.getProperty("Owners").getString();
+					
+					JSONObject OwnersJsonObject=new JSONObject();
+					OwnersJsonObject.put("Owners", Owners);
+					if(OwnersJsonObject.length()>0){
+					OwnersJsonarray.put(OwnersJsonObject);
+					}
+				}
+				if(nextnode.hasProperty("OpenPort")){
+					OpenPort=nextnode.getProperty("OpenPort").getString();
+					
+					JSONObject OpenPortJsonObject=new JSONObject();
+					OpenPortJsonObject.put("OpenPort", OpenPort);
+					if(OpenPortJsonObject.length()>0){
+					OpenPortJsonarray.put(OpenPortJsonObject);
+					}
+				}
+				if(nextnode.hasProperty("Operators")){
+					Operators=nextnode.getProperty("Operators").getString();
+					
+					JSONObject OperatorsJsonaobject=new JSONObject();
+					OperatorsJsonaobject.put("Operators", Operators);
+					if(OperatorsJsonaobject.length()>0){
+					OperatorsJsonarray.put(OperatorsJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("CargoType")){
+					CargoType=nextnode.getProperty("CargoType").getString();
+					
+					JSONObject CargoTypeJsonaobject=new JSONObject();
+					CargoTypeJsonaobject.put("CargoType", CargoType);
+					if(CargoTypeJsonaobject.length()>0){
+					CargoTypeJsonarray.put(CargoTypeJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("Comment")){
+					Comment=nextnode.getProperty("Comment").getString();
+					
+					JSONObject CommentJsonaobject=new JSONObject();
+					CommentJsonaobject.put("Comment", Comment);
+					if(CommentJsonaobject.length()>0){
+					CommentJsonarray.put(CommentJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("ETABasis")){
+					ETABasis=nextnode.getProperty("ETABasis").getString();
+					
+					JSONObject ETABasisJsonaobject=new JSONObject();
+					ETABasisJsonaobject.put("ETABasis", ETABasis);
+					if(ETABasisJsonaobject.length()>0){
+					ETABasisJsonarray.put(ETABasisJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("OpenDate")){
+					OpenDate=nextnode.getProperty("OpenDate").getString();
+					
+					JSONObject OpenDateJsonaobject=new JSONObject();
+					OpenDateJsonaobject.put("OpenDate", OpenDate);
+					if(OpenDateJsonaobject.length()>0){
+					OpenDateJsonarray.put(OpenDateJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("ReportType")){
+					ReportType=nextnode.getProperty("ReportType").getString();
+					
+					JSONObject ReportTypeJsonaobject=new JSONObject();
+					ReportTypeJsonaobject.put("ReportType", ReportType);
+					if(ReportTypeJsonaobject.length()>0){
+					ReportTypeJsonarray.put(ReportTypeJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("ReportTimestamp")){
+					ReportTimestamp=nextnode.getProperty("ReportTimestamp").getString();
+					
+					JSONObject ReportTimestampJsonaobject=new JSONObject();
+					ReportTimestampJsonaobject.put("ReportTimestamp", ReportTimestamp);
+					if(ReportTimestampJsonaobject.length()>0){
+					ReportTimestampJsonarray.put(ReportTimestampJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("RepositionRegion")){
+					RepositionRegion=nextnode.getProperty("RepositionRegion").getString();
+					
+					JSONObject RepositionRegionJsonaobject=new JSONObject();
+					RepositionRegionJsonaobject.put("RepositionRegion", RepositionRegion);
+					if(RepositionRegionJsonaobject.length()>0){
+					RepositionRegionJsonarray.put(RepositionRegionJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("Source")){
+					Source=nextnode.getProperty("Source").getString();
+					
+					JSONObject SourceJsonaobject=new JSONObject();
+					SourceJsonaobject.put("Source", Source);
+					if(SourceJsonaobject.length()>0){
+					SourceJsonarray.put(SourceJsonaobject);
+					}
+				}
+				if(nextnode.hasProperty("VesselName")){
+					VesselName=nextnode.getProperty("VesselName").getString();
+					
+					JSONObject VesselNameJsonaobject=new JSONObject();
+					VesselNameJsonaobject.put("VesselName", VesselName);
+					if(VesselNameJsonaobject.length()>0){
+					VesselNameJsonarray.put(VesselNameJsonaobject);
+					}
+				}
+				
+				if(nextnode.hasProperty("Built")){
+					String Built="";
+					Built=nextnode.getProperty("Built").getString();
+					
+					JSONObject BuiltJsonaobject=new JSONObject();
+					BuiltJsonaobject.put("Built", Built);
+					if(BuiltJsonaobject.length()>0){
+						BuiltJsonarray.put(BuiltJsonaobject);
+					}
+				}
+				
+				if(nextnode.hasProperty("DWT")){
+					String DWT="";
+					DWT=nextnode.getProperty("DWT").getString();
+					
+					JSONObject DWTJsonaobject=new JSONObject();
+					DWTJsonaobject.put("DWT", DWT);
+					if(DWTJsonaobject.length()>0){
+						DWTJsonarray.put(DWTJsonaobject);
+					}
+				}
+				
+				if(nextnode.hasProperty("Cubics")){
+					String Cubics="";
+					Cubics=nextnode.getProperty("Cubics").getString();
+					
+					JSONObject CubicsJsonaobject=new JSONObject();
+					CubicsJsonaobject.put("Cubics", Cubics);
+					if(CubicsJsonaobject.length()>0){
+						CubicsJsonarray.put(CubicsJsonaobject);
+					}
+				}
+				
+				if(nextnode.hasProperty("LOA")){
+					String LOA="";
+					LOA=nextnode.getProperty("LOA").getString();
+					
+					JSONObject LOAJsonaobject=new JSONObject();
+					LOAJsonaobject.put("LOA", LOA);
+					if(LOAJsonaobject.length()>0){
+						LOAJsonarray.put(LOAJsonaobject);
+					}
+				}
+				
+				
+				if(nextnode.hasProperty("ICE")){
+					String ICE="";
+					ICE=nextnode.getProperty("ICE").getString();
+					
+					JSONObject ICEJsonaobject=new JSONObject();
+					ICEJsonaobject.put("ICE", ICE);
+					if(ICEJsonaobject.length()>0){
+						ICEJsonarray.put(ICEJsonaobject);
+					}
+				}
+				
+				
+				if(nextnode.hasProperty("SternLine")){
+					String SternLine="";
+					SternLine=nextnode.getProperty("SternLine").getString();
+					
+					JSONObject SternLineJsonaobject=new JSONObject();
+					SternLineJsonaobject.put("SternLine", SternLine);
+					if(SternLineJsonaobject.length()>0){
+						SternLinejsonarray.put(SternLineJsonaobject);
+					}
+				}
+				
+				if(nextnode.hasProperty("VesselType")){
+					String VesselType="";
+					VesselType=nextnode.getProperty("VesselType").getString();
+					
+					JSONObject VesselTypeJsonaobject=new JSONObject();
+					VesselTypeJsonaobject.put("VesselType", VesselType);
+					if(VesselTypeJsonaobject.length()>0){
+						VesselTypejsonarray.put(VesselTypeJsonaobject);
+					}
+				}
+				
+				keyNameObject=new JSONObject();
+				
+				keyNameObject.put("tonnageId", Id);
+				keyNameObject.put("dateAndTime", dateAndTime);
+				keyNameObject.put("EmploymentStatusJsonarray", EmploymentStatusJsonarray);
+				keyNameObject.put("OwnersJsonarray", OwnersJsonarray);
+				keyNameObject.put("OpenPortJsonarray", OpenPortJsonarray);
+				keyNameObject.put("OperatorsJsonarray", OperatorsJsonarray);
+				keyNameObject.put("CargoTypeJsonarray", CargoTypeJsonarray);
+				keyNameObject.put("CommentJsonarray", CommentJsonarray);
+				keyNameObject.put("ETABasisJsonarray", ETABasisJsonarray);
+				keyNameObject.put("OpenDateJsonarray", OpenDateJsonarray);
+				keyNameObject.put("ReportTypeJsonarray", ReportTypeJsonarray);
+				keyNameObject.put("ReportTimestampJsonarray", ReportTimestampJsonarray);
+				keyNameObject.put("RepositionRegionJsonarray", RepositionRegionJsonarray);
+				keyNameObject.put("SourceJsonarray", SourceJsonarray);
+				keyNameObject.put("VesselNameJsonarray", VesselNameJsonarray);
+				keyNameObject.put("BuiltJsonarray", BuiltJsonarray);
+				keyNameObject.put("DWTJsonarray", DWTJsonarray);
+				keyNameObject.put("CubicsJsonarray", CubicsJsonarray);
+				keyNameObject.put("LOAJsonarray", LOAJsonarray);
+				keyNameObject.put("ICEJsonarray", ICEJsonarray);
+				keyNameObject.put("SternLinejsonarray", SternLinejsonarray);
+				keyNameObject.put("VesselTypejsonarray", VesselTypejsonarray);
+				keyNameObject.put("subNodeName", subNodeName);
+				keyNameObject.put("size", size+1);//parseId
+				keyNameObject.put("parseId", parseId+1);
+				keyNameObject.put("i", i);
+
+			
+	}catch(Exception e){
+		
+	}
+	return keyNameObject;
+}
+
+
+public static JSONObject fetchTonnageDaywiseDataTestStartEnd(PrintWriter out, Session session){
+	
+	JSONObject mainJsonobj=null;
+	
+	try{
+		
+		Node scorpio = session.getRootNode().getNode("scorpioDataBase");
+		Node ReportData=scorpio.getNode("ReportData");
+		Node Tonnage=ReportData.getNode("Tonnage");
+		
+		if(Tonnage.hasNodes()){
+			
+			long size=Tonnage.getNodes().getSize();
+
+			boolean nodeFlag = false;
+			NodeIterator itr=Tonnage.getNodes();
+			
+			int i=0;
+			String netChangedPointer="";
+			String start="";
+			if(Tonnage.hasProperty("netChangedPointer")){
+				netChangedPointer=Tonnage.getProperty("netChangedPointer").getString();
+				start= String.valueOf(Integer.parseInt(netChangedPointer)+1);
+			}
+			JSONArray keyNameObjectJsonarray=new JSONArray();
+			
+			while(itr.hasNext()){
+				Node nextNode=itr.nextNode();
+				String nodeNamee=nextNode.getName().toString();
+				
+				int result1 = Integer.valueOf(nodeNamee);
+				int netChangedPointerId=Integer.valueOf(netChangedPointer);
+				
+				if(result1>netChangedPointerId){
+					nodeFlag=true;
+					nextNode=Tonnage.getNode(String.valueOf(result1));
+					
+					JSONObject keyNameObject= displayTonnageList(size, i, nextNode);
+					if(keyNameObject.length()>0){
+						keyNameObjectJsonarray.put(keyNameObject);
+					}
+					
+					
+					Tonnage.setProperty("netChangedPointer",String.valueOf(size));
+					Tonnage.setProperty("Start",start);
+					session.save();
+					
+				}else{
+					if(!nodeFlag)
+					{
+						String Start=Tonnage.getProperty("Start").getString();
+						String end=netChangedPointer;
+						int startInt=Integer.valueOf(Start);
+						int endInt=Integer.valueOf(end);
+						
+						for( int tonnageId=startInt; tonnageId<=endInt; tonnageId++){
+							Node nextnode=Tonnage.getNode( String.valueOf(tonnageId) );
+							i++;
+							JSONObject keyNameObject=displayTonnageList(size, i, nextnode);
+							keyNameObjectJsonarray.put(keyNameObject);
+						}// for 
+						
+					
+				}// if false
+					
+					
+				}// else
+				
+			}// while
+			
+			if(keyNameObjectJsonarray.length()>0){
+				 mainJsonobj=new JSONObject();
+				 mainJsonobj.put("tonnageList", keyNameObjectJsonarray);
+				
+//				out.println("mainJsonobj: "+mainJsonobj);
+			}
+			
+			
+			
+		}// if check
+		
+		
+	} catch (Exception e) {
+	   out.println(e.getMessage());
+	   
+	}
+	 return mainJsonobj;
+	
 }
 
 

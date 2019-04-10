@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+	<script src="js/jquery.min.js"></script>
+  <script src="js/fancybox.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/custom.js"></script>
+</head>
+<body>
+	<div class="row-fluid main-section">
+		<div class="col-md-12 p-0">
+      <div class="row header-nav">
+        <div class="col-md-10">
+      		<ul class="nav nav-tabs">
+      		    <li class="active"><a data-toggle="tab" href="#document">Files</a></li>
+      		    
+      		</ul>
+        </div>
+        
+        
+        
+      </div>
+	  	<div class="tab-content">
+		    <div id="document" class="tab-pane fade in active">
+		    	<div class="row">
+		    		<div class="col-md-12">
+		      			<div class="image-input-section border">
+						<form name="photo" id="upload-file-form" enctype="multipart/form-data"  method="POST">
+    							<div class="form-group">
+    						    <!-- <input type="file" name="img[]" class="file" id="myFile"> --> 
+    						    <!-- <input type="file" name="img" class="file" id="myFile"> -->
+    						   <input id="upload-file-input" type="file" class="file" name="uploadfiles"  multiple="multiple" accept="*"  />
+    							    <div class="input-group col-xs-12">
+    							      <span class="input-group-addon"></span>
+    							      	<input type="text" class="form-control input-lg" disabled placeholder="">
+    							      	<span class="input-group-btn">
+    							       		<button class="browse btn btn-primary input-lg" type="button" id="upload-file-input"><i class="glyphicon glyphicon-search" ></i> Browse</button>
+										
+											
+    							      	</span>
+										
+										
+    							    </div>
+									
+									<div>
+									<button type=submit  id="btnSubmit" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px; margin-top: 2px;"> <img src="images/arrow.png" width="25px"> <b>GO</b></button>
+									</div>
+    							</div>		
+    							
+    							</form>      				
+		      			</div>
+		      		</div>
+		    	</div>
+	      	
+            
+			
+			                 <div class="col-sm-12">
+													<div class="row" id="draggable" style="padding: 0px 10px;">
+														<!--<div class="more-tr col-md-1-width">
+															<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i
+																class="fa fa-plus"></i></a> <a
+																class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i
+																class="fa fa-minus"></i></a>
+														</div>-->
+														<div class="draggable-table p-0">
+															<table
+																class="table table-bordered table-hover bg-light table-add-rules">
+																<thead class="btn-info">
+																	<tr class="not-dubble-text">
+																		<th class="text-center">SR No</th>
+																		<th class="text-center"> FileName </th>
+																		
+																		
+																		<th class="text-center">Actions</th>
+																		<!--<th class="display-none"></th>-->
+																	</tr>
+																</thead>
+																<tbody id="filePush" style="direction:rtl;">
+																	 
+												                  	<!--  <tr class="not-dubble-text">
+												                  		<td>1</td>
+												                  		<td>
+														                  			
+																					<span></span><a href="'+emailUrl+'" download>FileName</a>
+														                  		</td>
+												                  		
+												                  		
+																		<td>
+												                  			
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+																		<!--<td class="display-none">-->
+												                  	<!--  </tr>-->
+												                  	
+												                  	<!--<tr  class="firstTr" style="display: none;">
+												                  		<td>5</td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="display-none"></td>
+												                  	</tr>-->
+												                  
+
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<!--<div class="row">
+														<div class="col-sm-12">
+															<br>
+															<nav class="pull-right">
+																<ul class="pagination">
+																	<li><a href="#" aria-label="Previous"> <span
+																			aria-hidden="true">&laquo;</span>
+																	</a></li>
+																	<li class="active"><a href="#">1</a></li>
+																	<li><a href="#">2</a></li>
+																	<li><a href="#">3</a></li>
+																	<li><a href="#" aria-label="Next"> <span
+																			aria-hidden="true">&raquo;</span>
+																	</a></li>
+																</ul>
+															</nav>
+														</div>
+													</div>-->
+													
+													
+												</div>
+			
+			
+              <!--  <div class="img-section border" id="imgpush">-->
+                
+                
+                  <!-- <a class="thumbnail fancybox" rel="ligthbox" href="images/N2000HZ118-19-0095167.jpeg">
+                      <img class="img-responsive" alt="" src="images/N2000HZ118-19-0095167.jpeg" />
+                      <div class="icon-img-section">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </div>
+                  </a> -->
+                  
+                  
+               <!-- </div>-->
+            
+	      		
+	      			
+	      	
+		    </div>
+		    
+	  	</div>
+	  	</div>
+	</div>
+	
+	<script>
+	
+		 
+		$(document).ready(function (e) {
+			
+			$("#btnSubmit").click(function (event) {
+
+				//stop submit the form, we will post it manually.
+				event.preventDefault();
+
+				uploadFile();
+
+				});
+			
+			filesFetchDataSling();
+			
+		   
+		});   // main document ready close
+		 
+		
+		function uploadFile() {
+			$("#btnSubmit").prop("disabled", true);
+			$.ajax({
+			url: "http://dev.bizlem.io:8082/fileUploadSave/uploadFiles",
+			type: "POST",
+			data: new FormData($("#upload-file-form")[0]),
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			cache: false,
+			success: function (data) {
+			$("#result").text(data);
+			console.log("SUCCESS : "+ data);
+			$("#btnSubmit").prop("disabled", false)
+			// Handle upload success
+			// ...
+			
+			saveData(data);
+			
+			},
+			error: function () {
+			// Handle upload error
+			// ...
+			}
+			});
+			} // function uploadFile
+			
+		
+			
+			function saveData(name) {
+				$
+						.ajax({
+
+							url : "https://dev.bizlem.io:8082/scorpio/fileUploads?fileName="+name,
+							type : 'GET',
+							success : function(data) {
+								alert("saved");
+								filesFetchDataSling();
+							}
+
+						}); // function on click
+			}
+			
+			
+			function filesFetchDataSling() {
+				$
+						.ajax({
+
+							url : 'https://dev.bizlem.io:8082/scorpio/multiplefilesUploadUI',
+							type : 'GET',
+							success : function(data) {
+								var jsonStr = data;
+								jsonStr = JSON.parse(jsonStr);
+								
+								var filePush="";
+
+								for (var i = 0; i < jsonStr.fileList.length; i++) {
+
+										
+										var fileLocation = "";
+										if (jsonStr.fileList[i]
+												.hasOwnProperty("fileLocation")) {
+											fileLocation = jsonStr.fileList[i].fileLocation;
+										}
+										
+										var fileName = "";
+										if (jsonStr.fileList[i]
+												.hasOwnProperty("fileName")) {
+											fileName = jsonStr.fileList[i].fileName;
+											
+										}
+										var srNo = "";
+										if (jsonStr.fileList[i]
+												.hasOwnProperty("srNo")) {
+											srNo = jsonStr.fileList[i].srNo;
+											
+										}
+										var subNodeName = "";
+										if (jsonStr.fileList[i]
+												.hasOwnProperty("nodeName")) {
+											subNodeName = jsonStr.fileList[i].nodeName;
+											
+										}
+										
+										filePush=filePush + '<tr class="not-dubble-text"><td align="center">'+srNo+'</td><td align="center"><span></span><a href="'+fileLocation+'" download>'+fileName+'</a></td><td align="center"><a href="#" class="btn btn-danger btn-sm delete-table-btn" onclick="removeFiles('+subNodeName+');"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td><!--<td class="display-none">--></tr>';
+												
+
+								}// main for
+									
+									document.getElementById("filePush").innerHTML = filePush;
+									
+							},
+						//async: false
+						}); // Tonnage ajax close
+			}
+			
+
+			function removeFiles(subNodeName) {
+		        $.get("https://dev.bizlem.io:8082/scorpio/removeFiles?id="+subNodeName, function(data){
+						type: 'GET',	
+						filesFetchDataSling();
+						
+			    		});
+			}
+			
+	
+	</script>
+	
+</body>
+
+
+</html>

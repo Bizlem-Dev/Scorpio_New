@@ -1,0 +1,240 @@
+body{
+	padding-bottom: 30px;
+}
+.wizard-container{
+	padding-top: 15px;
+}
+.pt-5{
+	padding-top: 5px;
+}
+.mt-15{
+	margin-top: 15px;
+}
+.pr-0{
+	padding-right: 0px;
+}
+.mb-15{
+	margin-bottom: 15px !important;
+}
+.p-0{
+	padding: 0px;
+}
+.m-0{
+	margin: 0px !important;
+}
+.br-b-0{
+	border-bottom:0px !important;
+}
+.sm-btn-custom{
+	margin: 0px 0px;
+    padding: 8px 15px;
+    text-transform: capitalize !important;
+}
+.sm0-btn-custom{
+	margin: 4px 0px 0px 0px;
+    padding: 4px 8px;
+    text-transform: capitalize !important;
+}
+#draggable{
+	margin-top: 15px;
+}
+.draggable-table{
+	overflow-x: auto;
+}
+#draggable .draggable-table{
+}
+#basic .table tr th{
+	font-weight: bold;
+	/*font-size: 14px;*/
+	padding: 8px !important;
+	min-width: 30px;
+}
+#basic .table tr td{
+	/*font-size: 14px;*/
+	padding:3px 8px !important;	
+	vertical-align: middle;
+}
+.delete-table-btn i,.edit-table-btn i{
+	font-size:13px !important;
+}
+.delete-table-btn,.edit-table-btn{
+	padding:3px 5px !important;
+}
+.border{
+	border:1px solid red;
+}
+.col-md-1-width{
+	width:80px;
+	float: left;
+}
+.pull-left{
+	margin-right: 5px;
+}
+.table > thead > tr > th {
+     vertical-align: middle;
+}
+.tab-content-second{
+	min-height: auto !important;
+}
+
+.nav-tabs-custom{
+	/*overflow: hidden;*/
+	min-height: 40px;
+	width: 100%;
+	list-style: none;
+	padding:0px 0px 0px 0px;
+	background: #F4F4F4;
+}
+.nav-tabs-custom li{
+	float: left;
+	width: 20%;
+	text-align: center;
+	padding: 15px;
+    transform: translate3d(-8px, 0px, 0px);
+    transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.nav-tabs-custom li a{
+	color: #555555;
+	display: block;
+	font-weight: bold;
+}
+.nav-tabs-custom li.active a{
+	color: #fff;
+}
+.nav-tabs-custom li.active{
+	position: relative;
+	top: -4px;
+	background: #00CBF2;	
+	box-shadow: 0 16px 26px -10px rgba(0, 203, 242, 0.56), 
+				0 4px 25px 0px rgba(0, 0, 0, 0.12), 
+				0 8px 10px -5px rgba(0, 203, 242, 0.2);
+}
+.add-new-tab-btn1{
+	/*float:left;*/
+}
+.add-new-tab-btn2{
+	/*float:right;
+	position: relative;
+	top:-28px;
+	left:4px;*/
+}
+.add-new-tab-btn1-new{
+	/*right:10px;*/
+	position: relative;
+}
+
+.wizard-card[data-color="red"] .moving-tab{
+	background: #00CBF2;	
+	box-shadow: 0 16px 26px -10px rgba(0, 203, 242, 0.56), 
+				0 4px 25px 0px rgba(0, 0, 0, 0.12), 
+				0 8px 10px -5px rgba(0, 203, 242, 0.2);
+}
+
+table tbody tr td{
+	padding: 5px !important;
+	word-wrap: break-word;
+}
+table thead tr th{	
+	padding: 5px !important;
+	min-width: 160px !important;
+}
+
+table thead tr th:first-child,
+table thead tr th:last-child{
+	min-width: auto !important;
+}
+
+.width{
+	min-width: auto !important;
+	width: 26px !important;
+	max-width: 26px !important;
+	transition: 0.5s !important;
+	overflow: hidden;
+	padding: 0px !important;
+}
+.add-class:hover{
+	color:#fff;
+}
+.add-class:focus{
+	color:#fff;
+}
+.add-class{
+	color:#fff;
+	font-size:17px !important;
+	float:right;
+	cursor: pointer;
+	border:1px solid #fff;
+	background-color: red;
+	padding: 2px 5px 0px 5px !important;
+}
+.new-th tr th a{
+	height:25px;
+	width:26px;
+}
+.new-th tr th a i{
+	position: relative;
+	top:-2px;
+}
+.view-btn-table{
+	font-size:13px;
+	padding:5px 15px;
+}
+.display-none{
+	display: none;
+}
+.td-input{
+	display: none;
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+	background-color: #00CCEF;
+	border-color: #00CCEF;
+}
+.pagination>li>a, .pagination>li>span{
+	color: #00CCEF;
+}
+.wizard-card .wizard-header{
+	padding: 20px 0 10px;
+}
+.wizard-card .info-text{
+	margin: 0px !important;
+}
+.pagination{
+	margin: 0px;
+}
+
+/*#draggable .draggable-table thead,
+#draggable .draggable-table tbody{
+	display: block;
+}
+#draggable .draggable-table tbody{
+	overflow-y:auto;
+}*/
+.table-bordered{
+	border:unset;
+}
+
+tbody {
+    display:block;
+    overflow-y:auto;
+}
+thead, tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    direction: ltr;
+}
+thead tr th:first-child,
+tbody tr td:first-child{
+	width: 80px;
+	padding-left: 20px !important;
+}
+thead tr th,
+tbody tr td{
+	width: 150px;
+}

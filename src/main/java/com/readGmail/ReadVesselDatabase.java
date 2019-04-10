@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -31,14 +33,20 @@ public class ReadVesselDatabase {
 		Element body = doc.body();
 		String data=body.wholeText();*/
 		
-		ReadVesselDatabase s=new ReadVesselDatabase();
+		/*ReadVesselDatabase s=new ReadVesselDatabase();
 		String data=s.readFileAsString("D:\\Scorpio\\Scorpio\\scorpip-demo\\demo\\g.html");
 		//System.out.println(data);
 		
 		Document doc = Jsoup.parseBodyFragment(data);
 		Element body = doc.body();
 		String data1=body.wholeText();
-		System.out.println(data1);
+		System.out.println(data1);*/
+		 Calendar cal = null;
+		 cal = Calendar.getInstance();
+		 Date minDate = new Date(cal.getTimeInMillis());
+		 System.out.println(minDate.toString());
+		
+		
 	}
 	
 	public String readFileAsString(String filePath) throws IOException {
@@ -283,257 +291,10 @@ public class ReadVesselDatabase {
 	}
 	
 	
-public static void scorpioDataBaseSave_new(Session session, PrintWriter out){
-		
-		try {
-			
-			Node scorpio=null;
-			Node vessel=null;
-			
-			if(session.getRootNode().hasNode("DataBase_new")){
-				scorpio = session.getRootNode().getNode("DataBase_new");
-			}else{
-				scorpio = session.getRootNode().addNode("DataBase_new");
-				session.save();
-			}
-			
-			if(scorpio.hasNode("vessel")){
-				vessel=scorpio.getNode("vessel");
-			}else{
-				vessel=scorpio.addNode("vessel");
-				vessel.setProperty("jcr:count", String.valueOf(0));
-				session.save();
-			}
-			
-			String sql="SELECT vesselName,vesselType,dwt,loa,built,cubics,ice,sternline,owners,status FROM scorpio2";
-			 
-			Connection con=null;
-			Node vesselSubNode=null;
-			
-			con=MysqlConnection.getConnectionObj();
-			Statement st = con.createStatement();
-			 ResultSet rs = st.executeQuery(sql);
-			 while (rs.next()){
-				 
-				String count=vessel.getProperty("jcr:count").getString();
-				String forid= String.valueOf(Integer.parseInt(count)+1);
-				String vesselName = rs.getString("vesselName");
-				String vesselname="";
-				
-				  vesselname=vesselName.replace(" ", "_").replaceAll("[^\\p{ASCII}]", "").replaceAll("[^a-zA-Z0-9]", "_");
-				
-				String vesselType = rs.getString("vesselType");
-				String dwt = rs.getString("dwt");
-				String loa = rs.getString("loa");
-				String built = rs.getString("built");
-				String cubics = rs.getString("cubics");
-				String ice = rs.getString("ice");
-				String sternline = rs.getString("sternline");
-				String owners = rs.getString("owners");
-				String status = rs.getString("status");
-				
-				
-				if(vessel.hasNode(vesselname)){
-					vesselSubNode=vessel.getNode(vesselname);
-				}else{
-					vesselSubNode=vessel.addNode(vesselname);
-//					vessel.setProperty("jcr:count", String.valueOf(0));
-					session.save();
-				}
-				
-				 String forid1=check_vesselType(session, vesselType);
-				 String status_id= check_Status(session, status);
-				 String foridowners= check_Owners(session, owners);
-				
-				 vesselSubNode.setProperty("id", forid);
-				 vesselSubNode.setProperty("vesselName", vesselName);
-				 vesselSubNode.setProperty("vesselType_id", forid1);
-				 vesselSubNode.setProperty("dwt", dwt);
-				 vesselSubNode.setProperty("loa", loa);
-				 vesselSubNode.setProperty("built", built);
-				 vesselSubNode.setProperty("cubics", "");
-				 vesselSubNode.setProperty("ice", ice);
-				 vesselSubNode.setProperty("sternline", "");
-				 vesselSubNode.setProperty("owners_id", foridowners);
-				 vesselSubNode.setProperty("status_id", status_id);
-				 
-				 vessel.setProperty("jcr:count",String.valueOf(Integer.parseInt(count)+1));
-//				 session.save();
-				 
-				 out.printf(" %s\n", forid);
-			     out.printf(" %s\n", vesselname);
-			     
-				 
-			 }
-				 
-			
-			
-		} catch (Exception e) {
-			out.println(e.getMessage());
-		}
-		
-	}
-
-public static String check_vesselType(Session session,String mysqlvesselType) {
-
-	
-	String vessel_id = null;
-
-	try {
-
-		Node obj = null;
-
-		Workspace workspace = session.getWorkspace();
-
-		String slingqery = "select [vesselType] from [nt:base] where (contains('vesselType','" + mysqlvesselType
-				+ "')) and ISDESCENDANTNODE('/DataBase_new/vesselType/')";
-		Query query = workspace.getQueryManager().createQuery(slingqery, Query.JCR_SQL2);
-		QueryResult queryResult = query.execute();
-		NodeIterator iterator = queryResult.getNodes();
-		while (iterator.hasNext()) {
-
-			obj = iterator.nextNode();
-			vessel_id = obj.getProperty("id").getString();
-
-		}
-
-		
-		
-	} catch (Exception e) {
-		return e.getMessage();
-	}
-	return vessel_id;
-
-}
-
-public static String check_Status(Session session,String mysqlStatus) {
-
-	
-	String vessel_id = null;
-
-	try {
-
-		Node obj = null;
-
-		Workspace workspace = session.getWorkspace();
-
-		String slingqery = "select [Status] from [nt:base] where (contains('Status','" + mysqlStatus
-				+ "')) and ISDESCENDANTNODE('/DataBase_new/Status/')";
-		Query query = workspace.getQueryManager().createQuery(slingqery, Query.JCR_SQL2);
-		QueryResult queryResult = query.execute();
-		NodeIterator iterator = queryResult.getNodes();
-		while (iterator.hasNext()) {
-
-			obj = iterator.nextNode();
-			vessel_id = obj.getProperty("id").getString();
-
-		}
-
-	} catch (Exception e) {
-		return e.getMessage();
-	}
-	return vessel_id;
-
-}
-
-public static String check_Owners(Session session,String mysqlOwners) {
-
-	
-	String vessel_id = null;
-
-	try {
-
-		Node obj = null;
-
-		Workspace workspace = session.getWorkspace();
-
-		String slingqery = "select [ownerName] from [nt:base] where (contains('ownerName','" + mysqlOwners
-				+ "')) and ISDESCENDANTNODE('/DataBase_new/owners/')";
-		Query query = workspace.getQueryManager().createQuery(slingqery, Query.JCR_SQL2);
-		QueryResult queryResult = query.execute();
-		NodeIterator iterator = queryResult.getNodes();
-		while (iterator.hasNext()) {
-
-			obj = iterator.nextNode();
-			vessel_id = obj.getProperty("id").getString();
-
-		}
-
-	} catch (Exception e) {
-		return e.getMessage();
-	}
-	return vessel_id;
-
-}
 
 
-public static void scorpioOwner(Session session, PrintWriter out){
-	
-	try {
-		
-		Node scorpio=null;
-		Node vessel=null;
-		
-		if(session.getRootNode().hasNode("DataBase_new")){
-			scorpio = session.getRootNode().getNode("DataBase_new");
-		}else{
-			scorpio = session.getRootNode().addNode("DataBase_new");
-			session.save();
-		}
-		
-		if(scorpio.hasNode("owners")){
-			vessel=scorpio.getNode("owners");
-		}else{
-			vessel=scorpio.addNode("owners");
-			vessel.setProperty("jcr:count", String.valueOf(0));
-			session.save();
-		}
-		
-		String sql="SELECT vesselName FROM owner";
-		 
-		Connection con=null;
-		Node vesselSubNode=null;
-		
-		con=MysqlConnection.getConnectionObj();
-		Statement st = con.createStatement();
-		 ResultSet rs = st.executeQuery(sql);
-		 while (rs.next()){
-			 
-			String count=vessel.getProperty("jcr:count").getString();
-			String forid= String.valueOf(Integer.parseInt(count)+1);
-			String vesselName = rs.getString("vesselName");
-			String vesselname="";
-			
-				vesselname=vesselName.replace(" ", "_").replaceAll("[^\\p{ASCII}]", "").replaceAll("[^a-zA-Z0-9]", "_");
-			
-			if(vessel.hasNode(vesselname)){
-				vesselSubNode=vessel.getNode(vesselname);
-			}else{
-				vesselSubNode=vessel.addNode(vesselname);
-//				vessel.setProperty("jcr:count", String.valueOf(0));
-				session.save();
-			}
-			
-			 vesselSubNode.setProperty("id", forid);
-			 vesselSubNode.setProperty("ownerName", vesselName);
-			
-			 
-			 vessel.setProperty("jcr:count",String.valueOf(Integer.parseInt(count)+1));
-			 session.save();
-			 
-			 out.printf(" %s\n", forid);
-		     out.printf(" %s\n", vesselname);
-		     
-			 
-		 }
-			 
-		
-		
-	} catch (Exception e) {
-		out.println(e.getMessage());
-	}
-	
-}
+
+
 
 
 

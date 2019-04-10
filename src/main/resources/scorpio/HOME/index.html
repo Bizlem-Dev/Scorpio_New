@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+	<script src="js/jquery.min.js"></script>
+  <script src="js/fancybox.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/custom.js"></script>
+</head>
+<body>
+	<div class="row-fluid main-section">
+		<div class="col-md-12 p-0">
+      <div class="row header-nav">
+        <div class="col-md-10">
+      		<ul class="nav nav-tabs">
+      		    <li class="active"><a data-toggle="tab" href="#document">Document</a></li>
+      		    <li><a data-toggle="tab" href="#json">Json</a></li>
+      		</ul>
+        </div>
+        
+        <div class="col-md-2 text-center btn-section">
+          <!-- <a href="#" class="btn btn-primary">Back</a>
+          <a href="#" class="btn btn-primary">Next</a> -->
+          
+          <a href="#" class="btn btn-primary" onclick="fileImgUifetchdataNextCount(this.id)" id="fileimgBack">Back</a>
+          <a href="#" class="btn btn-primary" onclick="fileImgUifetchdataNextCount(this.id)" id="fileimgNext">Next</a>
+          
+        </div>
+        
+        
+      </div>
+	  	<div class="tab-content">
+		    <div id="document" class="tab-pane fade in active">
+		    	<div class="row">
+		    		<div class="col-md-12">
+		      			<div class="image-input-section border">
+						<form name="photo" id="upload-file-form" enctype="multipart/form-data"  method="POST">
+    							<div class="form-group">
+    						    <!-- <input type="file" name="img[]" class="file" id="myFile"> -->
+    						    <!-- <input type="file" name="img" class="file" id="myFile"> -->
+    						    <input id="upload-file-input" type="file" class="file" name="uploadfile" accept="*" />
+    							    <div class="input-group col-xs-12">
+    							      	<span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+    							      	<input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
+    							      	<span class="input-group-btn">
+    							       		<button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search" id="upload-file-input"></i> Browse</button>
+										
+											
+    							      	</span>
+										
+										
+    							    </div>
+									
+									<div>
+									<button type=submit  id="btnSubmit" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px; margin-top: 2px;"> <img src="images/arrow.png" width="25px"> <b>Go</b></button>
+									</div>
+    							</div>		
+    							
+    							</form>      				
+		      			</div>
+		      		</div>
+		    	</div>
+	      	<div class="row text-center">
+            <div class="col-sm-4">
+                <div class="img-section border" id="imgpush">
+                
+                
+                  <!-- <a class="thumbnail fancybox" rel="ligthbox" href="images/N2000HZ118-19-0095167.jpeg">
+                      <img class="img-responsive" alt="" src="images/N2000HZ118-19-0095167.jpeg" />
+                      <div class="icon-img-section">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </div>
+                  </a> -->
+                  
+                  
+                </div>
+            </div>
+	      		<div class="col-md-4 p-0">
+	      			<div class="tree-section border">
+					    <div class="file-browser">
+					    
+					        <ul id="dataImg">
+					        
+					            <!-- <li class="folder folder-open">
+					            
+					                <p>Page 1</p>
+					                <ul> -->
+					                
+					                
+					                    <!-- <li class="folder folder-open">
+					                        <p>Blog 1</p>
+					                        <ul class="ul-text">
+					                            <li>
+					                            	Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					                            </li>
+					                        </ul>
+					                        <ul class="ul-text">
+					                            <li>
+					                            	Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					                            	dolor sit amet, consectetur adipisicing.
+					                            </li>
+					                        </ul>
+					                        <ul class="ul-text">
+					                            <li>
+					                            	Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					                            </li>
+					                        </ul>
+					                    </li> -->
+					                    
+					                    
+					                    
+					                  <!--  <li class="folder">
+					                        <p>Blog 2</p>
+					                        <ul class="ul-text">
+					                            <li> 
+					                            	Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					                            	dolor sit amet, consectetur adipisicing.
+					                            </li>
+					                        </ul>
+					                        <ul class="ul-text">
+					                            <li>
+					                            	Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					                            </li>
+					                        </ul>
+					                    </li>
+		                                <li class="folder">
+		                                    <p>Blog 3</p>
+		                                    <ul class="ul-text">
+		                                        <li> 
+		                                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		                                          dolor sit amet, consectetur adipisicing.
+		                                        </li>
+		                                    </ul>
+		                                </li>
+		                                <li class="folder">
+		                                    <p>Blog 4</p>
+		                                    <ul class="ul-text">
+		                                        <li> 
+		                                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		                                          dolor sit amet, consectetur adipisicing.
+		                                        </li>
+		                                    </ul>
+		                                    <ul class="ul-text">
+		                                        <li>
+		                                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+		                                        </li>
+		                                    </ul>
+		                                </li> -->
+		                                
+		                                
+		                            <!--     
+					                </ul>
+					                
+					                
+					            </li> -->
+					            
+					            
+					        </ul>
+					        
+					        
+					        
+					    </div>
+	      			</div>
+	      		</div>
+	      		<div class="col-md-4 text-left">
+	      			<div class="border text-section" id="labelImag">
+	      			
+	      				<!-- <p><b>Amount:</b> 23.30 </p> -->
+	      				
+						<!-- <p><b>Tax Amount:</b> 3.04 </p>
+						<p><b>Date:</b> December 22, 2016 </p>
+						<p><b>Merchant:</b> Adina Apartment Hotel Auckland Britomart </p>
+						<p><b>Address:</b> 2 Tapora St, Auckland, 1010, New Zealand </p>
+						<p><b>Confidence Level:</b> 0.715897435897436</p> -->
+						
+	      			</div>
+	      		</div>	
+	      	</div>
+		    </div>
+		    <div id="json" class="tab-pane fade">
+		      	<div class="row">
+		      		<div class="col-md-6">
+		      			<div class="img-section border">
+		      				<img src="images/N2000HZ118-19-0095167.jpeg">
+		      			</div>
+		      		</div>
+		      		<div class="col-md-6 js-code-section">
+		      			<pre>
+{
+  "labelAnnotations": [
+    {
+      "mid": "/m/07s6nbt",
+      "description": "text",
+      "score": 0.9430722,
+      "topicality": 0.9430722
+    },
+    {
+      "mid": "/m/03scnj",
+      "description": "line",
+      "score": 0.768331,
+      "topicality": 0.768331
+    },
+    {
+      "mid": "/m/03gq5hm",
+      "description": "font",
+      "score": 0.7297776,
+      "topicality": 0.7297776
+    },
+    {
+      "mid": "/m/0641k",
+      "description": "paper",
+      "score": 0.7108609,
+      "topicality": 0.7108609
+    },
+    {
+      "mid": "/m/02csf",
+      "description": "drawing",
+      "score": 0.70948833,
+      "topicality": 0.70948833
+    },
+    {
+      "mid": "/m/0n0j",
+      "description": "area",
+      "score": 0.6720096,
+      "topicality": 0.6720096
+    },
+    {
+      "mid": "/m/01g6gs",
+      "description": "black and white",
+      "score": 0.63902813,
+      "topicality": 0.63902813
+    },
+    {
+      "mid": "/m/015bv3",
+      "description": "document",
+      "score": 0.62893206,
+      "topicality": 0.62893206
+    },
+    {
+      "mid": "/m/02v0m2",
+      "description": "diagram",
+      "score": 0.60415035,
+      "topicality": 0.60415035
+    },
+    {
+      "mid": "/m/04rlf",
+      "description": "music",
+      "score": 0.5754402,
+      "topicality": 0.5754402
+    },
+    {
+      "mid": "/m/0mwc",
+      "description": "angle",
+      "score": 0.56537735,
+      "topicality": 0.56537735
+    },
+    {
+      "mid": "/m/01jwgf",
+      "description": "product",
+      "score": 0.55510634,
+      "topicality": 0.55510634
+    },
+    {
+      "mid": "/m/0919rx",
+      "description": "line art",
+      "score": 0.5189564,
+      "topicality": 0.5189564
+    }
+  ],
+  "textAnnotations": [
+    {
+      "locale": "en",
+      "description": "Ã Â¤Ë†Ã Â¤Â¯Ã Â¤Â¨Ã Â¤â€˜Ã Â¤Â¯Ã Â¤Â²\n0720325\nHAVE SUFFERED TAX ATOUR HANDS.\nRT\nÃ Â¤â€¡Ã Â¤â€šÃ Â¤Â¡Ã Â¤Â¿Ã Â¤Â¯Ã Â¤Â¨ Ã Â¤â€˜Ã Â¤Â¯Ã Â¤Â² Ã Â¤â€¢Ã Â¥â€°Ã Â¤Â°Ã Â¥ï¿½Ã Â¤ÂªÃ Â¥â€¹Ã Â¤Â°Ã Â¥â€¡Ã Â¤Â¶Ã Â¤Â¨ Ã Â¤Â²Ã Â¤Â¿Ã Â¤Â®Ã Â¤Â¿Ã Â¤Å¸Ã Â¥â€¡Ã Â¤Â¡,\n-Ã Â¤â€¡Ã Â¤Â¸ Ã Â¤ï¿½Ã Â¤Â¤Ã Â¤Â¦Ã Â¥ï¿½Ã Â¤Â¦Ã Â¥ï¿½Ã Â¤ÂµÃ Â¤Â¾Ã Â¤Â°Ã Â¤Â¾ Ã Â¤Â«Ã Â¥ï¿½Ã Â¤Â°Ã Â¤Â¾Ã Â¤Â£Ã Â¤Â¿Ã Â¤Â¤ Ã Â¤Â¸Ã Â¥ï¿½Ã Â¤Â¤Ã Â¥â€¡ Ã Â¤Â¹Ã Â¥Ë† Ã Â¤â€¢Ã Â¤Â¿ Ã Â¤Â¦Ã Â¤Â¸Ã Â¥ï¿½Ã Â¤Â¤Ã Â¤Â¾Ã Â¤ÂµÃ Â¥â€¡Ã Â¤Å“ Ã Â¤Â®Ã Â¥â€¡Ã Â¤â€š Ã Â¤Â²Ã Â¤Â¿Ã Â¤â€“Ã Â¤Â¿Ã Â¤Â¤ Ã Â¤Â®Ã Â¤Â¾Ã Â¤Â² Ã Â¤ÂªÃ Â¤Â° Ã Â¤Â¹Ã Â¤Â®Ã Â¤Â¨Ã Â¥â€¡\nAro rion gift. 88\nÃ Â¤Å¸Ã Â¥Ë†Ã Â¤â€¢Ã Â¥ï¿½Ã Â¤Â¸ Ã Â¤Â²Ã Â¤â€”Ã Â¤Â¾Ã Â¤Â¯Ã Â¤Â¾ Ã Â¤Â¹Ã Â¥Ë†Ã Â¥Â¤\n:\nFORM NO. AC9911\nIndian Oil Corporation Limited\nWE HEREBY CERTIFY THAT THE GOODS COVERED BY THIS DOCUMENT !\n(An fitfasta MARKETING DIVISION)\nFiat F7 TA Doc Name SK 190ice 0:1931:42\nORIGINAL FOR BUYER\nprof eteen Form NO T\n?!\nTAX\nDOC No. 711036743 fenidate 200 lmt first seramher un trozand mantan\nÃ Â¤â€¢Ã Â¥ï¿½Ã Â¤Â·Ã Â¤Â¤Ã Â¤Â¿ Ã Â¤â€¢Ã Â¤Â¾ Ã Â¤Â¤Ã Â¤Â°Ã Â¥â‚¬Ã Â¤â€¢Ã Â¤Â¾ Del. !::::::\n8. A. HAI T.T.No. video\nHit olemniars imtylinuine\nÃ Â¤Â Ã Â¥â€¡Ã Â¤â€¢Ã Â¥â€¡Ã Â¤Â¦Ã Â¤Â¾Ã Â¤Â° Ã Â¤â€¢Ã Â¥â€šÃ Â¤Å¸. Cont.Code\nETER DEN @15\nÃ Â¤Â¹Ã Â¤Å¸Ã Â¤Â¾Ã Â¤Â¨Ã Â¥â€¡ Ã Â¤â€¢Ã Â¥â‚¬ Ã Â¤Â¤Ã Â¤Â¾Ã Â¤Â°Ã Â¥â‚¬Ã Â¤â€“ / Ã Â¤Â¸Ã Â¤Â®Ã Â¤Â¯ Rem Date/T . 3: Ã Â¥Â© :\nTIN BREGDCDEALERIASSESSEE OSTIN M E CONSIGNEE!.\nSUPPLIER NOT MF GR/IMPORTER.\nÃ Â¤Â¨Ã Â¤Â¾Ã Â¤Â® Ã Â¤â€�Ã Â¤Â° Ã Â¤ÂªÃ Â¤Â¤Ã Â¤Â¾\nName &amp; Address\nDATIN 24002114910124\nIVOR\n135117\nBAUSTRATORRUTTURA\nN2000HZ 118-19-0095167\nÃ Â¤â€”Ã Â¤â€šÃ Â¤Â¤Ã Â¤ÂµÃ Â¥ï¿½Ã Â¤Â¯ Destn. .\nens voleu CE Regn/ECC NO.\nÃ Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë† Ã Â¤Â°Ã Â¥â€¡Ã Â¤â€šÃ Â¤Å“ CERange\nÃ Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë†Ã Â¤Â¡Ã Â¤Â¿Ã Â¤ÂµÃ Â¤Â¿Ã Â¤Å“Ã Â¤Â¨ CE DIVN.\nÃ Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë† Ã Â¤â€¢Ã Â¤Â²Ã Â¥â€¡Ã Â¤â€¢Ã Â¤Å¸Ã Â¥ï¿½Ã Â¤Â°Ã Â¥â€¡Ã Â¤Å¸ CE COMMISSIONERATE\nfigsa). JSTEHT PAN/GIR\nÃ Â¤ï¿½Ã Â¤Â¸Ã Â¤Å¸Ã Â¥â‚¬ Ã Â¤ÂªÃ Â¤â€šÃ Â¤Å“Ã Â¥â‚¬Ã Â¤â€¢Ã Â¤Â°Ã Â¤Â£Ã Â¤â€š ST Regn.\nPLEASE SEE OVERLEAF\n.\norgaga. PLA NO...\nShaigh si ant *. Inv. No BOE No.\nÃ Â¤ÂªÃ Â¥â‚¬Ã Â¤ï¿½Ã Â¤Â²Ã Â¤ï¿½ Ã Â¤Â¨Ã Â¤Â¾Ã Â¤Â® PLADebit\nHrvf 23. stuff RG. 23 D Entry\nFarat MANUFACTURERTIMBO\nFTA BÃ„Â°R YAT:\nName &amp; Address\nÃ Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë† Ã Â¤ÂªÃ Â¤â€šÃ Â¤Å“Ã Â¥â‚¬Ã Â¤â€¢Ã Â¤Â°Ã Â¤Â£ CERagn\nÃ Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë† Ã Â¤Â°Ã Â¥â€¡Ã Â¤â€šÃ Â¤Å“ CE Range\nBUYER\nSHETSH / f15 Inv. de No 06 * rty: 2293644\nHICT Paapur Des. 6fcon 264ACENZA1P1ZN'..\nESSAR STEEL INDIA LTD,\nTara TRT (F.) Ass. Val.(Rs.)\ngeret se Duty Rate SURAT\ngyet T/ c Duty Amt, Unit : )\ngyd ferent Trap (77.)Duty Paid (Rs.)\n||Ã Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë† Ã Â¤Â¡Ã Â¤Â¿Ã Â¤ÂµÃ Â¤Â¿Ã Â¤Å“Ã Â¤Â¨ CE DIVN.\nÃ Â¤Â¸Ã Â¥â‚¬Ã Â¤Ë† Ã Â¤â€¢Ã Â¤Â²Ã Â¥â€¡Ã Â¤â€¢Ã Â¥ï¿½Ã Â¤Å¸Ã Â¥ï¿½Ã Â¤Â°Ã Â¥â€¡Ã Â¤Â° CE COMMISSIONERATE\nKrishna Chaitanya Industries GUNTUR. Dial : 0863 - 2338828\nÃ¢â‚¬Â¢ Pack Nos . HSN Code\nRate Unit.' .\nHaterial humber Material Description\nCharge Code Description : Quantity Unit\n3082401\n: SERVOSYSTEM HLA 44 - 210L SRL\n:\nTotal\n2\nHre\nsooo 209538\n2134599742\nQty 52.000 BRL Vol(129) 10.920.000 Total amount for material\n3092401 :\nSERVOSYSTEN HLP 46 - 210L BRL\n817715.95\n2\n2\nGJ-15.00\n.\nOty 28.000 BRL Vol(L29) 5.880.000. Total Amount for material\n.440308.61\n2146\nt\n.\n1258025.00\nZRNI Rounding Difference\nTotal Amount :\nProvisional $: lance Subiect to feconciliation: 5,041.177, 23- CRX\n1\n!\n13\n14..\nTAX Core\n",
+      "boundingPoly": {
+        "vertices": [
+          {
+            "x": 77,
+            "y": 51
+          },
+          {
+            "x": 3652,
+            "y": 51
+          },
+          {
+            "x": 3652,
+            "y": 2877
+          },
+          {
+            "x": 77,
+            "y": 2877
+          }
+        ]
+      }
+    },
+    {
+      "description": "Ã Â¤Ë†Ã Â¤Â¯Ã Â¤Â¨Ã Â¤â€˜Ã Â¤Â¯Ã Â¤Â²",
+      "boundingPoly": {
+        "vertices": [
+          {
+            "x": 282,
+            "y": 108
+          },
+          {
+            "x": 364,
+            "y": 107
+          },
+          {
+            "x": 364,
+            "y": 127
+          },
+          {
+            "x": 282,
+            "y": 128
+          }
+        ]
+      }
+    },
+    {
+      "description": "0720325",
+      "boundingPoly": {
+        "vertices": [
+          {
+            "x": 2860,
+            "y": 64
+          },
+          {
+            "x": 3166,
+            "y": 75
+          },
+          {
+            "x": 3161,
+            "y": 193
+          },
+          {
+            "x": 2856,
+            "y": 182
+          }
+        ]
+      }
+    },
+    {
+      "description": "HAVE",
+      "boundingPoly": {
+        "vertices": [
+          {
+            "x": 1621,
+            "y": 172
+          },
+          {
+            "x": 1675,
+            "y": 172
+          },
+          {
+            "x": 1675,
+            "y": 199
+          },
+          {
+            "x": 1621,
+            "y": 199
+          }
+        ]
+      }
+    }];
+		      			</pre>
+		      		</div>
+		      	</div>
+		    </div>
+	  	</div>
+	  	</div>
+	</div>
+	
+	<script>
+	
+		 
+		$(document).ready(function (e) {
+		   
+			
+			$("#btnSubmit").click(function (event) {
+
+				//stop submit the form, we will post it manually.
+				event.preventDefault();
+
+				uploadFile();
+
+				});
+
+			
+				/**
+				* Upload the file sending it via Ajax at the Spring Boot server.
+				*/
+				
+
+			
+
+			
+
+			
+			
+			
+			fileDataSling();
+			
+			
+			
+		    
+		});   // main document ready close
+		 
+	
+		function uploadFile() {
+			$("#btnSubmit").prop("disabled", true);
+			$.ajax({
+			url: "https://dev.bizlem.io:8082/fileUploadSave/uploadFile",
+			type: "POST",
+			data: new FormData($("#upload-file-form")[0]),
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			cache: false,
+			success: function (data) {
+			$("#result").text(data);
+			console.log("SUCCESS : "+ data);
+			$("#btnSubmit").prop("disabled", false)
+			// Handle upload success
+			// ...
+			
+			saveData(data);
+			
+			},
+			error: function () {
+			// Handle upload error
+			// ...
+			}
+			});
+			} // function uploadFile
+		
+			
+			function saveData(name) {
+				$
+						.ajax({
+
+							url : "https://dev.bizlem.io:8082/scorpio/fileUpload?fileName="+name,
+							type : 'GET',
+							success : function(data) {
+								alert("saved");
+								fileDataSlingNewUpload(data);
+							}
+
+						}); // function on click
+			}
+			
+		
+		function fileDataSlingNewUpload(count) {
+			$
+					.ajax({
+
+						url : 'https://dev.bizlem.io:8082/scorpio/fileUploadUI?count='+count,
+						type : 'GET',
+						success : function(data) {
+							var jsonStr = data;
+							jsonStr = JSON.parse(jsonStr);
+							var imgParsedData = "";
+							var imgPush="";
+
+							for (var i = 0; i < jsonStr.fileList.length; i++) {
+
+									
+									var fileLocation = "";
+									if (jsonStr.fileList[i]
+											.hasOwnProperty("fileLocation")) {
+										fileLocation = jsonStr.fileList[i].fileLocation;
+									}
+									
+									var description = "";
+									if (jsonStr.fileList[i]
+											.hasOwnProperty("description")) {
+										description = jsonStr.fileList[i].description;
+										description = description.replace("/(\r\n|\n|\r)/gm", "<br>");
+										
+										while (description.indexOf("?") != -1) {
+											description = description.replace(
+													"?", "");
+										}
+									}
+									
+
+									imgParsedData = imgParsedData +'<li class="folder folder-open"><p>Page 1</p><ul><li class="folder folder-open"><p>Blog 1</p><ul class="ul-text"><li><pre>'+description+'</pre></li></ul></li></ul></li>';
+									imgPush=imgPush +'<a class="thumbnail fancybox" rel="ligthbox" href="'+fileLocation+'"><img class="img-responsive" alt="" src="'+fileLocation+'" /><div class="icon-img-section"><i class="fa fa-search" aria-hidden="true"></i></div></a>';		
+
+							}// main for
+								
+								document.getElementById("dataImg").innerHTML = imgParsedData;
+								document.getElementById("imgpush").innerHTML = imgPush;
+								$(".fancybox").fancybox({
+							        openEffect: "none",
+							        closeEffect: "none"
+							    });
+						},
+					//async: false
+					}); // Tonnage ajax close
+		}
+		
+		function fileDataSling() {
+			$
+					.ajax({
+
+						url : 'https://dev.bizlem.io:8082/scorpio/fileUploadUI?count=1',
+						type : 'GET',
+						success : function(data) {
+							var jsonStr = data;
+							jsonStr = JSON.parse(jsonStr);
+							var imgParsedData = "";
+							var imgPush="";
+
+							for (var i = 0; i < jsonStr.fileList.length; i++) {
+
+									
+									var fileLocation = "";
+									if (jsonStr.fileList[i]
+											.hasOwnProperty("fileLocation")) {
+										fileLocation = jsonStr.fileList[i].fileLocation;
+									}
+									
+									var description = "";
+									if (jsonStr.fileList[i]
+											.hasOwnProperty("description")) {
+										description = jsonStr.fileList[i].description;
+										description = description.replace("/(\r\n|\n|\r)/gm", "<br>");
+										
+										while (description.indexOf("?") != -1) {
+											description = description.replace(
+													"?", "");
+										}
+									}
+									
+
+									imgParsedData = imgParsedData +'<li class="folder folder-open"><p>Page 1</p><ul><li class="folder folder-open"><p>Blog 1</p><ul class="ul-text"><li><pre>'+description+'</pre></li></ul></li></ul></li>';
+									imgPush=imgPush +'<a class="thumbnail fancybox" rel="ligthbox" href="'+fileLocation+'"><img class="img-responsive" alt="" src="'+fileLocation+'" /><div class="icon-img-section"><i class="fa fa-search" aria-hidden="true"></i></div></a>';		
+
+							}// main for
+								
+								document.getElementById("dataImg").innerHTML = imgParsedData;
+								document.getElementById("imgpush").innerHTML = imgPush;
+								$(".fancybox").fancybox({
+							        openEffect: "none",
+							        closeEffect: "none"
+							    });
+						},
+					//async: false
+					}); // Tonnage ajax close
+		}
+
+		var nextpre = 1;
+		function fileImgUifetchdataNextCount(buttonId) {
+			
+			if (buttonId == "fileimgNext") {
+				nextpre = nextpre + 1;
+				//alert("next :: "+nextpre);
+			} else if (buttonId == "fileimgBack" && nextpre != 1) {
+				nextpre = nextpre - 1;
+				//alert("pre :: "+nextpre);
+			}
+			
+			$
+			.ajax({
+
+				url : 'https://dev.bizlem.io:8082/scorpio/fileUploadUI?count='+nextpre,
+				type : 'GET',
+				success : function(data) {
+					var jsonStr = data;
+					jsonStr = JSON.parse(jsonStr);
+					var imgParsedData = "";
+					var imgPush="";
+					var labeldatapush="";
+
+					for (var i = 0; i < jsonStr.fileList.length; i++) {
+
+							
+							var fileLocation = "";
+							if (jsonStr.fileList[i]
+									.hasOwnProperty("fileLocation")) {
+								fileLocation = jsonStr.fileList[i].fileLocation;
+							}
+							var description = "";
+							if (jsonStr.fileList[i]
+									.hasOwnProperty("description")) {
+								description = jsonStr.fileList[i].description;
+								description = description.replace("/(\r\n|\n|\r)/gm", "<br>");
+								
+								while (description.indexOf("?") != -1) {
+									description = description.replace(
+											"?", "");
+								}
+								
+							}
+							var label = "";
+							if (jsonStr.fileList[i]
+									.hasOwnProperty("label")) {
+								label = jsonStr.fileList[i].label;
+								
+								var f=JSON.parse(label);
+								//console.log("f:: "+JSON.stringify(f));
+										
+								
+								
+								if (f.hasOwnProperty("Shipto") ){
+									//var key2 = f.Shipto;
+									//console.log(key2);
+									
+                                    for(var j=0;j<f.Shipto.length;j++){
+										
+                                    	var key2="";
+										if (f.Shipto[j]
+										.hasOwnProperty("key")) {
+											key2 = f.Shipto[j].key;
+											console.log("key2:: "+key2);
+										}
+										
+										var Name="";
+										if (f.Shipto[j]
+										.hasOwnProperty("Name")) {
+											Name = f.Shipto[j].Name;
+											console.log("Name:: "+Name);
+										}
+										
+										var Address="";
+										if (f.Shipto[j]
+										.hasOwnProperty("Address")) {
+											Address = f.Shipto[j].Address;
+											console.log("Address:: "+Address);
+										}
+										
+										var PlaceOfSuppply="";
+										if (f.Shipto[j]
+										.hasOwnProperty("PlaceOfSuppply")) {
+											PlaceOfSuppply = f.Shipto[j].PlaceOfSuppply;
+											console.log("PlaceOfSuppply:: "+PlaceOfSuppply);
+										}
+										
+										var GSTNo="";
+										if (f.Shipto[j]
+										.hasOwnProperty("GSTNo")) {
+											GSTNo = f.Shipto[j].GSTNo;
+											console.log("GSTNo:: "+GSTNo);
+										}
+										
+										var PANNo="";
+										if (f.Shipto[j]
+										.hasOwnProperty("PANNo")) {
+											PANNo = f.Shipto[j].PANNo;
+											console.log("PANNo:: "+PANNo);
+										}
+										
+										var BuyerOrder="";
+										if (f.Shipto[j]
+										.hasOwnProperty("BuyerOrder")) {
+											BuyerOrder = f.Shipto[j].BuyerOrder;
+											console.log("BuyerOrder:: "+BuyerOrder);
+										}
+										
+										var BuyerOrderdate="";
+										if (f.Shipto[j]
+										.hasOwnProperty("BuyerOrderdate")) {
+											BuyerOrderdate = f.Shipto[j].BuyerOrderdate;
+											console.log("BuyerOrderdate:: "+BuyerOrderdate);
+										}
+										
+										var InvoiceNo="";
+										if (f.Shipto[j]
+										.hasOwnProperty("InvoiceNo")) {
+											InvoiceNo = f.Shipto[j].InvoiceNo;
+											console.log("InvoiceNo:: "+InvoiceNo);
+										}
+										
+										var InvoiceDate="";
+										if (f.Shipto[j]
+										.hasOwnProperty("InvoiceDate")) {
+											InvoiceDate = f.Shipto[j].InvoiceDate;
+											console.log("InvoiceDate:: "+InvoiceDate);
+										}
+										
+										var StateName="";
+										if (f.Shipto[j]
+										.hasOwnProperty("StateName")) {
+											StateName = f.Shipto[j].StateName;
+											console.log("StateName:: "+StateName);
+										}
+										
+										var StateCode="";
+										if (f.Shipto[j]
+										.hasOwnProperty("StateCode")) {
+											StateCode = f.Shipto[j].StateCode;
+											console.log("StateCode:: "+StateCode);
+										}
+										
+										var ContactDetail="";
+										if (f.Shipto[j]
+										.hasOwnProperty("ContactDetail")) {
+											ContactDetail = f.Shipto[j].ContactDetail;
+											console.log("ContactDetail:: "+ContactDetail);
+										}
+										
+										var OrderNo="";
+										if (f.Shipto[j]
+										.hasOwnProperty("OrderNo")) {
+											OrderNo = f.Shipto[j].OrderNo;
+											console.log("OrderNo:: "+OrderNo);
+										}
+										
+										var OrderDate="";
+										if (f.Shipto[j]
+										.hasOwnProperty("OrderDate")) {
+											OrderDate = f.Shipto[j].OrderDate;
+											console.log("OrderDate:: "+OrderDate);
+										}
+										
+										/* labeldatapush=labeldatapush +'<p><b>'+key2+'</b> </p><p><b>Name:</b> '+name+' </p><p><b>Address:</b> '+Address+' </p><p><b>Place Of Suppply:</b> '+PlaceOfSuppply+' </p><p><b>GST No. :</b> '+GSTNo+'</p><p><b>PAN No. :</b> '+PANNo+' </p><p><b>Buyer Order No/Purchase Order No./PO No./PO Ref. No./Party Ref No. :</b> '+BuyerOrder+' </p><p><b>Buyer Order Date/Purchase Order Date/PO Date/PO Ref. Dt./Party Ref No.:</b> '+BuyerOrderdate+' </p> <p><b>Invoice No:</b> '+InvoiceNo+' </p> <p><b>Invoice Date:</b> '+InvoiceDate+' </p><p><b>State Name:</b> '+StateName+' </p><p><b> State Code:</b> '+StateCode+' </p> <p><b> Contact Detail:</b> '+ContactDetail+' </p><p><b> Order No:</b> '+OrderNo+' </p><p><b> Order Date:</b> '+OrderDate+' </p> <br>'; */
+										 labeldatapush=labeldatapush +'<p><b>Purchase Order No. :</b> '+BuyerOrder+' </p><p><b>Ship to Party</b> </p><p><b>Name:</b> '+Name+' </p><p><b>Address:</b> '+Address+' </p><p><b>Place Of Suppply:</b> '+PlaceOfSuppply+' </p><p><b>GST No. :</b> '+GSTNo+'</p><p><b>PAN No. :</b> '+PANNo+' </p><p><b>Purchase Order Date:</b> '+BuyerOrderdate+' </p> <p><b>Invoice No:</b> '+InvoiceNo+' </p> <p><b>Invoice Date:</b> '+InvoiceDate+' </p><p><b>State Name:</b> '+StateName+' </p><p><b> State Code:</b> '+StateCode+' </p> <p><b> Contact Detail:</b> '+ContactDetail+' </p><p><b> Order No:</b> '+OrderNo+' </p><p><b> Order Date:</b> '+OrderDate+' </p> <br>'; 
+                                      }
+									
+								}// shipto check
+								
+								
+								if (f.hasOwnProperty("SenderDetails") ){
+									//var key = f.SenderDetails;
+									//console.log(key);
+									
+									var key="";
+									for(var j=0;j<f.SenderDetails.length;j++){
+										
+										if (f.SenderDetails[j]
+										.hasOwnProperty("key")) {
+											key = f.SenderDetails[j].key;
+											console.log("key:: "+key);
+										}
+										
+										var name="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("Name")) {
+											name = f.SenderDetails[j].Name;
+											//console.log("name:: "+name);
+										}
+										
+										var Address="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("Address")) {
+											Address = f.SenderDetails[j].Address;
+											//console.log("Address:: "+Address);
+										}
+										
+										var gstno="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("GSTNo")) {
+											gstno = f.SenderDetails[j].GSTNo;
+											//console.log("gstno:: "+gstno);
+										}
+										
+										var TelNo="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("TelNo")) {
+											TelNo = f.SenderDetails[j].TelNo;
+											//console.log("TelNo:: "+TelNo);
+										}
+										
+										var FAX="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("FAX")) {
+											FAX = f.SenderDetails[j].FAX;
+											//console.log("FAX:: "+FAX);
+										}
+										
+										var panNo="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("PANNo")) {
+											panNo = f.SenderDetails[j].PANNo;
+											//console.log("panNo:: "+panNo);
+										}
+										
+										var StateName="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("StateName")) {
+											StateName = f.SenderDetails[j].StateName;
+											//console.log("StateName:: "+StateName);
+										}
+										
+										var StateCode="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("StateCode")) {
+											StateCode = f.SenderDetails[j].StateCode;
+											//console.log("StateCode:: "+StateCode);
+										}
+										
+										var Country="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("Country")) {
+											Country = f.SenderDetails[j].Country;
+											//console.log("Country:: "+Country);
+										}
+										
+										var CINNo="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("CINNo")) {
+											CINNo = f.SenderDetails[j].CINNo;
+											//console.log("CINNo:: "+CINNo);
+										}
+										
+										var ContactDetail="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("ContactDetail")) {
+											ContactDetail = f.SenderDetails[j].ContactDetail;
+											//console.log("ContactDetail:: "+ContactDetail);
+										}
+										
+										var Email="";
+										if (f.SenderDetails[j]
+										.hasOwnProperty("Email")) {
+											Email = f.SenderDetails[j].Email;
+											//console.log("Email:: "+Email);
+										}
+										
+										
+										 /*  labeldatapush=labeldatapush +'<p><b>'+key+'</b> </p><p><b>Name/Works:</b> '+name+' </p><p><b>Address:</b> '+Address+' </p><p><b>GST No./GSTIN/ UIN/ GSTIN:</b> '+gstno+' </p><p><b>Tel No.:</b> '+TelNo+'</p><p><b>FAX:</b> '+FAX+' </p><p><b>PAN No.:</b> '+panNo+' </p><p><b>State Name:</b> '+StateName+' </p> <p><b>State Code:</b> '+StateCode+' </p> <p><b>Country:</b> '+Country+' </p><p><b>CIN No.:</b> '+CINNo+' </p><p><b> Contact Detail:</b> '+ContactDetail+' </p> <br>'; */
+										//Sender Details
+										 labeldatapush=labeldatapush +'<p><b>Sender Details</b> </p><p><b>Name/Works:</b> '+name+' </p><p><b>Address:</b> '+Address+' </p><p><b>GST No.:</b> '+gstno+' </p><p><b>Tel No.:</b> '+TelNo+'</p><p><b>FAX:</b> '+FAX+' </p><p><b>PAN No.:</b> '+panNo+' </p><p><b>State Name:</b> '+StateName+' </p> <p><b>State Code:</b> '+StateCode+' </p> <p><b>Country:</b> '+Country+' </p><p><b>CIN No.:</b> '+CINNo+' </p><p><b> Contact Detail:</b> '+ContactDetail+' </p> <br>';
+										
+									}
+									
+									
+									
+									} // senderdetails
+									
+									
+								
+								
+								
+								if (f.hasOwnProperty("Description") ){
+									//var key2 = f.Shipto;
+									//console.log(key2);
+									
+                                    for(var j=0;j<f.Description.length;j++){
+										
+                                    	var key3="";
+										if (f.Description[j]
+										.hasOwnProperty("key")) {
+											key3 = f.Description[j].key;
+											console.log("key3:: "+key3);
+										}
+										
+										var Material="";
+										if (f.Description[j]
+										.hasOwnProperty("Material")) {
+											Material = f.Description[j].Material;
+											console.log("Material:: "+Material);
+										}
+										
+										var Quantity="";
+										if (f.Description[j]
+										.hasOwnProperty("Quantity")) {
+											Quantity = f.Description[j].Quantity;
+											console.log("Quantity:: "+Quantity);
+										}
+										
+										var Unit="";
+										if (f.Description[j]
+										.hasOwnProperty("Unit")) {
+											Unit = f.Description[j].Unit;
+											console.log("Unit:: "+Unit);
+										}
+										
+										var PriceRate="";
+										if (f.Description[j]
+										.hasOwnProperty("PriceRate")) {
+											PriceRate = f.Description[j].PriceRate;
+											console.log("PriceRate:: "+PriceRate);
+										}
+										
+										var Amount="";
+										if (f.Description[j]
+										.hasOwnProperty("Amount")) {
+											Amount = f.Description[j].Amount;
+											console.log("Amount:: "+Amount);
+										}
+										
+										var CGST="";
+										if (f.Description[j]
+										.hasOwnProperty("CGST")) {
+											CGST = f.Description[j].CGST;
+											console.log("CGST:: "+CGST);
+										}
+										
+										var SGST="";
+										if (f.Description[j]
+										.hasOwnProperty("SGST")) {
+											SGST = f.Description[j].SGST;
+											console.log("SGST:: "+SGST);
+										}
+										
+										var TotalAmount="";
+										if (f.Description[j]
+										.hasOwnProperty("TotalAmount")) {
+											TotalAmount = f.Description[j].TotalAmount;
+											console.log("TotalAmount:: "+TotalAmount);
+										}
+										
+										var Totalinwords="";
+										if (f.Description[j]
+										.hasOwnProperty("Totalinwords")) {
+											Totalinwords = f.Description[j].Totalinwords;
+											console.log("Totalinwords:: "+Totalinwords);
+										}
+										
+										var INR="";
+										if (f.Description[j]
+										.hasOwnProperty("INR")) {
+											INR = f.Description[j].INR;
+											console.log("INR:: "+INR);
+										}
+										
+										var GST="";
+										if (f.Description[j]
+										.hasOwnProperty("GST")) {
+											GST = f.Description[j].GST;
+											console.log("GST:: "+GST);
+										}
+										
+										var Total="";
+										if (f.Description[j]
+										.hasOwnProperty("Total")) {
+											Total = f.Description[j].Total;
+											console.log("Total:: "+Total);
+										}
+										
+										var Roundoff="";
+										if (f.Description[j]
+										.hasOwnProperty("Roundoff")) {
+											Roundoff = f.Description[j].Roundoff;
+											console.log("Roundoff:: "+Roundoff);
+										}
+										
+										var TotalGST="";
+										if (f.Description[j]
+										.hasOwnProperty("TotalGST")) {
+											TotalGST = f.Description[j].TotalGST;
+											console.log("TotalGST:: "+TotalGST);
+										}
+										
+										
+										/* labeldatapush=labeldatapush +'<p><b>'+key3+'</b> </p><p><b>Material:</b> '+Material+' </p><p><b>Quantity:</b> '+Quantity+' </p><p><b>Unit:</b> '+Unit+' </p><p><b>PriceRate :</b> '+PriceRate+'</p><p><b>Amount :</b> '+Amount+' </p><p><b> CGST :</b> '+CGST+' </p><p><b>SGST:</b> '+SGST+' </p> <p><b>Total/Amount Chargeable/Amount:</b> '+TotalAmount+' </p> <p><b>Total (in words)/Amount Chargeable (in words)/Total Amount (in words):</b> '+Totalinwords+' </p><p><b>(INR):</b> '+INR+' </p><p><b> GST:</b> '+GST+' </p> <p><b> Total:</b> '+Total+' </p><p><b> Roundo ff:</b> '+Roundoff+' </p><p><b> Total GST:</b> '+TotalGST+' </p>'; */
+										labeldatapush=labeldatapush +'<p><b>Description</b> </p><p><b>Material:</b> '+Material+' </p><p><b>Quantity:</b> '+Quantity+' </p><p><b>Unit:</b> '+Unit+' </p><p><b>PriceRate :</b> '+PriceRate+'</p><p><b>Amount :</b> '+Amount+' </p><p><b> CGST :</b> '+CGST+' </p><p><b>SGST:</b> '+SGST+' </p> <p><b>Total Amount :</b> '+TotalAmount+' </p> <p><b>Total (in words):</b> '+Totalinwords+' </p><p><b>(INR):</b> '+INR+' </p><p><b> GST:</b> '+GST+' </p> <p><b> Total:</b> '+Total+' </p><p><b> Roundo ff:</b> '+Roundoff+' </p><p><b> Total GST:</b> '+TotalGST+' </p>';
+                                      }
+									
+								}// Description check
+								
+								
+								if (f.hasOwnProperty("Recipient") ){
+									//var key2 = f.Shipto;
+									//console.log(key2);
+									
+                                    for(var j=0;j<f.Recipient.length;j++){
+										
+                                    	var key4="";
+										if (f.Recipient[j]
+										.hasOwnProperty("key")) {
+											key4 = f.Recipient[j].key;
+											console.log("key4:: "+key4);
+										}
+										
+										var Name="";
+										if (f.Recipient[j]
+										.hasOwnProperty("Name")) {
+											Name = f.Recipient[j].Name;
+											console.log("Name:: "+Name);
+										}
+										
+										var Address="";
+										if (f.Recipient[j]
+										.hasOwnProperty("Address")) {
+											Address = f.Recipient[j].Address;
+											console.log("Address:: "+Address);
+										}
+										
+										var GSTNo="";
+										if (f.Recipient[j]
+										.hasOwnProperty("GSTNo")) {
+											GSTNo = f.Recipient[j].GSTNo;
+											console.log("GSTNo:: "+GSTNo);
+										}
+										
+										var PANNo="";
+										if (f.Recipient[j]
+										.hasOwnProperty("PANNo")) {
+											PANNo = f.Recipient[j].PANNo;
+											console.log("PANNo:: "+PANNo);
+										}
+										
+										var PlaceofSupply="";
+										if (f.Recipient[j]
+										.hasOwnProperty("PlaceofSupply")) {
+											PlaceofSupply = f.Recipient[j].PlaceofSupply;
+											console.log("PlaceofSupply:: "+PlaceofSupply);
+										}
+										
+										var StateName="";
+										if (f.Recipient[j]
+										.hasOwnProperty("StateName")) {
+											StateName = f.Recipient[j].StateName;
+											console.log("StateName:: "+StateName);
+										}
+										
+										var StateCode="";
+										if (f.Recipient[j]
+										.hasOwnProperty("StateCode")) {
+											StateCode = f.Recipient[j].StateCode;
+											console.log("StateCode:: "+StateCode);
+										}
+										
+										var ContactDetail="";
+										if (f.Recipient[j]
+										.hasOwnProperty("ContactDetail")) {
+											ContactDetail = f.Recipient[j].ContactDetail;
+											console.log("ContactDetail:: "+ContactDetail);
+										}
+										
+										/* labeldatapush=labeldatapush +'<p><b>'+key4+'</b> </p><p><b>Name:</b> '+Name+' </p><p><b>Address:</b> '+Address+' </p><p><b>GST No:</b> '+GSTNo+' </p><p><b>PAN No :</b> '+PANNo+'</p><p><b>Place of Supply :</b> '+PlaceofSupply+' </p><p><b> State Name :</b> '+StateName+' </p><p><b>State Code:</b> '+StateCode+' </p> <p><b>Contact Detail:</b> '+ContactDetail+' </p> '; */
+										labeldatapush=labeldatapush +'<p><b>Recipient (Bill to Party)</b> </p><p><b>Name:</b> '+Name+' </p><p><b>Address:</b> '+Address+' </p><p><b>GST No:</b> '+GSTNo+' </p><p><b>PAN No :</b> '+PANNo+'</p><p><b>Place of Supply :</b> '+PlaceofSupply+' </p><p><b> State Name :</b> '+StateName+' </p><p><b>State Code:</b> '+StateCode+' </p> <p><b>Contact Detail:</b> '+ContactDetail+' </p> ';
+                                      }
+									
+								}// Recipient check
+								
+								
+								
+								}// label check
+							
+						
+							
+							
+							
+
+							imgParsedData = imgParsedData +'<li class="folder folder-open"><p>Page 1</p><ul><li class="folder folder-open"><p>Blog 1</p><ul class="ul-text"><li><pre>'+description+'</pre></li></ul></li></ul></li>';
+							imgPush=imgPush +'<a class="thumbnail fancybox" rel="ligthbox" href="'+fileLocation+'"><img class="img-responsive" alt="" src="'+fileLocation+'" /><div class="icon-img-section"><i class="fa fa-search" aria-hidden="true"></i></div></a>';		
+
+					}// main for
+						
+						document.getElementById("dataImg").innerHTML = imgParsedData;
+						document.getElementById("imgpush").innerHTML = imgPush;
+						document.getElementById("labelImag").innerHTML = labeldatapush;
+						$(".fancybox").fancybox({
+					        openEffect: "none",
+					        closeEffect: "none"
+					    });
+				},
+			//async: false
+			}); // Tonnage ajax close
+			
+			
+			
+			
+		}
+		
+
+	
+	</script>
+	
+</body>
+
+
+</html>

@@ -13,10 +13,13 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Flags;
@@ -78,7 +81,7 @@ public class GmailMethods {
 			store.connect(gmail_pj.getUserName(), gmail_pj.getPassWord());
 			
 		}catch(Exception e){
-			
+			e.printStackTrace();
 		}
 			return properties;
 		}
@@ -481,6 +484,17 @@ public class GmailMethods {
 				return true;
 			}
 		}
+		
+		public static boolean isNullNode (Node p_text) throws RepositoryException{
+			String nodeName=p_text.getName();
+			
+			if(p_text != null && nodeName.trim().length() > 0 && !"null".equalsIgnoreCase(nodeName.trim())){
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
 
 		public static Folder openFolder(String folderName) throws Exception {
 	        
@@ -520,7 +534,23 @@ public class GmailMethods {
 			SearchTerm term = null;
 			try {
 				
-				Calendar cal = null;
+				int x = -2;
+				int y = 1;
+				Calendar cal = GregorianCalendar.getInstance();
+				cal.add(Calendar.DAY_OF_YEAR, y);
+				Date tomorrow = cal.getTime();
+				//out.println(tomorrow);
+				cal.add(Calendar.DAY_OF_YEAR, x);
+				Date oneDaysAgo = cal.getTime();
+				//out.println(oneDaysAgo);
+
+				out.println(oneDaysAgo + " === " + tomorrow);
+				
+				SearchTerm olderThan = new ReceivedDateTerm(ComparisonTerm.LT, tomorrow);
+				SearchTerm newerThan = new ReceivedDateTerm(ComparisonTerm.GT, oneDaysAgo);
+				term = new AndTerm(olderThan, newerThan); // concat the search terms
+				
+				/*Calendar cal = null;
 				cal = Calendar.getInstance();
 				Date minDate = new Date(cal.getTimeInMillis());  // get today date
 				cal.add(Calendar.DAY_OF_MONTH, 1);               // add 1 day
@@ -531,7 +561,7 @@ public class GmailMethods {
 	            SearchTerm maxDateTerm = new ReceivedDateTerm(ComparisonTerm.LE, maxDate);
 	            
 	            term = new AndTerm(minDateTerm, maxDateTerm);    // concat the search terms
-				out.println("term: "+term);
+*/				out.println("term: "+term);
 			} catch (Exception e) {
 				out.println(e.getMessage());
 			}
