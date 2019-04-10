@@ -23,26 +23,27 @@ public class ReportTypeIdentify {
 
 	public static void main(String[] args) throws ParseException {
 		    
-		    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+		   /* SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
 		    String dateInString = "07/06/2013";
 		  String s=  before(dateInString, "/");
-		  System.out.println(s);
+		  System.out.println(s);*/
 		  boolean numeric = true;
-            String f="1.23";
+            String f="1,000";
 		  
 	        try {
 	            Integer num = Integer.parseInt(f);
 	            
 	        } catch (NumberFormatException e) {
 	            numeric = false;
+	            System.out.println(e.getMessage());
 	        }
 		  
 	        if(numeric){
-	        	System.out.println("numeric:: "+s);
+	        	System.out.println("numeric:: "+f);
 	        }
-		    Date date = formatter.parse(dateInString);
+		 /*   Date date = formatter.parse(dateInString);
 		    System.out.println(date);
-		    System.out.println(formatter.format(date));
+		    System.out.println(formatter.format(date));*/
 		   
 	}
 	

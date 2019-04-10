@@ -86,7 +86,7 @@ public class Test_servlet extends SlingAllMethodsServlet {
 		//out.println(logger.getRoot());
 //		String fileName = "/home/ubuntu/pyscript/Missing Ports 22 Dec.xls";
 //		fetchAllReport.pdfTonnage(session, out);
-		DateFromToApiReport.setFlagZero(session, out);
+		//DateFromToApiReport.setFlagZero(session, out);
 		/*FifteenMinuteClass.fetchVesselForSolr(out, session);
 		FifteenMinuteClass.fetchCargograde(out, session);
 		FifteenMinuteClass.fetchCargogradeOperators(out, session);
@@ -102,7 +102,7 @@ public class Test_servlet extends SlingAllMethodsServlet {
 //		DateFromToApiReport.ReadGmailDataChangeHttps(session, out);
 //		FifteenMinuteClass.portNotMasterDelete4(out, session);
 //		fetchAllReport.pdfTonnage(session, out);
-		//fetchAllReport.fetchTonnage_37KData(out, session);
+		fetchAllReport.fetchTonnage_37KData(out, session);
 		//fetchAllReport.fetchSpotDataChangedNew(out, session);
 		//DateFromToApiReport.ReadGmailDataChangeHttps(session, out);
 	/*	Gmail_Pojo gm = null;

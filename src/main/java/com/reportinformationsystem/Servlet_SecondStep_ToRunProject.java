@@ -13,7 +13,9 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
+import com.errorreport.StatusForUi;
 import com.pallavi.code.secondStepMethodCall;
+import com.readGmail.GmailMethods;
 import com.readGmail.Gmail_Pojo;
 
 import ChangedStructureCurrent.GmailReadMailChanged;
@@ -45,8 +47,19 @@ public class Servlet_SecondStep_ToRunProject extends SlingAllMethodsServlet {
 
 		session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
 		
+		 String datePass=StatusForUi.cronCurrentTimeParseHere();
+		if( (datePass!=null) && (!GmailMethods.isNullString(datePass)) ){
+			 String cronNodeName=StatusForUi.nodeCreateCronInSling(out, session, datePass);
+			 
+			 if( (cronNodeName!=null) && (!GmailMethods.isNullString(cronNodeName)) ){
+				 secondStepMethodCall.ReadGmailDataToPassPythonApi(session, out, cronNodeName);
+			 }
+			 
+		}
+		
+		
 		//DateFromToApiReport.ReadGmailDataToPassPythonApi(session, out);
-		secondStepMethodCall.ReadGmailDataToPassPythonApi(session, out);
+//		secondStepMethodCall.ReadGmailDataToPassPythonApi(session, out);
 		
 		//session.save();
 		}catch(Exception e){

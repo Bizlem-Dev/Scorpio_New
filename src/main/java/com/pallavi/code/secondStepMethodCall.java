@@ -22,6 +22,7 @@ import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 
 import com.abhishek.VinayaScript;
+import com.errorreport.StatusForUi;
 import com.mycode.MethodJsonOnlyInsert;
 import com.mycode.Methods;
 import com.mycode.ReportTypeIdentify;
@@ -50,7 +51,7 @@ public class secondStepMethodCall {
 		
 	}
 	
-public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out){
+public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out, String cronNodeName){
 		
 		try {
 			
@@ -138,15 +139,15 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 										      String nodeNameRepaceunderscore=subjectNode.getName().toString();
 										      nodeNameRepaceunderscore=nodeNameRepaceunderscore.replaceAll("_", " ");
 										      
-											  logger.info("*********************Strting point ************************************************************************************************************");
-											  logger.info("MainNode_Subject:: "+subjectNode.getName().toString());
-											  logger.info("SubNode_mail_Html:: "+textNode.getName().toString());
-											  logger.info("html_TimeStamp:: "+textSentMailTime);
+											//  logger.info("*********************Strting point ************************************************************************************************************");
+											//  logger.info("MainNode_Subject:: "+subjectNode.getName().toString());
+											//  logger.info("SubNode_mail_Html:: "+textNode.getName().toString());
+											//  logger.info("html_TimeStamp:: "+textSentMailTime);
 											  
 											  if(htmlSize==1){
 												  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
 														  from_Source, timestampDate, timestampDateAndTime, receivedDate,
-														  nodeNameRepaceunderscore);
+														  nodeNameRepaceunderscore, cronNodeName);
 
 											  } else if(htmlSize>1){
 										  
@@ -184,8 +185,8 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																  
 //															  }else{
 															  
-															    logger.info("AttachmentHasattachmentTomcatFilePath:: "+attachmentTomcatFilePath);	
-															    logger.info("SubjectNameattachmentTomcatFilePath:: "+attachmentNode.getName().toString());
+															   // logger.info("AttachmentHasattachmentTomcatFilePath:: "+attachmentTomcatFilePath);	
+															   // logger.info("SubjectNameattachmentTomcatFilePath:: "+attachmentNode.getName().toString());
 															    
 															  if(!GmailMethods.isNullString(attachmentTomcatFilePath)){
 															  if(attachmentTomcatFilePath.contains(".pdf")){
@@ -304,9 +305,9 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																 // out.println("subjectNodePath: "+subjectNodePath);
 																  
 																        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath);
-																        System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
-																        logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
-																        logger.info("emailUrl_Excel:: "+emailUrl);
+																       // System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
+																       // logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
+																       // logger.info("emailUrl_Excel:: "+emailUrl);
 																        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
 																       if( !( ExpertScriptCallHere.equals("false") )  ){
 																       
@@ -316,10 +317,10 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																         out.println("ExpertScriptexceloutput: "+ExpertScriptCallHere);
 																         //String MycodeHere= AbhishekScript.excelHtmlScript(ExpertScriptCallHere, out);
 																         String pallaviCodeHere= pallavi_UpdatedScript_07_04.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
-																         logger.info("pallaviCodeHere_Excel:: "+pallaviCodeHere);
-																         System.out.println("pallaviCodeHere:: "+pallaviCodeHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
+																         //logger.info("pallaviCodeHere_Excel:: "+pallaviCodeHere);
+																        // System.out.println("pallaviCodeHere:: "+pallaviCodeHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 																         
-																         logger.info("*******************************endingPoint*********************************************************************************************");
+																        // logger.info("*******************************endingPoint*********************************************************************************************");
 																         boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 																	        if(checkjsonStringAbhishek){
 																	        	out.println("pallaviCodeHere_excel: "+pallaviCodeHere);
@@ -344,6 +345,8 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																		        			if(finalQtyAbhishek){
 																		        				out.println("finalMethodwithqtyAbhishek_excel: "+finalwithQty);
 																		        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "excel", ExpertScriptCallHere);
+																		        				attachmentNode.setProperty("Flag", "1");
+																		        				StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "YES", "YES", "YES", "YES", emailUrl, subjectNodePath);
 																		        			}
 																	        				} //
 																	        			}
@@ -351,7 +354,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																	        	 }
 																                
 																	        }
-																             attachmentNode.setProperty("Flag", "1");
+																             
 																		//  session.save();
 																		}
 																	}
@@ -363,7 +366,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 
 																  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
 																		  from_Source, timestampDate, timestampDateAndTime, receivedDate,
-																		  nodeNameRepaceunderscore);
+																		  nodeNameRepaceunderscore, cronNodeName);
 
 															    
 															  }
@@ -422,7 +425,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 
 public static void htmlParser(Session session, PrintWriter out, SaveReportDataClass SDC, Node subjectNode,
 		Node textNode, String textSentMailTime, String from_Source, String timestampDate, String timestampDateAndTime,
-		String receivedDate, String nodeNameRepaceunderscore){
+		String receivedDate, String nodeNameRepaceunderscore, String cronNodeName){
 	try {
 		//									 if(htmlSize>1){
 		 
@@ -443,8 +446,6 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 		      lastProcessedTimeForUi(session, textSentMailTime);
 		      
 		    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath);
-		    System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+subjectNode.getName().toString()+ " "+textSentMailTime);
-		    
 		    
 		      String filepathfromourside="/home/ubuntu/TestedMailJSon/"+textNode.getName().toString()+"_"+timestampDate+".txt";
 			  boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
@@ -455,8 +456,6 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			        out.println("textSentMailTime_html: "+textSentMailTime);
 			       // String MycodeHere= AbhishekScript.excelHtmlScript(ExpertScriptCallHere, out);
 			       String pallaviCodeHere= pallavi_UpdatedScript_07_04.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
-			       System.out.println("pallaviCodeHere:: "+pallaviCodeHere+ " "+subjectNode.getName().toString()+ " "+textSentMailTime);
-			       logger.info("htmlpallaviCodeHere:: "+pallaviCodeHere);
 			       
 			      // take count of pallaviCodeHere
 			        boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
@@ -486,7 +485,8 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 					        				out.println("finalMethodwithqtyAbhishek_html: "+finalwithQty);
 					        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "html", ExpertScriptCallHere);
 									          textNode.setProperty("Flag", "1");
-											  ExecuteMailCount.executeMailCount(out, session, receivedDate, subjectNode.getName(), timestampDateAndTime, subjectNode.getPath());
+									          StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "YES", "YES", "YES", "YES", emailUrl, subjectNodePath);
+											 // ExecuteMailCount.executeMailCount(out, session, receivedDate, subjectNode.getName(), timestampDateAndTime, subjectNode.getPath());
 					        			}
 				        				}
 				        			}
