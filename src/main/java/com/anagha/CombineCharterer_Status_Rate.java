@@ -50,7 +50,7 @@ public class CombineCharterer_Status_Rate {
                         		    	System.out.println(Regex_Type);
                         		    	// Space contains
                         		    } // Regex_Type check here
-                        		    
+                        		    System.out.println("rateapi");
                         	   } // for loop issues
                                	   
                            } // length check here
