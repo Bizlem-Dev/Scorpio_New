@@ -25,6 +25,8 @@ import com.abhishek.VinayaScript;
 import com.errorreport.StatusForUi;
 import com.mycode.MethodJsonOnlyInsert;
 import com.mycode.Methods;
+import com.mycode.OutputReasponse;
+import com.mycode.ReportTypeCorrection;
 import com.mycode.ReportTypeIdentify;
 import com.mycode.SaveReportDataClassNewStr;
 import com.mycode.SaveReportNewRowWisePositionCheck;
@@ -174,7 +176,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 													 
 													  
 													 if(!attachmentNodeFlag.equals("1")){
-														 lastProcessedTimeForUi(session, textSentMailTime);
+														 //lastProcessedTimeForUi(session, textSentMailTime);
 //												   if(attachmentNodeFlag.equals("1")){
 //													 out.println("attachmentNode: "+attachmentNode);
 														 if(attachmentNode.hasProperty("tomcat_file_path")){
@@ -294,6 +296,16 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																 // if (schedulerReadMail == true) {
 																	  //}else{
 //																  out.print("kalka_excel: "+receivedOnlyDate);
+																  
+																  int clarksonCOunt=0;
+																  if(from_Source.equalsIgnoreCase("clarksons")){
+																	  
+																	  String countExcelBigSize= OutputReasponse.excelClarksonCountBigSize(attachmentTomcatFilePath, out);
+																	  if( !GmailMethods.isNullString(countExcelBigSize) ){
+																		  clarksonCOunt= Integer.parseInt(countExcelBigSize);
+																	  }
+																  } // clarkson check
+																  
 																  String emailUrl="";
 																  if(attachmentNode.hasProperty("tomcat_file_link")){
 																	  emailUrl=attachmentNode.getProperty("tomcat_file_link").getString();
@@ -302,21 +314,34 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																  }
 																  String subjectNodePath= subjectNode.getPath();
 																  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
-																 // out.println("subjectNodePath: "+subjectNodePath);
+																  String finalwithQty="";
+																  Node subjectNodeNode=null;
 																  
-																        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath);
+																  if(clarksonCOunt>700){
+																	  subjectNodeNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+																	  subjectNodeNode.setProperty("Ui_Update", "Rejected Due To Size");
+																	  subjectNodeNode.setProperty("Nlp1", "Rejected Due To Size");
+																	  subjectNodeNode.setProperty("Nlp2", "Rejected Due To Size");
+																	  subjectNodeNode.setProperty("Nlp3_and_4_QC", "Rejected Due To Size");
+																  }else{
+																  
+																 // out.println("subjectNodePath: "+subjectNodePath);
+																      subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+																        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 																       // System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 																       // logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
 																       // logger.info("emailUrl_Excel:: "+emailUrl);
 																        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
 																       if( !( ExpertScriptCallHere.equals("false") )  ){
-																       
+																    	 
 																       boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
 																		if(checkjsonString==true){
+																			  subjectNodeNode.setProperty("Nlp1", "YES");
 																		 out.println("attachmentTomcatFilePath_excel: "+attachmentTomcatFilePath);
 																         out.println("ExpertScriptexceloutput: "+ExpertScriptCallHere);
 																         //String MycodeHere= AbhishekScript.excelHtmlScript(ExpertScriptCallHere, out);
-																         String pallaviCodeHere= pallavi_UpdatedScript_07_04.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+																         String pallaviCodeHere= pallavi_UpdatedScript_copy_17_04.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+																         out.println("pallaviCodeHere_excel_newCode: "+pallaviCodeHere);
 																         //logger.info("pallaviCodeHere_Excel:: "+pallaviCodeHere);
 																        // System.out.println("pallaviCodeHere:: "+pallaviCodeHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 																         
@@ -324,6 +349,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																         boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 																	        if(checkjsonStringAbhishek){
 																	        	out.println("pallaviCodeHere_excel: "+pallaviCodeHere);
+																	        	subjectNodeNode.setProperty("Nlp2", "YES");
 																	        	String firstMethod=SaveReportNewRowWisePositionCheck.SaveReportNewStructureChanged(out, pallaviCodeHere);
 																	        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 																	        	 if(firstMethodAbhishek){
@@ -332,7 +358,11 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																	        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 																	        		 if(secondMethodAbhishek){
 																	        			 out.println("secondMethodAbhishek_excel: "+secondMethodAbhishek);
-																	        			String finalJson= Methods.ReportTypeAndFinalJson(secondMethod, out, nodeNameRepaceunderscore);
+																	        			 
+																	        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
+																	        			 boolean reportThirdMethodAbhishek=SaveReportDataClass.isJSONValid(reportThird);
+																	        			 if(reportThirdMethodAbhishek){
+																	        			String finalJson= Methods.ReportTypeAndFinalJson(reportThird, out, nodeNameRepaceunderscore);
 																	        			boolean finalJsonAbhishek=SaveReportDataClass.isJSONValid(finalJson);
 																	        			if(finalJsonAbhishek){
 																	        				out.println("finalMethodAbhishek_excel: "+finalJson);
@@ -340,24 +370,41 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																	        				String remainingDataCorrectedHere=MethodJsonOnlyInsert.applyToAllJsonAsSameReport(finalJson);
 																	        				boolean remainingDataCorrectedHereAbhishek=SaveReportDataClass.isJSONValid(remainingDataCorrectedHere);
 																	        				if(remainingDataCorrectedHereAbhishek){
-																	        				String finalwithQty=MethodJsonOnlyInsert.cargoQtyCheckFromNUmeric(remainingDataCorrectedHere);
+																	        				 finalwithQty=MethodJsonOnlyInsert.cargoQtyCheckFromNUmeric(remainingDataCorrectedHere);
 																	        				boolean finalQtyAbhishek=SaveReportDataClass.isJSONValid(finalwithQty);
 																		        			if(finalQtyAbhishek){
 																		        				out.println("finalMethodwithqtyAbhishek_excel: "+finalwithQty);
+																		        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 																		        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "excel", ExpertScriptCallHere);
 																		        				attachmentNode.setProperty("Flag", "1");
-																		        				StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "YES", "YES", "YES", "YES", emailUrl, subjectNodePath);
+																		        				 out.println("uientereduistatus:: "+cronNodeName);
+																		        				
+																		        			}else{
+																		        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
 																		        			}
 																	        				} //
 																	        			}
+																	        		 }//
 																	        		 }
 																	        	 }
 																                
+																	        }else{
+																	        	subjectNodeNode.setProperty("Nlp2", "NO");
 																	        }
 																             
 																		//  session.save();
+																		}else{
+																			  subjectNodeNode.setProperty("Nlp1", "NO");
 																		}
+																       }// clarkson count size here close
 																	}
+																       boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
+																      if(reportCheck==true){
+																    	  subjectNodeNode.setProperty("Ui_Update", "YES");
+																      }else{
+																    	  subjectNodeNode.setProperty("Ui_Update", "NO");
+																      }
+																      session.save();
 																	
 																 // } // chek 														  // set flag also in parseall method inside
 																  }
@@ -419,6 +466,13 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 			}// root node 
 			
 		} catch (Exception e) {
+			try {
+				session.save();
+			} catch (RepositoryException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace(out);
+			}
+			e.printStackTrace(out);
 			out.println(e.getMessage());
 		}
 	}
@@ -436,6 +490,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 		  if(textTomcatFilePath.contains(".html")){
 		    // out.println("textTomcatFilePath: "+textTomcatFilePath);
 		     String emailUrl="";
+		     String finalwithQty="";
 			  if(textNode.hasProperty("file_link")){
 				  emailUrl=textNode.getProperty("file_link").getString();
 			  }
@@ -443,25 +498,28 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 		      subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 		      out.println("subjectNodePath: "+subjectNodePath);
 		  
-		      lastProcessedTimeForUi(session, textSentMailTime);
+		     // lastProcessedTimeForUi(session, textSentMailTime);
+		      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
 		      
-		    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath);
+		    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 		    
 		      String filepathfromourside="/home/ubuntu/TestedMailJSon/"+textNode.getName().toString()+"_"+timestampDate+".txt";
 			  boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
 			    if(checkjsonString==true){
+			    	out.println();
+			    	subjectNodeNode.setProperty("Nlp1", "YES");
 			    	// take count of ExpertScriptCallHere
 			    	out.println("ExpertCodeOutputHtml: "+ExpertScriptCallHere);
 			        out.println("textTomcatFilePath: "+textTomcatFilePath);
 			        out.println("textSentMailTime_html: "+textSentMailTime);
 			       // String MycodeHere= AbhishekScript.excelHtmlScript(ExpertScriptCallHere, out);
-			       String pallaviCodeHere= pallavi_UpdatedScript_07_04.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+			       String pallaviCodeHere= pallavi_UpdatedScript_copy_17_04.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 			       
 			      // take count of pallaviCodeHere
 			        boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 			        if(checkjsonStringAbhishek){
 						  out.println("pallaviCodeHereHtml: "+pallaviCodeHere);
-			        	  
+						  subjectNodeNode.setProperty("Nlp2", "YES");
 						  String firstMethod=SaveReportNewRowWisePositionCheck.SaveReportNewStructureChanged(out, pallaviCodeHere);
 				        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 				        	 if(firstMethodAbhishek){
@@ -470,7 +528,11 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 out.println("secondMethodAbhishek_html: "+secondMethodAbhishek);
-				        			String finalJson= Methods.ReportTypeAndFinalJson(secondMethod, out, nodeNameRepaceunderscore);
+				        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
+				        			 boolean reportThirdMethodAbhishek=SaveReportDataClass.isJSONValid(reportThird);
+				        			 if(reportThirdMethodAbhishek){
+				        			 
+				        			String finalJson= Methods.ReportTypeAndFinalJson(reportThird, out, nodeNameRepaceunderscore);
 				        			boolean finalJsonAbhishek=SaveReportDataClass.isJSONValid(finalJson);
 				        			if(finalJsonAbhishek){
 				        				out.println("finalMethodAbhishek_html: "+finalJson);
@@ -479,24 +541,39 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        				boolean remainingDataCorrectedHereAbhishek=SaveReportDataClass.isJSONValid(remainingDataCorrectedHere);
 				        				if(remainingDataCorrectedHereAbhishek){
 				        				
-				        				String finalwithQty=MethodJsonOnlyInsert.cargoQtyCheckFromNUmeric(remainingDataCorrectedHere);
+				        				 finalwithQty=MethodJsonOnlyInsert.cargoQtyCheckFromNUmeric(remainingDataCorrectedHere);
 				        				boolean finalQtyAbhishek=SaveReportDataClass.isJSONValid(finalwithQty);
 					        			if(finalQtyAbhishek){
+					        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 					        				out.println("finalMethodwithqtyAbhishek_html: "+finalwithQty);
 					        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "html", ExpertScriptCallHere);
 									          textNode.setProperty("Flag", "1");
-									          StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "YES", "YES", "YES", "YES", emailUrl, subjectNodePath);
+									         
 											 // ExecuteMailCount.executeMailCount(out, session, receivedDate, subjectNode.getName(), timestampDateAndTime, subjectNode.getPath());
+					        			}else{
+					        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
 					        			}
 				        				}
 				        			}
+				        			 }
 				        		 }
 				        	 }
 			        	 
+			        }else{
+			        	subjectNodeNode.setProperty("Nlp2", "NO");
 			        }
+			    }else{
+			    	subjectNodeNode.setProperty("Nlp1", "NO");
 			    }
 		  
-		 
+			    boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
+			      if(reportCheck==true){
+			    	  subjectNodeNode.setProperty("Ui_Update", "YES");
+			      }else{
+			    	  subjectNodeNode.setProperty("Ui_Update", "NO");
+			      }
+			    session.save();
+			    
 		 // relevalent data
 		  
 		  //session.save();
@@ -512,7 +589,13 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 //} // textFlag check here
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+		try {
+			session.save();
+		} catch (RepositoryException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace(out);
+		}
+		e.printStackTrace(out);
 	}
 }
 

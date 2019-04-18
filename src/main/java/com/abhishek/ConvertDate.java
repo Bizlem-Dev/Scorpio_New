@@ -33,7 +33,7 @@ public class ConvertDate {
 	public static void main(String[] args) {
 	//	System.out.println("day: "+day+" month: "+month+" year: "+year);
 		//String sDate1="9 - 10 JAN".replaceAll("\\W", " ");
-		String sDate1="15th march 2019";
+		String sDate1="15/04/2019";
 		String rate="WS12345";
 		 Pattern p = Pattern.compile("\\d+");
 	        Matcher m = p.matcher(rate);

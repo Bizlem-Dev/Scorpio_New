@@ -19,6 +19,8 @@ import org.apache.sling.jcr.api.SlingRepository;
 import com.abhishek.UnseenMailReadProcess;
 import com.abhishek.logCheck;
 import com.anagha.ReadExcelData_new;
+import com.mongocode.MongoDbConnection;
+import com.mycode.SaveReportDataClassNewStr;
 import com.pallavi.code.secondStepMethodCall;
 import com.readGmail.CreateNodeFrmDirectory_Save_Attachment_text_xml_in_Sling;
 import com.readGmail.ExcelReadMethods;
@@ -26,9 +28,12 @@ import com.readGmail.Gmail_Pojo;
 import com.readGmail.ReadEmailFromGmail;
 import com.readGmail.ReadVesselDatabase;
 import com.readGmail.SlingMethods;
+import com.reportinformationsystem.ChangedApiWithoutMultipleArray;
 import com.reportinformationsystem.DateFromToApiReport;
+import com.reportinformationsystem.DownloadAllSpotDataForExcel;
 import com.reportinformationsystem.ExpertScriptCall;
 import com.reportinformationsystem.FifteenMinuteClass;
+import com.reportinformationsystem.FourReportsExcelClass;
 import com.reportinformationsystem.ReportBeforeOnWeekDataDisplay;
 import com.reportinformationsystem.SaveReportDataClass;
 import com.reportinformationsystem.fetchAllReport;
@@ -97,13 +102,127 @@ public class Test_servlet extends SlingAllMethodsServlet {
 		//SaveReportDataClass d=new SaveReportDataClass();
 		/*d.parseAllReportFromJsonToSave(out, session, "", "", "", "", "", "", "", "");*/
 		
+		String pythonScriptApiData="{\r\n" + 
+				"\"table_6\":{\r\n" + 
+				"\"table_data\":[\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"CEPSA\",\r\n" + 
+				"\"Status\":\"FXD\",\r\n" + 
+				"\"VesselName\":\"SEAMERIT\",\r\n" + 
+				"\"CargoQty\":\"30\",\r\n" + 
+				"\"CargoGrade\":\"CRD\",\r\n" + 
+				"\"LoadPort\":\"VLORE\",\r\n" + 
+				"\"DiscPort\":\"MED\",\r\n" + 
+				"\"LCStart\":\"14-15/04\",\r\n" + 
+				"\"RateType\":\"RNR\",\r\n" + 
+				"\"Rate\":\"RNR\",\r\n" + 
+				"\"Comments\":\"\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"},\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"HELLENIC\",\r\n" + 
+				"\"Status\":\"SUBS\",\r\n" + 
+				"\"VesselName\":\"VOGE TRUST\",\r\n" + 
+				"\"CargoQty\":\"35\",\r\n" + 
+				"\"CargoGrade\":\"DPP\",\r\n" + 
+				"\"LoadPort\":\"THESSA\",\r\n" + 
+				"\"DiscPort\":\"ASPRO A/O ELEUS\",\r\n" + 
+				"\"LCStart\":\"15/04\",\r\n" + 
+				"\"RateType\":\"WS\",\r\n" + 
+				"\"Rate\":\"192.5K BSS 1/1\",\r\n" + 
+				"\"Comments\":\"\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"},\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"NEWTON\",\r\n" + 
+				"\"Status\":\"SUBS\",\r\n" + 
+				"\"VesselName\":\"PIONEER\",\r\n" + 
+				"\"CargoQty\":\"30\",\r\n" + 
+				"\"CargoGrade\":\"FO\",\r\n" + 
+				"\"LoadPort\":\"IZMIT\",\r\n" + 
+				"\"DiscPort\":\"MED\",\r\n" + 
+				"\"LCStart\":\"18/04\",\r\n" + 
+				"\"RateType\":\"\",\r\n" + 
+				"\"Rate\":\"127.5\",\r\n" + 
+				"\"Comments\":\"\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"},\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"LITASCO\",\r\n" + 
+				"\"Status\":\"SUBS\",\r\n" + 
+				"\"VesselName\":\"STI BATTERSEA\",\r\n" + 
+				"\"CargoQty\":\"30\",\r\n" + 
+				"\"CargoGrade\":\"FO\",\r\n" + 
+				"\"LoadPort\":\"ALEX\",\r\n" + 
+				"\"DiscPort\":\"MED\",\r\n" + 
+				"\"LCStart\":\"17/04\",\r\n" + 
+				"\"RateType\":\"\",\r\n" + 
+				"\"Rate\":\"130\",\r\n" + 
+				"\"Comments\":\"\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"},\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"AOT\",\r\n" + 
+				"\"Status\":\"SUBS\",\r\n" + 
+				"\"VesselName\":\"KRITI JADE\",\r\n" + 
+				"\"CargoQty\":\"30\",\r\n" + 
+				"\"CargoGrade\":\"FO\",\r\n" + 
+				"\"LoadPort\":\"HAIFA\",\r\n" + 
+				"\"DiscPort\":\"MED\",\r\n" + 
+				"\"LCStart\":\"14-15/04\",\r\n" + 
+				"\"RateType\":\"\",\r\n" + 
+				"\"Rate\":\"129\",\r\n" + 
+				"\"Comments\":\"FREE OVER UPTO 33\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"},\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"SARAS\",\r\n" + 
+				"\"Status\":\"FXD\",\r\n" + 
+				"\"VesselName\":\"DONALD\",\r\n" + 
+				"\"CargoQty\":\"30\",\r\n" + 
+				"\"CargoGrade\":\"LSFO\",\r\n" + 
+				"\"LoadPort\":\"SARROCH\",\r\n" + 
+				"\"DiscPort\":\"MED\",\r\n" + 
+				"\"LCStart\":\"MID/15\",\r\n" + 
+				"\"RateType\":\"\",\r\n" + 
+				"\"Rate\":\"125\",\r\n" + 
+				"\"Comments\":\"\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"},\r\n" + 
+				"{\r\n" + 
+				"\"Charterer\":\"ENI\",\r\n" + 
+				"\"Status\":\"SUBS\",\r\n" + 
+				"\"VesselName\":\"SEAPROMISE\",\r\n" + 
+				"\"CargoQty\":\"35\",\r\n" + 
+				"\"CargoGrade\":\"FO\",\r\n" + 
+				"\"LoadPort\":\"LEGHORN\",\r\n" + 
+				"\"DiscPort\":\"MED\",\r\n" + 
+				"\"LCStart\":\"19-21/04\",\r\n" + 
+				"\"RateType\":\"\",\r\n" + 
+				"\"Rate\":\"110\",\r\n" + 
+				"\"Comments\":\"TBN 2 DAYS\",\r\n" + 
+				"\"ReportType\":\"Spot\"\r\n" + 
+				"}\r\n" + 
+				"]\r\n" + 
+				"}\r\n" + 
+				"}";
+		
+		//SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, pythonScriptApiData, "", "", "", "", "", "", "", "");
 //		fetchAllReport.data(session);
 //		FifteenMinuteClass.portNotMasterupdatehttps(out, session);
 //		DateFromToApiReport.ReadGmailDataChangeHttps(session, out);
 //		FifteenMinuteClass.portNotMasterDelete4(out, session);
 //		fetchAllReport.pdfTonnage(session, out);
 		fetchAllReport.fetchTonnage_37KData(out, session);
-		//fetchAllReport.fetchSpotDataChangedNew(out, session);
+		
+		/*ChangedApiWithoutMultipleArray CPWMA=new ChangedApiWithoutMultipleArray();
+		JSONObject dataobj=CPWMA.getSpotReportDateWithoutDataFrame(session, "15-04-2019", "16-04-2019", "Spot", out);
+		out.println("Spot:: "+dataobj);*/
+		//FifteenMinuteClass.updateTonnageSource(out, session);
+		/*MongoDbConnection MDC=new MongoDbConnection();
+		  MDC.getMongoDbAnyConn("MongoTestDataBase", "MongoTEstCollection", "Date", "0", "subject" , out);*/
+//		fetchAllReport.fetchSpotDataChangedNew(out, session);
+		//FourReportsExcelClass.fetchSpotDataChanged(out, session);
 		//DateFromToApiReport.ReadGmailDataChangeHttps(session, out);
 	/*	Gmail_Pojo gm = null;
 		gm = new Gmail_Pojo();

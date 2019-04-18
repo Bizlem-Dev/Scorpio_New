@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
@@ -15,13 +17,50 @@ public class ExpertScriptCall {
 
 	public static void main(String[] args) {
 
-		String filePath="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpio1/UPDATED_LR2_POSITION_LISTS_BSS_FUJAIRAH_1.html";
-		String responseString=postExpertScript(filePath);
+		String filePath = "D:\\scorpio pdf broker\\Analysis-28-29\\ODIN_CPP_MKT_RPT_-_WEEK_13_4.html";
+//		String filePath="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpio1/UPDATED_LR2_POSITION_LISTS_BSS_FUJAIRAH_1.html";
+		String responseString=postExpertScript(filePath, null);
 		System.out.println(responseString);
+		
+		
+		
 	}
 	
 	
-	public static String postExpertScript(String filePath){
+	public static String postExpertScript(String filePath, PrintWriter out){
+		String responseString="";
+		try {
+			
+			 File uploadFile1 = new File(filePath);
+				String charset = "UTF-8";
+
+				StringBuilder response = new StringBuilder();
+				
+					MultipartUtility multipart = new MultipartUtility("http://34.80.26.185:5025/project5", charset);
+
+					multipart.addFormField("only_extract_html_line", "True");
+
+					multipart.addFilePart("file", uploadFile1);
+					// multipart.addFilePart("file", uploadFile2);
+
+					List<String> response1 = multipart.finish();
+
+					out.println("SERVER REPLIED:");
+
+					for (String line : response1) {
+						// System.out.println(line);
+						response.append(line);
+					}
+					responseString=response.toString();
+			
+		} catch (Exception e) {
+		
+			return "false";
+		}
+		return responseString;
+	}
+	
+	public static String postExpertScript1(String filePath, PrintWriter out1){
 		String responseString="";
 		try {
 			
@@ -29,7 +68,8 @@ public class ExpertScriptCall {
 			StringBuilder response = new StringBuilder();
 			try {
 			//http://34.80.26.185:5015/project1
-			URL url = new URL("http://34.80.26.185:5015/project5");
+			/*URL url = new URL("http://34.80.26.185:5015/project5");*/
+				URL url = new URL("http://34.80.26.185:5025/project5");
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
@@ -39,6 +79,7 @@ public class ExpertScriptCall {
 			MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.STRICT);
 			multipartEntity.addPart("file", fileBody);
 
+			
 			connection.setRequestProperty("Content-Type", multipartEntity.getContentType().getValue());
 			OutputStream out = connection.getOutputStream();
 			try {
@@ -61,7 +102,7 @@ public class ExpertScriptCall {
 			connection.disconnect();
 			}
 			} catch (Exception e) {
-			    //e.printStackTrace();
+			    e.printStackTrace(out1);
 				return "false";
 			} 
 			
@@ -70,5 +111,8 @@ public class ExpertScriptCall {
 		}
 		return responseString;
 	}
+	
+	
+	
 
 }

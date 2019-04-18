@@ -9,10 +9,10 @@ import com.readGmail.GmailMethods;
 public class RateRegex {
 
 	public static void main(String[] args) {
-		String data=RateRegrex("250KB ", null);
+		String data=RateRegrex("$5000", null);
 				System.out.println(data);
 
-		String ratetype=getRateVal(data);
+		String ratetype=getRateVal("$5000");
 		System.out.println(ratetype);
 	}
 
@@ -28,144 +28,144 @@ public class RateRegex {
 			m = id.matcher(url);
 			if (m.find()) {
 				etaBasisDate = m.group(1);
-				System.out.println("alag0:: " + etaBasisDate);
+				//System.out.println("alag0:: " + etaBasisDate);
 
 			} else {
 				id = Pattern.compile("([Oo]\\/[Pp])");
 				m = id.matcher(url);
 				if (m.find()) {
 					etaBasisDate = m.group(1);
-					System.out.println("alag1:: " + etaBasisDate);
+					//System.out.println("alag1:: " + etaBasisDate);
 				} else {
 					id = Pattern.compile("([0-9]{1,3}\\s([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 					m = id.matcher(url);
 					if (m.find()) {
 						etaBasisDate = m.group(1);
-						System.out.println("alag2:: " + etaBasisDate);
+						//System.out.println("alag2:: " + etaBasisDate);
 					} else {
 						id = Pattern.compile("(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})\\s[0-9]{1,3})");
 						m = id.matcher(url);
 						if (m.find()) {
 							etaBasisDate = m.group(1);
-							System.out.println("alag3:: " + etaBasisDate);
+							//System.out.println("alag3:: " + etaBasisDate);
 						} else {
 							id = Pattern.compile("([0-9]{1,3}\\-[0-9]{1,3}\\.[0-9]\\-[0-9]{1,3}\\.[0-9]\\s([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 							m = id.matcher(url);
 							if (m.find()) {
 								etaBasisDate = m.group(1);
-								System.out.println("alag4:: " + etaBasisDate);
+								//System.out.println("alag4:: " + etaBasisDate);
 							} else {
 								id = Pattern.compile("(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})\\s[0-9]{1,3}\\-[0-9]{1,3}\\.[0-9]\\-[0-9]{1,3}\\.[0-9])");
 								m = id.matcher(url);
 								if (m.find()) {
 									etaBasisDate = m.group(1);
-									System.out.println("alag5:: " + etaBasisDate);
+									//System.out.println("alag5:: " + etaBasisDate);
 								} else {
 									id = Pattern.compile("([LlSs]{2}\\s[0-9]\\.[0-9]([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 									m = id.matcher(url);
 									if (m.find()) {
 										etaBasisDate = m.group(1);
-										System.out.println("alag6:: " + etaBasisDate);
+										//System.out.println("alag6:: " + etaBasisDate);
 									} else {
 										id = Pattern.compile("([0-9]{3,}[/|-][0-9]{3,})");
 										m = id.matcher(url);
 										if (m.find()) {
 											etaBasisDate = m.group(1);
-											System.out.println("alag7:: " + etaBasisDate);
+											//System.out.println("alag7:: " + etaBasisDate);
 										} else {
 											id = Pattern.compile("([0-9]{1,3}\\.[0-9]\\s([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 											m = id.matcher(url);
 											if (m.find()) {
 												etaBasisDate = m.group(1);
-												System.out.println("alag8:: " + etaBasisDate);
+												//System.out.println("alag8:: " + etaBasisDate);
 											} else {
 												id = Pattern.compile("(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})\\s[0-9]{1,3}\\.[0-9])");
 												m = id.matcher(url);
 												if (m.find()) {
 													etaBasisDate = m.group(1);
-													System.out.println("alag9:: " + etaBasisDate);
+													//System.out.println("alag9:: " + etaBasisDate);
 												} else {
 													id = Pattern.compile(
 															"([UuSsDd]{1,3}\\s[0-9]\\.[0-9]{1,2}([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 													m = id.matcher(url);
 													if (m.find()) {
 														etaBasisDate = m.group(1);
-														System.out.println("alag10:: " + etaBasisDate);
+														//System.out.println("alag10:: " + etaBasisDate);
 													} else {
 														id = Pattern
 																.compile("([0-9]{1,3}([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 														m = id.matcher(url);
 														if (m.find()) {
 															etaBasisDate = m.group(1);
-															System.out.println("alag11:: " + etaBasisDate);
+															//System.out.println("alag11:: " + etaBasisDate);
 														} else {
 															id = Pattern.compile(
 																	"(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})[0-9]{1,3})");
 															m = id.matcher(url);
 															if (m.find()) {
 																etaBasisDate = m.group(1);
-																System.out.println("alag12:: " + etaBasisDate);
+																//System.out.println("alag12:: " + etaBasisDate);
 															} else {
 																id = Pattern.compile(
 																		"(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})[0-9]{1,3})");
 																m = id.matcher(url);
 																if (m.find()) {
 																	etaBasisDate = m.group(1);
-																	System.out.println("alag13:: " + etaBasisDate);
+																	//System.out.println("alag13:: " + etaBasisDate);
 																} else {
 																	id = Pattern.compile(
 																			"([0-9]{1,3}([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 																	m = id.matcher(url);
 																	if (m.find()) {
 																		etaBasisDate = m.group(1);
-																		System.out.println("alag14:: " + etaBasisDate);
+																		//System.out.println("alag14:: " + etaBasisDate);
 																	} else {
 																		id = Pattern.compile(
 																				"([0-9]{1,3}\\.[0-9]([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 																		m = id.matcher(url);
 																		if (m.find()) {
 																			etaBasisDate = m.group(1);
-																			System.out.println("alag15:: " + etaBasisDate);
+																			//System.out.println("alag15:: " + etaBasisDate);
 																		} else {
 																			id = Pattern.compile(
 																					"(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})[0-9]{1,3}\\.[0-9])");
 																			m = id.matcher(url);
 																			if (m.find()) {
 																				etaBasisDate = m.group(1);
-																				System.out.println("alag16:: " + etaBasisDate);
+																				//System.out.println("alag16:: " + etaBasisDate);
 																			} else {
 																				id = Pattern.compile(
 																						"(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})[0-9]\\,[0-9]{1,3})");
 																				m = id.matcher(url);
 																				if (m.find()) {
 																					etaBasisDate = m.group(1);
-																					System.out.println(
-																							"alag17:: " + etaBasisDate);
+																					//System.out.println(
+																							//"alag17:: " + etaBasisDate);
 																				} else {
 																					id = Pattern.compile(
 																							"([OoWwNn]{3})");
 																					m = id.matcher(url);
 																					if (m.find()) {
 																						etaBasisDate = m.group(1);
-																						System.out.println("alag18:: "
-																								+ etaBasisDate);
+																						/*System.out.println("alag18:: "
+																								+ etaBasisDate);*/
 																					} else {
 																						id = Pattern.compile(
 																								"(([0-9]\\,[0-9]{1,3}([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7}))");
 																						m = id.matcher(url);
 																						if (m.find()) {
 																							etaBasisDate = m.group(1);
-																							System.out.println("alag19:: "
+																							/*System.out.println("alag19:: "
 																									+ etaBasisDate);
-																						} else {
+*/																						} else {
 																							id = Pattern.compile(
 																									"(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})[0-9]{1,3}\\+)");
 																							m = id.matcher(url);
 																							if (m.find()) {
 																								etaBasisDate = m
 																										.group(1);
-																								System.out.println("alag20:: "
-																										+ etaBasisDate);
+																								/*System.out.println("alag20:: "
+																										+ etaBasisDate);*/
 																							} else {
 																								id = Pattern.compile(
 																										"(([WwSs]{2}|[Kk]|[Mm]|[Ww]|[RrNn]{3}|[LlVv]{3}|[LlUuMmPpSs]{7})[0-9]\\.[0-9]{1,2})");
@@ -173,9 +173,9 @@ public class RateRegex {
 																								if (m.find()) {
 																									etaBasisDate = m
 																											.group(1);
-																									System.out.println(
+																									/*System.out.println(
 																											"alag21:: "
-																													+ etaBasisDate);
+																													+ etaBasisDate);*/
 																								} else {
 																									id = Pattern
 																											.compile(
@@ -184,9 +184,9 @@ public class RateRegex {
 																									if (m.find()) {
 																										etaBasisDate = m
 																												.group(1);
-																										System.out.println(
+																										/*System.out.println(
 																												"alag22:: "
-																														+ etaBasisDate);
+																														+ etaBasisDate);*/
 																									} else {
 																										id = Pattern
 																												.compile(
@@ -196,9 +196,9 @@ public class RateRegex {
 																										if (m.find()) {
 																											etaBasisDate = m
 																													.group(1);
-																											System.out.println(
+																											/*System.out.println(
 																													"alag23:: "
-																															+ etaBasisDate);
+																															+ etaBasisDate);*/
 																										} else {
 																											id = Pattern
 																													.compile(
@@ -208,9 +208,9 @@ public class RateRegex {
 																											if (m.find()) {
 																												etaBasisDate = m
 																														.group(1);
-																												System.out.println(
+																												/*System.out.println(
 																														"alag24:: "
-																																+ etaBasisDate);
+																																+ etaBasisDate);*/
 																											} else {
 																												id = Pattern
 																														.compile(
@@ -220,9 +220,9 @@ public class RateRegex {
 																												if (m.find()) {
 																													etaBasisDate = m
 																															.group(1);
-																													System.out.println(
+																													/*System.out.println(
 																															"alag25:: "
-																																	+ etaBasisDate);
+																																	+ etaBasisDate);*/
 																												} else {
 																													id = Pattern
 																															.compile(
@@ -232,9 +232,9 @@ public class RateRegex {
 																													if (m.find()) {
 																														etaBasisDate = m
 																																.group(1);
-																														System.out.println(
+																														/*System.out.println(
 																																"alag26:: "
-																																		+ etaBasisDate);
+																																		+ etaBasisDate);*/
 																													} else {
 																														id = Pattern
 																																.compile(
@@ -244,9 +244,9 @@ public class RateRegex {
 																														if (m.find()) {
 																															etaBasisDate = m
 																																	.group(1);
-																															System.out.println(
+																															/*System.out.println(
 																																	"alag27:: "
-																																			+ etaBasisDate);
+																																			+ etaBasisDate);*/
 																														} else {
 																															id = Pattern
 																																	.compile(
@@ -256,9 +256,9 @@ public class RateRegex {
 																															if (m.find()) {
 																																etaBasisDate = m
 																																		.group(1);
-																																System.out.println(
+																																/*System.out.println(
 																																		"alag28:: "
-																																				+ etaBasisDate);
+																																				+ etaBasisDate);*/
 																															} else {
 																																id = Pattern
 																																		.compile(
@@ -268,9 +268,9 @@ public class RateRegex {
 																																if (m.find()) {
 																																	etaBasisDate = m
 																																			.group(1);
-																																	System.out.println(
+																																	/*System.out.println(
 																																			"alag29:: "
-																																					+ etaBasisDate);
+																																					+ etaBasisDate);*/
 																																} else {
 																																	id = Pattern
 																																			.compile(
@@ -280,9 +280,9 @@ public class RateRegex {
 																																	if (m.find()) {
 																																		etaBasisDate = m
 																																				.group(1);
-																																		System.out.println(
+																																		/*System.out.println(
 																																				"alag30:: "
-																																						+ etaBasisDate);
+																																						+ etaBasisDate);*/
 																																	} else {
 																																		id = Pattern
 																																				.compile(
@@ -292,9 +292,9 @@ public class RateRegex {
 																																		if (m.find()) {
 																																			etaBasisDate = m
 																																					.group(1);
-																																			System.out.println(
+																																			/*System.out.println(
 																																					"alag31:: "
-																																							+ etaBasisDate);
+																																							+ etaBasisDate);*/
 																																		} else {
 																																			id = Pattern
 																																					.compile(
@@ -304,9 +304,9 @@ public class RateRegex {
 																																			if (m.find()) {
 																																				etaBasisDate = m
 																																						.group(1);
-																																				System.out.println(
+																																				/*System.out.println(
 																																						"alag32:: "
-																																								+ etaBasisDate);
+																																								+ etaBasisDate);*/
 																																			} else {
 																																				id = Pattern
 																																						.compile(
@@ -316,9 +316,9 @@ public class RateRegex {
 																																				if (m.find()) {
 																																					etaBasisDate = m
 																																							.group(1);
-																																					System.out.println(
+																																					/*System.out.println(
 																																							"alag33:: "
-																																									+ etaBasisDate);
+																																									+ etaBasisDate);*/
 																																				} else {
 																																					id = Pattern
 																																							.compile(
@@ -328,9 +328,9 @@ public class RateRegex {
 																																					if (m.find()) {
 																																						etaBasisDate = m
 																																								.group(1);
-																																						System.out.println(
+																																						/*System.out.println(
 																																								"alag34:: "
-																																										+ etaBasisDate);
+																																										+ etaBasisDate);*/
 																																					} else {
 																																						id = Pattern
 																																								.compile(
@@ -340,9 +340,9 @@ public class RateRegex {
 																																						if (m.find()) {
 																																							etaBasisDate = m
 																																									.group(1);
-																																							System.out.println(
+																																							/*System.out.println(
 																																									"alag35:: "
-																																											+ etaBasisDate);
+																																											+ etaBasisDate);*/
 																																						} else {
 																																							id = Pattern
 																																									.compile(
@@ -352,9 +352,9 @@ public class RateRegex {
 																																							if (m.find()) {
 																																								etaBasisDate = m
 																																										.group(1);
-																																								System.out.println(
+																																								/*System.out.println(
 																																										"alag36:: "
-																																												+ etaBasisDate);
+																																												+ etaBasisDate);*/
 																																							}  else {
 																																								id = Pattern
 																																										.compile(
@@ -364,9 +364,9 @@ public class RateRegex {
 																																								if (m.find()) {
 																																									etaBasisDate = m
 																																											.group(1);
-																																									System.out.println(
+																																									/*System.out.println(
 																																											"alag37:: "
-																																													+ etaBasisDate);
+																																													+ etaBasisDate);*/
 																																								} else{
 																																									id = Pattern
 																																											.compile(
@@ -376,9 +376,9 @@ public class RateRegex {
 																																									if (m.find()) {
 																																										etaBasisDate = m
 																																												.group(1);
-																																										System.out.println(
+																																										/*System.out.println(
 																																												"alag38:: "
-																																														+ etaBasisDate);
+																																														+ etaBasisDate);*/
 																																									}else{
 																																										id = Pattern
 																																												.compile(
@@ -388,9 +388,9 @@ public class RateRegex {
 																																										if (m.find()) {
 																																											etaBasisDate = m
 																																													.group(1);
-																																											System.out.println(
+																																											/*System.out.println(
 																																													"alag39:: "
-																																															+ etaBasisDate);
+																																															+ etaBasisDate);*/
 																																										}else{
 																																											id = Pattern
 																																													.compile(
@@ -400,9 +400,9 @@ public class RateRegex {
 																																											if (m.find()) {
 																																												etaBasisDate = m
 																																														.group(1);
-																																												System.out.println(
+																																												/*System.out.println(
 																																														"alag40:: "
-																																																+ etaBasisDate);
+																																																+ etaBasisDate);*/
 																																											}else{
 																																												id = Pattern
 																																														.compile(
@@ -412,9 +412,9 @@ public class RateRegex {
 																																												if (m.find()) {
 																																													etaBasisDate = m
 																																															.group(1);
-																																													System.out.println(
+																																													/*System.out.println(
 																																															"alag41:: "
-																																																	+ etaBasisDate);
+																																																	+ etaBasisDate);*/
 																																												}else{
 																																													id = Pattern
 																																															.compile(
@@ -424,9 +424,9 @@ public class RateRegex {
 																																													if (m.find()) {
 																																														etaBasisDate = m
 																																																.group(1);
-																																														System.out.println(
+																																														/*System.out.println(
 																																																"alag42:: "
-																																																		+ etaBasisDate);
+																																																		+ etaBasisDate);*/
 																																													}else{
 																																														id = Pattern
 																																																.compile(
@@ -436,9 +436,9 @@ public class RateRegex {
 																																														if (m.find()) {
 																																															etaBasisDate = m
 																																																	.group(1);
-																																															System.out.println(
+																																															/*System.out.println(
 																																																	"alag43:: "
-																																																			+ etaBasisDate);
+																																																			+ etaBasisDate);*/
 																																														}else{
 																																															id = Pattern
 																																																	.compile(
@@ -448,9 +448,9 @@ public class RateRegex {
 																																															if (m.find()) {
 																																																etaBasisDate = m
 																																																		.group(1);
-																																																System.out.println(
+																																																/*System.out.println(
 																																																		"alag44:: "
-																																																				+ etaBasisDate);
+																																																				+ etaBasisDate);*/
 																																															}else{
 																																																id = Pattern
 																																																		.compile(
@@ -460,9 +460,9 @@ public class RateRegex {
 																																																if (m.find()) {
 																																																	etaBasisDate = m
 																																																			.group(1);
-																																																	System.out.println(
+																																																	/*System.out.println(
 																																																			"alag45:: "
-																																																					+ etaBasisDate);
+																																																					+ etaBasisDate);*/
 																																																}else{
 																																																	id = Pattern
 																																																			.compile(
@@ -472,9 +472,9 @@ public class RateRegex {
 																																																	if (m.find()) {
 																																																		etaBasisDate = m
 																																																				.group(1);
-																																																		System.out.println(
+																																																		/*System.out.println(
 																																																				"alag46:: "
-																																																						+ etaBasisDate);
+																																																						+ etaBasisDate);*/
 																																																	}else{
 																																																		id = Pattern
 																																																				.compile(
@@ -484,9 +484,9 @@ public class RateRegex {
 																																																		if (m.find()) {
 																																																			etaBasisDate = m
 																																																					.group(1);
-																																																			System.out.println(
+																																																			/*System.out.println(
 																																																					"alag47:: "
-																																																							+ etaBasisDate);
+																																																							+ etaBasisDate);*/
 																																																		}else{
 																																																			id = Pattern
 																																																					.compile(
@@ -496,9 +496,9 @@ public class RateRegex {
 																																																			if (m.find()) {
 																																																				etaBasisDate = m
 																																																						.group(1);
-																																																				System.out.println(
+																																																				/*System.out.println(
 																																																						"alag48:: "
-																																																								+ etaBasisDate);
+																																																								+ etaBasisDate);*/
 																																																			}else{
 																																																				id = Pattern
 																																																						.compile(
@@ -508,9 +508,9 @@ public class RateRegex {
 																																																				if (m.find()) {
 																																																					etaBasisDate = m
 																																																							.group(1);
-																																																					System.out.println(
+																																																					/*System.out.println(
 																																																							"alag49:: "
-																																																									+ etaBasisDate);
+																																																									+ etaBasisDate);*/
 																																																				}else{
 																																																					id = Pattern
 																																																							.compile(
@@ -520,12 +520,12 @@ public class RateRegex {
 																																																					if (m.find()) {
 																																																						etaBasisDate = m
 																																																								.group(1);
-																																																						System.out.println(
+																																																						/*System.out.println(
 																																																								"alag50:: "
-																																																										+ etaBasisDate);
+																																																										+ etaBasisDate);*/
 																																																					}else{
-																																																						System.out.println(
-																																																								"no Rate Found");
+																																																						/*System.out.println(
+																																																								"no Rate Found");*/
 																																																					}
 																																																				}
 																																																			}
@@ -671,7 +671,7 @@ public class RateRegex {
 							rateTypeVal ="";
 						}
 						else {
-							rateTypeVal = "WS";
+							rateTypeVal = "lumpsum";
 						}
 					}
 

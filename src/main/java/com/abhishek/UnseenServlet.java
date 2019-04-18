@@ -300,7 +300,7 @@ public class UnseenServlet extends SlingAllMethodsServlet {
 														}
 														Node returnNodeForSameTextAttachment = GmailReadMailChanged.createTextNode_Save_txt_sling(out,
 																subject_replace_node_mainnode, subject_replace, bodyText, mainnodeCount,
-																Bodycheckmsg, sentDate, session, from, formatedDate,formatedDate1, bodyCheck);
+																Bodycheckmsg, sentDate, session, from, formatedDate,formatedDate1, bodyCheck, message);
 														out.println("else returnNodeForSameTextAttachment: " + returnNodeForSameTextAttachment);
 
 													

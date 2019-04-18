@@ -42,6 +42,12 @@ public class Methods {
 	                    		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
 	                    			 headerJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_header_data");
 	                    		 } // header close
+	                    		 JSONObject objheader=null;
+	                    		 if(tableinsideDataOnlyJonObj.has("objheader")){
+	                    			 objheader= tableinsideDataOnlyJonObj.getJSONObject("objheader");
+	                    		 } // objheader close
+	                    		 
+	                    		 
 	                    		 JSONObject jsonObj=new JSONObject();
 	                    		 if(headerJSonObj!=null){
 	                    			 
@@ -56,12 +62,19 @@ public class Methods {
 	                    			 
 	                    			
 	                    			  jsonObj.put(key, value);
+	                    			if(objheader!=null){
+	                    				JSONArray h=new JSONArray();
+	                    				h.put(objheader);
+	                    				jsonObj.put("objheader", h);
+	                    				
+	                    			}
 	                    			
 	                    			 }
 
 	                    			 }
 	                    			 
 	                    		 } // while keyheader dyanamic 
+	                    		 
 	                    		 jsonObjArray.put(jsonObj);
 	                		 }else{
 	                			 if(tableinsideDataOnlyJonObj.has("header")){

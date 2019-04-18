@@ -176,7 +176,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 								      subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 								      out.println("subjectNodePath: "+subjectNodePath);
 								  
-								    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath);
+								    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 								    
 								    logger.info("ExpertCodeOutputHtml:: "+ExpertScriptCallHere);
 								    logger.info("html_emailUrl:: "+emailUrl);
@@ -346,7 +346,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 														  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 														 // out.println("subjectNodePath: "+subjectNodePath);
 														  
-														        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath);
+														        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 														        logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
 														        logger.info("emailUrl_Excel:: "+emailUrl);
 														        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";

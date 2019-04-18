@@ -5320,7 +5320,7 @@ public static int countUnknownX(String mainjson){
 			CreationHelper createHelper = workbook.getCreationHelper();
 
 			// Create a Sheet
-			Sheet sheet = workbook.createSheet("Spot-Summery");
+			Sheet sheet = workbook.createSheet("Spot-Summary");
 			// Create a Font for styling header cells
 			Font headerFont = workbook.createFont();
 			headerFont.setBold(true);
@@ -5500,14 +5500,10 @@ public static int countUnknownX(String mainjson){
 			ICE.setCellValue("Vesseltype");
 			ICE.setCellStyle(headerCellStyle);
 
-			Cell emailUrl = brokertcratedatarow.createCell(18);
-			emailUrl.setCellValue("emailUrl");
-			emailUrl.setCellStyle(headerCellStyle);
+			Cell ReportTimestampSpot = brokertcratedatarow.createCell(18);
+			ReportTimestampSpot.setCellValue("ReportTimestamp");
+			ReportTimestampSpot.setCellStyle(headerCellStyle);
 			
-
-            Cell SingleJson = brokertcratedatarow.createCell(19);
-			SingleJson.setCellValue("SingleJson");
-			SingleJson.setCellStyle(headerCellStyle);
 			
 			
 			if (Tonnagejsonobj.has("spotList")) {
@@ -5537,12 +5533,6 @@ public static int countUnknownX(String mainjson){
 						combinebrokerobj.put("LCStartobj", Month_Year_value);
 					}
 
-					String emailUrl1 = "";
-					if (BrokerTcRateList_inside_jsonobj.has("emailUrl")) {
-						emailUrl1 = BrokerTcRateList_inside_jsonobj.getString("emailUrl");
-						combinebrokerobj.put("emailurlobj", emailUrl1);
-					}
-					
 					String firstyr_value = "";
 					if (BrokerTcRateList_inside_jsonobj.has("LCEnd")) {
 						firstyr_value = BrokerTcRateList_inside_jsonobj.getString("LCEnd");
@@ -5632,10 +5622,10 @@ public static int countUnknownX(String mainjson){
 						firstyr_value7 = BrokerTcRateList_inside_jsonobj.getString("Vesseltype");
 						combinebrokerobj.put("Vesseltypeobj", firstyr_value7);
 					}
-					String firstyr_value23 = "";
-					if (BrokerTcRateList_inside_jsonobj.has("SingleJson")) {
-						firstyr_value23 = BrokerTcRateList_inside_jsonobj.getString("SingleJson");
-						combinebrokerobj.put("SingleJsonobj", firstyr_value23);
+					String firstyr_value81 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("ReportTimestamp")) {
+						firstyr_value81 = BrokerTcRateList_inside_jsonobj.getString("ReportTimestamp");
+						combinebrokerobj.put("ReportTimestampobj", firstyr_value81);
 					}
 
 					if (combinebrokerobj.length() > 0) {
@@ -5878,10 +5868,10 @@ public static int countUnknownX(String mainjson){
 
 						broker_value = brokerrow.createCell(17);
 						broker_value.setCellValue(vesseltypeobj8);
-
-						String vesseltypeobj1712 = "";
-						if (brokercombineobj.has("emailurlobj")) {
-							vesseltypeobj1712 = brokercombineobj.getString("emailurlobj");
+						
+						String vesseltypeobj9 = "";
+						if (brokercombineobj.has("ReportTimestampobj")) {
+							vesseltypeobj9 = brokercombineobj.getString("ReportTimestampobj");
 						}
 
 						brokerrow = sheet.getRow((rowIndex + 1 + j));
@@ -5890,23 +5880,8 @@ public static int countUnknownX(String mainjson){
 						}
 
 						broker_value = brokerrow.createCell(18);
-						broker_value.setCellValue(vesseltypeobj1712);
-						
+						broker_value.setCellValue(vesseltypeobj9);
 
-						String vesseltypeobj1713 = "";
-							if (brokercombineobj.has("SingleJsonobj")) {
-								vesseltypeobj1713 = brokercombineobj.getString("SingleJsonobj");
-							}
-
-							brokerrow = sheet.getRow((rowIndex + 1 + j));
-							if (brokerrow == null) {
-								brokerrow = sheet.createRow((rowIndex + 1 + j));
-							}
-
-							broker_value = brokerrow.createCell(19);
-							broker_value.setCellValue(vesseltypeobj1713);
-						
-						
 					}
 				} //
 
@@ -5949,7 +5924,6 @@ public static int countUnknownX(String mainjson){
 			final_obj.put("fileName", fileName.trim());
 			final_obj.put("fileUrl", "https://dev.bizlem.io:8082/scorpioexcel/" + fileName.trim());
 			final_obj.put("status", "S");
-
 		} catch (Exception e) {
 			return "{\"status\":\"E\",\"Message\" : " + e.getMessage() + "}";
 		}

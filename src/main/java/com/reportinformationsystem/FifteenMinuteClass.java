@@ -1790,5 +1790,44 @@ public class FifteenMinuteClass {
 			
 		}
 	}
+	
+	public static void updateTonnageSource(PrintWriter out, Session session) {
+
+		try {
+
+			Node scorpioDatabase = session.getRootNode().getNode("scorpioDataBase");
+			Node ReportData = scorpioDatabase.getNode("ReportData");
+			Node Tonnage = ReportData.getNode("Tonnage");
+
+			if (Tonnage.hasNodes()) {
+				NodeIterator itr = Tonnage.getNodes();
+				while (itr.hasNext()) {
+					Node nextNode = itr.nextNode();
+
+					if (nextNode.hasProperty("Source")) {
+						String source = nextNode.getProperty("Source").getString();
+						if (source.equalsIgnoreCase("bizlem")) {
+							String textSentMailTime=nextNode.getProperty("textSentMailTime").getString();
+							Calendar c = Calendar.getInstance();
+							SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+
+							if( !GmailMethods.isNullString(textSentMailTime) ){
+								c.setTime(sdf.parse(textSentMailTime));
+							}		
+							nextNode.setProperty("ReportTimestamp", c);
+							nextNode.setProperty("Source", "gtcbrokers");
+						}
+
+						session.save();
+					}
+
+				} // while close
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace(out);
+		}
+	}
 
 }

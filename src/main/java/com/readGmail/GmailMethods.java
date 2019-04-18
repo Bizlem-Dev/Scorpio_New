@@ -534,7 +534,7 @@ public class GmailMethods {
 			SearchTerm term = null;
 			try {
 				
-				int x = -2;
+				int x = -3; //-2
 				int y = 1;
 				Calendar cal = GregorianCalendar.getInstance();
 				cal.add(Calendar.DAY_OF_YEAR, y);
@@ -597,10 +597,10 @@ public class GmailMethods {
 	    		boolean isseen = message.getFlags().contains(Flags.Flag.SEEN);
 	    		if (isseen == true) {
             		seen = "1";
-            		out.println("seen : "+seen);
+            	//	out.println("seen : "+seen);
             	}else{
             		seen = "0";
-            		out.println("Unseen : "+seen);
+            		//out.println("Unseen : "+seen);
             	} 
 	    		
 			} catch (Exception e) {

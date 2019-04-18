@@ -195,9 +195,32 @@ public class SaveReportDataClassNewStr {
 							}
 						}
 
+						//.............................table objHeader...........
+						
+						JSONObject objHeaderJsonWise=OnlyCheckFourJsonToReportType.fetchOjectHeaderFromTable(allReportJsonArrayInsideJSonobject);
+						String objHeaderJsonWiseRG="";
+						String objHeaderJsonWiseRT="";
+						String objHeaderJsonWiseCT="";
+						
+						if(objHeaderJsonWise!=null && objHeaderJsonWise.length()!=0){
+						   if(objHeaderJsonWise.has("RepositionRegion")){
+							objHeaderJsonWiseRG=objHeaderJsonWise.getString("RepositionRegion");
+						   }if(objHeaderJsonWise.has("ReportType")){
+							objHeaderJsonWiseRT=objHeaderJsonWise.getString("ReportType");
+						    }if(objHeaderJsonWise.has("CargoType")){
+							objHeaderJsonWiseCT=objHeaderJsonWise.getString("CargoType");
+						}
+						}
+						
+						//........ end tableobjheader here.......................
+						
 						String check_Port_repositionRegion_id="";
-						if(!GmailMethods.isNullString(RG)){  // forst prioritty goes to Subject
-							check_Port_repositionRegion_id=RG;
+						
+						if( !GmailMethods.isNullString(objHeaderJsonWiseRG) ){
+							 check_Port_repositionRegion_id=objHeaderJsonWiseRG;
+						}
+						else if( !GmailMethods.isNullString(RG) ){  // forst prioritty goes to Subject
+							    check_Port_repositionRegion_id=RG;
 						}else{
 
 
@@ -263,13 +286,17 @@ public class SaveReportDataClassNewStr {
 								check_Port_repositionRegion_id=allReportJsonArrayInsideJSonobject.getString("RepositionRegion1");
 							}*/
 
-						}
+						} // else rg
 
 						out.println("before CargoType: ");
 						String check_CargoType_cargotype_id="";
 						String CargoTypeString="";
+						
+						if( !GmailMethods.isNullString(objHeaderJsonWiseCT) ){
+							 check_CargoType_cargotype_id=objHeaderJsonWiseCT;
+						}
 
-//						else{
+						else{
 
 							if(allReportJsonArrayInsideJSonobject.has("CargoType")){
 								CargoTypeString=allReportJsonArrayInsideJSonobject.getString("CargoType");
@@ -312,7 +339,7 @@ public class SaveReportDataClassNewStr {
 								}
 							}
 
-//						}
+						}
 
 
 
@@ -1594,15 +1621,18 @@ public class SaveReportDataClassNewStr {
 						}	
 
 						String CargoQtyString="";
-						String cargo_json="";
+//						String cargo_json="";
 						//cargo_count rate_count
-						if(allReportJsonArrayInsideJSonobject.has("CargoQty") && (!GmailMethods.isNullString(allReportJsonArrayInsideJSonobject.getString("CargoQty")))){
+						if(allReportJsonArrayInsideJSonobject.has("CargoQty") ){
 							CargoQtyString=allReportJsonArrayInsideJSonobject.getString("CargoQty");
 							CargoQtyString = urlValue(CargoQtyString);
-						}else if(allReportJsonArrayInsideJSonobject.has("http://www.semanticweb.org/user/ontologies/2018/10/scorpio-12-11-2018#CargoQty") && (!GmailMethods.isNullString(allReportJsonArrayInsideJSonobject.getString("http://www.semanticweb.org/user/ontologies/2018/10/scorpio-12-11-2018#CargoQty")))){
+						}else if(allReportJsonArrayInsideJSonobject.has("http://www.semanticweb.org/user/ontologies/2018/10/scorpio-12-11-2018#CargoQty")){
 							CargoQtyString=allReportJsonArrayInsideJSonobject.getString("http://www.semanticweb.org/user/ontologies/2018/10/scorpio-12-11-2018#CargoQty");
 							CargoQtyString = urlValue(CargoQtyString);
 						}
+						
+						out.println("CargoQtyString_inside: "+CargoQtyString);
+						out.println("vessel_inside: "+VesselNameString);
 						/*else {
 
 
@@ -2290,7 +2320,7 @@ public class SaveReportDataClassNewStr {
 							owners_id=owners_Name;   // header gpoes here
 						}if(GmailMethods.isNullString(check_Operators_id)){
 							check_Operators_id=opertaor_Name;   // header gpoes here
-						}if( GmailMethods.isNullString(vesselType_id)){
+						}/*if( !GmailMethods.isNullString(vesselType_id)){
 							
 							 boolean numeric = true;
 							  
@@ -2305,13 +2335,35 @@ public class SaveReportDataClassNewStr {
 						        	if("Spot".equalsIgnoreCase(returnReportType) ){
 						        		CargoQtyString=vesselType_id;
 						        	}
-						        }else{
-						        	vesselType_id=VesselType_Name;
-						        	if( GmailMethods.isNullString(vesselType_id) ){
-						        		vesselType_id=VT;
-						        	}
 						        }
-						} if(GmailMethods.isNullString(check_EmployementStatus) ){
+						} else{
+				        	vesselType_id=VesselType_Name;
+				        	if( GmailMethods.isNullString(vesselType_id) ){
+				        		vesselType_id=VT;
+				        	}
+				        }*/
+						
+						if( GmailMethods.isNullString(vesselType_id) ){
+							 vesselType_id=VT;
+						}
+						else{
+							boolean numeric = true;
+							  
+					        try {
+					            Integer num = Integer.parseInt(vesselType_id);
+					            
+					        } catch (NumberFormatException e) {
+					            numeric = false;
+					        }
+						  
+					        if(numeric){
+					        	
+					        }else{
+					        	vesselType_id=VesselType_Name;
+					        }
+						}
+						
+						if(GmailMethods.isNullString(check_EmployementStatus) ){
 							 check_EmployementStatus=StatusHeader;
 						}else{
 							if(GmailMethods.isNullString(check_EmployementStatus)){
@@ -2384,19 +2436,21 @@ public class SaveReportDataClassNewStr {
 							ETABasisString=EB;
 						} // second priority
 						
-						if(GmailMethods.isNullString(OpenDateString)){
+						/*if(GmailMethods.isNullString(OpenDateString)){
 							if(allReportJsonArrayInsideJSonobject.has("OPEN")){
 								OpenDateString=allReportJsonArrayInsideJSonobject.getString("OPEN");
 							}
-							/*else if(allReportJsonArrayInsideJSonobject.has("Date")){
+							else if(allReportJsonArrayInsideJSonobject.has("Date")){
 								OpenDateString=allReportJsonArrayInsideJSonobject.getString("Date");
-							}*/
-						}
+							}
+						}*/
 						
 						out.println("combine all three data check");
 						//out.println("new type: "+ReportTypeString.trim());
 						//ReportTypeString ,
-
+						out.println("CargoQtyString_outside: "+CargoQtyString);
+						out.println("vessel_outside: "+VesselNameString);
+						
 						callReportwiseReortsaveInSling(out, session, ReportTypeString, check_Port_repositionRegion_id, check_CargoType_cargotype_id, vessel_Id, vesselType_id, built, dwt, cubics, loa, ice, sternline, owners_id, check_Operators_id, check_EmployementStatus, check_OpenPort_id, OpenDateString, ETABasisString, CommentString, check_Source, ReportTimestampString, check_Information, check_FixturetType_id, check_Charterer, check_Status, CargoQtyString, check_CargoGrade, LCStartString, LCEndString, check_LoadPort_id, check_DiscPort_id, check_RateType, RateString, ReportDateString, check_Spot_TCS_id, DateString, check_CPP_DPP_id, DeliveryString, check_DeliveryPlace, PeriodString, check_Periodunit, RedeliveryString, TCRateString, check_currencyUnit, CommentString,Month_YearString,first_yrString,second_yrString,third_yrString,fifth_yrString, emailUrl, subjectNodePath,textSentMailTime,from_Source,timestampDate,timestampDateAndTime, Flag, flagPort1, flagPortOpen1, reportcomesFrom, allReport, allReportJsonArrayInsideJSonobject.toString());
 						//session.save();
 

@@ -39,7 +39,9 @@ public class FetchData {
 		/*String data=getdata("09-10-2018", "30-10-2018", "Position List");
 		System.out.println(data);*/
 		
-		 String data=convertStringToDate("09-10-2018");
+		 String data= getdata("10-04-2019", "15-04-2019", "Spot");
+		System.out.println(data);
+		 /*String data=convertStringToDate("09-10-2018");
 		 System.out.println(data);
 		 Date date=GmailMethods.parseDate(data);
 		 System.out.println(date);
@@ -47,7 +49,7 @@ public class FetchData {
 		 long s=9;
 		 String d=String.valueOf(s);
 		 s=Long.parseLong(d);
-		 System.out.println(s);
+		 System.out.println(s);*/
 	}
 	
 	public static  String convertStringToDate(String dateString)
@@ -171,7 +173,7 @@ public class FetchData {
 	public static String getdata(String from, String to, String reporttype) throws IOException, JSONException {
         JSONObject inputdata =null;
    
-      URL url = new URL("http://35.199.31.139:8080/bernhard/reportApi"); 
+      URL url = new URL("https://dev.bizlem.io:8082/scorpio/ReportApi"); 
       System.out.println("url =======" + url);
       HttpURLConnection http = (HttpURLConnection) url.openConnection();
       http.setRequestMethod("POST");

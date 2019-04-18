@@ -1,4 +1,4 @@
-package com.reportinformationsystem;
+package com.errorreport;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,12 +13,8 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
-import com.errorreport.StatusForUi;
-import com.pallavi.code.secondStepMethodCall;
 import com.readGmail.GmailMethods;
-import com.readGmail.Gmail_Pojo;
-
-import ChangedStructureCurrent.GmailReadMailChanged;
+import com.reportinformationsystem.ExpertScriptCall;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
@@ -29,10 +25,10 @@ import org.apache.felix.scr.annotations.Properties;
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ 
-		@Property(name = "sling.servlet.paths", value = { "/SecondStep" }),
+		@Property(name = "sling.servlet.paths", value = { "/subjectLinkStatus" }),
 		})
 
-public class Servlet_SecondStep_ToRunProject extends SlingAllMethodsServlet {
+public class SubjectMailClientLinkStatus extends SlingAllMethodsServlet {
 	@Reference
 	private SlingRepository repo;
 	Session session = null;
@@ -46,26 +42,15 @@ public class Servlet_SecondStep_ToRunProject extends SlingAllMethodsServlet {
 		try{
 
 		session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
+		String emailClientNodeId=request.getParameter("emailClientNodeId");
+		/*JSONObject data=StatusForUi.subjectLink(session, out, emailClientNodeId);
+		out.println(data);*/
 		
-		 String datePass=StatusForUi.cronCurrentTimeParseHere();
-		if( (datePass!=null) && (!GmailMethods.isNullString(datePass)) ){
-			out.println("uidatePass:: "+datePass);
-			 String cronNodeName=StatusForUi.nodeCreateCronInSling(out, session, datePass);
-			 
-			 if( (cronNodeName!=null) && (!GmailMethods.isNullString(cronNodeName)) ){
-				 out.println("uidatecronNodeName:: "+cronNodeName);
-				 secondStepMethodCall.ReadGmailDataToPassPythonApi(session, out, cronNodeName);
-			 }
-			 
-		}
+		String data=ExpertScriptCall.postExpertScript(emailClientNodeId, out);
+		out.println("data: "+data);
 		
-		
-		//DateFromToApiReport.ReadGmailDataToPassPythonApi(session, out);
-//		secondStepMethodCall.ReadGmailDataToPassPythonApi(session, out);
-		
-		//session.save();
 		}catch(Exception e){
-			//e.printStackTrace(out);
+//			e.printStackTrace(out);
 		    out.println(e.getMessage());
 		}
 		

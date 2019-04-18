@@ -1790,7 +1790,7 @@ public class DateFromToApiReport {
 									  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 									  out.println("subjectNodePath: "+subjectNodePath);
 									  
-									    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath);
+									    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 									    String filepathfromourside="/home/ubuntu/TestedMailJSon/"+textNode.getName().toString()+"_"+timestampDate+".txt";
 										  boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
 										    if(checkjsonString==true){
@@ -1946,7 +1946,7 @@ public class DateFromToApiReport {
 															  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 															 // out.println("subjectNodePath: "+subjectNodePath);
 															  
-															        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath);
+															        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 															        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
 															       if( !( ExpertScriptCallHere.equals("false") )  ){
 															       

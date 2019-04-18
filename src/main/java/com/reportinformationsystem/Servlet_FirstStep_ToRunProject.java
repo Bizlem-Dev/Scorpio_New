@@ -52,7 +52,8 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 		gm.setUserName(bundle.getString("userName"));
 		gm.setPassWord(bundle.getString("password"));
 
-	    GmailReadMailChanged.processEmail(session,gm, out);
+		String passSubject=request.getParameter("passSubject");
+	    GmailReadMailChanged.processEmail(session,gm, out, passSubject, null, "");
 		
 	    
 		}catch(Exception e){

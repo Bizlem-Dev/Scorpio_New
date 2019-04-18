@@ -105,7 +105,7 @@ public class ReportTypeIdentify {
 	                    			 
 	                    		 }// while close first vesselname check
 	                    			if(vesselNameCheckBlank==true){
-	                    				System.out.println("vesselname entered blank");
+	                    				//System.out.println("vesselname entered blank");
 	                    			HashMap<String, String> g=new HashMap<>();
 	                    			 Iterator<String>itr= headerJSonObj.keys();
 	                    		 while(itr.hasNext()){
@@ -116,7 +116,7 @@ public class ReportTypeIdentify {
 	                    			g.put(headerKeyKey, headerValue);
 	                    		 } // while keyheader dyanamic 
 	                    		
-	                    		 System.out.println("g:: "+g);
+	                    		// System.out.println("g:: "+g);
 	                    		
 	                    		 if(g!=null && !g.isEmpty() && g.size()>0){
 	                    			 
@@ -135,6 +135,7 @@ public class ReportTypeIdentify {
 	                    				String ETABasisPos="";
 	                    				String ChartererPos="";
 	                    				String ReportTypePos="";
+	                    				String OPENPos="";
 	                    				
 	                    				boolean vesselHas=false;
 	                    				boolean LCStartHas=false;
@@ -150,6 +151,8 @@ public class ReportTypeIdentify {
 	                    				boolean ETABasisPoss=false;
 	                    				boolean ChartererPoss=false;
 	                    				boolean ReportTypePoss=false;
+	                    				boolean OPENPoss=false;
+	                    				
 	                    			 
 	                    		 for (Map.Entry<String, String> entry : g.entrySet())
 								  {
@@ -157,23 +160,23 @@ public class ReportTypeIdentify {
 	                    				
 	                    				if(entry.getValue().equalsIgnoreCase("VesselName")){
 	                    					VesselNamePos=entry.getKey();
-	                    					System.out.println("VesselNamePos:: "+VesselNamePos);
+	                    					//System.out.println("VesselNamePos:: "+VesselNamePos);
 	                    					 vesselHas=true;
 	                    				}if(entry.getValue().equalsIgnoreCase("LCStart")){
 	                    					LCStartPos=entry.getKey();
-	                    					System.out.println("LCStartPos:: "+LCStartPos);
+	                    					//System.out.println("LCStartPos:: "+LCStartPos);
 	                    					LCStartHas=true;
 	                    				}if(entry.getValue().equalsIgnoreCase("LoadPort")){
 	                    					LoadPortPos=entry.getKey();
-	                    					System.out.println("LoadPortPos:: "+LoadPortPos);
+	                    					//System.out.println("LoadPortPos:: "+LoadPortPos);
 	                    					LoadPortHas=true;
 	                    				}if(entry.getValue().equalsIgnoreCase("Rate")){
 	                    					RatePos=entry.getKey();
-	                    					System.out.println("RatePos:: "+RatePos);
+	                    					//System.out.println("RatePos:: "+RatePos);
 	                    					RateHas=true;
 	                    				}if(entry.getValue().equalsIgnoreCase("Date")){
 	                    					datePos=entry.getKey();
-	                    					System.out.println("datePos:: "+datePos);
+	                    					//System.out.println("datePos:: "+datePos);
 	                    					DateHas=true;
 	                    				}if(entry.getValue().equalsIgnoreCase("Port")){
 	                    					PortPos=entry.getKey();
@@ -199,13 +202,16 @@ public class ReportTypeIdentify {
 	                    				}if(entry.getValue().equalsIgnoreCase("ReportType")){
 	                    					ReportTypePos=entry.getKey();
 	                    					ReportTypePoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("OPEN")){
+	                    					OPENPos=entry.getKey();
+	                    					OPENPoss=true;
 	                    				}
 	                    				
 	                    			
 								  } // map for loop close
 	                    		 
 	                    		 JSONObject countAll=countRateAndPortAndDate(g);
-	                    		 System.out.println(":: "+countAll);
+	                    		// System.out.println(":: "+countAll);
 	                    		 
 	                    		    int dateCount=0;
 	                    			int portCount=0;
@@ -214,7 +220,7 @@ public class ReportTypeIdentify {
 	                    			 if(countAll!=null){
 	                    				 if(countAll.has("Date")){
 	                    					 dateCount= countAll.getInt("Date");
-	                    					 System.out.println("singlejsondate: "+dateCount);
+	                    					// System.out.println("singlejsondate: "+dateCount);
 	                    				 }if(countAll.has("Port")){
 	                    					 portCount=countAll.getInt("Port");
 	                    				 }if(countAll.has("Rate")){
@@ -225,7 +231,7 @@ public class ReportTypeIdentify {
 	                    			// dateGreaterLesser(g, dataJSonObj);
 	                    			 
 	                    			String RT= OnlyCheckFourJsonToReportType.checkHeaderDataAndSubjectData(tabledataJsonObj, headerJSonObj, dataJSonObj);
-	                    			System.out.println("RTCHECK:: "+RT);
+	                    			//System.out.println("RTCHECK:: "+RT);
 	                    			// ................... header and table reporttype check
 	                    			if( !GmailMethods.isNullString(RT) ){
 	                    				 if("Tonnage".equalsIgnoreCase(RT) ){
@@ -254,8 +260,9 @@ public class ReportTypeIdentify {
 	                    						
 	                    						if(StandardAndNonStandardDate.has("DateStandardFound")){
 	                    							JSONArray DateStandardFound=StandardAndNonStandardDate.getJSONArray("DateStandardFound");
+	                    							System.out.println("DateStandardFound: "+DateStandardFound);
 	                    							for(int k=0;k<DateStandardFound.length();k++){
-		                    							JSONObject DateStandardFoundOBj= DateStandardFound.getJSONObject(i);
+		                    							JSONObject DateStandardFoundOBj= DateStandardFound.getJSONObject(k);
 		                    							if(DateStandardFoundOBj.has("ETABasis")){
 		                    								ETABasisFound=DateStandardFoundOBj.getString("ETABasis");
 		                    							}if(DateStandardFoundOBj.has("OpenDate")){
@@ -295,13 +302,43 @@ public class ReportTypeIdentify {
 	                    				 }
 	                    				 
 	                    				 if(DateHas){
-	                    					 if(!ETABasisPoss){
-	                    						 newHeader.put(datePos, "ETABasis");
-	                    					 }else if(!OpenDatePoss){
+	                    					 if(!OpenDatePoss){
 	                    						 newHeader.put(datePos, "OpenDate");
+	                    					 }else if(!ETABasisPoss){
+	                    						 newHeader.put(datePos, "ETABasis");
 	                    					 }
 	                    				 } // date check 
-	                    				 if(PortHas){
+	                    				 
+	                    				/* if(OPENPoss && ETABasisPoss && OpenPortPoss){
+	                    					 newHeader.put(OPENPos, "OpenDate");
+	                    				 }*/
+	                    				 
+	                    				  if( portCount>=1 && ETABasisPoss && !RateHas ){
+	                    					 if(PortHas){
+		                    					 if(!OpenPortPoss){
+		                    						 newHeader.put(PortPos, "OpenPort");
+		                    					 }
+		                    				 } // port check
+	                    					 
+	                    					 if(DateHas){
+	                    						 //System.out.println("date inside:: "+DateHas+"date pos::  "+datePos);
+		                    					 if(!ETABasisPoss){
+		                    						 newHeader.put(datePos, "ETABasis");
+		                    					 }else if(!OpenDatePoss){
+		                    						 newHeader.put(datePos, "OpenDate");
+		                    					 }
+		                    				 } // date check 
+	                    					 else{
+	                    						 newHeader.put(OPENPos, "OpenDate");
+	                    					 }
+	                    					 
+	                    					 if(ChartererPoss){
+	                    						 newHeader.put(ChartererPos, "Operators");
+	                    				 } //  Operators
+	                    					 
+	                    					 
+	                    				 }
+	                    				 /*if(PortHas){
 	                    					 if(!OpenPortPoss){
 	                    						 newHeader.put(PortPos, "OpenPort");
 	                    					 }
@@ -309,12 +346,14 @@ public class ReportTypeIdentify {
 	                    				 if(ChartererPoss){
 	                    						 newHeader.put(ChartererPos, "Operators");
 	                    				 } //  Operators
-	                    				 
+*/	                    				 
 	                    					 
-	                    				 }else{
-	                    					 if("Spot".equalsIgnoreCase(RT) ){
+	                    				 }
+	                    				 
+//	                    				 else {
+	                    				 else  if("Spot".equalsIgnoreCase(RT) ){
 	                    						 if(ReportTypePoss){
-		                    						 System.out.println("header rt found");
+		                    						// System.out.println("header rt found");
 		                    						 
 		                    					 }else{
 		                    						 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
@@ -325,7 +364,7 @@ public class ReportTypeIdentify {
 	    	                    				 if(DateHas){ // if date has
 	    	                    					 comparePortAndDate=new JSONObject();
 	    	    	                    			 comparePortAndDate=PortAndDatePositionCompare(g);
-	    	    	                    			 System.out.println(comparePortAndDate);
+	    	    	                    			// System.out.println(comparePortAndDate);
 	    	    	                    			 
 	    	    	                    			 if(comparePortAndDate!=null){
 	    	    	                    				 if(comparePortAndDate.has("LCStart")){
@@ -369,17 +408,17 @@ public class ReportTypeIdentify {
 	    	                    				 
 	                    						 
 	                    					 } // spot equal check
-	                    				 }
+//	                    				 }
 	                    			 }
 	                    			 // ................... header and table reporttype check
 	                    			
 	                    			// ..............not in header and table reporttype......
 	                    			 else{
-	                    			 System.out.println("else spot inside");
-	                    			 System.out.println(1>=1);
-	                    			 System.out.println("dateCount:: "+dateCount);
+	                    			// System.out.println("else spot inside");
+	                    			// System.out.println(1>=1);
+	                    			// System.out.println("dateCount:: "+dateCount);
 	                    			 if( dateCount>=1 && portCount>=1 && rateCount>=1){
-	                    				 System.out.println("onecount spot true");
+	                    				// System.out.println("onecount spot true");
 	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
 	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Spot");
 	                    				 
@@ -387,7 +426,7 @@ public class ReportTypeIdentify {
 	                    				 if(DateHas){ // if date has
 	                    					 comparePortAndDate=new JSONObject();
 	    	                    			 comparePortAndDate=PortAndDatePositionCompare(g);
-	    	                    			 System.out.println(comparePortAndDate);
+	    	                    			 //System.out.println(comparePortAndDate);
 	    	                    			 
 	    	                    			 if(comparePortAndDate!=null){
 	    	                    				 if(comparePortAndDate.has("LCStart")){
@@ -416,7 +455,7 @@ public class ReportTypeIdentify {
 	                    			 }
 
 	                    			 else if( LCStartHas && LoadPortHas && RateHas ){
-	                    				 System.out.println("entered spot");
+	                    				// System.out.println("entered spot");
 	                    				 if(DateHas){ // if date has
 	                    					 if(!LCStartHas){ // if not else lcstart
 	                    						 newHeader.put(datePos, "LCStart");
@@ -493,9 +532,9 @@ public class ReportTypeIdentify {
 	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Spot");
 	                    			 }// spot
 	                    			 
-	                    			 else {
+//	                    			 else {
 	                    				 
-	                    				 if( dateCount>=1 && portCount>=1 && !RateHas){
+	                    			 else if( dateCount>=1 && portCount>=1 && !RateHas){
 	                    					 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
 	                    					 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Tonnage");
 	                    					 
@@ -507,6 +546,7 @@ public class ReportTypeIdentify {
 		                    				 } //  Operators
 		                    				 if(DateHas){
 		                    					JSONObject StandardAndNonStandardDate= dateGreaterLesser(g, dataJSonObj);
+		                    					//System.out.println("StandardAndNonStandardDate:: "+StandardAndNonStandardDate);
 		                    					if(StandardAndNonStandardDate!=null && StandardAndNonStandardDate.length()!=0){
 		                    						String ETABasisFound="";
 		                    						String OpenDateFound="";
@@ -515,14 +555,18 @@ public class ReportTypeIdentify {
 		                    						
 		                    						if(StandardAndNonStandardDate.has("DateStandardFound")){
 		                    							JSONArray DateStandardFound=StandardAndNonStandardDate.getJSONArray("DateStandardFound");
+		                    							//System.out.println("DateStandardFound:: "+DateStandardFound);
+		                    							if(DateStandardFound.length()>0){
 		                    							for(int k=0;k<DateStandardFound.length();k++){
-			                    							JSONObject DateStandardFoundOBj= DateStandardFound.getJSONObject(i);
+			                    							JSONObject DateStandardFoundOBj= DateStandardFound.getJSONObject(k);
+			                    							//System.out.println("DateStandardFoundOBj:: "+DateStandardFoundOBj);
 			                    							if(DateStandardFoundOBj.has("ETABasis")){
 			                    								ETABasisFound=DateStandardFoundOBj.getString("ETABasis");
 			                    							}if(DateStandardFoundOBj.has("OpenDate")){
 			                    								OpenDateFound=DateStandardFoundOBj.getString("OpenDate");
 			                    							}
 			                    						} // standard date
+		                    							}
 		                    						}if(StandardAndNonStandardDate.has("DateNotStandardFound")){
 		                    							JSONArray DateNotStandardFound=StandardAndNonStandardDate.getJSONArray("DateNotStandardFound");
 		                    							for(int j=0;j<DateNotStandardFound.length();j++){
@@ -619,13 +663,17 @@ public class ReportTypeIdentify {
 		                    						 newHeader.put(ChartererPos, "Operators");
 		                    				 } //  Operators
 		                    				 
+		                    				/* if(OPENPoss && ETABasisPoss && OpenPortPoss){
+		                    					 newHeader.put(OPENPos, "OpenDate");
+		                    				 }*/
+		                    				 
 	                    				 }
 	                    				 else if( OpenPortPoss && OpenDatePoss){
 	                    					 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
 	                    					 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Tonnage");
 	                    					 
 	                    					 if(DateHas){
-	                    						 System.out.println("date inside:: "+DateHas+"date pos::  "+datePos);
+	                    						 //System.out.println("date inside:: "+DateHas+"date pos::  "+datePos);
 		                    					 if(!ETABasisPoss){
 		                    						 newHeader.put(datePos, "ETABasis");
 		                    					 }else if(!OpenDatePoss){
@@ -647,12 +695,12 @@ public class ReportTypeIdentify {
 	                    					 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Tonnage");
 	                    					 
 	                    					 if(DateHas){
-	                    						 System.out.println("if two date  balnks in tonnage:: "+DateHas+"date pos::  "+datePos);
+	                    						// System.out.println("if two date  balnks in tonnage:: "+DateHas+"date pos::  "+datePos);
 	                    						 if(!ETABasisPoss && !OpenDatePoss){
 	                    							 
 	     		                    					JSONObject StandardAndNonStandardDate= dateGreaterLesser(g, dataJSonObj);
 	     		                    					if(StandardAndNonStandardDate!=null && StandardAndNonStandardDate.length()!=0){
-	     		                    						System.out.println(StandardAndNonStandardDate);
+	     		                    						//System.out.println(StandardAndNonStandardDate);
 	     		                    						String ETABasisFound="";
 	     		                    						String OpenDateFound="";
 	     		                    						String ETABasisNotFound="";
@@ -661,7 +709,7 @@ public class ReportTypeIdentify {
 	     		                    						if(StandardAndNonStandardDate.has("DateStandardFound")){
 	     		                    							JSONArray DateStandardFound=StandardAndNonStandardDate.getJSONArray("DateStandardFound");
 	     		                    							for(int k=0;k<DateStandardFound.length();k++){
-	     			                    							JSONObject DateStandardFoundOBj= DateStandardFound.getJSONObject(i);
+	     			                    							JSONObject DateStandardFoundOBj= DateStandardFound.getJSONObject(k);
 	     			                    							if(DateStandardFoundOBj.has("ETABasis")){
 	     			                    								ETABasisFound=DateStandardFoundOBj.getString("ETABasis");
 	     			                    							}if(DateStandardFoundOBj.has("OpenDate")){
@@ -718,10 +766,50 @@ public class ReportTypeIdentify {
 		                    						 newHeader.put(ChartererPos, "Operators");
 		                    				 } //  Operators
 		                    				 
+	                    				 }else if( portCount>=1 && ETABasisPoss && !RateHas ){
+	                    					 if(PortHas){
+		                    					 if(!OpenPortPoss){
+		                    						 newHeader.put(PortPos, "OpenPort");
+		                    					 }
+		                    				 } // port check
+	                    					 
+	                    					 if(DateHas){
+	                    						 //System.out.println("date inside:: "+DateHas+"date pos::  "+datePos);
+		                    					 if(!ETABasisPoss){
+		                    						 newHeader.put(datePos, "ETABasis");
+		                    					 }else if(!OpenDatePoss){
+		                    						 newHeader.put(datePos, "OpenDate");
+		                    					 }
+		                    				 } // date check 
+	                    					 else{
+	                    						 newHeader.put(OPENPos, "OpenDate");
+	                    					 }
+	                    					 
+	                    					 if(ChartererPoss){
+	                    						 newHeader.put(ChartererPos, "Operators");
+	                    				 } //  Operators
+	                    					 
+	                    					 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+	                    					 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Tonnage");
+	                    					 
+	                    				 }else if( ETABasisPoss && OPENPoss && !RateHas && !PortHas ){
+	                    					 if(DateHas){
+	                    						 //System.out.println("date inside:: "+DateHas+"date pos::  "+datePos);
+		                    					 if(!ETABasisPoss){
+		                    						 newHeader.put(datePos, "ETABasis");
+		                    					 }else if(!OpenDatePoss){
+		                    						 newHeader.put(datePos, "OpenDate");
+		                    					 }
+		                    				 } // date check 
+	                    					 else{
+	                    						 newHeader.put(OPENPos, "OpenDate");
+	                    					 }
+	                    					 
+	                    					 
 	                    				 }
 	                    				 
 	                    				 
-	                    			 } // tonnage
+//	                    			 } // tonnage
                  				
 	                    			
 	                    		 }// check null map
@@ -759,14 +847,14 @@ public class ReportTypeIdentify {
 		try {
 			
 			if( !GmailMethods.isNullString(dateValue) ){
-				System.out.println("datecheckdatevalue: "+dateValue);
+				//System.out.println("datecheckdatevalue: "+dateValue);
 			  String dateStandardFormate= new ConvertDate().convertDateFormat(dateValue);
-			  System.out.println("dateStandardFormate: "+dateStandardFormate);
+			  //System.out.println("dateStandardFormate: "+dateStandardFormate);
 			  SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
 			  Date date = formatter.parse(dateStandardFormate);
 		     if(date!=null){
 		    	 dateStandardFound=true;
-		    	 System.out.println("dateStandardFound: "+dateStandardFormate);
+		    	// System.out.println("dateStandardFound: "+dateStandardFormate);
 		     }
 			}
 		  // 
@@ -789,29 +877,29 @@ public class ReportTypeIdentify {
  				
  				if(entry.getValue().equalsIgnoreCase("Date")){
  					 boolean dateStandardFormate=false;
- 					 System.out.println("entry.getKey():: "+entry.getKey());
+ 					// System.out.println("entry.getKey():: "+entry.getKey());
  					 
  					String dateValue=dataJSonObj.getString(entry.getKey());
- 					System.out.println("dateValue:: "+dateValue);
+ 					//System.out.println("dateValue:: "+dateValue);
  					if( !GmailMethods.isNullString(dateValue) ){
  						dateStandardFormate=datecheck(dateValue);
  						String dateStandard="";
     					if(dateStandardFormate){
-    						System.out.println("boolean :: "+dateStandardFormate);
+    						//System.out.println("boolean :: "+dateStandardFormate);
     						dateStandard= new ConvertDate().convertDateFormat(dateValue);
-    						System.out.println("boolean1 :: "+dateStandard);
+    						//System.out.println("boolean1 :: "+dateStandard);
     						String addSingleDateList=before(dateStandard, "/");
-    						System.out.println("boolean_slash :: "+addSingleDateList);
+    						//System.out.println("boolean_slash :: "+addSingleDateList);
     						
     						dateList.put(entry.getKey(), addSingleDateList);
-    						System.out.println("dateList:: "+dateList);
+    						//System.out.println("dateList:: "+dateList);
     						
     						
     					}else{
     						//dateStandard= new ConvertDate().convertDateFormat(dateValue);
 //    						notRecognizedList.put(entry.getKey(), "Date");
     						notRecognizedList.put(entry.getKey(), dateValue);
-    						System.out.println("else:: "+notRecognizedList);
+    						//System.out.println("else:: "+notRecognizedList);
     					}
  					}
  					
@@ -835,8 +923,8 @@ public class ReportTypeIdentify {
 				    String minKey = Collections.min(dateList.keySet());
 				 
 //				 System.out.println("longKey:: "+longKey);
-				 System.out.println("maxkey:: "+maxKey);
-				 System.out.println("minKey:: "+minKey);
+				// System.out.println("maxkey:: "+maxKey);
+				 //System.out.println("minKey:: "+minKey);
 				 JSONObject dateStandard=new JSONObject();
 				 
 				 if(maxKey.equals(minKey)){
@@ -844,12 +932,12 @@ public class ReportTypeIdentify {
 				 }else{
 					 
 					 String maxValueInMap=(Collections.max(dateList.values()));
-					    System.out.println("maxValueInMap: "+maxValueInMap);
+					   // System.out.println("maxValueInMap: "+maxValueInMap);
 					    
 					    for (Map.Entry<String, String> entry : dateList.entrySet())
 						  {
 					    	if (entry.getValue()==maxValueInMap) {
-				                System.out.println(entry.getKey());     // Print the key with max value
+				              //  System.out.println(entry.getKey());     // Print the key with max value
 				                dateStandard.put("ETABasis", entry.getKey());
 				            }else{
 				            	dateStandard.put("OpenDate", entry.getKey());
@@ -873,7 +961,7 @@ public class ReportTypeIdentify {
 				    String minKey = Collections.min(notRecognizedList.keySet());
 //				    String longKey = Collections.max(dateList.keySet(),strLenCmp );
 				 
-				 System.out.println("maxkey:: "+maxKey);
+				// System.out.println("maxkey:: "+maxKey);
 				 JSONObject dateNotStandard=new JSONObject();
 				 
 				 if(maxKey.equals(minKey)){
@@ -884,7 +972,7 @@ public class ReportTypeIdentify {
 					 for (Map.Entry<String, String> entry : notRecognizedList.entrySet()){
 						 if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0){
 					            maxEntry =  entry;
-					            System.out.println("string max:: "+maxEntry.getValue());
+					           // System.out.println("string max:: "+maxEntry.getValue());
 					            dateNotStandard.put("ETABasis", maxEntry.getKey());
 					        }
 					        
@@ -941,8 +1029,8 @@ public class ReportTypeIdentify {
 			 
 			 
 			 if(date!=null && date.size()>0){
-				 System.out.println("max: " + Collections.max(date));
-				 System.out.println("min: " + Collections.min(date));
+				// System.out.println("max: " + Collections.max(date));
+				// System.out.println("min: " + Collections.min(date));
 				 
 				 if(Collections.min(date).equals(Collections.max(date))){
 					 countObj.put("LCStart", Collections.min(date));
@@ -952,8 +1040,8 @@ public class ReportTypeIdentify {
 				 }
 				 
 			 }if(port!=null && port.size()>0){
-				 System.out.println("max: " + Collections.max(port));
-				 System.out.println("min: " + Collections.min(port));
+				// System.out.println("max: " + Collections.max(port));
+				// System.out.println("min: " + Collections.min(port));
 				 
 				 if(Collections.min(port).equals(Collections.max(port))){
 					 countObj.put("LoadPort", Collections.min(port));

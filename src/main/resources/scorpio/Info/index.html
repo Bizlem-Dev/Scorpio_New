@@ -64,6 +64,8 @@ li.disable {
 									<li class="disable"><a id="emailclientId"
 										href="#email-client" style="text-decoration: none;"
 										class="transformationF disable-email" data-toggle="tab">Email</a></li>
+									<li><a href="#status" class=""
+										style="text-decoration: none;" data-toggle="tab">Status</a></li>	
 								</ul>
 							</div>
 
@@ -1615,105 +1617,1519 @@ li.disable {
 								<div class="tab-pane" id="error-list">
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="row">
-												<div class="col-sm-12">
-													<h4 class="info-text">
-														<a href="#"
-															class="pull-right m-0 btn btn-success sm0-btn-custom"><i
-															class="fa fa-save"></i></a> <a href="#"
-															class="btn btn-info m-0 sm0-btn-custom pull-right"
-															style="margin-right: 15px !important; padding: 2px 5px;">
-															<img src="images/excel_icon.png" width="25px">
-														</a>
+											<ul class="nav-tabs-custom" role="tablist">
+												<li class="active"><a href="#error-list-tonnage"
+													style="text-decoration: none;" role="tab" data-toggle="tab">Tonnage</a></li>
+												<li><a href="#error-list-spot" role="tab"
+													style="text-decoration: none;" data-toggle="tab">Spot</a></li>
+												<li><a href="#error-list-tcreport" role="tab"
+													style="text-decoration: none;" data-toggle="tab">TC Reports</a></li>		
+											</ul>
 
-														<!-- <div id="errorExcelUrl">
-					                                		</div> -->
-
-													</h4>
-												</div>
-												<div class="col-sm-12">
-													<div class="row" id="draggable" style="padding: 0px 10px;">
-														<div class="more-tr col-md-1-width">
-															<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i
-																class="fa fa-plus"></i></a> <a
-																class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i
-																class="fa fa-minus"></i></a>
-														</div>
-														<div class="draggable-table p-0">
-															<table
-																class="table table-bordered table-hover bg-light table-add-rules">
-																<thead class="btn-info">
-																	<tr class="not-dubble-text">
-																		<th>SR No</th>
-																		<th>Description</th>
-																		<th>Check Email</th>
-																		<th class="display-none"></th>
-																	</tr>
-																</thead>
-																<tbody id="errorList" style="direction:rtl;">
-																	<!--  
-												                  	<tr class="not-dubble-text">
-												                  		<td>1</td>
-												                  		<td>Position List</td>
-												                  		<td>Link</td>
-												                  		<td class="display-none"></td>
-												                  	</tr>
-												                  	<tr>
-												                  		<td>2</td>
-												                  		<td>Position List</td>
-												                  		<td>Link</td>
-												                  		<td class="display-none"></td>
-												                  	</tr>
-												                  	<tr>
-												                  		<td>3</td>
-												                  		<td>Position List</td>
-												                  		<td>Link</td>
-												                  		<td class="display-none"></td>
-												                  	</tr>
-												                  	<tr>
-												                  		<td>4</td>
-												                  		<td>Position List</td>
-												                  		<td>Link</td>
-												                  		<td class="display-none"></td>
-												                  	</tr>
-												                  	<tr>
-												                  		<td>5</td>
-												                  		<td>Position List</td>
-												                  		<td>Link</td>
-												                  		<td class="display-none"></td>
-												                  	</tr>
-												                  	<tr  class="firstTr" style="display: none;">
-												                  		<td>5</td>
-												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
-												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
-												                  		<td class="display-none"></td>
-												                  	</tr>
-												                  	-->
-
-																</tbody>
-															</table>
-														</div>
-													</div>
+											<div class="tab-content">
+												<div class="tab-pane active" id="error-list-tonnage">
 													<div class="row">
 														<div class="col-sm-12">
-															<br>
-															<nav class="pull-right">
-																<ul class="pagination">
-																	<li><a href="#" aria-label="Previous"> <span
-																			aria-hidden="true">&laquo;</span>
-																	</a></li>
-																	<li class="active"><a href="#">1</a></li>
-																	<li><a href="#">2</a></li>
-																	<li><a href="#">3</a></li>
-																	<li><a href="#" aria-label="Next"> <span
-																			aria-hidden="true">&raquo;</span>
-																	</a></li>
-																</ul>
-															</nav>
+															<div class="row">
+																<div class="col-sm-12">
+																	<h4 class="info-text">
+																		<button type="button"
+																			class="btn btn-success m-0 sm0-btn-custom pull-right"
+																			style="margin-right: 15px !important; padding: 2px 5px;">
+																			<i class="fa fa-save"></i>
+																		</button>
+
+																	 <a href="#" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px;"> <img src="images/excel_icon.png" width="25px"> </a>
+																	</h4>
+																</div>
+																<div class="col-sm-12">
+																	<div id="draggable">
+																		<div class="more-tr text-left col-md-1-width">
+																			<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i
+																				class="fa fa-plus"></i></a> <a
+																				class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i
+																				class="fa fa-minus"></i></a>
+																		</div>
+																		<div class="draggable-table p-0">
+																			<table
+																				class="table-bordered table-hover bg-light table-add-rules find-table">
+																				<thead class="btn-info">
+																					<tr>
+																						<th>SR No</th>
+																						<th>Report Type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Reposition Region <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>ETA Basis <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Cargo Type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Vessel Name <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Vessel Type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Built <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>DWT <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Cubics <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>LOA <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>ICE <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Stern Line <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Owners <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Operators <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Employment Status <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Open Port <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Open Date <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						
+																						<th>Comment <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Source <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Report Timestamp <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Check Email <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th class="display-none"></th>
+																						<th>Actions</th>
+																					</tr>
+																				</thead>
+																				<tbody id="tonnageTableError" style="direction:rtl;">
+
+																					 <!-- 
+																                  	<tr>
+																                  		<td>1</td>
+																                  		<td>
+																                  			<span>Position List</span>
+																                  			<input type="text" name="" class="td-input" value="Position List">
+																                  		</td>
+																                  		<td>
+																                  			<span>AG</span>
+																                  			<input type="text" name="" class="td-input" value="AG">
+																                  		</td>
+																                  		<td>
+																                  			<span>Clean/CPP</span>
+																                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+																                  		</td>
+																                  		<td>
+																                  			<span>ACE</span>
+																                  			<input type="text" name="" class="td-input" value="ACE">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>IMS</span>
+																                  			<input type="text" name="" class="td-input" value="IMS">
+																                  		</td>
+																                  		<td>
+																                  			<span>Unfixed</span>
+																                  			<input type="text" name="" class="td-input" value="Unfixed">
+																                  		</td>
+																                  		<td>
+																                  			<span>SOHAR</span>
+																                  			<input type="text" name="" class="td-input" value="SOHAR">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>LGO</span>
+																                  			<input type="text" name="" class="td-input" value="LGO">
+																                  		</td>
+																                  		<td>
+																                  			<span>Affinity</span>
+																                  			<input type="text" name="" class="td-input" value="Affinity">
+																                  		</td>
+																                  		<td>
+																                  			<span>#####</span>
+																                  			<input type="text" name="" class="td-input" value="#####">
+																                  		</td>
+																                  		<td>
+																                  			<a href="#email-client" class="email-link">Link</a>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr>
+																                  		<td>2</td>
+																                  		<td class="simple-td boxWidth">
+																                  			<span>Position List</span>
+																                  			<input type="text" name="" class="td-input" value="Position List">
+																                  			<input type="text" name="" hidden="hidden" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>AG</span>
+																                  			<input type="text" name="" class="td-input" value="AG">
+																                  		</td>
+																                  		<td>
+																                  			<span>Clean/CPP</span>
+																                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+																                  		</td>
+																                  		<td>
+																                  			<span>ACE</span>
+																                  			<input type="text" name="" class="td-input" value="ACE">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>IMS</span>
+																                  			<input type="text" name="" class="td-input" value="IMS">
+																                  		</td>
+																                  		<td>
+																                  			<span>Unfixed</span>
+																                  			<input type="text" name="" class="td-input" value="Unfixed">
+																                  		</td>
+																                  		<td>
+																                  			<span>SOHAR</span>
+																                  			<input type="text" name="" class="td-input" value="SOHAR">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>LGO</span>
+																                  			<input type="text" name="" class="td-input" value="LGO">
+																                  		</td>
+																                  		<td>
+																                  			<span>Affinity</span>
+																                  			<input type="text" name="" class="td-input" value="Affinity">
+																                  		</td>
+																                  		<td>
+																                  			<span>#####</span>
+																                  			<input type="text" name="" class="td-input" value="#####">
+																                  		</td>
+																                  		<td>
+																                  			<a href="#email-client" class="email-link">Link</a>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr>
+																                  		<td>3</td>
+																                  		<td class="simple-td boxWidth">
+																                  			<span>Position List</span>
+																                  			<input type="text" name="" class="td-input" value="Position List">
+																                  			<input type="text" name="" hidden="hidden" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>AG</span>
+																                  			<input type="text" name="" class="td-input" value="AG">
+																                  		</td>
+																                  		<td>
+																                  			<span>Clean/CPP</span>
+																                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+																                  		</td>
+																                  		<td>
+																                  			<span>ACE</span>
+																                  			<input type="text" name="" class="td-input" value="ACE">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>IMS</span>
+																                  			<input type="text" name="" class="td-input" value="IMS">
+																                  		</td>
+																                  		<td>
+																                  			<span>Unfixed</span>
+																                  			<input type="text" name="" class="td-input" value="Unfixed">
+																                  		</td>
+																                  		<td>
+																                  			<span>SOHAR</span>
+																                  			<input type="text" name="" class="td-input" value="SOHAR">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>LGO</span>
+																                  			<input type="text" name="" class="td-input" value="LGO">
+																                  		</td>
+																                  		<td>
+																                  			<span>Affinity</span>
+																                  			<input type="text" name="" class="td-input" value="Affinity">
+																                  		</td>
+																                  		<td>
+																                  			<span>#####</span>
+																                  			<input type="text" name="" class="td-input" value="#####">
+																                  		</td>
+																                  		<td>
+																                  			<a href="#email-client" class="email-link">Link</a>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr>
+																                  		<td>4</td>
+																                  		<td class="simple-td boxWidth">
+																                  			<span>Position List</span>
+																                  			<input type="text" name="" class="td-input" value="Position List">
+																                  			<input type="text" name="" hidden="hidden" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>AG</span>
+																                  			<input type="text" name="" class="td-input" value="AG">
+																                  		</td>
+																                  		<td>
+																                  			<span>Clean/CPP</span>
+																                  			<input type="text" name="" class="td-input" value="Clean/CPP">
+																                  		</td>
+																                  		<td>
+																                  			<span>ACE</span>
+																                  			<input type="text" name="" class="td-input" value="ACE">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span></span>
+																                  			<input type="text" name="" class="td-input" value="">
+																                  		</td>
+																                  		<td>
+																                  			<span>IMS</span>
+																                  			<input type="text" name="" class="td-input" value="IMS">
+																                  		</td>
+																                  		<td>
+																                  			<span>Unfixed</span>
+																                  			<input type="text" name="" class="td-input" value="Unfixed">
+																                  		</td>
+																                  		<td>
+																                  			<span>SOHAR</span>
+																                  			<input type="text" name="" class="td-input" value="SOHAR">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>30-jul-18</span>
+																                  			<input type="text" name="" class="td-input" value="30-jul-18">
+																                  		</td>
+																                  		<td>
+																                  			<span>LGO</span>
+																                  			<input type="text" name="" class="td-input" value="LGO">
+																                  		</td>
+																                  		<td>
+																                  			<span>Affinity</span>
+																                  			<input type="text" name="" class="td-input" value="Affinity">
+																                  		</td>
+																                  		<td>
+																                  			<span>#####</span>
+																                  			<input type="text" name="" class="td-input" value="#####">
+																                  		</td>
+																                  		<td>
+																                  			<a href="#email-client" class="email-link">Link</a>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr class="firstTr" style="display: none;">
+																                  		<td>4</td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	
+																                  	-->
+																                  	
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-sm-12">
+																			<br>
+																			<nav class="pull-right">
+																				<ul class="pagination">
+																					<li><a href="#" aria-label="Previous"> <span
+																							aria-hidden="true">&laquo;</span>
+																					</a></li>
+																					<li class="active"><a href="#">1</a></li>
+																					<li><a href="#">2</a></li>
+																					<li><a href="#">3</a></li>
+																					<li><a href="#" aria-label="Next"> <span
+																							aria-hidden="true">&raquo;</span>
+																					</a></li>
+																				</ul>
+																			</nav>
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
-											</div>
+												<div class="tab-pane" id="error-list-spot">
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="row">
+																<div class="col-sm-12">
+																	<h4 class="info-text">
+																		<button type="button"
+																			class="btn btn-success m-0 sm0-btn-custom pull-right"
+																			style="margin-right: 15px !important; padding: 2px 5px;">
+																			<i class="fa fa-save"></i>
+																		</button>
+				                                                        <a href="#" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px;"> <img src="images/excel_icon.png" width="25px"> </a>
+																	</h4>
+																</div>
+																<div class="col-sm-12">
+																	<div id="draggable">
+																		<div class="more-tr text-left col-md-1-width">
+																			<a
+																				class="btn add-new-tab-btn1 add-new-tab-btn1-new btn-success p-0 m-0 sm0-btn-custom add"><i
+																				class="fa fa-plus"></i></a> <a
+																				class="btn add-new-tab-btn2  btn-success p-0 m-0 sm0-btn-custom remove"><i
+																				class="fa fa-minus"></i></a>
+																		</div>
+																		<div class="draggable-table p-0">
+																			<table
+																				class="table table-bordered table-hover bg-light table-add-rules">
+																				<thead class="btn-info new-th">
+																					<tr>
+																						<th>SR No</th>
+																						<th>Information <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Fixture Type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Charterer <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Status <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Cargo Type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Cargo Grade <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Cargo Qty <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>LC Start <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>LC End <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Load Port <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Disc Port <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Vessel Name <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Rate Type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Rate <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Comments <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Report Date <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Source <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								
+																						<th>Vessel type <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Report Time Stamp<a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th>Check Email <a class="add-class"><i
+																								class="fa fa-minus" aria-hidden="true"></i></a></th>
+																						<th class="display-none"></th>
+																						<th>Actions</th>
+																					</tr>
+																				</thead>
+																				<tbody id="" style="direction:rtl;">
+																					  
+																                  	<tr>
+																                  		<td>1</td>
+																                  		<td>
+																                  			<span>Market</span>
+																                  			<input type="text" name="" class="td-input" value="Market">
+																                  		</td>
+																                  		<td>
+																                  			<span>Spot</span>
+																                  			<input type="text" name="" class="td-input" value="Spot">
+																                  		</td>
+																                  		<td>
+																                  			<span>BBNAFT</span>
+																                  			<input type="text" name="" class="td-input" value="BBNAFT">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>CPP/Clean</span>
+																                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+																                  		</td>
+																                  		<td>
+																                  			<span>Naptha</span>
+																                  			<input type="text" name="" class="td-input" value="Naptha">
+																                  		</td>
+																                  		<td>
+																                  			<span>30</span>
+																                  			<input type="text" name="" class="td-input" value="30">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/5/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/5/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/6/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/6/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>Riga</span>
+																                  			<input type="text" name="" class="td-input" value="Riga">
+																                  		</td>
+																                  		<td>
+																                  			<span>UKC</span>
+																                  			<input type="text" name="" class="td-input" value="UKC">
+																                  		</td>
+																                  		<td>
+																                  			<span>Hans Scholl</span>
+																                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+																                  		</td>
+																                  		<td>
+																                  			<span>WS</span>
+																                  			<input type="text" name="" class="td-input" value="WS">
+																                  		</td>
+																                  		<td>
+																                  			<span>125</span>
+																                  			<input type="text" name="" class="td-input" value="125">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/3/2018  10:30:00 PM</span>
+																                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+																                  		</td>
+																                  		<td>
+																                  			<span>Braemar</span>
+																                  			<input type="text" name="" class="td-input" value="Braemar">
+																                  		</td>
+																                  		<td>
+																                  			<span>This will be picked from Vessel Databse</span>
+																                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+																                  		</td>
+																                  		<td>
+																                  			<span>Link</span>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr>
+																                  		<td>2</td>
+																                  		<td>
+																                  			<span>Market</span>
+																                  			<input type="text" name="" class="td-input" value="Market">
+																                  		</td>
+																                  		<td>
+																                  			<span>Spot</span>
+																                  			<input type="text" name="" class="td-input" value="Spot">
+																                  		</td>
+																                  		<td>
+																                  			<span>BBNAFT</span>
+																                  			<input type="text" name="" class="td-input" value="BBNAFT">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>CPP/Clean</span>
+																                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+																                  		</td>
+																                  		<td>
+																                  			<span>Naptha</span>
+																                  			<input type="text" name="" class="td-input" value="Naptha">
+																                  		</td>
+																                  		<td>
+																                  			<span>30</span>
+																                  			<input type="text" name="" class="td-input" value="30">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/5/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/5/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/6/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/6/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>Riga</span>
+																                  			<input type="text" name="" class="td-input" value="Riga">
+																                  		</td>
+																                  		<td>
+																                  			<span>UKC</span>
+																                  			<input type="text" name="" class="td-input" value="UKC">
+																                  		</td>
+																                  		<td>
+																                  			<span>Hans Scholl</span>
+																                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+																                  		</td>
+																                  		<td>
+																                  			<span>WS</span>
+																                  			<input type="text" name="" class="td-input" value="WS">
+																                  		</td>
+																                  		<td>
+																                  			<span>125</span>
+																                  			<input type="text" name="" class="td-input" value="125">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/3/2018  10:30:00 PM</span>
+																                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+																                  		</td>
+																                  		<td>
+																                  			<span>Braemar</span>
+																                  			<input type="text" name="" class="td-input" value="Braemar">
+																                  		</td>
+																                  		<td>
+																                  			<span>This will be picked from Vessel Databse</span>
+																                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+																                  		</td>
+																                  		<td>
+																                  			<span>Link</span>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr>
+																                  		<td>3</td>
+																                  		<td>
+																                  			<span>Market</span>
+																                  			<input type="text" name="" class="td-input" value="Market">
+																                  		</td>
+																                  		<td>
+																                  			<span>Spot</span>
+																                  			<input type="text" name="" class="td-input" value="Spot">
+																                  		</td>
+																                  		<td>
+																                  			<span>BBNAFT</span>
+																                  			<input type="text" name="" class="td-input" value="BBNAFT">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>CPP/Clean</span>
+																                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+																                  		</td>
+																                  		<td>
+																                  			<span>Naptha</span>
+																                  			<input type="text" name="" class="td-input" value="Naptha">
+																                  		</td>
+																                  		<td>
+																                  			<span>30</span>
+																                  			<input type="text" name="" class="td-input" value="30">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/5/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/5/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/6/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/6/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>Riga</span>
+																                  			<input type="text" name="" class="td-input" value="Riga">
+																                  		</td>
+																                  		<td>
+																                  			<span>UKC</span>
+																                  			<input type="text" name="" class="td-input" value="UKC">
+																                  		</td>
+																                  		<td>
+																                  			<span>Hans Scholl</span>
+																                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+																                  		</td>
+																                  		<td>
+																                  			<span>WS</span>
+																                  			<input type="text" name="" class="td-input" value="WS">
+																                  		</td>
+																                  		<td>
+																                  			<span>125</span>
+																                  			<input type="text" name="" class="td-input" value="125">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/3/2018  10:30:00 PM</span>
+																                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+																                  		</td>
+																                  		<td>
+																                  			<span>Braemar</span>
+																                  			<input type="text" name="" class="td-input" value="Braemar">
+																                  		</td>
+																                  		<td>
+																                  			<span>This will be picked from Vessel Databse</span>
+																                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+																                  		</td>
+																                  		<td>
+																                  			<span>Link</span>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr>
+																                  		<td>4</td>
+																                  		<td>
+																                  			<span>Market</span>
+																                  			<input type="text" name="" class="td-input" value="Market">
+																                  		</td>
+																                  		<td>
+																                  			<span>Spot</span>
+																                  			<input type="text" name="" class="td-input" value="Spot">
+																                  		</td>
+																                  		<td>
+																                  			<span>BBNAFT</span>
+																                  			<input type="text" name="" class="td-input" value="BBNAFT">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>CPP/Clean</span>
+																                  			<input type="text" name="" class="td-input" value="CPP/Clean">
+																                  		</td>
+																                  		<td>
+																                  			<span>Naptha</span>
+																                  			<input type="text" name="" class="td-input" value="Naptha">
+																                  		</td>
+																                  		<td>
+																                  			<span>30</span>
+																                  			<input type="text" name="" class="td-input" value="30">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/5/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/5/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/6/2018</span>
+																                  			<input type="text" name="" class="td-input" value="8/6/2018">
+																                  		</td>
+																                  		<td>
+																                  			<span>Riga</span>
+																                  			<input type="text" name="" class="td-input" value="Riga">
+																                  		</td>
+																                  		<td>
+																                  			<span>UKC</span>
+																                  			<input type="text" name="" class="td-input" value="UKC">
+																                  		</td>
+																                  		<td>
+																                  			<span>Hans Scholl</span>
+																                  			<input type="text" name="" class="td-input" value="Hans Scholl">
+																                  		</td>
+																                  		<td>
+																                  			<span>WS</span>
+																                  			<input type="text" name="" class="td-input" value="WS">
+																                  		</td>
+																                  		<td>
+																                  			<span>125</span>
+																                  			<input type="text" name="" class="td-input" value="125">
+																                  		</td>
+																                  		<td>
+																                  			<span>Subs</span>
+																                  			<input type="text" name="" class="td-input" value="Subs">
+																                  		</td>
+																                  		<td>
+																                  			<span>8/3/2018  10:30:00 PM</span>
+																                  			<input type="text" name="" class="td-input" value="8/3/2018  10:30:00 PM">
+																                  		</td>
+																                  		<td>
+																                  			<span>Braemar</span>
+																                  			<input type="text" name="" class="td-input" value="Braemar">
+																                  		</td>
+																                  		<td>
+																                  			<span>This will be picked from Vessel Databse</span>
+																                  			<input type="text" name="" class="td-input" value="This will be picked from Vessel Databse">
+																                  		</td>
+																                  		<td>
+																                  			<span>Link</span>
+																                  			<input type="text" name="" class="td-input" value="Link">
+																                  		</td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																                  		</td>
+																                  	</tr>
+																                  	<tr  class="firstTr" style="display: none;">
+																                  		<td>4</td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																                  		<td class="display-none"></td>
+																                  		<td>
+																                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a href="#">
+																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a href="#">
+																                  		</td>
+																                  	</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-sm-12">
+																			<br>
+																			<nav class="pull-right">
+																				<ul class="pagination">
+																					<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+																					</a></li>
+																					<li class="active"><a href="#">1</a></li>
+																					<li><a href="#">2</a></li>
+																					<li><a href="#">3</a></li>
+																					<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+																					</a></li>
+																				</ul>
+																			</nav>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="tab-pane" id="error-list-tcreport">
+													<div class="row">
+														<div class="col-sm-12">
+															<ul class="nav-tabs-custom" role="tablist">
+																<li class="active"><a href="#error-list-time-charter-report"
+																	style="text-decoration: none;" role="tab" data-toggle="tab">Time
+																		Charter Report</a></li>
+																<li><a href="#error-list-brokertc-rate" role="tab"
+																	style="text-decoration: none;" data-toggle="tab">Broker
+																		TC Rate</a></li>
+															</ul>
+															<div class="tab-content tab-content-second">
+																<div class="tab-pane active" id="error-list-time-charter-report">
+																	<div class="col-sm-12">
+																		<h4 class="info-text">
+																			<button type="button"
+																				class="btn btn-success m-0 sm0-btn-custom pull-right"
+																				style="margin-right: 15px !important; padding: 2px 5px;">
+																				<i class="fa fa-save"></i>
+																			</button>
+				                                                           <a href="#" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px;"> <img src="images/excel_icon.png" width="25px"> </a>
+																		</h4>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="tab-pane active">
+																			<div class="row" id="draggable">
+																				<div class="more-tr-first-add col-md-1-width">
+																					<a
+																						class="btn add-new-tab-btn1 btn-success p-0 m-0 pull-left sm0-btn-custom add-first-new"><i
+																						class="fa fa-plus"></i></a> &nbsp; <a
+																						class="btn add-new-tab-btn2 btn-success p-0 m-0 ull-right sm0-btn-custom remove-first-new"><i
+																						class="fa fa-minus"></i></a>
+																				</div>
+																				<div class="draggable-table p-0">
+																					<table
+																						class="table-bordered table-hover bg-light table-add-rules">
+																						<thead class="btn-info new-th">
+																							<tr>
+																								<th>SR No</th>
+																								<th>Information <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Spot / TC <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Date <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Vessel Name <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>CPP/DPP <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Charterer <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Delivery <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Delivery Place <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Period <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Period unit <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Redelivery <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>TC Rate <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Rate <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Unit <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Comments <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Source <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Vessel Type <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Time Stamp <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Check Email <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th class="display-none"></th>
+																								<th>Actions</th>
+																							</tr>
+																						</thead>
+																						<tbody id="" style="direction:rtl;">
+																							  
+																		                  	<tr>
+																		                  		<td>1</td>
+																		                  		<td>
+																		                  			<span>Market</span>
+																		                  			<input type="text" name="" class="td-input" value="Market">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>TC</span>
+																		                  			<input type="text" name="" class="td-input" value="TC">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>7/27/2018</span>
+																		                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>C. Spirit</span>
+																		                  			<input type="text" name="" class="td-input" value="C. Spirit">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Dirty/DPP</span>
+																		                  			<input type="text" name="" class="td-input" value="Dirty/DPP">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Reliance</span>
+																		                  			<input type="text" name="" class="td-input" value="Reliance">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Q3</span>
+																		                  			<input type="text" name="" class="td-input" value="Q3">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>India</span>
+																		                  			<input type="text" name="" class="td-input" value="India">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>12+12</span>
+																		                  			<input type="text" name="" class="td-input" value="12+12">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>months</span>
+																		                  			<input type="text" name="" class="td-input" value="months">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>7/1/2019</span>
+																		                  			<input type="text" name="" class="td-input" value="7/1/2019">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>RNR</span>
+																		                  			<input type="text" name="" class="td-input" value="RNR">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>RNR</span>
+																		                  			<input type="text" name="" class="td-input" value="RNR">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>USD</span>
+																		                  			<input type="text" name="" class="td-input" value="USD">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>DTY Del India</span>
+																		                  			<input type="text" name="" class="td-input" value="DTY Del India">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Braemar</span>
+																		                  			<input type="text" name="" class="td-input" value="Braemar">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>from Vessel Database</span>
+																		                  			<input type="text" name="" class="td-input" value="from Vessel Database">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>7/27/2018</span>
+																		                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Link</span>
+																		                  			<input type="text" name="" class="td-input" value="Link">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td class="display-none"></td>
+																		                  		<td>
+																		                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																		                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																		                  		</td>
+																		                  	</tr>
+																		                  	<tr>
+																		                  		<td>2</td>
+																		                  		<td>
+																		                  			<span>Market</span>
+																		                  			<input type="text" name="" class="td-input" value="Market">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>TC</span>
+																		                  			<input type="text" name="" class="td-input" value="TC">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>7/27/2018</span>
+																		                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>C. Spirit</span>
+																		                  			<input type="text" name="" class="td-input" value="C. Spirit">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Dirty/DPP</span>
+																		                  			<input type="text" name="" class="td-input" value="Dirty/DPP">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Reliance</span>
+																		                  			<input type="text" name="" class="td-input" value="Reliance">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Q3</span>
+																		                  			<input type="text" name="" class="td-input" value="Q3">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>India</span>
+																		                  			<input type="text" name="" class="td-input" value="India">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>12+12</span>
+																		                  			<input type="text" name="" class="td-input" value="12+12">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>months</span>
+																		                  			<input type="text" name="" class="td-input" value="months">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>7/1/2019</span>
+																		                  			<input type="text" name="" class="td-input" value="7/1/2019">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>RNR</span>
+																		                  			<input type="text" name="" class="td-input" value="RNR">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>RNR</span>
+																		                  			<input type="text" name="" class="td-input" value="RNR">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>USD</span>
+																		                  			<input type="text" name="" class="td-input" value="USD">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>DTY Del India</span>
+																		                  			<input type="text" name="" class="td-input" value="DTY Del India">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Braemar</span>
+																		                  			<input type="text" name="" class="td-input" value="Braemar">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>from Vessel Database</span>
+																		                  			<input type="text" name="" class="td-input" value="from Vessel Database">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>7/27/2018</span>
+																		                  			<input type="text" name="" class="td-input" value="7/27/2018">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Link</span>
+																		                  			<input type="text" name="" class="td-input" value="Link">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td class="display-none"></td>
+																		                  		<td>
+																		                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																		                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																		                  		</td>
+																		                  	</tr>
+																		                  	<tr class="firstTr" style="display: none;">
+																		                  		<td>2</td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="display-none"></td>
+																		                  		<td>
+																		                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																		                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																		                  		</td>
+																	                  		</tr>
+																						</tbody>
+																					</table>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-sm-12">
+																					<br>
+																					<nav class="pull-right">
+																						<ul class="pagination">
+																							<li><a href="#" aria-label="Previous"> <span
+																									aria-hidden="true">&laquo;</span>
+																							</a></li>
+																							<li class="active"><a href="#">1</a></li>
+																							<li><a href="#">2</a></li>
+																							<li><a href="#" aria-label="Next"> <span
+																									aria-hidden="true">&raquo;</span>
+																							</a></li>
+																						</ul>
+																					</nav>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="tab-pane" id="error-list-brokertc-rate">
+																	<div class="col-sm-12">
+																		<h4 class="info-text">
+																			<button type="button"
+																				class="btn btn-success m-0 sm0-btn-custom pull-right"
+																				style="margin-right: 15px !important; padding: 2px 5px;">
+																				<i class="fa fa-save"></i>
+																			</button>
+				                                                            <a href="#" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px;"> <img src="images/excel_icon.png" width="25px"> </a>
+																		</h4>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="tab-pane-new active">
+																			<div class="row" id="draggable">
+																				<div class="more-tr-add col-md-1-width">
+																					<a
+																						class="btn btn-success p-0 m-0 add-new-tab-btn1 sm0-btn-custom add-new"><i
+																						class="fa fa-plus"></i></a> <a
+																						class="btn btn-success p-0 m-0 add-new-tab-btn2 sm0-btn-custom remove-new"><i
+																						class="fa fa-minus"></i></a>
+																				</div>
+																				<div class="draggable-table p-0">
+																					<table
+																						class="table table-bordered table-hover bg-light table-add-rules">
+																						<thead class="btn-info new-th">
+																							<tr>
+																								<th>SR No</th>
+																								<th>Broker <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Vessel Type <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Month-Year <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>1 yr <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>2 yr <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>3 yr <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>5 yr <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th>Check Email <a class="add-class"><i
+																										class="fa fa-minus" aria-hidden="true"></i></a></th>
+																								<th class="display-none"></th>
+																								<th>Actions</th>
+																							</tr>
+																						</thead>
+																						<tbody id="" style="direction:rtl;">
+																							
+																		                  	<tr>
+																		                  		<td>1</td>
+																		                  		<td>
+																		                  			<span>Braemar</span>
+																		                  			<input type="text" name="" class="td-input" value="Braemar">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Handymax</span>
+																		                  			<input type="text" name="" class="td-input" value="Handymax">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>jan-18</span>
+																		                  			<input type="text" name="" class="td-input" value="jan-18">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>12000</span>
+																		                  			<input type="text" name="" class="td-input" value="12000">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>13250</span>
+																		                  			<input type="text" name="" class="td-input" value="13250">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>14000</span>
+																		                  			<input type="text" name="" class="td-input" value="14000">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>-</span>
+																		                  			<input type="text" name="" class="td-input" value="-">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Link</span>
+																		                  			<input type="text" name="" class="td-input" value="Link">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td class="display-none"></td>
+																		                  		<td>
+																		                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																		                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																		                  		</td>
+																		                  	</tr>
+																		                  	<tr>
+																		                  		<td>2</td>
+																		                  		<td>
+																		                  			<span>Braemar</span>
+																		                  			<input type="text" name="" class="td-input" value="Braemar">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Handymax</span>
+																		                  			<input type="text" name="" class="td-input" value="Handymax">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>jan-18</span>
+																		                  			<input type="text" name="" class="td-input" value="jan-18">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>12000</span>
+																		                  			<input type="text" name="" class="td-input" value="12000">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>13250</span>
+																		                  			<input type="text" name="" class="td-input" value="13250">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>14000</span>
+																		                  			<input type="text" name="" class="td-input" value="14000">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>13500</span>
+																		                  			<input type="text" name="" class="td-input" value="13500">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td>
+																		                  			<span>Link</span>
+																		                  			<input type="text" name="" class="td-input" value="Link">
+																									<input type="text" name="" hidden="hidden" value="">
+																		                  		</td>
+																		                  		<td class="display-none"></td>
+																		                  		<td>
+																		                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																		                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																		                  		</td>
+																		                  	</tr>
+																		                  	<tr class="firstTr" style="display: none;">
+																		                  		<td>2</td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+																		                  		<td class="display-none"></td>
+																		                  		<td>
+																		                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																		                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+																		                  		</td>
+																	                  		</tr>
+																						</tbody>
+																					</table>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-sm-12">
+																					<br>
+																					<nav class="pull-right">
+																						<ul class="pagination">
+																							<li><a href="#" aria-label="Previous"> <span
+																									aria-hidden="true">&laquo;</span>
+																							</a></li>
+																							<li class="active"><a href="#">1</a></li>
+																							<li><a href="#">2</a></li>
+																							<li><a href="#" aria-label="Next"> <span
+																									aria-hidden="true">&raquo;</span>
+																							</a></li>
+																						</ul>
+																					</nav>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>	
 										</div>
 									</div>
 								</div>
@@ -1880,6 +3296,134 @@ li.disable {
 										</div>
 									</div>
 								</div>
+								<div class="tab-pane" id="status">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 class="info-text">
+														<button type="button"
+															class="btn btn-success m-0 sm0-btn-custom pull-right"
+															style="margin-right: 15px !important; padding: 2px 5px;">
+															<i class="fa fa-save"></i>
+														</button>
+
+													 <a href="#" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px;"> <img src="images/excel_icon.png" width="25px"> </a>
+													</h4>
+												</div>
+												<div class="col-sm-12">
+													<div id="draggable">
+														<div class="more-tr text-left col-md-1-width">
+															<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i
+																class="fa fa-plus"></i></a> <a
+																class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i
+																class="fa fa-minus"></i></a>
+														</div>
+														<div class="draggable-table p-0">
+															<table
+																class="table-bordered table-hover bg-light table-add-rules find-table">
+																<thead class="btn-info">
+																	<tr>
+																		<th style="width:160px !important;">Last Process Time</th>
+																		<th>Date and Time</th>
+																		<th>Subject <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Attachment <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Nlp1 <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Nlp2 <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Nlp 3 & 4 QC <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Ui Update <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th class="display-none"></th>
+																		<th>Actions</th>
+																	</tr>
+																</thead>
+																<tbody id="statusUiProcess" style="direction:rtl;">
+																
+																<!-- 
+												                  	<tr>
+												                  		<td style="width:160px !important;"></td>
+												                  		<td>4/5/2019 9:59:38</td>
+												                  		<td>
+												                  			<span>LINK</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>YES</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span> NO</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>YES</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>NO</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>YES</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr> -->
+												                  	
+												                  	<!-- here is cronStatus start -->
+												                  	<tr class="firstTr" style="display: none;">
+												                  		<td></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<!-- here is cronStatus end-->
+												                  	
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12">
+															<br>
+															<nav class="pull-right">
+																<ul class="pagination">
+																	<li><a href="#" aria-label="Previous"> <span
+																			aria-hidden="true">&laquo;</span>
+																	</a></li>
+																	<li class="active"><a href="#">1</a></li>
+																	<li><a href="#">2</a></li>
+																	<li><a href="#">3</a></li>
+																	<li><a href="#" aria-label="Next"> <span
+																			aria-hidden="true">&raquo;</span>
+																	</a></li>
+																</ul>
+															</nav>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -1896,8 +3440,12 @@ li.disable {
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/jquery-ui-1.12.1.js"></script>
 	<script src="js/custom.js"></script>
+	
+	<script type="text/javascript" src="NewJS/ErrorJs.js"></script> 
+	<script type="text/javascript" src="NewJS/StatusUiDataProcessed.js"></script> 
+	
 	<script type="text/javascript">
-			
+	
 		$(document).ready(
 			function() {
 				var height = $(window).height();
@@ -1923,10 +3471,10 @@ li.disable {
 			});
 	</script>
 	<script type="text/javascript">
-      $(document).bind("contextmenu",function(e) {
-    	  e.preventDefault();
-    	 });
-      </script>
+$(document).bind("contextmenu",function(e) {
+e.preventDefault();
+});
+</script>
 
 	<script>
 		$(document).ready(function() {
@@ -1956,7 +3504,8 @@ li.disable {
 
 			}); // submint ajax  
 			
-		
+			TonnageErrorUifetchdataChanged();
+			statusUiFetchProcessed();
 
 		}); // main document ready close
 		

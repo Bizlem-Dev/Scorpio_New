@@ -989,9 +989,7 @@ public class ChangedApiWithoutMultipleArray {
 					if(GmailMethods.isNullString(LCStart)){
 						LCStart=LCEnd;
 					}
-					if(GmailMethods.isNullString(LCStart)){
-						LCStart=LCEnd;
-					}
+					
 					
 					if (nextnode.hasProperty("LoadPort")) {
 						String LoadPortData = nextnode.getProperty("LoadPort").getString();

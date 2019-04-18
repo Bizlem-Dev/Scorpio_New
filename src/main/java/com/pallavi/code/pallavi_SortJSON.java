@@ -490,7 +490,7 @@ public class pallavi_SortJSON {
 				String solrmatch, String key) throws UnsupportedEncodingException {
 
 			int responseCode = 0;
-			String MethodName="";
+			String MethodName="Blank";
 			StringBuffer response = new StringBuffer();
        	String data="JSONHEADER_str:\""+jsonheader+"\" AND SYNONYMS_str:\""+synonyms+"\" AND REGAXMATCH_str:\""+regexmatch+"\" AND SOLRMATCH_str:\""+solrmatch+"\"";
        //	System.out.println("data "+data);
@@ -502,7 +502,7 @@ public class pallavi_SortJSON {
 				//	 param = URLEncoder.encode(param, "UTF-8");
                  String url1="http://35.188.227.168:8983/solr/RegexMatch/select?fl=*,score&q="+data;
 				URL url = new URL(url1);
-				//System.out.println("url ****  "+url1);
+				System.out.println("url ****  "+url1);
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();
 				con.setRequestMethod("GET");
 				con.setRequestProperty("Content-Type", "application/json");
@@ -529,7 +529,7 @@ public class pallavi_SortJSON {
 		        JSONObject subdocs=docs.getJSONObject(i);
 		        double score=subdocs.getDouble("score");
 		        if(score==maxscore) {
-		        	System.out.println("maxscore "+maxscore+" score   "+score);
+		        	//System.out.println("maxscore "+maxscore+" score   "+score);
 		      	   MethodName=subdocs.getJSONArray(key).getString(0);
 		        }
 		        }

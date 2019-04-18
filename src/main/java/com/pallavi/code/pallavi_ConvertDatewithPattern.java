@@ -3,7 +3,9 @@ package com.pallavi.code;
 
 import java.util.Calendar;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;  
+import java.util.regex.Pattern;
+
+import org.apache.commons.collections4.functors.CatchAndRethrowClosure;  
 
 public class pallavi_ConvertDatewithPattern {	
 	int day = 0;
@@ -48,10 +50,36 @@ public class pallavi_ConvertDatewithPattern {
 			retDate= isContainDot(date, pattern);
 		}else if (pattern.contains("-")) {
 			retDate= isContainDash(date, pattern);
+		}else if (pattern.equalsIgnoreCase("DDMMM")) {
+			retDate= isParsePattern(date, pattern);
 		}
 		return retDate;
 	}
 
+	private String isParsePattern(String date, String pattern) {
+			try {
+		   String MMM=date.substring(date.length()-3);
+			String DD= date.replace(MMM, "");
+			day=Integer.parseInt(DD);
+			System.out.println("DD "+DD+" MMM "+MMM);
+			String newStr= isAlphaNumeric(DD);
+			//System.out.println("newStr: "+newStr);
+			day= Integer.parseInt(newStr);
+			
+				for(int j=0; j<mon.length; j++) {
+				if(mon[j].equalsIgnoreCase(MMM)) {
+				month= j+1;
+				}else if(mnth[j].equalsIgnoreCase(MMM)) {
+				month= j+1;
+				}
+				}
+				
+				if(year==0) {
+				year= Calendar.getInstance().get(Calendar.YEAR);
+				}
+	}catch(Exception e) {e.printStackTrace();}
+				return day+"/"+month+"/"+year;
+	}
 	private String isContainDashnSpace(String date, String pattern) {
 		int day1=0;
 		int day2=0;
@@ -117,8 +145,11 @@ public class pallavi_ConvertDatewithPattern {
 
 	public String isContainSpace(String date, String pattern) {
 
-		String strPat[] = pattern.split(" ");
-		String strDate[]= date.split(" ");
+		
+		
+		
+			String strPat[] = pattern.split(" ");
+			String strDate[]= date.split(" ");
 
 		for(int i=0; i<strPat.length; i++) {
 			System.out.println(strDate[i]);

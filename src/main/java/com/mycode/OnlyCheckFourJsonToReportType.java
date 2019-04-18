@@ -1,137 +1,60 @@
 package com.mycode;
 
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.apache.sling.commons.json.JSONArray;
+import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 
 import com.reportinformationsystem.SaveReportDataClass;
 
 public class OnlyCheckFourJsonToReportType {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JSONException {
 
-	}
+		String d="{\r\n" + 
+				"\"ETABasis\":\"Apr 09\",\r\n" + 
+				"\"objheader\":[\r\n" + 
+				"{\r\n" + 
+				"\"RepositionRegion\":\"Med\",\r\n" + 
+				"\"ReportType\":\"Tonnage\",\r\n" + 
+				"\"CargoType\":\"\"\r\n" + 
+				"}\r\n" + 
+				"],\r\n" + 
+				"\"VesselName\":\"Seaways Hellas\",\r\n" + 
+				"\"DWT\":\"69\",\r\n" + 
+				"\"Built\":\"03\",\r\n" + 
+				"\"OpenPort\":\"Antwerp\",\r\n" + 
+				"\"OpenDate\":\"Apr 09\",\r\n" + 
+				"\"Comments\":\"poss\",\r\n" + 
+				"\"Owners\":\"Capetank\",\r\n" + 
+				"\"ReportType\":\"Tonnage\"\r\n" + 
+				"}";
+		
+		JSONObject f=new JSONObject(d);
+		JSONObject jsonObjReturn=fetchOjectHeaderFromTable(f);
+		System.out.println(jsonObjReturn);
 	
-	public static String data(HashMap<String, String> g, int headerCount){
-		 String reporttype="";
+	}
+	public static JSONObject fetchOjectHeaderFromTable(JSONObject allReportJsonArrayInsideJSonobject){
+		JSONObject f=null;
 		try {
-			
-			 if(g!=null && !g.isEmpty() && g.size()>0){
-    			 
-    				boolean vesselHas=false;
-    				boolean LCStartHas=false;
-    				boolean LoadPortHas=false;
-    				boolean RateHas=false;
-    				boolean DateHas=false;
-    				boolean PortHas=false;
-    				boolean LCEndHas=false;
-    				boolean DiscPortHas=false;
-    				
-    				boolean OpenDatePoss=false;
-    				boolean OpenPortPoss=false;
-    				boolean ETABasisPoss=false;
-    				boolean ChartererPoss=false;
-    			 
-    		 for (Map.Entry<String, String> entry : g.entrySet())
-			  {
-    				
-    				if(g.containsValue("VesselName")){
-    					
-    					 vesselHas=true;
-    				}if(g.containsValue("LCStart")){
-    					
-    					LCStartHas=true;
-    				}if(g.containsValue("LoadPort")){
-    					
-    					LoadPortHas=true;
-    				}if(g.containsValue("Rate")){
-    					
-    					RateHas=true;
-    				}if(g.containsValue("Date")){
-    					
-    					DateHas=true;
-    				}if(g.containsValue("Port")){
-    					
-    					PortHas=true;
-    				}if(g.containsValue("LCEnd")){
-    					
-    					LCEndHas=true;
-    				}if(g.containsValue("DiscPort")){
-    					
-    					DiscPortHas=true;
-    				}if(g.containsValue("OpenDate")){
-    					
-    					OpenDatePoss=true;
-    				}if(g.containsValue("OpenPort")){
-    					
-    					OpenPortPoss=true;
-    				}if(g.containsValue("ETABasis")){
-    					
-    					ETABasisPoss=true;
-    				}if(g.containsValue("Charterer")){
-    					
-    					ChartererPoss=true;
-    				}
-    				 if(headerCount<=4){
-    						break;
-    					}
-    			
-			  } // map for loop close
-    		 
-    		 JSONObject countAll=ReportTypeIdentify.countRateAndPortAndDate(g);
-    		 System.out.println(":: "+countAll);
-    		 
-    		 int dateCount=0;
-    			int portCount=0;
-    			int rateCount=0;
-    			
-    			 if(countAll!=null){
-    				 if(countAll.has("Date")){
-    					 dateCount= countAll.getInt("Date");
-    				 }if(countAll.has("Port")){
-    					 portCount=countAll.getInt("Port");
-    				 }if(countAll.has("Rate")){
-    					 rateCount=countAll.getInt("Rate");
-    				 }
-    				
-    			 }
-    			// dateGreaterLesser(g, dataJSonObj);
-    			
-    			 if( vesselHas && dateCount>=1 && portCount>=1 && rateCount>=1){
-    				  reporttype="Spot";
-    			 }
-
-    			 else if( vesselHas && LCStartHas && LoadPortHas && RateHas ){
-    				 reporttype="Spot";
-    				 
-    			 }else if(vesselHas && LCEndHas && DiscPortHas && RateHas){
-    				 reporttype="Spot";
-    			 }// spot 
-    			 else {
-    				 
-    				 if(vesselHas && dateCount>=1 && portCount>=1){
-    					 reporttype="Tonnage";
-    					 
-    				 }else if( vesselHas && OpenDatePoss && OpenPortPoss ){
-    					 reporttype="Tonnage";
-    				 }else if( vesselHas && OpenDatePoss && OpenPortPoss && ETABasisPoss ){
-    					 reporttype="Tonnage";
-    				 }
-    				 
-    			 } // tonnage
-				
-    			
-    		 }// check null map
-			
+				if(allReportJsonArrayInsideJSonobject.has("objheader")){
+				   JSONArray objheader=allReportJsonArrayInsideJSonobject.getJSONArray("objheader");
+										
+					for(int j=0;j<objheader.length();j++) {
+						 f=objheader.getJSONObject(j);
+						 
+			}
+		  }
+								
+							
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return reporttype;
+		return f;
 	}
 	
 	public static String checkHeaderDataAndSubjectData( JSONObject tabledataJsonObj , JSONObject headerJSonObj, JSONObject dataJSonObj){

@@ -15,7 +15,7 @@ public class SaveMailCount {
 			Node Datewise=null;
 			Node saveMailCount=null;
 			Node ReportData=null;
-			Node subNode=null;
+//			Node subNode=null;
 			
 			if(session.getRootNode().hasNode("scorpioDataBase")){
 				scorpio = session.getRootNode().getNode("scorpioDataBase");
@@ -45,15 +45,22 @@ public class SaveMailCount {
 				Datewise=saveMailCount.getNode(dateWiseCheck);
 			}else{
 				Datewise=saveMailCount.addNode(dateWiseCheck);
-				Datewise.setProperty("jcr:count", String.valueOf(0));
+				Datewise.setProperty("GmaiReadMailCount", String.valueOf(0));
+//				Datewise.setProperty("jcr:count", String.valueOf(0));
 				// session.refresh(true);
 				 session.save();
 			}
 			
-			 String count=Datewise.getProperty("jcr:count").getString();
-			 String forid= String.valueOf(Integer.parseInt(count)+1);
+			if(Datewise.hasProperty("GmaiReadMailCount")){
+//				 String count=Datewise.getProperty("jcr:count").getString();
+				 String count=Datewise.getProperty("GmaiReadMailCount").getString();
+				 Datewise.setProperty("GmaiReadMailCount",String.valueOf(Integer.parseInt(count)+1));
+//				 String forid= String.valueOf(Integer.parseInt(count)+1);
+				 session.save();
+			}
+			
 			 
-			 if(!Datewise.hasNode(forid)){
+			 /*if(!Datewise.hasNode(forid)){
 				 subNode=Datewise.addNode(forid);
 				 
 				 subNode.setProperty("Count", forid);
@@ -64,11 +71,11 @@ public class SaveMailCount {
 				 Datewise.setProperty("jcr:count",String.valueOf(Integer.parseInt(count)+1));
 				// session.refresh(true);
 				 session.save();
-			 }
+			 }*/
 			 
 			
 		} catch (Exception e) {
-			out.println(e.getMessage());
+			out.println("savemailmehod:: "+e.getMessage());
 		}
 	}
 	

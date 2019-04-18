@@ -18,6 +18,7 @@ import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
 import javax.mail.search.AndTerm;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.FlagTerm;
@@ -32,6 +33,8 @@ import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
 import com.abhishek.UnseenMailReadProcess;
+import com.mongocode.GmailReadSaveInMongoDb;
+import com.mongocode.MongoDbConnection;
 import com.processcountMail.SaveMailCount;
 import com.readGmail.CreateNodeFrmDirectory_Save_Attachment_text_xml_in_Sling;
 import com.readGmail.ExcelReadMethods;
@@ -81,7 +84,7 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		if (request.getRequestPathInfo().getExtension().equals("data")) {
-
+			Message message=null;
 			try {
 
 				session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
@@ -116,13 +119,15 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 				
 					Message[] arrayMessages = folder.search(searchTerm); // search
 					out.println("arrayMessages  :: " + arrayMessages.length);
+					String formatedDate1=null;
 
 					for (int i = 0; i < arrayMessages.length; i++) { // this
 						// will
 						// print
+						//Message message=null;
 						try { // all
 								// message
-							Message message = arrayMessages[i];
+							 message = arrayMessages[i];
 							// out.println(message.getReceivedDate());
 							
 
@@ -133,8 +138,8 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 								Date date1 = GmailMethods.parseDate(recDate);
 								mailReceivedDate = GmailMethods.formatDate(date1);
 							}*/
-							System.out.println("UnreadMailFound:: "+recDate+" "+i);
-							System.out.println("Subject:: "+message.getSubject());
+							out.println("UnreadMailFound:: "+recDate+" "+i);
+							out.println("Subject:: "+message.getSubject());
 							//out.println("UnreadMailFound:: "+recDate+" "+i);
 							
 							//boolean schedulerReadMail=FifteenMinuteClass.returnTimeRange(recDate);
@@ -177,7 +182,7 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 							DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
 							Date date3 = (Date) formatter.parse(sentDate);
 							String formatedDate=null;
-							String formatedDate1=null;
+//							String formatedDate1=null;
 
 							if (date3 != null) {
 								out.println("date3: " + date3);
@@ -293,13 +298,21 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 									}
 									Node returnNodeForSameTextAttachment = GmailReadMailChanged.createTextNode_Save_txt_sling(out,
 											subject_replace_node_mainnode, subject_replace, bodyText, mainnodeCount,
-											Bodycheckmsg, sentDate, session, from, formatedDate,formatedDate1, bodyCheck);
+											Bodycheckmsg, sentDate, session, from, formatedDate,formatedDate1, bodyCheck, message);
 									out.println("else returnNodeForSameTextAttachment: " + returnNodeForSameTextAttachment);
 
 									GmailReadMailChanged.AttachmentSaveData(out, contentType, message, returnNodeForSameTextAttachment,
 											subject_replace, session);
 									
-									SaveMailCount.saveMailCount(out, session, formatedDate1, subject_replace_node_mainnode.getName(), formatedDate, subject_replace_node_mainnode.getPath());
+									//...................................... mongosubject readmail flag1 here
+									if( !GmailMethods.isNullString(formatedDate1) ){
+										int AttachmentLength=GmailReadSaveInMongoDb.attachmentCount(contentType, message);
+										GmailReadSaveInMongoDb.GmailReadMongo("ReadMail", message.getSentDate().toString(), message.getSubject(), message.getSentDate(), "1", AttachmentLength);
+									}
+									
+									//........................................ end mongo
+									
+									//SaveMailCount.saveMailCount(out, session, formatedDate1, subject_replace_node_mainnode.getName(), formatedDate, subject_replace_node_mainnode.getPath());
 									//original mails
 									
 									//session.save();
@@ -316,13 +329,32 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 							 
 
 							
-							  }catch(Exception e){ continue; }
+							  }catch(Exception e){ 
+								  MongoDbConnection MDC=new MongoDbConnection();
+								  MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject(), out);
+								  
+								  continue;
+								  
+							  }
 							 
 					} // for close
+					if( !GmailMethods.isNullString(formatedDate1) ){
+						MongoDbConnection.saveGmailReadCount("GmailReadCountDataBase", formatedDate1, String.valueOf(arrayMessages.length));
+					}
+					
+					
+					
 
 			} catch (Exception e) {
-				//e.printStackTrace(out);
-				// out.println(e.getMessage());
+				MongoDbConnection MDC=new MongoDbConnection();
+				  try {
+					MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , out);
+				} catch (MessagingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+//				  e.printStackTrace(out);
+				  out.print("mainException"+e.getMessage());
 			}
 
 		} // extension

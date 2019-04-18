@@ -45,14 +45,8 @@ li.disable {
 									<div class="col-sm-12 logo-text">
 										<h2 class="m-0"
 											style="text-transform: uppercase; font-size: 24px; font-weight: bold;">Report
-											Information System</h2> 
+											Information System</h2>
 									</div>
-									
-									<div align="center" id="lastTime">
-                                       <!--    <span>lastTime</span> -->
-                                          
-                                        </div>
-									
 								</div>
 							</div>
 							<div class="wizard-navigation">
@@ -70,6 +64,8 @@ li.disable {
 									<li class="disable"><a id="emailclientId"
 										href="#email-client" style="text-decoration: none;"
 										class="transformationF disable-email" data-toggle="tab">Email</a></li>
+									<li><a href="#status" class=""
+										style="text-decoration: none;" data-toggle="tab">Status</a></li>	
 								</ul>
 							</div>
 
@@ -1709,7 +1705,7 @@ li.disable {
 																				</thead>
 																				<tbody id="tonnageTableError" style="direction:rtl;">
 
-																					<!--
+																					 <!-- 
 																                  	<tr>
 																                  		<td>1</td>
 																                  		<td>
@@ -2110,7 +2106,9 @@ li.disable {
 																                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 																                  		</td>
 																                  	</tr>
+																                  	
 																                  	-->
+																                  	
 																				</tbody>
 																			</table>
 																		</div>
@@ -3298,6 +3296,134 @@ li.disable {
 										</div>
 									</div>
 								</div>
+								<div class="tab-pane" id="status">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 class="info-text">
+														<button type="button"
+															class="btn btn-success m-0 sm0-btn-custom pull-right"
+															style="margin-right: 15px !important; padding: 2px 5px;">
+															<i class="fa fa-save"></i>
+														</button>
+
+													 <a href="#" class="btn btn-info m-0 sm0-btn-custom pull-right" style="margin-right: 15px !important; padding: 2px 5px;"> <img src="images/excel_icon.png" width="25px"> </a>
+													</h4>
+												</div>
+												<div class="col-sm-12">
+													<div id="draggable">
+														<div class="more-tr text-left col-md-1-width">
+															<a class="btn btn-success p-0 m-0 sm0-btn-custom add"><i
+																class="fa fa-plus"></i></a> <a
+																class="btn btn-success p-0 m-0 sm0-btn-custom remove"><i
+																class="fa fa-minus"></i></a>
+														</div>
+														<div class="draggable-table p-0">
+															<table
+																class="table-bordered table-hover bg-light table-add-rules find-table">
+																<thead class="btn-info">
+																	<tr>
+																		<th style="width:160px !important;">Last Process Time</th>
+																		<th>Date and Time</th>
+																		<th>Subject <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Attachment <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Nlp1 <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Nlp2 <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Nlp 3 & 4 QC <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th>Ui Update <a class="add-class"><i
+																				class="fa fa-minus" aria-hidden="true"></i></a></th>
+																		<th class="display-none"></th>
+																		<th>Actions</th>
+																	</tr>
+																</thead>
+																<tbody id="statusUiProcess" style="direction:rtl;">
+																
+																<!-- 
+												                  	<tr>
+												                  		<td style="width:160px !important;"></td>
+												                  		<td>4/5/2019 9:59:38</td>
+												                  		<td>
+												                  			<span>LINK</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>YES</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span> NO</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>YES</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>NO</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td>
+												                  			<span>YES</span>
+												                  			<input type="text" name="" class="td-input" value="">
+												                  		</td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr> -->
+												                  	
+												                  	<!-- here is cronStatus start -->
+												                  	<tr class="firstTr" style="display: none;">
+												                  		<td></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="dblclick"><input type="" name="" class="display-block-input display-none"></td>
+												                  		<td class="display-none"></td>
+												                  		<td>
+												                  			<a href="#" class="btn btn-success btn-sm edit-table-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												                  			<a href="#" class="btn btn-danger btn-sm delete-table-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+												                  		</td>
+												                  	</tr>
+												                  	<!-- here is cronStatus end-->
+												                  	
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-sm-12">
+															<br>
+															<nav class="pull-right">
+																<ul class="pagination">
+																	<li><a href="#" aria-label="Previous"> <span
+																			aria-hidden="true">&laquo;</span>
+																	</a></li>
+																	<li class="active"><a href="#">1</a></li>
+																	<li><a href="#">2</a></li>
+																	<li><a href="#">3</a></li>
+																	<li><a href="#" aria-label="Next"> <span
+																			aria-hidden="true">&raquo;</span>
+																	</a></li>
+																</ul>
+															</nav>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -3316,10 +3442,11 @@ li.disable {
 	<script src="js/custom.js"></script>
 	
 	<script type="text/javascript" src="NewJS/ErrorJs.js"></script> 
-	<script type="text/javascript" src="NewJS/timeShowUi.js"></script>
+	<script type="text/javascript" src="NewJS/StatusUiDataProcessed.js"></script> 
+	<script type="text/javascript" src="NewJS/subjectLink.js"></script> 
 	
 	<script type="text/javascript">
-			
+	
 		$(document).ready(
 			function() {
 				var height = $(window).height();
@@ -3344,11 +3471,9 @@ li.disable {
 				// }
 			});
 	</script>
-	<!-- <script type="text/javascript">
-      $(document).bind("contextmenu",function(e) {
-    	  e.preventDefault();
-    	 });
-      </script> -->
+	<script type="text/javascript">
+      
+      </script>
 
 	<script>
 		$(document).ready(function() {
@@ -3379,7 +3504,7 @@ li.disable {
 			}); // submint ajax  
 			
 			TonnageErrorUifetchdataChanged();
-			lastTimeProcessed();
+			statusUiFetchProcessed();
 
 		}); // main document ready close
 		
