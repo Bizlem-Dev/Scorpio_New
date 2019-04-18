@@ -48,6 +48,7 @@ public class CombineCharterer_Status_Rate {
                         		    if( jsonObjRate.has("Regex_Type") ){
                         		    	String Regex_Type=jsonObjRate.getString("Regex_Type");
                         		    	System.out.println(Regex_Type);
+                        		    	//
                         		    	// Space contains
                         		    } // Regex_Type check here
                         		    
