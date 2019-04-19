@@ -2,9 +2,12 @@ package com.test_servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
@@ -325,6 +328,45 @@ public class Test_servlet extends SlingAllMethodsServlet {
 	public static void rename(Node node, String newName) throws RepositoryException 
 	{
 		node.getSession().move(node.getPath(), node.getParent().getPath() + "/" + newName);
+	}
+	
+	public static JSONObject fetchCronWiseDataForUi(PrintWriter out, Session session){
+		JSONObject cronDataFinal=new JSONObject();
+		try {
+			Node scorpioDataBase=null;
+			Node StatusUIProcess=null;
+			Node cronNodeFifty=null;
+			
+			if( session.getRootNode().hasNode("scorpioDataBase") ){
+				scorpioDataBase=session.getRootNode().getNode("scorpioDataBase");
+			}if( scorpioDataBase.hasNode("StatusUIProcess") ){
+				StatusUIProcess=scorpioDataBase.getNode("StatusUIProcess");
+			}
+			
+			if(StatusUIProcess.hasNode("50")){
+				cronNodeFifty=StatusUIProcess.getNode("50");
+				if(cronNodeFifty.hasNodes()){
+					NodeIterator itr=cronNodeFifty.getNodes();
+					while(itr.hasNext()){
+						Node nextNode=itr.nextNode();
+						if(nextNode.hasProperty("Ui_Update")){
+							String uiupdate=nextNode.getProperty("Ui_Update").getString();
+							if("NO".equalsIgnoreCase(uiupdate)){
+								nextNode.remove();
+								session.save();
+							}
+						}
+					}
+				}
+			}
+			
+			
+				
+			
+		} catch (Exception e) {
+			
+		}
+		return cronDataFinal;
 	}
 	
 }
