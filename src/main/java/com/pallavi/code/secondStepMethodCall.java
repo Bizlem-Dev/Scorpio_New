@@ -316,13 +316,15 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 																  String finalwithQty="";
 																  Node subjectNodeNode=null;
+																  Node clarksonChekNode=null;
 																  
 																  if(clarksonCOunt>700){
-																	  subjectNodeNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
-																	  subjectNodeNode.setProperty("Ui_Update", "Rejected Due To Size");
-																	  subjectNodeNode.setProperty("Nlp1", "Rejected Due To Size");
-																	  subjectNodeNode.setProperty("Nlp2", "Rejected Due To Size");
-																	  subjectNodeNode.setProperty("Nlp3_and_4_QC", "Rejected Due To Size");
+																	  clarksonChekNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+																	  clarksonChekNode.setProperty("Ui_Update", "Rejected Due To Size");
+																	  clarksonChekNode.setProperty("Nlp1", "Rejected Due To Size");
+																	  clarksonChekNode.setProperty("Nlp2", "Rejected Due To Size");
+																	  clarksonChekNode.setProperty("Nlp3_and_4_QC", "Rejected Due To Size");
+																	  session.save();
 																  }else{
 																  
 																 // out.println("subjectNodePath: "+subjectNodePath);
@@ -331,7 +333,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																       // System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 																       // logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
 																       // logger.info("emailUrl_Excel:: "+emailUrl);
-																        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
+																        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
 																       if( !( ExpertScriptCallHere.equals("false") )  ){
 																    	 
 																       boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
@@ -374,6 +376,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																	        				boolean finalQtyAbhishek=SaveReportDataClass.isJSONValid(finalwithQty);
 																		        			if(finalQtyAbhishek){
 																		        				out.println("finalMethodwithqtyAbhishek_excel: "+finalwithQty);
+																		        				pallavi_WriteFile.writeUsingOutputStream( "AbhishekJSON ::====== "+finalwithQty.toString() ,filepathfromourside );
 																		        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 																		        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "excel", ExpertScriptCallHere);
 																		        				attachmentNode.setProperty("Flag", "1");
@@ -503,7 +506,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 		      
 		    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 		    
-		      String filepathfromourside="/home/ubuntu/TestedMailJSon/"+textNode.getName().toString()+"_"+timestampDate+".txt";
+		      String filepathfromourside="/home/ubuntu/TestedMailJSon/"+textNode.getName().toString()+"_"+timestampDateAndTime+".txt";
 			  boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
 			    if(checkjsonString==true){
 			    	out.println();
@@ -546,6 +549,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 					        			if(finalQtyAbhishek){
 					        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 					        				out.println("finalMethodwithqtyAbhishek_html: "+finalwithQty);
+					        				pallavi_WriteFile.writeUsingOutputStream( "AbhishekJSON ::====== "+finalwithQty.toString() ,filepathfromourside );
 					        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "html", ExpertScriptCallHere);
 									          textNode.setProperty("Flag", "1");
 									         

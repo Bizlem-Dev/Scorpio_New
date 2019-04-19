@@ -181,7 +181,7 @@ public class SaveReportNewRowWisePositionCheck {
 	                    				String JsonKey=tempitr.next();
 	                    				String valuemaxJson=headerJSonObj.getString(JsonKey);
 
-	                    				if(valuemaxJson.equals("VesselName")){
+	                    				if(valuemaxJson.equalsIgnoreCase("VesselName") || valuemaxJson.equalsIgnoreCase("Vessel")){
 	    	         						vesselNameCheckBlank=true;
 //	    	         						System.out.println("check:: "+vesselNameCheckBlank);
 	    	         						break;

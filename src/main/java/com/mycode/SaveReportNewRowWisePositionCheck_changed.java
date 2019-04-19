@@ -24,10 +24,11 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	public static void main(String[] args) {
     
 		String jsonString=MethodJsonOnlyInsert.jsonInpput();
+		System.out.println(jsonString);
 		
       String data=SaveReportNewRowWisePositionCheck_changed.SaveReportNewStructureChanged(null, jsonString);
       System.out.println("newJson:: "+data);
-     boolean datacheck= SaveReportDataClass.isJSONValid(data);
+    /* boolean datacheck= SaveReportDataClass.isJSONValid(data);
      if(datacheck){
     	 String subjectdata="CPP_MR_BSS_SPORE_35-55_DWT_TONNAGE_LIST_20.03.2019";
     	 subjectdata=subjectdata.replaceAll("_", " ");
@@ -43,7 +44,7 @@ public class SaveReportNewRowWisePositionCheck_changed {
      // String last=Methods.ReportTypeAndFinalJson(finaldata ,null, "");
      // System.out.println("last:: "+last);
       }
-     }
+     }*/
     
       
 	}
@@ -90,7 +91,7 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	                    				String JsonKey=tempitr.next();
 	                    				String valuemaxJson=headerJSonObj.getString(JsonKey);
 
-	                    				if(valuemaxJson.equals("VesselName")){
+	                    				if(valuemaxJson.equalsIgnoreCase("VesselName") || valuemaxJson.equalsIgnoreCase("Vessel") ){
 	    	         						vesselNameCheckBlank=true;
 //	    	         						System.out.println("check:: "+vesselNameCheckBlank);
 	    	         						break;
@@ -151,6 +152,7 @@ public class SaveReportNewRowWisePositionCheck_changed {
 		   	         							   if( dataAndRateJsonObj!=null && dataAndRateJsonObj.length()!=0 ){
 		   	         							        if(dataAndRateJsonObj.has("Rate")){
 		   	         							        rateJsonObj= dataAndRateJsonObj.getString("Rate");
+		   	         							        System.out.println("rateJsonObj: "+rateJsonObj);
 		   	         							        rateType=RateRegex.getRateVal(rateJsonObj);
 		   	         							        }if(dataAndRateJsonObj.has("Date")){
 		   	         							            dateJsonObj= dataAndRateJsonObj.getString("Date");
@@ -180,15 +182,16 @@ public class SaveReportNewRowWisePositionCheck_changed {
 		   	         							         
 		   	         							    }
 		   	         							 } else if( !valuemaxJson.equals("Rate") ){
+		   	         							 System.out.println("rateJsonObj_inside: "+rateJsonObj);
 		   	         								       int rateNotFoundPosition= headerJSonObj.length();
 		   	         								        int rateNotFoundPositionData= dataJSonObj.length();
 //		   	         								       headerJSonObj.put(String.valueOf(rateNotFoundPosition), "Rate");
 		   	         								     //  headerJSonObj.put(String.valueOf(JsonKey), "Rate");
 		   	         								       newHeader.put(String.valueOf(String.valueOf(rateNotFoundPosition)), "Rate");
-		   	         								     //  System.out.println(newHeader);
+		   	         								       System.out.println(newHeader);
 		   	         								       //dataJSonObj.put(String.valueOf(rateNotFoundPosition), max_keyValeu_original);
 		   	         								       dataJSonObj.put(String.valueOf(rateNotFoundPositionData), rateJsonObj);
-		   	         								     //  System.out.println(dataJSonObj);
+		   	         								       System.out.println(dataJSonObj);
 		   	         							 }
 		   	         							 
 		   	         							 if(valuemaxJson.equals("RateType")){
@@ -278,7 +281,8 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	    	         						//System.out.println("position_unknown:: "+JsonKey);
 	    	         						if(dataJSonObj.has(JsonKey)){
 	    	         							String max_keyValeu_original=dataJSonObj.getString(JsonKey);
-	    	         							JSONObject chartereobj=ChartererUnknownAndCommentCheck.chartererData(max_keyValeu_original);
+	    	         							/*JSONObject chartereobj=ChartererUnknownAndCommentCheck.chartererData(max_keyValeu_original);*/
+	    	         							JSONObject chartereobj=CombineCharterer_Status_Rate.chartererSplit(max_keyValeu_original);
 	    	         							if(chartereobj!=null && chartereobj.length()!=0){
 	    	         								if(chartereobj.has("Charterer")){
 	    	         									JSONObject chartererSolrjsonobj=chartereobj.getJSONObject("Charterer");
@@ -297,11 +301,11 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	    	        		   	         							         dataJSonObj.put(JsonKey, Charterer);
 	    	        		   	         							    }
 	    	        		   	         							 }else if( !valuemaxJson.equals("Charterer") ){
-	    	        		   	         								      // int rateNotFoundPosition= headerJSonObj.length();
+	    	        		   	         								       int rateNotFoundPosition= headerJSonObj.length();
 	    	        		   	         								      /* headerJSonObj.put(String.valueOf(rateNotFoundPosition), "Charterer");
 	    	        		   	         								       dataJSonObj.put(String.valueOf(rateNotFoundPosition), Charterer);*/
-	    	        		   	         								newHeader.put(String.valueOf(JsonKey), "Charterer");
-    	        		   	         								       dataJSonObj.put(String.valueOf(JsonKey), Charterer);
+	    	        		   	         								       newHeader.put(String.valueOf(rateNotFoundPosition), "Charterer");
+    	        		   	         								           dataJSonObj.put(String.valueOf(rateNotFoundPosition), Charterer);
 	    	        		   	         							 }
 	    	        											
 	    	        											
@@ -315,7 +319,8 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	    	         						//System.out.println("position_comment:: "+JsonKey);
 	    	         						if(dataJSonObj.has(JsonKey)){
 	    	         							String max_keyValeu_original=dataJSonObj.getString(JsonKey);
-	    	         							JSONObject chartereobj=ChartererUnknownAndCommentCheck.chartererData(max_keyValeu_original);
+	    	         							/*JSONObject chartereobj=ChartererUnknownAndCommentCheck.chartererData(max_keyValeu_original);*/
+	    	         							JSONObject chartereobj=CombineCharterer_Status_Rate.chartererSplit(max_keyValeu_original);
 	    	         							if(chartereobj!=null && chartereobj.length()!=0){
 	    	         								if(chartereobj.has("Charterer")){
 	    	         									JSONObject chartererSolrjsonobj=chartereobj.getJSONObject("Charterer");
@@ -336,7 +341,7 @@ public class SaveReportNewRowWisePositionCheck_changed {
 		    	        		   	         							    }
 		    	        		   	         							 }else if( !valuemaxJson.equals("Charterer") ){
 		    	        		   	         								       int rateNotFoundPosition= headerJSonObj.length();
-		    	        		   	         								   newHeader.put(String.valueOf(rateNotFoundPosition), "Charterer");
+		    	        		   	         								       newHeader.put(String.valueOf(rateNotFoundPosition), "Charterer");
 		    	        		   	         								       dataJSonObj.put(String.valueOf(rateNotFoundPosition), Charterer);
 		    	        		   	         							 }
 		    	        											
@@ -357,7 +362,8 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	    	         					if(valuemaxJson.contains("unknown")){
 	    	         						if(dataJSonObj.has(JsonKey)){
 	    	         							String max_keyValeu_original=dataJSonObj.getString(JsonKey);
-	    	         							JSONObject statusobj=StatusUnknownAndComment.SubjectData(max_keyValeu_original,out);
+	    	         							/*JSONObject statusobj=StatusUnknownAndComment.SubjectData(max_keyValeu_original,out);*/
+	    	         							JSONObject statusobj=CombineCharterer_Status_Rate.statusSplit(max_keyValeu_original, out);
 	    	         							if(statusobj!=null && statusobj.length()!=0){
 	    	         								if(statusobj.has("Status")){
 	    	        										Status=statusobj.getString("Status");
@@ -371,8 +377,9 @@ public class SaveReportNewRowWisePositionCheck_changed {
 	    	        		   	         							         dataJSonObj.put(JsonKey, Status);
 	    	        		   	         							    }
 	    	        		   	         							 }else if( !valuemaxJson.equals("Status") ){
-	    	        		   	         								   newHeader.put(String.valueOf(JsonKey), "Status");
-    	        		   	         								       dataJSonObj.put(String.valueOf(JsonKey), Status);
+	    	        		   	         								       int rateNotFoundPosition= headerJSonObj.length();
+	    	        		   	         								       newHeader.put(String.valueOf(rateNotFoundPosition), "Status");
+    	        		   	         								           dataJSonObj.put(String.valueOf(rateNotFoundPosition), Status);
 	    	        		   	         							 }
 	    	        											
 	    	        											

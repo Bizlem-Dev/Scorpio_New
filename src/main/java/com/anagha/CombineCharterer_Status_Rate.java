@@ -13,14 +13,15 @@ import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONObject;
 
 import com.NewStructureScorpio.ChartererUnknownAndCommentCheck;
+import com.mycode.StatusUnknownAndComment;
 import com.readGmail.GmailMethods;
 import com.reportinformationsystem.SaveReportDataClass;
 
 public class CombineCharterer_Status_Rate {
 
 	public static void main(String[] args) {
-		String splitData="AG-SPORE 17/04 250K-W105 CSSA=SUBS";
-		JSONObject data=combine_Rate_Date(splitData);
+		String splitData="AG-SPORE 17/04 250K-W105 CSSA=SUBS fx";
+		JSONObject data=statusSplit(splitData, null);
 		System.out.println(data);
 	}
 	
@@ -39,13 +40,41 @@ public class CombineCharterer_Status_Rate {
 				
 				
 			}else{
-				
-			}
+				if( !GmailMethods.isNullString(splitData) ){
+					 chartereobj=ChartererUnknownAndCommentCheck.chartererData(splitData);
+				}
+			} // else 
 			
 		} catch (Exception e) {
-			
+			return chartereobj;
 		}
 		return chartereobj;
+	}
+	
+	public static JSONObject statusSplit( String splitData , PrintWriter out){
+		JSONObject statusobj=new JSONObject();
+		try {
+			
+			if(splitData.contains(" ")){
+				String[] splited = splitData.split("\\s+");
+				for(int i=0;i<splited.length;i++){
+					String data=splited[i];
+					if( !GmailMethods.isNullString(data) ){
+						 statusobj=StatusUnknownAndComment.SubjectData(data,out);
+					}
+				} // for loop
+				
+				
+			}else{
+				if( !GmailMethods.isNullString(splitData) ){
+					 statusobj=StatusUnknownAndComment.SubjectData(splitData,out);
+				}
+			} // else 
+			
+		} catch (Exception e) {
+			return statusobj;
+		}
+		return statusobj;
 	}
 	
 	

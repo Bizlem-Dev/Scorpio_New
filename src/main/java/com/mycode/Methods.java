@@ -60,8 +60,12 @@ public class Methods {
 	                    			 if(dataJSonObj.has(JsonKey)){
 	                    			 String value= dataJSonObj.getString(JsonKey);
 	                    			 
-	                    			
-	                    			  jsonObj.put(key, value);
+	                    			 if(key.equalsIgnoreCase("Vessel")){
+	                    				 jsonObj.put("VesselName", value);
+	                    			 }else{
+	                    				 jsonObj.put(key, value);
+	                    			 }
+	                    			 
 	                    			if(objheader!=null){
 	                    				JSONArray h=new JSONArray();
 	                    				h.put(objheader);

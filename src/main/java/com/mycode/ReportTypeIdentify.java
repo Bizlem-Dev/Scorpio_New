@@ -97,7 +97,7 @@ public class ReportTypeIdentify {
 	                    			 String headerKeyKey=itrtemp.next(); //0
 	                    			 String headerValue=headerJSonObj.getString(headerKeyKey); //key
 	                    			 
-	                    			 if(headerValue.equals("VesselName")){
+	                    			 if(headerValue.equalsIgnoreCase("VesselName") || headerValue.equalsIgnoreCase("Vessel")){
 	    	         						vesselNameCheckBlank=true;
 //	    	         						System.out.println("check:: "+vesselNameCheckBlank);
 	    	         						break;

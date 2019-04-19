@@ -36,6 +36,7 @@ public class pallavi_WriteFile {
         try {
             os = new FileOutputStream(new File(path));
             os.write(data.getBytes(), 0, data.length());
+            
         } catch (IOException e) {
             e.printStackTrace();
         }finally{
