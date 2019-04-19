@@ -323,7 +323,7 @@ public class FifteenMinuteClass {
 
 			cal = Calendar.getInstance();
 			// cal.add(Calendar.MINUTE, -20);
-			cal.add(Calendar.DATE, -1); // 15 days before
+			cal.add(Calendar.DATE, -2); // 15 days before
 			Date minusSate = cal.getTime();
 
 			if (ReceivedDate.after(minusSate) && ReceivedDate.before(todayDate)) {
