@@ -20,13 +20,25 @@ import com.reportinformationsystem.SaveReportDataClass;
 public class CombineCharterer_Status_Rate {
 
 	public static void main(String[] args) {
-		String splitData="AG-SPORE 17/04 250K-W105 CSSA=SUBS fx";
-		JSONObject data=statusSplit(splitData, null);
-		System.out.println(data);
+		String splitData="70 / WS86.75 UNIPEC"; 
+		
+		JSONObject data=combine_Rate_Date(splitData);
+		System.out.println("data: "+data);
+		/*if(splitData.contains(" ")){
+			String[] splited = splitData.split("\\s+");
+			for(int i=0;i<splited.length;i++){
+				System.out.println("data: "+splited[i]);
+			}
+		}else{
+			System.out.println("data_else: "+splitData);
+		}*/
+		
+		/*JSONObject data=statusSplit(splitData, null);  //AG-SPORE 17/04 250K-W105 CSSA=SUBS fx
+		System.out.println("data: "+data);*/
 	}
 	
 	public static JSONObject chartererSplit( String splitData ){
-		JSONObject chartereobj=new JSONObject();
+		JSONObject chartereobjNew=new JSONObject();
 		try {
 			
 			if(splitData.contains(" ")){
@@ -34,25 +46,31 @@ public class CombineCharterer_Status_Rate {
 				for(int i=0;i<splited.length;i++){
 					String data=splited[i];
 					if( !GmailMethods.isNullString(data) ){
-						 chartereobj=ChartererUnknownAndCommentCheck.chartererData(data);
+						JSONObject chartereobj=ChartererUnknownAndCommentCheck.chartererData(data);
+                         if(chartereobj!=null && chartereobj.length()>0 ){
+                        	 chartereobjNew=chartereobj;
+                         }
 					}
 				} // for loop
 				
-				
+				 
 			}else{
 				if( !GmailMethods.isNullString(splitData) ){
-					 chartereobj=ChartererUnknownAndCommentCheck.chartererData(splitData);
+					JSONObject chartereobj=ChartererUnknownAndCommentCheck.chartererData(splitData);
+					 if(chartereobj!=null && chartereobj.length()>0 ){
+						 chartereobjNew=chartereobj;
+                     }
 				}
 			} // else 
 			
 		} catch (Exception e) {
-			return chartereobj;
+			return chartereobjNew;
 		}
-		return chartereobj;
+		return chartereobjNew;
 	}
 	
 	public static JSONObject statusSplit( String splitData , PrintWriter out){
-		JSONObject statusobj=new JSONObject();
+		JSONObject statusobjNew=new JSONObject();
 		try {
 			
 			if(splitData.contains(" ")){
@@ -60,30 +78,34 @@ public class CombineCharterer_Status_Rate {
 				for(int i=0;i<splited.length;i++){
 					String data=splited[i];
 					if( !GmailMethods.isNullString(data) ){
-						 statusobj=StatusUnknownAndComment.SubjectData(data,out);
+						JSONObject statusobj=StatusUnknownAndComment.SubjectData(data,out);
+						 if(statusobj!=null && statusobj.length()>0 ){
+							 statusobjNew=statusobj;
+                         }
 					}
 				} // for loop
 				
 				
 			}else{
 				if( !GmailMethods.isNullString(splitData) ){
-					 statusobj=StatusUnknownAndComment.SubjectData(splitData,out);
+					JSONObject statusobj=StatusUnknownAndComment.SubjectData(splitData,out);
+					if(statusobj!=null && statusobj.length()>0 ){
+						 statusobjNew=statusobj;
+                    }
 				}
 			} // else 
 			
 		} catch (Exception e) {
-			return statusobj;
+			return statusobjNew;
 		}
-		return statusobj;
+		return statusobjNew;
 	}
 	
 	
 	public static JSONObject combine_Rate_Date( String splitData ){
-		String s="";
 		String realValueRateMax="";
 		String realValueDateMax="";
 		ArrayList<String>RealValueRate=new ArrayList<>();
-		ArrayList<String>rateCombineAllList=new ArrayList<>();
 		ArrayList<String>dateCombineAllList=new ArrayList<>();
 		JSONObject dataAndRateJsonObj=new JSONObject();
 		
@@ -96,10 +118,12 @@ public class CombineCharterer_Status_Rate {
 				
 				for(int i=0;i<splited.length;i++){
 					String data=splited[i];
+					//System.out.println("dataSplit: "+data);
 					// call api for rate 
 					
 					if( !GmailMethods.isNullString(data) ){
 						String rateApiResponse= ApiRateAndDate(data);
+						//System.out.println("rateApiResponse: "+rateApiResponse);
 						boolean rateResponseCheck=SaveReportDataClass.isJSONValid(rateApiResponse);
 						if(rateResponseCheck){
                            JSONArray rateArray=new JSONArray(rateApiResponse);
@@ -110,24 +134,17 @@ public class CombineCharterer_Status_Rate {
                         		  
                         		    if( jsonObjRate.has("Regex_Type") ){
                         		    	String Regex_Type=jsonObjRate.getString("Regex_Type");
-                        		    	
+                        		    	if( !GmailMethods.isNullString(Regex_Type) ){
                         		    	if( Regex_Type.equalsIgnoreCase("Rate") ){
                         		    		RealValueRate.add(data);
-                        		    	    JSONArray valueArray=null;
-                        		    	if( jsonObjRate.has("value") ){
-                        		    		valueArray=jsonObjRate.getJSONArray("value");
-                        		    		
-                        		    		String arrayValue=valueArray.get(0).toString();
-                        		    		//System.out.println(arrayValue);
-                        		    		rateCombineAllList.add(arrayValue);
-                        		    	}
+                        		    	 
                         		    }// check rate here
                         		    	
                         		    	if( Regex_Type.equalsIgnoreCase("Date") ){
                         		    		dateCombineAllList.add(data);
                         		    	
                         		    }// check Date here
-                        		    	
+                        		    }// blank check
                         		    	
                         		    } // Regex_Type check here
                         		    
@@ -143,11 +160,7 @@ public class CombineCharterer_Status_Rate {
 					// end rate here
 					
 				} // for split check here 
-				if( rateCombineAllList.size()>0 && !rateCombineAllList.isEmpty() && rateCombineAllList!=null){
-					
-                     s = Collections.max(rateCombineAllList);
-//                    System.out.println("maxJsonValue:: "+s);
-				} // value of json rate
+				
                    if(RealValueRate.size()>0 && !RealValueRate.isEmpty() && RealValueRate!=null ){
 					
                      realValueRateMax = Collections.max(RealValueRate);
@@ -175,7 +188,7 @@ public class CombineCharterer_Status_Rate {
                        		  
                      		    if( jsonObjRate.has("Regex_Type") ){
                      		    	String Regex_Type=jsonObjRate.getString("Regex_Type");
-                    		    	
+                    		    	if( !GmailMethods.isNullString(Regex_Type) ){
                     		    	if( Regex_Type.equalsIgnoreCase("Rate") ){
                     		    		RealValueRate.add(splitData);
                     		    	} // rate check here
@@ -185,6 +198,7 @@ public class CombineCharterer_Status_Rate {
                     		    	
                     		    }// check Date here
                     		    	
+                     		    }// check blank
                      		    } // regrex type close
                         	 }
                         }// for rate loop close here
@@ -210,12 +224,10 @@ public class CombineCharterer_Status_Rate {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			return dataAndRateJsonObj;
 		}finally {
-			s=null;
 			realValueRateMax=null;
 			RealValueRate.clear();
-			rateCombineAllList.clear();
 			realValueDateMax=null;
 			dateCombineAllList.clear();
 		}
@@ -256,8 +268,7 @@ public class CombineCharterer_Status_Rate {
 					
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			return "false";
+			return count;
 		}
 		return count;
 	}

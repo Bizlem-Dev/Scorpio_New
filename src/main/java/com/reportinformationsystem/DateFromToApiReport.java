@@ -1891,7 +1891,7 @@ public class DateFromToApiReport {
 															  String svgUrl = processPdftoSvg(attachmentTomcatFilePath);
 															  String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
 															  if(!GmailMethods.isNullString(svgUrl)){
-															       String vinayaScriptCall=VinayaScript.vinayaScript(svgUrl);
+															       String vinayaScriptCall=VinayaScript.vinayaScript(svgUrl, timestampDateAndTime);
 															      if( !( vinayaScriptCall.equals("false") )  ){
 															      if( !GmailMethods.isNullString(vinayaScriptCall) ){
 															           boolean checkjsonString=SaveReportDataClass.isJSONValid(vinayaScriptCall);
@@ -2172,7 +2172,7 @@ public static void setFlagZero(Session session, PrintWriter out){
 								  }// emailUrl purpose
 								  
 								  long htmlSize= textNode.getNodes().getSize();
-								  if(htmlSize>1){
+//								  if(htmlSize>1){
 								  
 								  if(textFlag.equals("1")){
 								  String emailUrl="";
@@ -2197,9 +2197,7 @@ public static void setFlagZero(Session session, PrintWriter out){
 											  emailUrl=textNode.getProperty("tomcat_file_link").getString();
 											  emailUrl = (GmailMethods.isNullString(emailUrl)) ? "" : emailUrl;
 											  
-											  out.println("textSentMailTime:: "+textSentMailTime);
-											  out.println("emailUrl:: "+emailUrl);
-											  out.println("from_Source:: "+from_Source);
+											  out.println("html_textSentMailTime:: "+textSentMailTime);
 											  
 										  }
 										  
@@ -2218,7 +2216,7 @@ public static void setFlagZero(Session session, PrintWriter out){
 								  
 								} // textFlag check here
 								  }
-								  }
+//								  }
 								  
 								  if(textNode.hasNodes()){
 									 NodeIterator textNodeItr=textNode.getNodes();
@@ -2290,22 +2288,18 @@ public static void setFlagZero(Session session, PrintWriter out){
 																  
 																  if (schedulerReadMail1 == true) {
 																	  String emailUrl="";
-															/*		  if(attachmentNode.hasProperty("tomcat_file_link")){
+																  if(attachmentNode.hasProperty("tomcat_file_link")){
 																		  emailUrl=attachmentNode.getProperty("tomcat_file_link").getString();
 																		  emailUrl = (GmailMethods.isNullString(emailUrl)) ? "" : emailUrl;
 																		  
-																		 // out.println("textSentMailTime:: "+textSentMailTime);
+																		  out.println("textSentMailTime_excel:: "+textSentMailTime);
 																		 // out.println("emailUrl:: "+emailUrl);
 																		  //out.println("from_Source:: "+from_Source);
-																		  
-
-																		  out.println("emailUrl:: "+emailUrl);
-																		  out.println("from_Source:: "+from_Source);
-																		  out.println("textSentMailTime:: "+textSentMailTime);
-																	  }*/
+												
+																	  }
 																	  
 																	  attachmentNode.setProperty("Flag", "0");
-																	 // session.save();
+																	  session.save();
 																  }
 															  
 															 /* attachmentNode.setProperty("Flag", "0");

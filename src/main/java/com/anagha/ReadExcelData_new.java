@@ -75,7 +75,7 @@ public class ReadExcelData_new {
 			
 			/*JSONObject obj = new JSONObject();
 			obj.put("Data", list);
-			obj.put("url", "http://35.188.227.168:8983/solr/#/AllReport/CargoGrade");
+			obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/CargoGrade");
 			obj.put("DocumentName", "CargoGrade");
 
 			System.out.println("obj: "+obj);
@@ -223,8 +223,8 @@ public class ReadExcelData_new {
 		// String url1 =
 		// "http://35.186.170.65:8983/solr/Vessel/update/json/docs?commit=true";
 		//String url1 = "http://35.186.170.65:8983/solr/HSN_Code/update/json/docs?commit=true";
-		/*String url1 = "http://35.188.227.168:8983/solr/AllReport/update/json/docs?commit=true";*/
-			String url1 = "http://35.188.227.168:8983/solr/PortFound/update/json/docs?commit=true";
+		/*String url1 = "http://34.73.112.165:8983/solr/AllReport/update/json/docs?commit=true";*/
+			String url1 = "http://34.73.112.165:8983/solr/PortFound/update/json/docs?commit=true";
 
 		URL url = new URL(url1);
 

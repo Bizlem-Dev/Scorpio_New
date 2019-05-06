@@ -412,12 +412,12 @@ public class pallavi_SortJSON {
 		try {
 
 			// String url1 =
-			// "http://35.188.227.168:8983/solr/Vessel/update/json/docs?commit=true";
+			// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
 			 data = URLEncoder.encode(data, "UTF-8");
 
-			//String url1 = "http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
+			//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
 					
-			String url1="http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+			String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 			//	 param = URLEncoder.encode(param, "UTF-8");
 
 			URL url = new URL(url1);
@@ -457,10 +457,10 @@ public class pallavi_SortJSON {
         	}
 
 			try {
-				// "http://35.188.227.168:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
-				String url1 = "http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";	
-				//String url1="http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+				String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";	
+				//String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
 				URL url = new URL(url1);				
 				//System.out.println("url ****  "+url1);
@@ -495,12 +495,12 @@ public class pallavi_SortJSON {
        	String data="JSONHEADER_str:\""+jsonheader+"\" AND SYNONYMS_str:\""+synonyms+"\" AND REGAXMATCH_str:\""+regexmatch+"\" AND SOLRMATCH_str:\""+solrmatch+"\"";
        //	System.out.println("data "+data);
 			try {
-				// "http://35.188.227.168:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
-				//String url1 = "http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";
-				//String url1="http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+				//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";
+				//String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
-                 String url1="http://35.188.227.168:8983/solr/RegexMatch/select?fl=*,score&q="+data;
+                 String url1="http://34.73.112.165:8983/solr/RegexMatch/select?fl=*,score&q="+data;
 				URL url = new URL(url1);
 				System.out.println("url ****  "+url1);
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -551,14 +551,14 @@ public class pallavi_SortJSON {
 			try {
 
 				// String url1 =
-				// "http://35.188.227.168:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
 
-				//String url1 = "http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
+				//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
 						
-					//String url1="http://35.188.227.168:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
-String url1="http://35.188.227.168:8983/solr/ColumnMatch/select?fl=score,ReportType,RequiredColumns&q=("+data+")&rows=3";
-				// String url1="http://35.188.227.168:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+					//String url1="http://34.73.112.165:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+String url1="http://34.73.112.165:8983/solr/ColumnMatch/select?fl=score,ReportType,RequiredColumns&q=("+data+")&rows=3";
+				// String url1="http://34.73.112.165:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
 
 				URL url = new URL(url1);
@@ -599,14 +599,14 @@ String url1="http://35.188.227.168:8983/solr/ColumnMatch/select?fl=score,ReportT
 			try {
 
 				// String url1 =
-				// "http://35.188.227.168:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
 
-				//String url1 = "http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
+				//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
 						
-					String url1="http://35.188.227.168:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+					String url1="http://34.73.112.165:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 
-				// String url1="http://35.188.227.168:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+				// String url1="http://34.73.112.165:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
 
 				URL url = new URL(url1);

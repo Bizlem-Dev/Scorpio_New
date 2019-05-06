@@ -45,7 +45,7 @@ public class PortSlashFoundCheck {
 				 q = URLEncoder.encode(q, "UTF-8");
 				 String url = "";
 
-				url = "http://35.188.227.168:8983/solr/PortFound/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
+				url = "http://34.73.112.165:8983/solr/PortFound/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
 				
 				URL url1 = new URL(url);
 				HttpURLConnection con = (HttpURLConnection) url1.openConnection();

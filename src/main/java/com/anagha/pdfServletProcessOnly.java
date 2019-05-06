@@ -1,4 +1,4 @@
-package com.errorreport;
+package com.anagha;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,24 +10,24 @@ import javax.servlet.ServletException;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
+import com.errorreport.StatusForUi;
+import com.pallavi.code.secondStepMethodCall;
 import com.readGmail.GmailMethods;
-
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.felix.scr.annotations.Properties;
 
-@Component(immediate = true, metatype = false)
-@Service(value = javax.servlet.Servlet.class)
-@Properties({ 
-		@Property(name = "sling.servlet.paths", value = { "/statusUiFectchData" }),
-		})
 
-public class StatusFetchDataUi extends SlingAllMethodsServlet {
+@SlingServlet(paths = "/pdfProcessData")
+
+public class pdfServletProcessOnly extends SlingAllMethodsServlet {
+	private static final long serialVersionUID = 1;
+	@SuppressWarnings("deprecation")
 	@Reference
 	private SlingRepository repo;
 	Session session = null;
@@ -41,12 +41,20 @@ public class StatusFetchDataUi extends SlingAllMethodsServlet {
 		try{
 
 		session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
-//		JSONObject data=StatusForUi.fetchCronWiseDataForUi(out, session); 
-		JSONObject data=StatusForUi.fetchCronWiseDataForUiFromLast(out, session);
-		out.println(data);
 		
+		 String datePass=StatusForUi.cronCurrentTimeParseHere();
+		if( (datePass!=null) && (!GmailMethods.isNullString(datePass)) ){
+			out.println("uidatePass:: "+datePass);
+			 String cronNodeName=StatusForUi.nodeCreateCronInSling(out, session, datePass);
+			 
+			 if( (cronNodeName!=null) && (!GmailMethods.isNullString(cronNodeName)) ){
+				 out.println("uidatecronNodeName:: "+cronNodeName);
+				 pdfDataProcess.ReadGmailDataForPdf(session, out, cronNodeName);
+			 }
+			 
+		}
+	
 		}catch(Exception e){
-//			e.printStackTrace(out);
 		    out.println(e.getMessage());
 		}
 		

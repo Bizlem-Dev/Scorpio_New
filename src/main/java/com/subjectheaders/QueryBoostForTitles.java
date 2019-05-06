@@ -15,11 +15,14 @@ import com.reportinformationsystem.SaveReportDataClass;
 public class QueryBoostForTitles {
 
 	public static void main(String[] args) {
-		 String q="EASTPORT_CLEAN_MARKET_REPORT_DATED_08TH_APR_2019";
+		 String q="EASTPORT CLEAN MARKET REPORT DATED 08TH APR 2019";
 		// q = q.replaceAll("((?<![A-Za-z])(AND|and|And))","");
 		// System.out.println("q:: "+q);
 		 JSONObject s=SubjectData(q, null);
 		 System.out.println(s);
+		 
+		String data= SubjectHeadersAllMethods.etaBasisRegrexDate("29/10/2019 string", null);
+		System.out.println(data);
 	}
 	
 	public static JSONObject SubjectData(String q, PrintWriter out){
@@ -64,7 +67,8 @@ public class QueryBoostForTitles {
 			String fl="Key,value,score";
 			String q="value_str:("+passvalue+")^2";
 
-			url="http://35.188.227.168:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
+//			url="http://34.73.112.165:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
+			url="http://34.73.112.165:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
 			
 			url = url.replace(" ", "%20");
 			

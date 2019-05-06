@@ -29,12 +29,12 @@ public class MongoDbConnection {
 		saveGmailReadCount("GmailReadCountDataBase", "23-04-2019", "5");
 	}
 	
-	 public DBCollection getMongoDbAnyConn( String Dbname ,String collectionname, String Date, String Flag, String Subject, PrintWriter out) {
+	 public DBCollection getMongoDbAnyConn( String Dbname ,String collectionname, String Date, String Flag, String Subject, String error) {
 		 
    	   DBCollection collection=null;
    	   MongoClient mongoClient=null;
        try {
-    	   out.println("inmongodb inside");
+    	   System.out.println("inmongodb inside");
             mongoClient = new MongoClient("localhost", 27017);
             DB mongoDataBase = mongoClient.getDB(Dbname);
             collection = mongoDataBase.getCollection(collectionname);
@@ -44,14 +44,14 @@ public class MongoDbConnection {
 			 obj.put("Date", Date);
 			 obj.put("Flag", Flag);
 			 obj.put("Subject", Subject);
-			 
+			 obj.put("Error", error);
 			 collection.insert(obj);
 
        } catch (Exception e) {
            e.printStackTrace();
        } finally{
     	   mongoClient.close();
-    	   out.println("insertCatchReadMailData Method Executed Successfully!");
+    	   System.out.println("insertCatchReadMailData Method Executed Successfully!");
        }
        return collection;
 

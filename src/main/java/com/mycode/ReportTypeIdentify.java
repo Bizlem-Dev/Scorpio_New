@@ -136,6 +136,7 @@ public class ReportTypeIdentify {
 	                    				String ChartererPos="";
 	                    				String ReportTypePos="";
 	                    				String OPENPos="";
+	                    				String RateTypePos="";
 	                    				
 	                    				boolean vesselHas=false;
 	                    				boolean LCStartHas=false;
@@ -152,6 +153,7 @@ public class ReportTypeIdentify {
 	                    				boolean ChartererPoss=false;
 	                    				boolean ReportTypePoss=false;
 	                    				boolean OPENPoss=false;
+	                    				boolean RateTypePoss=false;
 	                    				
 	                    			 
 	                    		 for (Map.Entry<String, String> entry : g.entrySet())
@@ -205,6 +207,9 @@ public class ReportTypeIdentify {
 	                    				}if(entry.getValue().equalsIgnoreCase("OPEN")){
 	                    					OPENPos=entry.getKey();
 	                    					OPENPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("RateType")){
+	                    					RateTypePos=entry.getKey();
+	                    					RateTypePoss=true;
 	                    				}
 	                    				
 	                    			
@@ -531,6 +536,29 @@ public class ReportTypeIdentify {
 	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
 	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Spot");
 	                    			 }// spot
+	                    			 
+	                    			 else if( RateHas && PortHas && RateTypePoss ){
+	                    				 if(DateHas){ // if date has
+	                    					 if(!LCStartHas){ // if not else lcstart
+	                    						 newHeader.put(datePos, "LCStart");
+	                    					 }else if(!LCEndHas){ //if not else lcend
+	                    						 newHeader.put(datePos, "LCEnd");
+	                    					 }
+	                    				 } // date check 
+	                    				 if(PortHas){ // if date has
+	                    					 
+	                    					 System.out.println("porthas:: "+PortHas);
+	                    					 if(!LoadPortHas){ //if not else lloadport
+	                    						 System.out.println("entered");
+	                    						 newHeader.put(LoadPortPos, "LoadPort");
+	                    					 }else if(!DiscPortHas){    //if not else discport
+	                    						 newHeader.put(LoadPortPos, "DiscPort");
+	                    					 }
+	                    				 } // port check
+	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Spot");
+	                    				 
+	                    			 }
 	                    			 
 //	                    			 else {
 	                    				 

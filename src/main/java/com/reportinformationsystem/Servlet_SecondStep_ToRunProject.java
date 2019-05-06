@@ -24,15 +24,20 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.felix.scr.annotations.Properties;
-
+/*
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ 
 		@Property(name = "sling.servlet.paths", value = { "/SecondStep" }),
-		})
+		})*/
+
+@SlingServlet(paths = "/SecondStep")
 
 public class Servlet_SecondStep_ToRunProject extends SlingAllMethodsServlet {
+	private static final long serialVersionUID = 1;
+	@SuppressWarnings("deprecation")
 	@Reference
 	private SlingRepository repo;
 	Session session = null;

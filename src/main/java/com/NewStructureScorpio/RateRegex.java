@@ -12,7 +12,7 @@ public class RateRegex {
 		String data=RateRegrex("$5000", null);
 				System.out.println(data);
 
-		String ratetype=getRateVal("$5000");
+		String ratetype=getRateVal("725,000 / 1,550,000");
 		System.out.println(ratetype);
 	}
 

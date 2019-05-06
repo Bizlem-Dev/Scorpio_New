@@ -3166,7 +3166,7 @@ String timechartereSolr="";
 
 		try {
 
-			String url1 = "http://35.188.227.168:8983/solr/Report/update/json/docs?commit=true";
+			String url1 = "http://34.73.112.165:8983/solr/Report/update/json/docs?commit=true";
 			URL url = new URL(url1);
 
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -5504,6 +5504,13 @@ public static int countUnknownX(String mainjson){
 			ReportTimestampSpot.setCellValue("ReportTimestamp");
 			ReportTimestampSpot.setCellStyle(headerCellStyle);
 			
+		  	Cell emailUrl = brokertcratedatarow.createCell(19);
+					emailUrl.setCellValue("emailUrl");
+					emailUrl.setCellStyle(headerCellStyle); //SingleJson
+					
+					Cell SingleJson = brokertcratedatarow.createCell(20);
+					SingleJson.setCellValue("SingleJson");
+					SingleJson.setCellStyle(headerCellStyle);
 			
 			
 			if (Tonnagejsonobj.has("spotList")) {
@@ -5627,6 +5634,20 @@ public static int countUnknownX(String mainjson){
 						firstyr_value81 = BrokerTcRateList_inside_jsonobj.getString("ReportTimestamp");
 						combinebrokerobj.put("ReportTimestampobj", firstyr_value81);
 					}
+					
+					String firstyr_value144 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("SingleJson")) {
+						firstyr_value144 = BrokerTcRateList_inside_jsonobj.getString("SingleJson");
+						combinebrokerobj.put("SingleJsonobj", firstyr_value144);
+					}
+					
+					
+					String emailUrl1 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("emailUrl")) {
+						emailUrl1 = BrokerTcRateList_inside_jsonobj.getString("emailUrl");
+						combinebrokerobj.put("emailurlobj", emailUrl1);
+					}
+					
 
 					if (combinebrokerobj.length() > 0) {
 						combinebrokerjsonarray.put(combinebrokerobj);
@@ -5881,6 +5902,33 @@ public static int countUnknownX(String mainjson){
 
 						broker_value = brokerrow.createCell(18);
 						broker_value.setCellValue(vesseltypeobj9);
+						
+						
+						String vesseltypeobj1712 = "";
+						if (brokercombineobj.has("emailurlobj")) {
+							vesseltypeobj1712 = brokercombineobj.getString("emailurlobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(19);
+						broker_value.setCellValue(vesseltypeobj1712);
+
+						String vesseltypeobj1713 = "";
+						if (brokercombineobj.has("SingleJsonobj")) {
+							vesseltypeobj1713 = brokercombineobj.getString("SingleJsonobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(20);
+						broker_value.setCellValue(vesseltypeobj1713);
 
 					}
 				} //

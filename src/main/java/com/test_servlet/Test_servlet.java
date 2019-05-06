@@ -216,7 +216,7 @@ public class Test_servlet extends SlingAllMethodsServlet {
 //		DateFromToApiReport.ReadGmailDataChangeHttps(session, out);
 //		FifteenMinuteClass.portNotMasterDelete4(out, session);
 //		fetchAllReport.pdfTonnage(session, out);
-		fetchAllReport.fetchTonnage_37KData(out, session);
+		//fetchAllReport.fetchTonnage_37KData(out, session);
 		
 		/*ChangedApiWithoutMultipleArray CPWMA=new ChangedApiWithoutMultipleArray();
 		JSONObject dataobj=CPWMA.getSpotReportDateWithoutDataFrame(session, "15-04-2019", "16-04-2019", "Spot", out);
@@ -224,7 +224,7 @@ public class Test_servlet extends SlingAllMethodsServlet {
 		//FifteenMinuteClass.updateTonnageSource(out, session);
 		/*MongoDbConnection MDC=new MongoDbConnection();
 		  MDC.getMongoDbAnyConn("MongoTestDataBase", "MongoTEstCollection", "Date", "0", "subject" , out);*/
-//		fetchAllReport.fetchSpotDataChangedNew(out, session);
+		fetchAllReport.fetchSpotDataChangedNew(out, session);
 		//FourReportsExcelClass.fetchSpotDataChanged(out, session);
 		//DateFromToApiReport.ReadGmailDataChangeHttps(session, out);
 	/*	Gmail_Pojo gm = null;

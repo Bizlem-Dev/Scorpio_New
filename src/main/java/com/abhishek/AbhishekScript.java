@@ -308,7 +308,7 @@ public class AbhishekScript {
 
 			String url = "";
 
-			url = "http://35.188.227.168:8983/solr/AllReport/select?q=Data:" + q + "&fl=score,DocumentName";
+			url = "http://34.73.112.165:8983/solr/AllReport/select?q=Data:" + q + "&fl=score,DocumentName";
 			
 			URL url1 = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
@@ -610,17 +610,17 @@ public class AbhishekScript {
 
 			String url = "";
 
-			// url = "http://35.188.227.168:8983/solr/TemplateCore/select?q=" + q
+			// url = "http://34.73.112.165:8983/solr/TemplateCore/select?q=" + q
 			// + "&fl=" + f1 + "&df=" + df;
 
-			// url = "http://35.188.227.168:8983/solr/Header_Synomes/select?q=" +
+			// url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=" +
 			// q + "&fl=" + f1;
 			// url =
-			// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:" +
+			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" +
 			// q + "&fl=" + "HeaderName";
-			url = "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:" + q + "&fl=score,HeaderName";
+			url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" + q + "&fl=score,HeaderName";
 			// url =
-			// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
+			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
 
 			// url = url.replace(" ", "%20");
 
@@ -776,9 +776,9 @@ public class AbhishekScript {
 			String url = "";
 
 			// url =
-			// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:" +
+			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" +
 			// data + "&fl=score,HeaderName";
-			url = "http://35.188.227.168:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="
+			url = "http://34.73.112.165:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="
 					+ 4 + "&pf=Data&&q=Data:(" + data + ")&&qf=Data";
 
 			URL url1 = new URL(url);

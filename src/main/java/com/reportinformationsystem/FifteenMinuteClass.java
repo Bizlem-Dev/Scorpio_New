@@ -75,44 +75,16 @@ import ChangedStructureCurrent.GmailReadMailChanged;
 public class FifteenMinuteClass {
 
 	public static void main(String[] args) throws ParseException {
-		/*
-		 * JSONObject data1=CurrentDateTime(); System.out.println(data1); Date
-		 * d=new Date(); boolean data=returnTimeRange(d);
-		 * 
-		 * if(data==true){ System.out.println("yes"); }else{
-		 * System.out.println("not"); }
-		 * 
-		 * // System.out.println(data);
-		 * 
-		 * 
-		 * Calendar cal = null; cal = Calendar.getInstance(); Date todayDate =
-		 * new Date(cal.getTimeInMillis()); DateFormat dateFormat = new
-		 * SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); String currentDate =
-		 * dateFormat.format(todayDate);
-		 * System.out.println("currentDate: "+currentDate);
-		 * 
-		 * 
-		 * 
-		 * SimpleDateFormat formatter1=new
-		 * SimpleDateFormat("dd-MM-yyyy HH:mm:ss"); Date
-		 * date1=formatter1.parse(currentDate);
-		 * System.out.println("date1: "+date1);
-		 * 
-		 * DateTimeFormatter formatter =
-		 * DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss" , Locale.ENGLISH);
-		 * LocalDate date = LocalDate.parse(currentDate, formatter);
-		 * System.out.println(date);
-		 * 
-		 * Date date11 = new Date(dateFormat.parse(currentDate).getTime());
-		 * System.out.println(date11);
-		 */
-
-		String space = DateSpach("8 jan", "2018");
+		
+		Date date1=new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse("Fri Sep 28 16:51:44 IST 2018");
+        FifteenMinuteClass.fifteenDaysBeforeDataRead1(date1);
+		
+		/*String space = DateSpach("8 jan", "2018");
 		System.out.println(space);
 
-		/*
+		
 		 * String d=dateDot("28.01.20", "2018"); System.out.println("d:: "+d);
-		 */
+		 
 
 		dateSpaceSingle("8 jan 2018", "2018");
 
@@ -190,10 +162,10 @@ public class FifteenMinuteClass {
 
 			String sDate1 = "Fri Sep 28 16:51:44 IST 2018";
 			Date date1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(sDate1);
-			System.out.println("date1:  " + date1);
+			System.out.println("date1:  " + date1);*/
 
 			// System.out.println(intForFirst2Char);
-		}
+//		}
 		/*
 		 * double[] arrayName = new double[10]; double[] resultValue = null;
 		 * //resultValue[0] = ((double)14/49)*100;
@@ -299,7 +271,7 @@ public class FifteenMinuteClass {
 			// cal.add(Calendar.MINUTE, -20);
 			// cal.add(Calendar.DATE, -15); // 15 days before
 //			cal.add(Calendar.DATE, -1);
-			cal.add(Calendar.DATE, -12); // only previous two days mail can parse 
+			cal.add(Calendar.DATE, -12); // only previous two days mail can parse  //12
 			Date minusSate = cal.getTime();
 
 			if (ReceivedDate.after(minusSate) && ReceivedDate.before(todayDate)) {
@@ -323,8 +295,9 @@ public class FifteenMinuteClass {
 
 			cal = Calendar.getInstance();
 			// cal.add(Calendar.MINUTE, -20);
-			cal.add(Calendar.DATE, -2); // 15 days before
+			cal.add(Calendar.DATE, -4); // 15 days before
 			Date minusSate = cal.getTime();
+			System.out.println(minusSate);
 
 			if (ReceivedDate.after(minusSate) && ReceivedDate.before(todayDate)) {
 				// System.out.println("aa raha hai ki nahi");
@@ -1558,8 +1531,8 @@ public class FifteenMinuteClass {
 		try {
 
 			// String url1 =
-			// "http://35.188.227.168:8983/solr/Vessel/update/json/docs?commit=true";
-			String url1 = "http://35.188.227.168:8983/solr/AllReport/update/json/docs?commit=true";
+			// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
+			String url1 = "http://34.73.112.165:8983/solr/AllReport/update/json/docs?commit=true";
 			URL url = new URL(url1);
 
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -1625,7 +1598,7 @@ public class FifteenMinuteClass {
 				} // while vessel close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://35.188.227.168:8983/solr/#/AllReport/vesselName");
+				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/vesselName");
 				obj.put("DocumentName", "vesselName");
 
 				postSolr(obj, out);
@@ -1657,7 +1630,7 @@ public class FifteenMinuteClass {
 				} // while CargoGrade close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://35.188.227.168:8983/solr/#/AllReport/CargoGrade");
+				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/CargoGrade");
 				obj.put("DocumentName", "CargoGrade");
 
 				postSolr(obj, out);
@@ -1690,7 +1663,7 @@ public class FifteenMinuteClass {
 				} // while Owners close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://35.188.227.168:8983/solr/#/AllReport/Owners");
+				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Owners");
 				obj.put("DocumentName", "Owners");
 
 				postSolr(obj, out);
@@ -1725,7 +1698,7 @@ public class FifteenMinuteClass {
 				} // while Operators close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://35.188.227.168:8983/solr/#/AllReport/Operators");
+				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Operators");
 				obj.put("DocumentName", "Operators");
 
 				postSolr(obj, out);
@@ -1759,7 +1732,7 @@ public class FifteenMinuteClass {
 				} // while Operators closeobj = new JSONObject();
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://35.188.227.168:8983/solr/#/AllReport/Port");
+				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Port");
 				obj.put("DocumentName", "Port");
 
 				postSolr(obj, out);
@@ -1780,7 +1753,7 @@ public class FifteenMinuteClass {
 			JSONArray arr = new FormatDate().formatDateMain();
 			JSONObject obj1 = new JSONObject();
 			obj1.put("Data", arr);
-			obj1.put("url", "http://35.188.227.168:8983/solr/#/AllReport/Date");
+			obj1.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Date");
 			obj1.put("DocumentName", "Date");
 
 			postSolr(obj1, out);

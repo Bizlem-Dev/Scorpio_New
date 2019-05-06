@@ -215,7 +215,7 @@ public class StanbolData_old {
 			int BUFFER_SIZE = 4096;
 			InputStream isr = new ByteArrayInputStream(plain_text.toString().getBytes("UTF-8"));
 
-			URL url = new URL("http://35.188.227.39:8080/enhancer/chain/scorpiosvchain");
+			URL url = new URL("http://35.227.82.195:8080/enhancer/chain/scorpiosvchain");
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 
 			httpConn.setUseCaches(false);

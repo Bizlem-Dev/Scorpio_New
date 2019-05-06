@@ -14,6 +14,8 @@ import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
+import com.mongocode.RemoveNodeFifteenDays;
+
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
@@ -45,6 +47,11 @@ public class CommonServlet extends SlingAllMethodsServlet {
 		
 		SaveReportDataClass SRDC=new SaveReportDataClass();
 		DateFromToApiReport DFTAR=new DateFromToApiReport();
+		
+		//DateFromToApiReport.setFlagZero(session, out);
+		
+		//RemoveNodeFifteenDays.removeFifteenDaysbeforeData(session, "", out, -15, currentDate);
+		
 		/*JSONArray obj=DateFromToApiReport.ReadGmailDataToShowOnUi(session, out);
 		out.println(obj);*/
 //		DateFromToApiReport.ReadGmailDataToPassPythonApi(session, out);

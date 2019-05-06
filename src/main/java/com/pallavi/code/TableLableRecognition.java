@@ -90,17 +90,17 @@ public static String fetchsolrdata(String q) {
 
 		String url = "";
 
-		// url = "http://35.188.227.168:8983/solr/TemplateCore/select?q=" + q
+		// url = "http://34.73.112.165:8983/solr/TemplateCore/select?q=" + q
 		// + "&fl=" + f1 + "&df=" + df;
 
-		// url = "http://35.188.227.168:8983/solr/Header_Synomes/select?q=" +
+		// url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=" +
 		// q + "&fl=" + f1;
 		// url =
-		// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:" +
+		// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" +
 		// q + "&fl=" + "HeaderName";
-		url = "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data_str:\"" + q + "\"&fl=score,HeaderName";
+		url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data_str:\"" + q + "\"&fl=score,HeaderName";
 		// url =
-		// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
+		// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
 
 		// url = url.replace(" ", "%20");
 

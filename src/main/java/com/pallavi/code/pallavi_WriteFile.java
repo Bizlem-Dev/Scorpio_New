@@ -31,10 +31,10 @@ public class pallavi_WriteFile {
      * Use Streams when you are dealing with raw data
      * @param data
      */
-    static void writeUsingOutputStream(String data, String path) {
+    public static void writeUsingOutputStream(String data, String path) {
         OutputStream os = null;
         try {
-            os = new FileOutputStream(new File(path));
+            os = new FileOutputStream(new File(path), true);
             os.write(data.getBytes(), 0, data.length());
             
         } catch (IOException e) {

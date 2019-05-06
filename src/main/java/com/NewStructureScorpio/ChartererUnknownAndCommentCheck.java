@@ -29,16 +29,10 @@ public class ChartererUnknownAndCommentCheck {
 			
 					String data=fetchsolrdata(unknow_commentVariable);
 					JSONObject data1=parsesolrresp(data);
+				      
 					
 					if(data1 != null && data1.length()>0){
-						if(data1.has("Charterer")){
-							chartererRep.push(data1);	
-							//System.out.println("Charterer Stack Size :: "+chartererRep.size());
-						}
-					}
-					
-					
-					if(data1 != null && data1.length()>0){
+						//System.out.println("g:: "+data1);
 						if(data1.has("Charterer")){
 							chartererRep.push(data1);	
 							//System.out.println("Charterer Stack Size :: "+chartererRep.size());
@@ -47,14 +41,14 @@ public class ChartererUnknownAndCommentCheck {
 					
 				
 			
-			if(!chartererRep.empty()){
+			if(!chartererRep.empty() && chartererRep.size()>0 && chartererRep!=null){
 				finaldata.put("Charterer",chartererRep.pop());
+				//System.out.println("d: "+finaldata);
 			}
 			
 			//System.out.println(finaldata);
 			
 		} catch (Exception e) {
-			
 		}
 		
 		return finaldata;
@@ -117,7 +111,7 @@ public class ChartererUnknownAndCommentCheck {
 				 q = URLEncoder.encode(q, "UTF-8");
 				 String url = "";
 
-				url = "http://35.188.227.168:8983/solr/Charterer/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
+				url = "http://34.73.112.165:8983/solr/Charterer/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
 				
 				URL url1 = new URL(url);
 				HttpURLConnection con = (HttpURLConnection) url1.openConnection();

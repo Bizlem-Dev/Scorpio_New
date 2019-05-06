@@ -25,7 +25,7 @@ public class SubjectHeadersAllMethods {
 			int BUFFER_SIZE = 4096;
 			InputStream isr = new ByteArrayInputStream(plain_text.toString().getBytes("UTF-8"));
 
-			URL url = new URL("http://35.188.227.39:8080/enhancer/chain/scorpiosvchain");
+			URL url = new URL("http://35.227.82.195:8080/enhancer/chain/scorpiosvchain");
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 
 			httpConn.setUseCaches(false);
@@ -382,7 +382,16 @@ public class SubjectHeadersAllMethods {
 																																								    		etaBasisDate = m.group(1);
 																																								    		out.println("alag37:: "+etaBasisDate);
 																																								    	}else{
-																																								    		out.println("no EtaBasis Found");
+																																								    		id = Pattern.compile("(([0-9]|[0][0-9]|[12][0-9]|[3][01])\\/([0-9]|[0][0-9]|[1][012])\\/[0-9]{4}[ ]?$)");
+																																								    		 m = id.matcher(url);
+																																									    	if (m.find()){
+																																									    		etaBasisDate = m.group(1);
+																																									    		out.println("alag37:: "+etaBasisDate);
+																																									    	}else{
+																																								    		
+																																								    		
+																																								    		  out.println("no EtaBasis Found");
+																																									    	}
 																																								    	}
 																																							    		
 																																							    	}

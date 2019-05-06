@@ -56,7 +56,13 @@ public class ChangedApiWithoutMultipleArray {
 			
 			if (Tonnage.hasNodes()) {
 //				long size = Tonnage.getNodes().getSize()+1;
-				long size = Tonnage.getNodes().getSize()+1;
+				/*long size = Tonnage.getNodes().getSize()+1;*/ //my code
+				long size=0;
+				if(Tonnage.hasProperty("jcr:count")){
+					   String count=Tonnage.getProperty("jcr:count").getString();
+					    size= Long.valueOf(count);
+					}
+				
 //				long countRangeI = Long.parseLong(countRange);
 				long countRangeI=Long.valueOf(countRange);
 				JSONObject keyNameObject = null;
@@ -828,7 +834,14 @@ public class ChangedApiWithoutMultipleArray {
 			Node Spot = ReportData.getNode("Spot");
 
 			if (Spot.hasNodes()) {
-				long size = Spot.getNodes().getSize()+1;
+				/*long size = Spot.getNodes().getSize()+1;*/
+				
+				long size=0;
+				if(Spot.hasProperty("jcr:count")){
+					   String count=Spot.getProperty("jcr:count").getString();
+					    size= Long.valueOf(count);
+					}
+				
 				long countRangeI = Long.parseLong(countRange);
 				String Id = "";
 

@@ -187,9 +187,9 @@ public class SolrLogicSubjectHeaders {
 			String f1="fl=score,Key,value";
 			String df="value_str";
 
-			url = "http://35.188.227.168:8983/solr/subject_data/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value_str:("+q+")&&qf=value_str";
-			//url = "http://35.188.227.168:8983/solr/subject_data/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
-			//url = "http://35.188.227.168:8983/solr/subject_data/select?q=value_str:{!dismax}"+q +"&qf=value^1 Key^1";
+			url = "http://34.73.112.165:8983/solr/subject_data/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value_str:("+q+")&&qf=value_str";
+			//url = "http://34.73.112.165:8983/solr/subject_data/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
+			//url = "http://34.73.112.165:8983/solr/subject_data/select?q=value_str:{!dismax}"+q +"&qf=value^1 Key^1";
 			
 			URL url1 = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) url1.openConnection();

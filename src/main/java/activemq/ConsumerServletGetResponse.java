@@ -1,0 +1,162 @@
+package activemq;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ResourceBundle;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.jcr.SimpleCredentials;
+import javax.servlet.ServletException;
+import org.apache.sling.api.servlets.SlingAllMethodsServlet;
+import org.apache.sling.commons.json.JSONObject;
+import org.apache.sling.jcr.api.SlingRepository;
+
+import com.errorreport.StatusForUi;
+import com.mycode.SaveReportDataClassNewStr;
+import com.readGmail.GmailMethods;
+import com.reportinformationsystem.SaveReportDataClass;
+
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.sling.SlingServlet;
+import org.apache.sling.api.SlingHttpServletRequest; 
+import org.apache.sling.api.SlingHttpServletResponse;
+
+
+@SlingServlet(paths = "/getConsumerResponse")
+public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
+	private static final long serialVersionUID = 1;
+	@SuppressWarnings("deprecation")
+	@Reference
+	private SlingRepository repo;
+
+	static ResourceBundle bundle = ResourceBundle.getBundle("config");
+	Session session = null;
+	
+	@Override
+	public void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+
+	}
+	
+	@Override
+	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		
+		 String line = "";
+		 String emailUrl="";
+		 String textSentMailTime="";
+		 String subjectNodePath="";
+		 String from_Source="";
+		 String timestampDate="";
+		 String timestampDateAndTime="";
+		 String extension="";
+		 String subjectNodeNode="";
+		 String ExpertScriptCallHere="";
+		 String finalwithQty="";
+		 
+      try {
+			
+			session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
+		        
+              BufferedReader br = request.getReader();
+			
+			StringBuffer sb = new StringBuffer();
+			while((line = br.readLine()) != null){
+				sb.append(line);
+			}
+			
+			String producerData=sb.toString();
+		        
+			if( !GmailMethods.isNullString(producerData) ){
+				
+				boolean isjsonValid=SaveReportDataClass.isJSONValid(producerData);
+				if( isjsonValid ){
+					JSONObject producerJsonObj=new JSONObject(producerData);
+					if( producerJsonObj!=null && producerJsonObj.length()!=0 ){
+						
+						if(producerJsonObj.has("emailUrl")){
+							emailUrl=producerJsonObj.getString("emailUrl");
+						}if(producerJsonObj.has("textSentMailTime")){
+							textSentMailTime=producerJsonObj.getString("textSentMailTime");
+						}if(producerJsonObj.has("subjectNodePath")){
+							subjectNodePath=producerJsonObj.getString("subjectNodePath");
+						}if(producerJsonObj.has("from_Source")){
+							from_Source=producerJsonObj.getString("from_Source");
+						}if(producerJsonObj.has("timestampDate")){
+							timestampDate=producerJsonObj.getString("timestampDate");
+						}if(producerJsonObj.has("timestampDateAndTime")){
+							timestampDateAndTime=producerJsonObj.getString("timestampDateAndTime");
+						}if(producerJsonObj.has("extension")){
+							extension=producerJsonObj.getString("extension");
+						}if(producerJsonObj.has("subjectNodeNode")){
+							subjectNodeNode=producerJsonObj.getString("subjectNodeNode");
+						}if(producerJsonObj.has("ExpertScriptCallHere")){
+							ExpertScriptCallHere=producerJsonObj.getString("ExpertScriptCallHere");
+						}if(producerJsonObj.has("finalwithQty")){
+							finalwithQty=producerJsonObj.getString("finalwithQty");
+						}
+						
+						
+						SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, extension, ExpertScriptCallHere);
+						
+						if( !GmailMethods.isNullString(subjectNodeNode) ){
+							
+							Node cronSubNode=session.getNode(subjectNodeNode);
+							
+						boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
+						if(reportCheck==true){
+							cronSubNode.setProperty("Ui_Update", "YES");
+							String allreport=StatusForUi.getReportTypeUi(finalwithQty);
+							cronSubNode.setProperty("Type", allreport);
+						}else{
+							cronSubNode.setProperty("Ui_Update", "NO");
+							
+						}
+					}// null check nodepath cronnode
+						
+						
+					} // json check null and length!=0
+					
+				} // is json valid check
+				
+			} // check producerData jsonString  blank
+			
+			session.save();
+			
+		} catch (Exception e) {
+			e.printStackTrace(out);
+		}finally{
+			 if( GmailMethods.isNullString(line) ){
+				 line=null;
+			 } if( GmailMethods.isNullString(emailUrl) ){
+				 emailUrl=null;
+			 }if( GmailMethods.isNullString(textSentMailTime) ){
+				 textSentMailTime=null;
+			 }if( GmailMethods.isNullString(subjectNodePath) ){
+				 subjectNodePath=null;
+			 }if( GmailMethods.isNullString(from_Source) ){
+				 from_Source=null;
+			 }if( GmailMethods.isNullString(timestampDate) ){
+				 timestampDate=null;
+			 }if( GmailMethods.isNullString(timestampDateAndTime) ){
+				 timestampDateAndTime=null;
+			 }if( GmailMethods.isNullString(extension) ){
+				 extension=null;
+			 }if( GmailMethods.isNullString(subjectNodeNode) ){
+				 subjectNodeNode=null;
+			 }if( GmailMethods.isNullString(ExpertScriptCallHere) ){
+				 ExpertScriptCallHere=null;
+			 }if( GmailMethods.isNullString(finalwithQty) ){
+				 finalwithQty=null;
+			 }
+			 out.close();
+			 
+		}
+
+
+	}
+	
+
+}

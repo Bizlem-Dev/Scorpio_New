@@ -287,7 +287,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 														  String svgUrl = DateFromToApiReport.processPdftoSvg(attachmentTomcatFilePath);
 														  String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
 														  if(!GmailMethods.isNullString(svgUrl)){
-														       String vinayaScriptCall=VinayaScript.vinayaScript(svgUrl);
+														       String vinayaScriptCall=VinayaScript.vinayaScript(svgUrl, timestampDateAndTime);
 															    logger.info("PdfvinayaScriptCall:: "+vinayaScriptCall);
 															    logger.info("Pdf_emailUrl:: "+emailUrl);
 															    logger.info("Pdftimestamp:: "+textSentMailTime);

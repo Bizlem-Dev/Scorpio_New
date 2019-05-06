@@ -6,14 +6,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.jcr.AccessDeniedException;
+import javax.jcr.InvalidItemStateException;
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.version.VersionException;
 
 import org.apache.log4j.Logger;
@@ -23,6 +28,7 @@ import org.apache.sling.commons.json.JSONObject;
 
 import com.abhishek.VinayaScript;
 import com.errorreport.StatusForUi;
+import com.mongocode.PdfErrorInMongoDb;
 import com.mycode.MethodJsonOnlyInsert;
 import com.mycode.Methods;
 import com.mycode.OutputReasponse;
@@ -191,92 +197,18 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 															   // logger.info("SubjectNameattachmentTomcatFilePath:: "+attachmentNode.getName().toString());
 															    
 															  if(!GmailMethods.isNullString(attachmentTomcatFilePath)){
+																  
+											//............................................pdf start here...................................
 															  if(attachmentTomcatFilePath.contains(".pdf")){
 																  attachmentFlag=true;
-																 // out.println("attachmentTomcatFilePath_pdf: "+attachmentTomcatFilePath);
-																 // Date date1=new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(textSentMailTime);
-																  //boolean schedulerReadMail= FifteenMinuteClass.fifteenDaysBeforeDataRead(date1);
-																   /* Calendar cal = Calendar.getInstance();
-																	cal.setTime(date1);
-																	//String receivedOnlyDate = String.valueOf(cal.get(Calendar.DATE));
-																	String receivedOnlyDate = cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
-																				+ cal.get(Calendar.YEAR);
-																	
-																
-																  if(receivedOnlyDate.equals("7-3-2019")){*/
-																// if (schedulerReadMail == true) {
-																	  
-//																  out.print("kalka_pdf: "+receivedOnlyDate);
-																	 
-																	// if(attachmentTomcatFilePath.equals("/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpio1/TC_MARKET_REPORT_END_2018WEEK_41_1_weeklytc_report_1.pdf")){
-																	 // if(attachmentTomcatFilePath.equals("/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpio1/Braemar_ACM_-_Eastern_CPP_LR_Report_-_04.03.19_1_BraemarACM_Clean_East_of_Suez_LR_Report_04.03.19.pdf")){
-																		 // out.print("inside match");
-																		  String emailUrl="";
-																  if(attachmentNode.hasProperty("tomcat_file_link")){
-																	  emailUrl=attachmentNode.getProperty("tomcat_file_link").getString();
-																	  emailUrl = (GmailMethods.isNullString(emailUrl)) ? "" : emailUrl;
-																	  
-																  }
-																  
-																  String subjectNodePath= subjectNode.getPath();
-																  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
-																  out.println("subjectNodePath: "+subjectNodePath);
-																  /*String svgUrl = DateFromToApiReport.processPdftoSvg(attachmentTomcatFilePath);
-																  String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDate+".txt";
-																  if(!GmailMethods.isNullString(svgUrl)){
-																       String vinayaScriptCall=VinayaScript.vinayaScript(svgUrl);
-																       System.out.println("vinayaScriptCall:: "+vinayaScriptCall+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
-																	    logger.info("PdfvinayaScriptCall:: "+vinayaScriptCall);
-																	    logger.info("Pdf_emailUrl:: "+emailUrl);
-																	    logger.info("Pdftimestamp:: "+textSentMailTime);
-																      if( !( vinayaScriptCall.equals("false") )  ){
-																      if( !GmailMethods.isNullString(vinayaScriptCall) ){
-																           boolean checkjsonString=SaveReportDataClass.isJSONValid(vinayaScriptCall);
-																	     if(checkjsonString==true){
-																	    	// take count of vinayaScriptCall
-															          	   out.println("attachmentTomcatFilePath_pdf: "+attachmentTomcatFilePath);
-															          	   out.println("vinayaScriptCall_Output_svgtopdf: "+vinayaScriptCall);
-															          	   String pallaviCodeHere= pallavi__json3_execution.UpdatedScriptForKnownAndUnknown(out, session, vinayaScriptCall, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
-															          	   logger.info("PdfpallaviCodeHere:: "+pallaviCodeHere);
-															          	   System.out.println("PdfpallaviCodeHere:: "+pallaviCodeHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
-															          	   boolean checkjsonStringfinalobj=SaveReportDataClass.isJSONValid(pallaviCodeHere);
-																			    if(checkjsonStringfinalobj==true){
-																			    	// JSONObject data=SubjectHeadersAllMethods.getUrlByStanbol(nodeNameRepaceunderscore, out);
-																			    	  JSONObject myJSonSubject=SolrLogicSubjectHeaders.SubjectData(nodeNameRepaceunderscore, out);
-																			    	  JSONArray finalArray=new JSONArray();
-																			    	  if(myJSonSubject!=null && myJSonSubject.length()!=0){
-																		        		    JSONObject pdfData=PdfSubjectHeaders.pdfData(vinayaScriptCall);
-																		        		    JSONObject dataFinal=null;
-																		        		    if(pdfData!=null && pdfData.length()!=0){
-																		        		       dataFinal=PdfSubjectHeaders.finalHeaderPdfData(myJSonSubject, pdfData);
-																		        		       finalArray.put(dataFinal);
-																		        		    }else{
-																		        		    	finalArray.put(myJSonSubject);
-																		        		    }
-																		        		  
-																		        			JSONObject stabnBolCheckSubjectHeader=new JSONObject(pallaviCodeHere);
-																		        			stabnBolCheckSubjectHeader.put("subject_HeadersData", finalArray);
-																		        			pallaviCodeHere=stabnBolCheckSubjectHeader.toString();
-																		        		    
-																		        	  }
-																			    	
-																			    	out.println("pallaviCodeHere_pdf: "+pallaviCodeHere);
-																			    //take count of pallaviCodeHere
-																			    	SDC.parseAllReportFromJsonToSave(out, session, pallaviCodeHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "pdf", vinayaScriptCall);
-																			    }
-															                   attachmentNode.setProperty("Flag", "1");
-																	   //  session.save();
-																	     
-																	} // null check pdfScript
-																}
-																  } // svg check close
-//															  } //........  															  } // check 15  days wala
-															  }// check if	
-*/															  													  // false
-																  //set flag also in parseall method inside
-//														  }// equals
-															  }// pdf close
-															 
+																  attachmentFlag = pdfProcessData(session, out,
+																		cronNodeName, subjectNode, textSentMailTime,
+																		from_Source, timestampDate,
+																		timestampDateAndTime, nodeNameRepaceunderscore,
+																		attachmentNode, attachmentTomcatFilePath);
+															  }// pdf close	
+															  
+									//............................................pdf close here...................................						  
 															  
 //														 if( emailUrl.contains(".xls") || emailUrl.contains(".xlsx") ){
 															  if( (attachmentTomcatFilePath.contains(".xls")) || (attachmentTomcatFilePath.contains(".xlsx")) || (attachmentTomcatFilePath.contains(".XLS")) || (attachmentTomcatFilePath.contains(".XLSX")) ){
@@ -324,11 +256,12 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																	  clarksonChekNode.setProperty("Nlp1", "Rejected Due To Size");
 																	  clarksonChekNode.setProperty("Nlp2", "Rejected Due To Size");
 																	  clarksonChekNode.setProperty("Nlp3_and_4_QC", "Rejected Due To Size");
+																	  attachmentNode.setProperty("Flag", "1");
 																	  session.save();
 																  }else{
 																  
 																 // out.println("subjectNodePath: "+subjectNodePath);
-																      subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+																        subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
 																        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 																       // System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 																       // logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
@@ -342,7 +275,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																		 out.println("attachmentTomcatFilePath_excel: "+attachmentTomcatFilePath);
 																         out.println("ExpertScriptexceloutput: "+ExpertScriptCallHere);
 																         //String MycodeHere= AbhishekScript.excelHtmlScript(ExpertScriptCallHere, out);
-																         String pallaviCodeHere= pallavi_UpdatedScript_copy_18_04_updated.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+																         String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 																         out.println("pallaviCodeHere_excel_newCode: "+pallaviCodeHere);
 																         //logger.info("pallaviCodeHere_Excel:: "+pallaviCodeHere);
 																        // System.out.println("pallaviCodeHere:: "+pallaviCodeHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
@@ -399,16 +332,21 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																		}else{
 																			  subjectNodeNode.setProperty("Nlp1", "NO");
 																		}
+																		
+																		 boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
+																	      if(reportCheck==true){
+																	    	  subjectNodeNode.setProperty("Ui_Update", "YES");
+																	    	  String allreport=StatusForUi.getReportTypeUi(finalwithQty);
+																	    	  subjectNodeNode.setProperty("Type", allreport);
+																	      }else{
+																	    	  subjectNodeNode.setProperty("Ui_Update", "NO");
+																	      }
+																	      session.save();
+																		
 																       }// clarkson count size here close
-																	}
-																       boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
-																      if(reportCheck==true){
-																    	  subjectNodeNode.setProperty("Ui_Update", "YES");
-																      }else{
-																    	  subjectNodeNode.setProperty("Ui_Update", "NO");
-																      }
-																      session.save();
 																	
+																      
+															  }
 																 // } // chek 														  // set flag also in parseall method inside
 																  }
 															  
@@ -480,11 +418,145 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 		}
 	}
 
+public static boolean pdfProcessData(Session session, PrintWriter out, String cronNodeName, Node subjectNode,
+		String textSentMailTime, String from_Source, String timestampDate, String timestampDateAndTime,
+		String nodeNameRepaceunderscore, Node attachmentNode, String attachmentTomcatFilePath)
+		throws RepositoryException, ValueFormatException, PathNotFoundException, VersionException, LockException,
+		ConstraintViolationException, AccessDeniedException, ItemExistsException, ReferentialIntegrityException,
+		InvalidItemStateException, NoSuchNodeTypeException, JSONException {
+	boolean attachmentFlag;
+	attachmentFlag=true;
+	
+	  Node subjectNodeNode=null;
+	  String finalwithQty="";
+	  String emailUrl="";
+			  
+	  if(attachmentNode.hasProperty("tomcat_file_link")){
+		  emailUrl=attachmentNode.getProperty("tomcat_file_link").getString();
+		  emailUrl = (GmailMethods.isNullString(emailUrl)) ? "" : emailUrl;
+		  
+	  }
+	  
+	  String subjectNodePath= subjectNode.getPath();
+	  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
+	  
+	  subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+	  
+	  String svgUrl = DateFromToApiReport.processPdftoSvg(attachmentTomcatFilePath);
+	 String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
+	  if(!GmailMethods.isNullString(svgUrl)){
+		  String vinayaScriptCall=VinayaScript.vinayaScript(svgUrl, timestampDateAndTime);
+		  if( !( vinayaScriptCall.equals("false") )  ){
+			  if( !GmailMethods.isNullString(vinayaScriptCall) ){
+				  boolean checkjsonString=SaveReportDataClass.isJSONValid(vinayaScriptCall);
+				     if(checkjsonString==true){
+				    	 
+				    	 //........................................
+				    	 JSONObject pdfDataBlankCheck=new JSONObject(vinayaScriptCall);
+				    	 String forpdfOnly="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/pdfErrorStored/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
+				    	 if(pdfDataBlankCheck.length()==0){
+				    		 attachmentNode.setProperty("Flag", "1");
+//				    		 VinayaScript.writeUsingOutputStream("pdfError::  "+subjectNode.getName().toString(), forpdfOnly);
+				    		 PdfErrorInMongoDb.storePdfErrorMongo("PDFERRORDATABASE", "PdfCollection", timestampDateAndTime, attachmentNode.getName().toString(), "BlankJSOn");
+				    	 }
+				    	 
+				    	 //......................
+				    	 
+				    	 
+				    	 subjectNodeNode.setProperty("Nlp1", "YES");
+				    	 
+				    	 String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19.updatedMainScript(out, session, vinayaScriptCall, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+				    	 boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
+				    	 if(checkjsonStringAbhishek){
+				    		 out.println("pallaviCodeHere_pdf_newCode: "+pallaviCodeHere);
+				    		 subjectNodeNode.setProperty("Nlp2", "YES");
+				    		 
+				    		 String firstMethod=SaveReportNewRowWisePositionCheck.SaveReportNewStructureChanged(out, pallaviCodeHere);
+				        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
+				        	 if(firstMethodAbhishek){
+				        		 out.println("firstMethod_pdf: "+firstMethod);
+				        		 
+				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
+				        		 if(secondMethodAbhishek){
+				        			 
+				        			 out.println("secondMethodAbhishek_pdf: "+secondMethodAbhishek);
+				        			 
+				        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
+				        			 boolean reportThirdMethodAbhishek=SaveReportDataClass.isJSONValid(reportThird);
+				        			 if(reportThirdMethodAbhishek){
+				        				 String finalJson= Methods.ReportTypeAndFinalJson(reportThird, out, nodeNameRepaceunderscore);
+						        			boolean finalJsonAbhishek=SaveReportDataClass.isJSONValid(finalJson);
+						        			if(finalJsonAbhishek){
+						        				out.println("finalMethodAbhishek_pdf: "+finalJson);
+						        				
+						        				String remainingDataCorrectedHere=MethodJsonOnlyInsert.applyToAllJsonAsSameReport(finalJson);
+						        				boolean remainingDataCorrectedHereAbhishek=SaveReportDataClass.isJSONValid(remainingDataCorrectedHere);
+						        				if(remainingDataCorrectedHereAbhishek){
+						        					finalwithQty=MethodJsonOnlyInsert.cargoQtyCheckFromNUmeric(remainingDataCorrectedHere);
+							        				boolean finalQtyAbhishek=SaveReportDataClass.isJSONValid(finalwithQty);
+								        			if(finalQtyAbhishek){
+								        				out.println("finalMethodwithqtyAbhishek_pdf: "+finalwithQty);
+								        				pallavi_WriteFile.writeUsingOutputStream( "AbhishekJSON ::====== "+finalwithQty.toString() ,filepathfromourside );
+								        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+								        				SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, "excel", vinayaScriptCall);
+								        				attachmentNode.setProperty("Flag", "1");
+								        				out.println("uientereduistatus:: "+cronNodeName);
+								        				
+								        				
+								        			}else{
+								        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+								        			}
+								        			
+						        				}
+						        			}
+				        				 
+				        			 }
+				        			 
+				        		 }
+				        		 
+				        		 
+				        	 }
+				    		 
+				    		 
+				    	 } else{
+				    		 subjectNodeNode.setProperty("Nlp2", "NO");
+				    	 }
+				        
+				    	 
+				    	 
+				     }else{
+						  subjectNodeNode.setProperty("Nlp1", "NO");
+						}
+				     
+				     
+				     boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
+				      if(reportCheck==true){
+				    	  subjectNodeNode.setProperty("Ui_Update", "YES");
+				    	  String allreport=StatusForUi.getReportTypeUi(finalwithQty);
+				    	  subjectNodeNode.setProperty("Type", allreport);
+				      }else{
+				    	  subjectNodeNode.setProperty("Ui_Update", "NO");
+				      }
+				      session.save();
+				     
+				     
+			  }// vinaya check pdf script
+			  
+			  
+		  } // check pdf false
+		  
+		  
+		  
+	  }// check if	
+	  
+	return attachmentFlag;
+}
+
 public static void htmlParser(Session session, PrintWriter out, SaveReportDataClass SDC, Node subjectNode,
 		Node textNode, String textSentMailTime, String from_Source, String timestampDate, String timestampDateAndTime,
 		String receivedDate, String nodeNameRepaceunderscore, String cronNodeName){
 	try {
-		//									 if(htmlSize>1){
 		 
 		if(textNode.hasProperty("tomcat_file_path")){
 		  String textTomcatFilePath=textNode.getProperty("tomcat_file_path").getString();
@@ -516,7 +588,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			        out.println("textTomcatFilePath: "+textTomcatFilePath);
 			        out.println("textSentMailTime_html: "+textSentMailTime);
 			       // String MycodeHere= AbhishekScript.excelHtmlScript(ExpertScriptCallHere, out);
-			       String pallaviCodeHere= pallavi_UpdatedScript_copy_18_04_updated.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+			       String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 			       
 			      // take count of pallaviCodeHere
 			        boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
@@ -573,6 +645,8 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			    boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
 			      if(reportCheck==true){
 			    	  subjectNodeNode.setProperty("Ui_Update", "YES");
+			    	  String allreport=StatusForUi.getReportTypeUi(finalwithQty);
+			    	  subjectNodeNode.setProperty("Type", allreport);
 			      }else{
 			    	  subjectNodeNode.setProperty("Ui_Update", "NO");
 			      }

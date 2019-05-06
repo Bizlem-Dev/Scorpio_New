@@ -83,8 +83,8 @@ public class NewStaructureMethods {
 		try {
 
 			 data = URLEncoder.encode(data, "UTF-8");
-			 //String url1 = "http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";
-			 String url1="http://35.188.227.168:8983/solr/AllReport/select?fl=score,DocumentName,url&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";
+			 //String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";
+			 String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";
 			 URL url = new URL(url1);
 			 System.out.println("url ****  "+url1);
 			 HttpURLConnection con = (HttpURLConnection) url.openConnection();

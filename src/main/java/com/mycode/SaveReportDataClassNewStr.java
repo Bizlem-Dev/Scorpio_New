@@ -2363,18 +2363,19 @@ public class SaveReportDataClassNewStr {
 					        }
 						}
 						
-						if(GmailMethods.isNullString(check_EmployementStatus) ){
+						/*if(GmailMethods.isNullString(check_EmployementStatus) ){
 							 check_EmployementStatus=StatusHeader;
-						}else{
+						}*/
+//						else{
 							if(GmailMethods.isNullString(check_EmployementStatus)){
 								check_EmployementStatus=check_Status;
-							}else{
+							}/*else{
 								if(GmailMethods.isNullString(check_EmployementStatus)){
 									check_EmployementStatus=StatusHeader;
 								}
-							}
-									
-						}
+							
+//							}		
+						}*/
 						
 						//.............checking nan here ..........................................
 						

@@ -1075,17 +1075,17 @@ out.println("returnarry "+returnarry);
 
 			String url = "";
 
-			// url = "http://35.188.227.168:8983/solr/TemplateCore/select?q=" + q
+			// url = "http://34.73.112.165:8983/solr/TemplateCore/select?q=" + q
 			// + "&fl=" + f1 + "&df=" + df;
 
-			// url = "http://35.188.227.168:8983/solr/Header_Synomes/select?q=" +
+			// url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=" +
 			// q + "&fl=" + f1;
 			// url =
-			// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:" +
+			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" +
 			// q + "&fl=" + "HeaderName";
-			url = "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data_str:" + q + "&fl=score,HeaderName";
+			url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data_str:" + q + "&fl=score,HeaderName";
 			// url =
-			// "http://35.188.227.168:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
+			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
 
 			// url = url.replace(" ", "%20");
 
@@ -1196,7 +1196,7 @@ out.println("returnarry "+returnarry);
 					int BUFFER_SIZE = 4096;
 					InputStream isr = new ByteArrayInputStream(plain_text.toString().getBytes("UTF-8"));
 
-					URL url = new URL("http://35.188.227.39:8080/enhancer/chain/scorpiosvchain");
+					URL url = new URL("http://35.227.82.195:8080/enhancer/chain/scorpiosvchain");
 					HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 
 					httpConn.setUseCaches(false);

@@ -33,9 +33,11 @@ import javax.mail.Store;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.search.AndTerm;
+import javax.mail.search.BodyTerm;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.ReceivedDateTerm;
 import javax.mail.search.SearchTerm;
+import javax.mail.search.SubjectTerm;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.commons.json.JSONObject;
@@ -534,8 +536,8 @@ public class GmailMethods {
 			SearchTerm term = null;
 			try {
 				
-				int x = -3; //-2
-				int y = 1;
+				int x = -12; //-2
+				int y = 1; //1
 				Calendar cal = GregorianCalendar.getInstance();
 				cal.add(Calendar.DAY_OF_YEAR, y);
 				Date tomorrow = cal.getTime();
@@ -549,6 +551,46 @@ public class GmailMethods {
 				SearchTerm olderThan = new ReceivedDateTerm(ComparisonTerm.LT, tomorrow);
 				SearchTerm newerThan = new ReceivedDateTerm(ComparisonTerm.GT, oneDaysAgo);
 				term = new AndTerm(olderThan, newerThan); // concat the search terms
+				//term = new AndTerm(new SubjectTerm(emailSubject),new BodyTerm(emailSubject)); // concat the search terms
+				
+				/*Calendar cal = null;
+				cal = Calendar.getInstance();
+				Date minDate = new Date(cal.getTimeInMillis());  // get today date
+				cal.add(Calendar.DAY_OF_MONTH, 1);               // add 1 day
+				Date maxDate = new Date(cal.getTimeInMillis());  // get tomorrow date
+				
+				out.println(maxDate + " === " + minDate);
+				SearchTerm minDateTerm = new ReceivedDateTerm(ComparisonTerm.GE, minDate);
+	            SearchTerm maxDateTerm = new ReceivedDateTerm(ComparisonTerm.LE, maxDate);
+	            
+	            term = new AndTerm(minDateTerm, maxDateTerm);    // concat the search terms
+*/				out.println("term: "+term);
+			} catch (Exception e) {
+				out.println(e.getMessage());
+			}
+			return term;
+		}
+		public static SearchTerm searchSubjectMailterm(String emailSubject,PrintWriter out){
+			
+			SearchTerm term = null;
+			try {
+				
+				int x = -12; //-2
+				int y = 1; //1
+				Calendar cal = GregorianCalendar.getInstance();
+				cal.add(Calendar.DAY_OF_YEAR, y);
+				Date tomorrow = cal.getTime();
+				//out.println(tomorrow);
+				cal.add(Calendar.DAY_OF_YEAR, x);
+				Date oneDaysAgo = cal.getTime();
+				//out.println(oneDaysAgo);
+
+				out.println(oneDaysAgo + " === " + tomorrow);
+				
+				SearchTerm olderThan = new ReceivedDateTerm(ComparisonTerm.LT, tomorrow);
+				SearchTerm newerThan = new ReceivedDateTerm(ComparisonTerm.GT, oneDaysAgo);
+				//term = new AndTerm(olderThan, newerThan); // concat the search terms
+				term = new AndTerm(new SubjectTerm(emailSubject),new BodyTerm(emailSubject)); // concat the search terms
 				
 				/*Calendar cal = null;
 				cal = Calendar.getInstance();

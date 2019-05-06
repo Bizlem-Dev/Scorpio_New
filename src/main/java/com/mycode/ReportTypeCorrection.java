@@ -399,6 +399,7 @@ rateTypeVal = "WS";
 							}else if( spotFound ){
 								
 								if(spotCount>=3){
+									System.out.println("spot count");
 									table_dataArray=spotCollectJsonAndRemaining(table_dataArray, value);
 								}
 								

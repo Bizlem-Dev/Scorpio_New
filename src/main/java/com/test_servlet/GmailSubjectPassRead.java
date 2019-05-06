@@ -1,4 +1,4 @@
-package com.reportinformationsystem;
+package com.test_servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,8 +36,8 @@ import ChangedStructureCurrent.GmailReadMailChanged;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
-@SlingServlet(paths = "/FirstStep")
-public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
+@SlingServlet(paths = "/FirstStep_Subject")
+public class GmailSubjectPassRead extends SlingAllMethodsServlet {
 	/**
 	 * 
 	 */
@@ -69,7 +69,7 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 		String passSubject=request.getParameter("passSubject");
 //		String passDateParameter=request.getParameter("arg");
 		out.println("method started ");
-	   processEmail(session,gm, out, null, "" );
+	    processEmail(session,gm, out, null, "" , passSubject);
 		
 	    
 		}catch(Exception e){
@@ -79,7 +79,7 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 		
 	}
 
-	public static void processEmail(Session session, Gmail_Pojo gmail_pj, PrintWriter out, DB mongoDataBase, String mongoId) throws MessagingException {
+	public static void processEmail(Session session, Gmail_Pojo gmail_pj, PrintWriter out, DB mongoDataBase, String mongoId, String passSubject) throws MessagingException {
 		out.println("method  inside	 ");
 		Message message=null;
 		Folder folder=null;
@@ -89,7 +89,11 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 			// session = repo.login(new SimpleCredentials("admin",
 			// "admin".toCharArray()));
 			out.println("length :: 123" + session);
-			String arrSub[]={""};
+			String arrSub[]={"HANDY & MR FUEL OIL POSITIONS BASIS ROTTERDAM, AS OF TUESDAY, 23RD APRIL, 2019.","BRAEMAR ACM - CLEAN LR1 LIST BSS FUJAIRAH - 23 APRIL 2019","BRAEMAR ACM - CLEAN LR2 LIST BSS FUJAIRAH - 23 APRIL 2019",
+					"DIRTY HANDY & MR POSITIONS","DIRTY PANAMAX POSITIONS – EUROPE",
+					"HANDY/MR DPP UKC TONNAGE LIST UPDATED 23/04/19","CLARKSONS PLATOU AG LR1 LIST DATED 23.04.19",
+					"CLARKSONS PLATOU AG MR LIST DATED 23.04.19","CLARKSONS PLATOU ECI  MR LIST DATED 23.04.19",
+					"CLARKSONS PLATOU RSEA MR LIST 23.04.19"};
 			 Properties properties = new Properties();
 			// server setting
 				properties.put(String.format("mail.%s.host", gmail_pj.getProtocol()), gmail_pj.getHost());
@@ -117,7 +121,7 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 		        if (folder != null) {
 		        	folder.open(Folder.READ_WRITE);
 		      
-		     	
+//		     for(String emailSubject :arrSub){ 	
 		    	 
 			SearchTerm term = GmailMethods.searchMailterm(out);
 
@@ -176,8 +180,8 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 						String subject = message.getSubject().trim();
 						
 						//.... start subject equals.....
-						 for(String emailSubject :arrSub){
-						if(subject.equalsIgnoreCase(emailSubject)){
+						
+						if(subject.equalsIgnoreCase(passSubject)){
 							out.println("subjectequals:: "+subject);
 						String toList = GmailMethods.parseAddresses(message.getRecipients(RecipientType.TO));
 						String ccList = GmailMethods.parseAddresses(message.getRecipients(RecipientType.CC));
@@ -338,8 +342,6 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 						
 						
 						}// subject equals
-						
-						 }
 						/*if (i == 1) {
 						break;
 					}*/
@@ -368,9 +370,8 @@ public class Servlet_FirstStep_ToRunProject extends SlingAllMethodsServlet {
 					//GmailMethods.closeFolder();
 					//GmailMethods.disconnect();
 				} // term check null close
-			
-			
-		     }
+//			}
+			}
 			
 		        }
 

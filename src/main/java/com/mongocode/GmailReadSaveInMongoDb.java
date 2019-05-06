@@ -1,6 +1,5 @@
 package com.mongocode;
 
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,30 +16,43 @@ import com.mongodb.MongoClient;
 
 public class GmailReadSaveInMongoDb {
 
-	public static void main(String[] args) {
-//		GmailReadMongo("ReadMail", "ReadMailRecords", "abhishek", null, "1", 3);
-		String date="Fri Apr 12 19:19:19 IST 2019";
-		SimpleDateFormat format1 = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");	
-		
-try {
-	Date today = format1.parse(date);
-    //Formatting today's date in EEEE, MMM dd yyyy, hh:mm:ss a format
-     
-    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-     
-    System.out.println("Today in EEEE, MMM dd yyyy, hh:mm:ss a format : "+formatter.format(today));
+	public static void main(String[] args) throws ParseException {
 
-	//System.out.println(format1.parse(date));
-} catch (Exception e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-		/*SimpleDateFormat format1 = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
-	    System.out.println(format1.format(date1));
-		*/	
-			
-
+		// store attachment file name, separated by comma
+        String attachFiles = "";
+        String fileName ="abc";
+        attachFiles += fileName + ", ";
+        
+        attachFiles = attachFiles.replaceAll(", $", "");
+        String[] split=attachFiles.split(",");
+        System.out.println(split.length);
+        
+        String d="Tue Oct 23 16:55:02 IST 2018";
+        SimpleDateFormat format1 = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+        Date today = format1.parse(d);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter2 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        d=formatter.format(today);
+        System.out.println(d);
+        String d2=formatter2.format(today);
+        System.out.println(d2);
+       
+        
+        String from="dean.marshall@clarksons.com";
+		if (from.indexOf("@") != -1) {
+			from = from.substring(from.indexOf("@") + 1); // e.g.
+															// @google.com
+		}
 		
+		if (from.indexOf(".") != -1) {
+			from = from.substring(0, from.indexOf("."));
+			System.out.println("from: " + from);
+		}
+		
+	
+
+        
 	}
 	
 	public static DBCollection GmailReadMongo( String Dbname ,String collectionname, String Subject, Date SentDate, String Flag
@@ -117,7 +129,8 @@ try {
 
 		int fileName = 0;
 		try {
-
+			// store attachment file name, separated by comma
+            String attachFiles = "";
 			if (contentType.contains("multipart")) {
 
 				Multipart multiPart = (Multipart) message.getContent();
@@ -127,10 +140,16 @@ try {
 					part = (MimeBodyPart) multiPart.getBodyPart(partCount);
 
 					if (Part.ATTACHMENT.equalsIgnoreCase(part.getDisposition())) {
-						fileName = Part.ATTACHMENT.length(); 
+						String filename = part.getFileName();
+                        attachFiles += filename + ", ";
 						
 					}
-				}
+				} // for loop
+				
+		        attachFiles = attachFiles.replaceAll(", $", ""); // if at the end any comma left remove
+		        String[] split=attachFiles.split(",");
+		        fileName=split.length;
+		        
 			}
 
 		} catch (Exception e) {

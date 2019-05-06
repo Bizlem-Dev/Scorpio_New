@@ -1,4 +1,5 @@
-package com.abhishek;
+package com.stanbol;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
@@ -16,124 +18,145 @@ import javax.mail.Address;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
-import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
+import javax.mail.Store;
+import javax.mail.Message.RecipientType;
 import javax.mail.search.AndTerm;
 import javax.mail.search.ComparisonTerm;
 import javax.mail.search.FlagTerm;
 import javax.mail.search.ReceivedDateTerm;
 import javax.mail.search.SearchTerm;
 import javax.servlet.ServletException;
-import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.SlingHttpServletResponse;
+
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
+import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
 import com.mongocode.GmailReadSaveInMongoDb;
 import com.mongocode.MongoDbConnection;
 import com.readGmail.GmailMethods;
 import com.readGmail.Gmail_Pojo;
+
 import ChangedStructureCurrent.GmailReadMailChanged;
 
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
-@SlingServlet(paths = "/servlet/service/UnseenCountOnlyOld")
-public class UnseenMailCountOnly extends SlingAllMethodsServlet {
+import org.apache.sling.api.SlingHttpServletRequest; 
+import org.apache.sling.api.SlingHttpServletResponse;
+
+
+@SlingServlet(paths = "/servlet/service/UnseenCountOnly")
+public class SlingTestServlet extends SlingAllMethodsServlet {
 	private static final long serialVersionUID = 1;
 	@Reference
 	private SlingRepository repo;
 
 	static ResourceBundle bundle = ResourceBundle.getBundle("config");
 	Session session = null;
-
+	
 	@Override
-	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
-			throws ServletException, IOException {
-		ResourceBundle bundle = ResourceBundle.getBundle("config");
-		Folder folder= null;
+	public void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-//		if (request.getRequestPathInfo().getExtension().equals("data")) {
-			//Message message=null;
-			try {
-
-				session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
-                System.out.println("entered session");
-				Gmail_Pojo gm = null;
-				gm = new Gmail_Pojo();
-				gm.setProtocol(bundle.getString("protocol"));
-				gm.setHost(bundle.getString("host"));
-				gm.setPort(bundle.getString("port"));
-				gm.setUserName(bundle.getString("userName"));
-				gm.setPassWord(bundle.getString("password"));
-
-				GmailMethods.getServerConnect(gm);
-				folder = GmailMethods.openFolder(bundle.getString("GmailFolderName"));
-				//SearchTerm term = searchMailterm(out);
-
-//				if (term != null) {
-					// fetches new messages from server
-					// Message[] arrayMessages = folder.getMessages(); //
-					// without
-					// search we can
-					// use this
+		Folder folder=null;
+		Store store=null;
+		try {
+			
+			session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
+			System.out.println("entered session");
+			
+			Gmail_Pojo gm = null;
+			gm = new Gmail_Pojo();
+			gm.setProtocol(bundle.getString("protocol"));
+			gm.setHost(bundle.getString("host"));
+			gm.setPort(bundle.getString("port"));
+			gm.setUserName(bundle.getString("userName"));
+			gm.setPassWord(bundle.getString("password"));
+			
+			 Properties properties = new Properties();
+			// server setting
+				properties.put(String.format("mail.%s.host", gm.getProtocol()), gm.getHost());
+				properties.put(String.format("mail.%s.port", gm.getProtocol()), gm.getPort());
 				
-				Flags seen = new Flags(Flags.Flag.SEEN);
-				FlagTerm unseenFlagTerm = new FlagTerm(seen, false);
-//				FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+				// SSL setting
+				properties.setProperty(String.format("mail.%s.socketFactory.class", gm.getProtocol()),"javax.net.ssl.SSLSocketFactory");
+				properties.setProperty(String.format("mail.%s.socketFactory.fallback", gm.getProtocol()), "false");
+				properties.setProperty(String.format("mail.%s.socketFactory.port", gm.getProtocol()), String.valueOf(gm.getPort()));
 				
-				Calendar cal1 = GregorianCalendar.getInstance();
-				cal1.add(Calendar.DAY_OF_MONTH, -12);
-//				cal1.add(Calendar.DAY_OF_MONTH, -6);
-				Date twelveDaysBefore = cal1.getTime();
-				ReceivedDateTerm term = new ReceivedDateTerm(ComparisonTerm.GT,twelveDaysBefore);
-				SearchTerm searchTerm = new AndTerm(unseenFlagTerm,term);
+				javax.mail.Session session	 = javax.mail.Session.getDefaultInstance(properties);
 				
-					Message[] arrayMessages = folder.search(searchTerm); // search
-					out.println("arrayMessages  :: " + arrayMessages.length);
-					System.out.println("arrayMessages :: "+arrayMessages);
-					String formatedDate1=null;
+				// connects to the message store
+			    store = session.getStore(gm.getProtocol());
+				store.connect(gm.getUserName(), gm.getPassWord());
+				
+				 // Open the Folder
+		         folder = store.getDefaultFolder();
+		        
+		        folder = folder.getFolder(bundle.getString("GmailFolderName"));
+		        
+		        if (folder != null) {
+		        	folder.open(Folder.READ_WRITE);
+		        	
 
-					for (int i = 0; i < arrayMessages.length; i++) { 
+					Flags seen = new Flags(Flags.Flag.SEEN);
+					FlagTerm unseenFlagTerm = new FlagTerm(seen, false);
+//					FlagTerm unseenFlagTerm = new FlagTerm(seen, true);
+					
+					Calendar cal1 = GregorianCalendar.getInstance();
+					cal1.add(Calendar.DAY_OF_MONTH, -4); //12
+//					cal1.add(Calendar.DAY_OF_MONTH, -6);
+					Date twelveDaysBefore = cal1.getTime();
+					ReceivedDateTerm term = new ReceivedDateTerm(ComparisonTerm.GT,twelveDaysBefore);
+					SearchTerm searchTerm = new AndTerm(unseenFlagTerm,term);
+					
+						Message[] arrayMessages = folder.search(searchTerm); // search
+						//out.println("arrayMessages  :: " + arrayMessages.length);
+						System.out.println("arrayMessages :: "+arrayMessages.length);
+						String formatedDate1=null;
+		        	
+						for (int i = 0; i < arrayMessages.length; i++) { 
+							try{
+							
+							formatedDate1 = processMessage(out, arrayMessages, formatedDate1, i);
+								 
+							}catch(Exception e){
+								continue;
+							}
+						} // for close
 						
-						formatedDate1 = processMessage(out, arrayMessages, formatedDate1, i);
-							 
-					} // for close
-					if( !GmailMethods.isNullString(formatedDate1) ){
-						MongoDbConnection.saveGmailReadCount("GmailReadCountDataBase", formatedDate1, String.valueOf(arrayMessages.length));
-					}
-					
-					
-					
-
-			} catch (Exception e) {
-				//MongoDbConnection MDC=new MongoDbConnection();
-/*				  try {
-					  if(message!=null){
-					    MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , out);
-					  }
-					  } catch (MessagingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}*/
-//				  e.printStackTrace(out);
-				  System.out.println("mainException");
-                        e.printStackTrace();
+						if( !GmailMethods.isNullString(formatedDate1) ){
+							MongoDbConnection.saveGmailReadCount("GmailReadCountDataBase", formatedDate1, String.valueOf(arrayMessages.length));
+						}
+						
+						
+		        	
+		        }// folder check not null
+			
+		        
+		        
+		        
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			 try {
+				 if(null!=folder){
+					 folder.close(false);
+			 }
+				if(null!=store){
+				store.close();
+				}} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			finally{
-				 try {
-					folder.close(false);
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	           
-				
-			}
-
-//		} // extension
+          
+			
+		}
+		
+		
 	}
-
+	
 	public String processMessage(PrintWriter out, Message[] arrayMessages, String formatedDate1, int i)
 			throws MessagingException {
 		// this
@@ -145,7 +168,6 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 				 message = arrayMessages[i];
 				// out.println(message.getReceivedDate());
 				
-
 				Date recDate = message.getReceivedDate();
 //							recDate = (GmailMethods.isNullString(recDate)) ? "" : recDate;
 				/*String mailReceivedDate = "";
@@ -286,7 +308,7 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 						GmailReadMailChanged.dublicatecheck_mainNode(out, session, subject_replace, Bodycheckmsg, bodyText, toList,
 								from, ccList, sentDate, subject, contentType, message,
 								subject_replace_node_mainnode, formatedDate,formatedDate1, bodyCheck);
-						out.println("same below");
+						System.out.println("same below");
 						
 						if( !GmailMethods.isNullString(formatedDate1) ){
 							int AttachmentLength=GmailReadSaveInMongoDb.attachmentCount(contentType, message);
@@ -294,6 +316,7 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 						}
 
 					} else {
+						
 						subject_replace_node_mainnode = content.addNode(subject_replace);
 						subject_replace_node_mainnode.setProperty("jcr:count", String.valueOf(0));
 						session.save();
@@ -325,10 +348,11 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 								subject_replace, session);
 						
 						//...................................... mongosubject readmail flag1 here
-						/*if( !GmailMethods.isNullString(formatedDate1) ){
+						
+						if( !GmailMethods.isNullString(formatedDate1) ){
 							int AttachmentLength=GmailReadSaveInMongoDb.attachmentCount(contentType, message);
 							GmailReadSaveInMongoDb.GmailReadMongo("ReadMail", message.getSentDate().toString(), message.getSubject(), message.getSentDate(), "1", AttachmentLength);
-						}*/
+						}
 						
 						//........................................ end mongo
 						
@@ -351,7 +375,6 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 				
 				  }catch(Exception e){ 
 					  System.out.println("Errorcaught insert into Mongo db "+e.getMessage());
-					  e.printStackTrace();
 					  MongoDbConnection MDC=new MongoDbConnection();
 					  String errorMsg=e.getMessage();
 					  MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject(), errorMsg);
@@ -361,72 +384,6 @@ public class UnseenMailCountOnly extends SlingAllMethodsServlet {
 				  }
 		return formatedDate1;
 	}
-
-	@Override
-	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	public static SearchTerm searchMailterm(PrintWriter out) {
-
-		SearchTerm term = null;
-		try {
-
-			int x = -2;
-			int y = 1;
-			Calendar cal = GregorianCalendar.getInstance();
-			cal.add(Calendar.DAY_OF_YEAR, y);
-			Date tomorrow = cal.getTime();
-			// out.println(tomorrow);
-			cal.add(Calendar.DAY_OF_YEAR, x);
-			Date oneDaysAgo = cal.getTime();
-			// out.println(oneDaysAgo);
-
-			out.println(oneDaysAgo + " === " + tomorrow);
-
-			SearchTerm olderThan = new ReceivedDateTerm(ComparisonTerm.LT, tomorrow);
-			SearchTerm newerThan = new ReceivedDateTerm(ComparisonTerm.GT, oneDaysAgo);
-			term = new AndTerm(olderThan, newerThan); // concat the search terms
-
-			/*
-			 * Calendar cal = null; cal = Calendar.getInstance(); Date minDate =
-			 * new Date(cal.getTimeInMillis()); // get today date
-			 * cal.add(Calendar.DAY_OF_MONTH, 1); // add 1 day Date maxDate =
-			 * new Date(cal.getTimeInMillis()); // get tomorrow date
-			 * 
-			 * out.println(maxDate + " === " + minDate); SearchTerm minDateTerm
-			 * = new ReceivedDateTerm(ComparisonTerm.GE, minDate); SearchTerm
-			 * maxDateTerm = new ReceivedDateTerm(ComparisonTerm.LE, maxDate);
-			 * 
-			 * term = new AndTerm(minDateTerm, maxDateTerm); // concat the
-			 * search terms
-			 */ out.println("term: " + term);
-		} catch (Exception e) {
-			out.println(e.getMessage());
-		}
-		return term;
-	}
-
-	public static String seen_UnseenEmails(Message message, PrintWriter out) {
-
-		String seen = "";
-		try {
-
-			boolean isseen = message.getFlags().contains(Flags.Flag.SEEN);
-			if (isseen == true) {
-				seen = "1";
-				// out.println("seen : "+seen);
-			} else {
-				seen = "0";
-				out.println("Unseen : " + seen);
-			}
-
-		} catch (Exception e) {
-			out.println(e.getMessage());
-		}
-		return seen;
-
-	}
+	
 
 }

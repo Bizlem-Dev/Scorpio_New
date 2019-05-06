@@ -101,6 +101,7 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 	}
 
 	public static void processEmail(Session session, Gmail_Pojo gmail_pj, PrintWriter out, String passSubject, DB mongoDataBase, String mongoId) throws MessagingException {
+		out.println("method  inside	 ");
 		Message message=null;
 		try {
 			// session = repo.login(new SimpleCredentials("admin",
@@ -167,7 +168,7 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 						//.... start subject equals.....
 						
 						if(subject.equals(passSubject)){
-
+							out.println("subjectequals:: ");
 						String toList = GmailMethods.parseAddresses(message.getRecipients(RecipientType.TO));
 						String ccList = GmailMethods.parseAddresses(message.getRecipients(RecipientType.CC));
 
@@ -484,14 +485,14 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 
 			} // main node check
 		} catch (Exception e) {
-			MongoDbConnection MDC=new MongoDbConnection();
+			/*MongoDbConnection MDC=new MongoDbConnection();
 			try {
-				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , out);
-			} catch (MessagingException e1) {
+				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , e.getMessage());
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			out.println("dublicatecheck_mainNode:: "+e.getMessage());
+			}*/
+			System.out.println("dublicatecheck_mainNode:: "+e.getMessage());
 		}
 
 		return CheckedNode;
@@ -535,13 +536,13 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 			if (!GmailMethods.isNullString(mainnodeCount)) {
 				String forid1 = String.valueOf(Integer.parseInt(mainnodeCount) + 1);
 				String file_name = subject_replace + "_" + forid1 + ".html";
-				out.println("inside method text : " + file_name);
+				System.out.println("inside method text : " + file_name);
 				if (subject_replace_node_mainnode.hasNode(file_name)) {
-					out.println("entered inside if");
+					System.out.println("entered inside if");
 					mainInsideText_unstructured_Node = subject_replace_node_mainnode.getNode(file_name);
-					out.println("inside mainInsideText_unstructured_Node : " + mainInsideText_unstructured_Node);
+					//out.println("inside mainInsideText_unstructured_Node : " + mainInsideText_unstructured_Node);
 				} else {
-					out.println("entered inside else");
+					System.out.println("entered inside else");
 					mainInsideText_unstructured_Node = subject_replace_node_mainnode.addNode(file_name,
 							"nt:unstructured");
 					// session.save();
@@ -667,15 +668,15 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 
 		} catch (Exception e) {
 			
-			MongoDbConnection MDC=new MongoDbConnection();
+			/*MongoDbConnection MDC=new MongoDbConnection();
 			try {
-				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , out);
+				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , e.getMessage());
 			} catch (MessagingException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-            out.println("in html catch");
-			out.println(e.getMessage());
+            out.println("in html catch");*/
+			System.out.println(e.getMessage());
 
 		}
 		return mainInsideText_unstructured_Node;
@@ -776,7 +777,7 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 
 		} catch (Exception e) {
 			
-			out.println("create_AttachmentNode_SaveAttach_Sling:: "+e.getMessage());
+			System.out.println("create_AttachmentNode_SaveAttach_Sling:: "+e.getMessage());
 		}
 	}
 
@@ -869,14 +870,14 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 			}
 
 		} catch (Exception e) {
-			MongoDbConnection MDC=new MongoDbConnection();
+			/*MongoDbConnection MDC=new MongoDbConnection();
 			try {
-				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , out);
-			} catch (MessagingException e1) {
+				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , e.getMessage());
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			out.println("AttachmentSaveData:: "+e.getMessage());
+			}*/
+			System.out.println("AttachmentSaveData:: "+e.getMessage());
 		}
 	}
 
@@ -1030,14 +1031,14 @@ public class GmailReadMailChanged extends SlingAllMethodsServlet {
 
 			}
 		} catch (Exception e) {
-			MongoDbConnection MDC=new MongoDbConnection();
+			/*MongoDbConnection MDC=new MongoDbConnection();
 			try {
-				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , out);
-			} catch (MessagingException e1) {
+				MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", message.getSentDate().toString(), "0", message.getSubject() , e.getMessage());
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			out.println("checkEmailFields_TimeSentMail:: "+e.getMessage());
+			}*/
+			System.out.println("checkEmailFields_TimeSentMail:: "+e.getMessage());
 		}
 
 	}
