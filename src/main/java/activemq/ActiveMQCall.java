@@ -25,25 +25,26 @@ public class ActiveMQCall {
 	
 	
 	
-	ResourceBundle bundle = null;
-	private Connection connection = null;
-	private ActiveMQSession session = null;
-	private Destination destination = null;
-	private MessageProducer producer = null;
-	private MessageConsumer consumer = null;
-	QueueSender queueSender;
-	String response = "";
-	InputStream inputStream;
+	//ResourceBundle bundle = null;
+	//QueueSender queueSender;
+//	String response = "";
+	//InputStream inputStream;
 	//final static Logger logger = Logger.getLogger(ActiveMQCall.class); 
 
 	public String GetProducer(String queueName ,String correlationId,String jsonString) {
 		
+		Connection connection = null;
+		ActiveMQSession session = null;
+		Destination destination = null;
+		MessageProducer producer = null;
+		 String activeMQURL = null;
+			String activeMQUsername = null;
+			String activeMQPassword = null;
+	//	MessageConsumer consumer = null;
 		
 		try {
 		// bundle = ResourceBundle.getBundle("serverConfig");
-		 String activeMQURL ="";
-			String activeMQUsername="";
-			String activeMQPassword="";
+		
 			// bundle = ResourceBundle.getBundle("serverConfig");
 			// activeMQURL=bundle.getString("activeMQ.URL");
 			 activeMQURL="http://34.74.142.84:8161/admin/";
@@ -78,6 +79,7 @@ public class ActiveMQCall {
 		}finally {
 			try {
 			connection.close();
+			connection=null;
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -87,7 +89,7 @@ public class ActiveMQCall {
 		return correlationId;
 	}
 	
-public String GetConsumer(String queueName) {
+/*public String GetConsumer(String queueName) {
 		String correlationId = "";
 		try {
 			
@@ -106,8 +108,8 @@ public String GetConsumer(String queueName) {
 				 activeMQPassword ="admin";
 
 
-			/*ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
-			"tcp://" + prop.getProperty("activeMQ.URL") + ":61616");*/
+			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+			"tcp://" + prop.getProperty("activeMQ.URL") + ":61616");
 		//ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(activeMQUsername, activeMQPassword, activeMQURL);
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(activeMQUsername, activeMQPassword, "tcp://34.74.142.84:61616");
 
@@ -144,20 +146,20 @@ public String GetConsumer(String queueName) {
 		return correlationId;
 		
 	}
-
+*/
 public String createRandomString() {
 	Random random = new Random(System.currentTimeMillis());
 	long randomLong = random.nextLong();
 	return Long.toHexString(randomLong);
 }
 
-public static void main(String args[]) {
+/*public static void main(String args[]) {
 	ActiveMQCall a = new ActiveMQCall();
 	String id=a.GetConsumer("WORKINGTEST");
 	System.out.println("id: "+id);
 	
 	//a.GetProducer("testing", "765", "4", "first message");
-	 /* a.GetProducer( "queueName" ,  "646","{\r\n" + 
+	  a.GetProducer( "queueName" ,  "646","{\r\n" + 
 	  		"\"subject\":\"CLARKSONS MIDDLE EAST CPP TRACKERS - 02/05/19\",\r\n" + 
 	  		"\"to\":\"scorpio@bizlem.com\",\r\n" + 
 	  		"\"from\":\"Dean.Marshall@clarksons.com\",\r\n" + 
@@ -165,10 +167,10 @@ public static void main(String args[]) {
 	  		"\"mailbodyfilepath\":\"\",\r\n" + 
 	  		"\"attachment\":[{\"tomcatfilepath\":\"\",\"filename\":\"\"\r\n" + 
 	  		"},{\"tomcatfilepath\":\"\"}]\r\n" + 
-	  		"}") ;*/
+	  		"}") ;
 
 	//a.GetConsumer("IPMS.COCD.GENERATE");
-	/*try {
+	try {
 	ResourceBundle	bundle = ResourceBundle.getBundle("serverConfig");
 	 String activeMQURL ="";
 		String activeMQUsername="";
@@ -192,8 +194,8 @@ System.out.println(session);
 	}catch (Exception e) {
 		// TODO: handle exception
 		System.out.println(e.getMessage());
-	}*/
+	}
 }
-
+*/
 
 }

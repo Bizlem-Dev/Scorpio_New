@@ -165,8 +165,8 @@ public class SaveReportNewRowWisePositionCheck {
 	                    		  tableinsideDataOnlyJonObj=  table_dataArray.getJSONObject(i);
 	                    		// System.out.println(tableinsideDataOnlyJonObj);
 	                    		  JSONObject dataJSonObj=null;
-	                    		 if(tableinsideDataOnlyJonObj.has("data")){
-	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
+	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
 	                    		 } // data close 
 	                    		 JSONObject headerJSonObj=null;

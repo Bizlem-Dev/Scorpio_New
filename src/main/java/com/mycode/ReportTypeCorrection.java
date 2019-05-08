@@ -330,8 +330,8 @@ rateTypeVal = "WS";
 	                		 for(int i=0;i<table_dataArray.length();i++){
 	                			 tableinsideDataOnlyJonObj=  table_dataArray.getJSONObject(i);
 	                			 JSONObject dataJSonObj=null;
-	                    		 if(tableinsideDataOnlyJonObj.has("data")){
-	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
+	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
 	                    		 } // data close
 	                    		 JSONObject headerJSonObj=null;
@@ -442,8 +442,8 @@ rateTypeVal = "WS";
 			for(int i=0;i<table_dataArray.length();i++){
 				JSONObject tableinsideDataOnlyJonObj=table_dataArray.getJSONObject(i);
 				JSONObject dataJSonObj=null;
-				if(tableinsideDataOnlyJonObj.has("data")){
-        			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+				if(tableinsideDataOnlyJonObj.has("new_data")){
+        			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
         			 
         		 } // data close
         		 JSONObject headerJSonObj=null;
@@ -682,8 +682,8 @@ rateTypeVal = "WS";
 			for(int i=0;i<table_dataArray.length();i++){
 				JSONObject tableinsideDataOnlyJonObj=table_dataArray.getJSONObject(i);
 				JSONObject dataJSonObj=null;
-				if(tableinsideDataOnlyJonObj.has("data")){
-        			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+				if(tableinsideDataOnlyJonObj.has("new_data")){
+        			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
         			 
         		 } // data close
         		 JSONObject headerJSonObj=null;
@@ -874,8 +874,8 @@ rateTypeVal = "WS";
 			for(int i=0;i<table_dataArray.length();i++){
 				JSONObject tableinsideDataOnlyJonObj=table_dataArray.getJSONObject(i);
 				JSONObject dataJSonObj=null;
-				if(tableinsideDataOnlyJonObj.has("data")){
-        			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+				if(tableinsideDataOnlyJonObj.has("new_data")){
+        			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
         			 
         		 } // data close
         		 JSONObject headerJSonObj=null;

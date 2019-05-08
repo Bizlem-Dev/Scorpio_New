@@ -34,8 +34,8 @@ public class Methods {
 	                		 for(int i=0;i<table_dataArray.length();i++){
 	                			 tableinsideDataOnlyJonObj=  table_dataArray.getJSONObject(i);
 	                			 JSONObject dataJSonObj=null;
-	                    		 if(tableinsideDataOnlyJonObj.has("data")){
-	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
+	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
 	                    		 } // data close
 	                    		 JSONObject headerJSonObj=null;
@@ -174,8 +174,8 @@ public class Methods {
        			 for(int i=0;i<header_data.length();i++){
        				JSONObject headerJsonObj=header_data.getJSONObject(i);
        				
-       				if(headerJsonObj.has("data")){
-       					JSONArray data=headerJsonObj.getJSONArray("data");
+       				if(headerJsonObj.has("new_data")){
+       					JSONArray data=headerJsonObj.getJSONArray("new_data");
        					//System.out.println(data);
        					for(int j=0;j<data.length();j++){
        						JSONObject dataArrayObj=data.getJSONObject(j);

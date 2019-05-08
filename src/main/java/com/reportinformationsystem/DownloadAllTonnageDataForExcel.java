@@ -13,8 +13,6 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
-import com.readGmail.GmailMethods;
-
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
@@ -28,6 +26,10 @@ import org.apache.felix.scr.annotations.Properties;
 		})
 
 public class DownloadAllTonnageDataForExcel extends SlingAllMethodsServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Reference
 	private SlingRepository repo;
 	Session session = null;

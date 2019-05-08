@@ -12,7 +12,6 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.jcr.api.SlingRepository;
 
-import com.readGmail.Gmail_Pojo;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
@@ -50,8 +49,8 @@ public class RemoveFifteenDaysData extends SlingAllMethodsServlet {
 			String currentDate=request.getParameter("currentDate");
 			String passRemoveDays=request.getParameter("passRemoveDays");
 			out.println("NodePath "+NodePath+ " currentDate "+ currentDate+" passRemoveDays "+passRemoveDays);
-			RemoveNodeFifteenDays.removeFifteenDaysbeforeData(session, "/scorpioDataBase/ReportData/Spot/", out, -15, "24-04-2019");
-//			RemoveNodeFifteenDays.removeFifteenDaysbeforeData(session, NodePath, out, Integer.parseInt(passRemoveDays), currentDate);
+			//RemoveNodeFifteenDays.removeFifteenDaysbeforeData(session, "/scorpioDataBase/ReportData/Spot/", out, -15, "24-04-2019");
+			RemoveNodeFifteenDays.removeFifteenDaysbeforeData(session, NodePath, out, Integer.parseInt(passRemoveDays), currentDate);
 			//session.save();
 	    
 		}catch(Exception e){

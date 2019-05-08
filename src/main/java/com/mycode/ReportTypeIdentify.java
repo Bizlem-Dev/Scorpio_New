@@ -79,8 +79,8 @@ public class ReportTypeIdentify {
 	                			 headerCount++;
 	                			 tableinsideDataOnlyJonObj=  table_dataArray.getJSONObject(i);
 	                			 JSONObject dataJSonObj=null;
-	                    		 if(tableinsideDataOnlyJonObj.has("data")){
-	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
+	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
 	                    		 } // data close
 	                    		 JSONObject headerJSonObj=null;

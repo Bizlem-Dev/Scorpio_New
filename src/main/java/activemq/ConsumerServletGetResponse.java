@@ -3,6 +3,8 @@ package activemq;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
@@ -55,6 +57,7 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 		 String subjectNodeNode="";
 		 String ExpertScriptCallHere="";
 		 String finalwithQty="";
+		 String formatedDate="";
 		 
       try {
 			
@@ -101,9 +104,17 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 						
 						SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, extension, ExpertScriptCallHere);
 						
+						
 						if( !GmailMethods.isNullString(subjectNodeNode) ){
 							
 							Node cronSubNode=session.getNode(subjectNodeNode);
+							
+							 Date date = new Date();
+							 SimpleDateFormat formatter2 = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+							 if( formatter2!=null ){
+								 formatedDate= formatter2.format(date);
+								 cronSubNode.setProperty("savingTime", formatedDate);
+							 }
 							
 						boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
 						if(reportCheck==true){
@@ -150,6 +161,8 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 				 ExpertScriptCallHere=null;
 			 }if( GmailMethods.isNullString(finalwithQty) ){
 				 finalwithQty=null;
+			 }if( GmailMethods.isNullString(formatedDate) ){
+				 formatedDate=null;
 			 }
 			 out.close();
 			 

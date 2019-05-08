@@ -24,7 +24,7 @@ import com.mycode.OutputReasponse;
 import com.mycode.ReportTypeCorrection;
 import com.mycode.ReportTypeIdentify;
 import com.mycode.SaveReportNewRowWisePositionCheck;
-import com.pallavi.code.pallavi_UpdatedScript_copy_25_04_19;
+import com.pallavi.code.pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck;
 import com.pallavi.code.pallavi_WriteFile;
 import com.readGmail.GmailMethods;
 import com.reportinformationsystem.DateFromToApiReport;
@@ -327,7 +327,7 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 				  attachmentNode.setProperty("Flag", "1");
 			 out.println("attachmentTomcatFilePath_excel: "+attachmentTomcatFilePath);
 	         out.println("ExpertScriptexceloutput: "+ExpertScriptCallHere);
-	         String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+	         String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 	         out.println("pallaviCodeHere_excel_newCode: "+pallaviCodeHere);
 	         boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 		        if(checkjsonStringAbhishek){
@@ -465,7 +465,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				    	 subjectNodeNode.setProperty("Nlp1", "YES");
 				    	 attachmentNode.setProperty("Flag", "1");
 				    	 
-				    	 String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19.updatedMainScript(out, session, vinayaScriptCall, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+				    	 String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, vinayaScriptCall, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 				    	 boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 				    	 if(checkjsonStringAbhishek){
 				    		 out.println("pallaviCodeHere_pdf_newCode: "+pallaviCodeHere);
@@ -611,7 +611,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			    	out.println("ExpertCodeOutputHtml: "+ExpertScriptCallHere);
 			        out.println("textTomcatFilePath: "+textTomcatFilePath);
 			        out.println("textSentMailTime_html: "+textSentMailTime);
-			        String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+			        String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 			        boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 			        if(checkjsonStringAbhishek){
 						  out.println("pallaviCodeHereHtml: "+pallaviCodeHere);

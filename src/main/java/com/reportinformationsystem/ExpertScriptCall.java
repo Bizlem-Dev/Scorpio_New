@@ -21,14 +21,13 @@ public class ExpertScriptCall {
 		String filePath = "D:\\scorpio pdf broker\\Analysis-28-29\\ODIN_CPP_MKT_RPT_-_WEEK_13_4.html";
 		// String
 		// filePath="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpio1/UPDATED_LR2_POSITION_LISTS_BSS_FUJAIRAH_1.html";
-		/*
-		 * String responseString=postExpertScript(filePath, null);
-		 * System.out.println(responseString);
-		 */
+		 String responseString=postExpertScript(filePath, null);
+		  System.out.println(responseString);
+		 
 
-		String data = data(
+		/*String data = data(
 				"/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpio1/svgoutput/TRUE_NORTH_WEEKLY_CLEAN_REPORT_-_WEEK_14_1_TNCWeekly_Commentary_Week_14_2019.json");
-		System.out.println(data);
+		System.out.println(data);*/
 	}
 
 	public static String postExpertScript(String filePath, PrintWriter out) {
@@ -58,7 +57,7 @@ public class ExpertScriptCall {
 			responseString = response.toString();
 
 		} catch (Exception e) {
-
+//e.printStackTrace();
 			return "false";
 		}
 		return responseString;

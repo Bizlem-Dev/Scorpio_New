@@ -592,12 +592,12 @@ public class StatusForUi {
 			Calendar cal = null;
 			cal = Calendar.getInstance();
 			Date todayDate = new Date(cal.getTimeInMillis()); // today date 
-			System.out.println("todayDate: "+todayDate);
+			//System.out.println("todayDate: "+todayDate);
 			
 			cal = Calendar.getInstance();
 			cal.add( Calendar.DAY_OF_YEAR, -4);
 			Date minusSate = cal.getTime(); // three days before date 
-			System.out.println("minusSate: "+minusSate);
+		//	System.out.println("minusSate: "+minusSate);
 			if (cronDate.after(minusSate) && cronDate.before(todayDate)) {
 				returnTimerange = true;
 			}
