@@ -25,6 +25,7 @@ import com.mycode.ReportTypeCorrection;
 import com.mycode.ReportTypeIdentify;
 import com.mycode.SaveReportNewRowWisePositionCheck;
 import com.pallavi.code.pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck;
+import com.pallavi.code.pallavi_UpdatedScript_copy_25_04_19_lablecheck_noshifting;
 import com.pallavi.code.pallavi_WriteFile;
 import com.readGmail.GmailMethods;
 import com.reportinformationsystem.DateFromToApiReport;
@@ -323,25 +324,59 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 	           boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
 			if(checkjsonString==true){
 				producerJSonObj.put("ExpertScriptCallHere", ExpertScriptCallHere);
-				  subjectNodeNode.setProperty("Nlp1", "YES");
+				
+				JSONObject expertJsonObj=new JSONObject(ExpertScriptCallHere);
+				if( expertJsonObj.length()>0 ){
+					subjectNodeNode.setProperty("Nlp1", "YES");
+				}else{
+					subjectNodeNode.setProperty("Nlp1", "NO");
+				}
+				  
 				  attachmentNode.setProperty("Flag", "1");
+				  
 			 out.println("attachmentTomcatFilePath_excel: "+attachmentTomcatFilePath);
 	         out.println("ExpertScriptexceloutput: "+ExpertScriptCallHere);
-	         String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+	         //String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+	         
+	         String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19_lablecheck_noshifting.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+	         
 	         out.println("pallaviCodeHere_excel_newCode: "+pallaviCodeHere);
 	         boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 		        if(checkjsonStringAbhishek){
 		        	out.println("pallaviCodeHere_excel: "+pallaviCodeHere);
-		        	subjectNodeNode.setProperty("Nlp2", "YES");
+		        	
+		        	JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
+					if( pallaviCodeHereJsonObj.length()>0 ){
+						subjectNodeNode.setProperty("Nlp2", "YES");
+					}else{
+						subjectNodeNode.setProperty("Nlp2", "NO");
+					}
+		        	
 		        	attachmentNode.setProperty("Flag", "1");
+		        	
 		        	String firstMethod=SaveReportNewRowWisePositionCheck.SaveReportNewStructureChanged(out, pallaviCodeHere);
 		        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 		        	 if(firstMethodAbhishek){
 		        		 out.println("firstMethod_excel: "+firstMethod);
+		        		 
+		        		 JSONObject firstMethodAbhishekJsonObj=new JSONObject(firstMethod);
+		 				if( firstMethodAbhishekJsonObj.length()==0 ){
+		 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+		 					 attachmentNode.setProperty("Flag", "1");
+		 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+		 				}
+		        		 
 		        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
 		        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 		        		 if(secondMethodAbhishek){
 		        			 out.println("secondMethodAbhishek_excel: "+secondMethodAbhishek);
+		        			 
+		        			 JSONObject secondMethodAbhishekJsonObj=new JSONObject(secondMethod);
+				 				if( secondMethodAbhishekJsonObj.length()==0 ){
+				 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				 					 attachmentNode.setProperty("Flag", "1");
+				 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				 				}
 		        			 
 		        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
 		        			 boolean reportThirdMethodAbhishek=SaveReportDataClass.isJSONValid(reportThird);
@@ -351,6 +386,13 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		        			if(finalJsonAbhishek){
 		        				out.println("finalMethodAbhishek_excel: "+finalJson);
 		        				
+		        				JSONObject finalJsonAbhishekJsonObj=new JSONObject(finalJson);
+				 				if( finalJsonAbhishekJsonObj.length()==0 ){
+				 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				 					 attachmentNode.setProperty("Flag", "1");
+				 				}
+		        				
 		        				String remainingDataCorrectedHere=MethodJsonOnlyInsert.applyToAllJsonAsSameReport(finalJson);
 		        				boolean remainingDataCorrectedHereAbhishek=SaveReportDataClass.isJSONValid(remainingDataCorrectedHere);
 		        				if(remainingDataCorrectedHereAbhishek){
@@ -359,8 +401,16 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 			        			if(finalQtyAbhishek){
 			        				out.println("finalMethodwithqtyAbhishek_excel: "+finalwithQty);
 			        				pallavi_WriteFile.writeUsingOutputStream( "AbhishekJSON ::====== "+finalwithQty.toString() ,filepathfromourside );
-			        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+			        				
+			        				JSONObject finalwithQtyJsonObj=new JSONObject(finalwithQty);
+			    					if( finalwithQtyJsonObj.length()>0 ){
+			    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+			    					}else{
+			    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+			    					}
+			        				
 			        				attachmentNode.setProperty("Flag", "1");
+			        				
 			        				producerJSonObj.put("finalwithQty", finalwithQty);
 			        				
 			        				ActiveMQCall amq=new ActiveMQCall();
@@ -376,7 +426,15 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		        				} //
 		        			}
 		        		 }//
+		        		 }else {
+		        			 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+		        			 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+		        			 attachmentNode.setProperty("Flag", "1");
 		        		 }
+		        	 }else {
+		        		 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+		        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+		        		 attachmentNode.setProperty("Flag", "1");
 		        	 }
 	                
 		        }else{
@@ -389,14 +447,6 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 				  attachmentNode.setProperty("Flag", "1");
 			}
 			
-			 /*boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
-		      if(reportCheck==true){
-		    	  subjectNodeNode.setProperty("Ui_Update", "YES");
-		    	  String allreport=StatusForUi.getReportTypeUi(finalwithQty);
-		    	  subjectNodeNode.setProperty("Type", allreport);
-		      }else{
-		    	  subjectNodeNode.setProperty("Ui_Update", "NO");
-		      }*/
 		      session.save();
 			
 	       }// clarkson count size here close
@@ -453,23 +503,45 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				  boolean checkjsonString=SaveReportDataClass.isJSONValid(vinayaScriptCall);
 				     if(checkjsonString==true){
 				    	 producerJSonObj.put("ExpertScriptCallHere", vinayaScriptCall);
+				    	 
+				    	 
+				    	 JSONObject expertJsonObj=new JSONObject(vinayaScriptCall);
+							if( expertJsonObj.length()>0 ){
+								subjectNodeNode.setProperty("Nlp1", "YES");
+							}else{
+								subjectNodeNode.setProperty("Nlp1", "NO");
+							}
+				    	 
 				    	 //........................................
 				    	 JSONObject pdfDataBlankCheck=new JSONObject(vinayaScriptCall);
 				    	 if(pdfDataBlankCheck.length()==0){
 				    		 attachmentNode.setProperty("Flag", "1");
+				    		String nujanScripPdf= ExpertScriptCall.postPdfExpertScript(svgUrl, out);
+				    		 
+				    		 boolean nujanScripPdfString=SaveReportDataClass.isJSONValid(nujanScripPdf);
+				    		 if( nujanScripPdfString ){
+				    			 vinayaScriptCall=nujanScripPdf;
+				    		 }
+				    		 
 				    		 PdfErrorInMongoDb.storePdfErrorMongo("PDFERRORDATABASE", "PdfCollection", timestampDateAndTime, attachmentNode.getName().toString(), "BlankJSOn");
 				    	 }
 				    	 
 				    	 //......................
 				    	 
-				    	 subjectNodeNode.setProperty("Nlp1", "YES");
 				    	 attachmentNode.setProperty("Flag", "1");
 				    	 
 				    	 String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, vinayaScriptCall, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
 				    	 boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 				    	 if(checkjsonStringAbhishek){
 				    		 out.println("pallaviCodeHere_pdf_newCode: "+pallaviCodeHere);
-				    		 subjectNodeNode.setProperty("Nlp2", "YES");
+				    		 
+				    		 JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
+								if( pallaviCodeHereJsonObj.length()>0 ){
+									subjectNodeNode.setProperty("Nlp2", "YES");
+								}else{
+									subjectNodeNode.setProperty("Nlp2", "NO");
+								}
+				    		 
 				    		 attachmentNode.setProperty("Flag", "1");
 				    		 
 				    		 String firstMethod=SaveReportNewRowWisePositionCheck.SaveReportNewStructureChanged(out, pallaviCodeHere);
@@ -477,11 +549,25 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				        	 if(firstMethodAbhishek){
 				        		 out.println("firstMethod_pdf: "+firstMethod);
 				        		 
+				        		 JSONObject firstMethodAbhishekJsonObj=new JSONObject(firstMethod);
+					 				if( firstMethodAbhishekJsonObj.length()==0 ){
+					 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+					 					 attachmentNode.setProperty("Flag", "1");
+					 				}
+				        		 
 				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 
 				        			 out.println("secondMethodAbhishek_pdf: "+secondMethodAbhishek);
+				        			 
+				        			 JSONObject secondMethodAbhishekJsonObj=new JSONObject(secondMethod);
+						 				if( secondMethodAbhishekJsonObj.length()==0 ){
+						 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+						 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+						 					 attachmentNode.setProperty("Flag", "1");
+						 				}
 				        			 
 				        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
 				        			 boolean reportThirdMethodAbhishek=SaveReportDataClass.isJSONValid(reportThird);
@@ -491,6 +577,13 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 						        			if(finalJsonAbhishek){
 						        				out.println("finalMethodAbhishek_pdf: "+finalJson);
 						        				
+						        				JSONObject finalJsonAbhishekJsonObj=new JSONObject(finalJson);
+								 				if( finalJsonAbhishekJsonObj.length()==0 ){
+								 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+								 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+								 					 attachmentNode.setProperty("Flag", "1");
+								 				}
+						        				
 						        				String remainingDataCorrectedHere=MethodJsonOnlyInsert.applyToAllJsonAsSameReport(finalJson);
 						        				boolean remainingDataCorrectedHereAbhishek=SaveReportDataClass.isJSONValid(remainingDataCorrectedHere);
 						        				if(remainingDataCorrectedHereAbhishek){
@@ -499,7 +592,14 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 								        			if(finalQtyAbhishek){
 								        				out.println("finalMethodwithqtyAbhishek_pdf: "+finalwithQty);
 								        				pallavi_WriteFile.writeUsingOutputStream( "AbhishekJSON ::====== "+finalwithQty.toString() ,filepathfromourside );
-								        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+								        				
+								        				JSONObject finalwithQtyJsonObj=new JSONObject(finalwithQty);
+								    					if( finalwithQtyJsonObj.length()>0 ){
+								    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+								    					}else{
+								    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+								    					}
+								        				
 								        				attachmentNode.setProperty("Flag", "1");
 								        				producerJSonObj.put("finalwithQty", finalwithQty);
 								        				
@@ -519,11 +619,23 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 						        				}
 						        			}
 				        				 
+				        			 }else{
+				        				 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					        			 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+					        			 attachmentNode.setProperty("Flag", "1");
 				        			 }
 				        			 
+				        		 }else{
+				        			 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				        			 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        			 attachmentNode.setProperty("Flag", "1");
 				        		 }
 				        		 
 				        		 
+				        	 }else{
+				        		 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				        		 attachmentNode.setProperty("Flag", "1");
+				        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
 				        	 }
 				    		 
 				    		 
@@ -539,15 +651,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 						  attachmentNode.setProperty("Flag", "1");
 						}
 				     
-				     
-				     /*boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
-				      if(reportCheck==true){
-				    	  subjectNodeNode.setProperty("Ui_Update", "YES");
-				    	  String allreport=StatusForUi.getReportTypeUi(finalwithQty);
-				    	  subjectNodeNode.setProperty("Type", allreport);
-				      }else{
-				    	  subjectNodeNode.setProperty("Ui_Update", "NO");
-				      }*/
+				    
 				      session.save();
 				     
 				     
@@ -605,26 +709,58 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			  boolean checkjsonString=SaveReportDataClass.isJSONValid(ExpertScriptCallHere);
 			    if(checkjsonString==true){
 			    	producerJSonObj.put("ExpertScriptCallHere", ExpertScriptCallHere);
-			    	subjectNodeNode.setProperty("Nlp1", "YES");
+			    	
+			    	JSONObject expertJsonObj=new JSONObject(ExpertScriptCallHere);
+					if( expertJsonObj.length()>0 ){
+						subjectNodeNode.setProperty("Nlp1", "YES");
+					}else{
+						subjectNodeNode.setProperty("Nlp1", "NO");
+					}
+			    	
 			    	textNode.setProperty("Flag", "1");
 			    	
 			    	out.println("ExpertCodeOutputHtml: "+ExpertScriptCallHere);
 			        out.println("textTomcatFilePath: "+textTomcatFilePath);
 			        out.println("textSentMailTime_html: "+textSentMailTime);
-			        String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+			       // String pallaviCodeHere= pallavi_UpdatedScript_copy_06_05_19_shifting_labelcheck.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+			        
+			        String pallaviCodeHere= pallavi_UpdatedScript_copy_25_04_19_lablecheck_noshifting.updatedMainScript(out, session, ExpertScriptCallHere, emailUrl, textSentMailTime, subjectNodePath, from_Source, timestampDate, timestampDateAndTime, filepathfromourside);
+			        
 			        boolean checkjsonStringAbhishek=SaveReportDataClass.isJSONValid(pallaviCodeHere);
 			        if(checkjsonStringAbhishek){
 						  out.println("pallaviCodeHereHtml: "+pallaviCodeHere);
-						  subjectNodeNode.setProperty("Nlp2", "YES");
+						  
+						  JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
+							if( pallaviCodeHereJsonObj.length()>0 ){
+								subjectNodeNode.setProperty("Nlp2", "YES");
+							}else{
+								subjectNodeNode.setProperty("Nlp2", "NO");
+							}
+						  
 						  textNode.setProperty("Flag", "1");
+						  
 						  String firstMethod=SaveReportNewRowWisePositionCheck.SaveReportNewStructureChanged(out, pallaviCodeHere);
 				        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 				        	 if(firstMethodAbhishek){
 				        		 out.println("firstMethod_html: "+firstMethod);
+				        		 
+				        		 JSONObject firstMethodAbhishekJsonObj=new JSONObject(firstMethod);
+					 				if( firstMethodAbhishekJsonObj.length()==0 ){
+					 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+					 				}
+				        		 
 				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 out.println("secondMethodAbhishek_html: "+secondMethodAbhishek);
+				        			 
+				        			 JSONObject secondMethodAbhishekJsonObj=new JSONObject(secondMethod);
+						 				if( secondMethodAbhishekJsonObj.length()==0 ){
+						 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+						 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+						 				}
+				        			 
 				        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
 				        			 boolean reportThirdMethodAbhishek=SaveReportDataClass.isJSONValid(reportThird);
 				        			 if(reportThirdMethodAbhishek){
@@ -634,6 +770,12 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        			if(finalJsonAbhishek){
 				        				out.println("finalMethodAbhishek_html: "+finalJson);
 				        				
+				        				JSONObject finalJsonAbhishekJsonObj=new JSONObject(finalJson);
+						 				if( finalJsonAbhishekJsonObj.length()==0 ){
+						 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+						 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+						 				}
+				        				
 				        				String remainingDataCorrectedHere=MethodJsonOnlyInsert.applyToAllJsonAsSameReport(finalJson);
 				        				boolean remainingDataCorrectedHereAbhishek=SaveReportDataClass.isJSONValid(remainingDataCorrectedHere);
 				        				if(remainingDataCorrectedHereAbhishek){
@@ -641,10 +783,17 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        				 finalwithQty=MethodJsonOnlyInsert.cargoQtyCheckFromNUmeric(remainingDataCorrectedHere);
 				        				boolean finalQtyAbhishek=SaveReportDataClass.isJSONValid(finalwithQty);
 					        			if(finalQtyAbhishek){
-					        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+					        				
 					        				out.println("finalMethodwithqtyAbhishek_html: "+finalwithQty);
 					        				producerJSonObj.put("finalwithQty", finalwithQty);
 					        				pallavi_WriteFile.writeUsingOutputStream( "AbhishekJSON ::====== "+finalwithQty.toString() ,filepathfromourside );
+					        				
+					        				JSONObject finalwithQtyJsonObj=new JSONObject(finalwithQty);
+					    					if( finalwithQtyJsonObj.length()>0 ){
+					    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
+					    					}else{
+					    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					    					}
 					        				
 					        				ActiveMQCall amq=new ActiveMQCall();
 					        				amq.GetProducer("PROCESSMAILS",amq.createRandomString(), producerJSonObj.toString());
@@ -657,9 +806,18 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 					        				textNode.setProperty("Flag", "1");
 					        			}
 				        				}
+				        			}else{
+				        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+						        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
 				        			}
 				        			 }
+				        		 }else{
+				        			 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
 				        		 }
+				        	 }else {
+				        		 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
 				        	 }
 			        	 
 			        }else{
@@ -671,14 +829,6 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			    	textNode.setProperty("Flag", "1");
 			    }
 		  
-			   /* boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
-			      if(reportCheck==true){
-			    	  subjectNodeNode.setProperty("Ui_Update", "YES");
-			    	  String allreport=StatusForUi.getReportTypeUi(finalwithQty);
-			    	  subjectNodeNode.setProperty("Type", allreport);
-			      }else{
-			    	  subjectNodeNode.setProperty("Ui_Update", "NO");
-			      }*/
 			    session.save();
 		  }
 		} //end

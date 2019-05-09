@@ -149,5 +149,39 @@ public class ExpertScriptCall {
 
 
 	}
+	
+	public static String postPdfExpertScript(String filePath, PrintWriter out) {
+		String responseString = "";
+		try {
+
+			File uploadFile1 = new File(filePath);
+			String charset = "UTF-8";
+
+			StringBuilder response = new StringBuilder();
+
+			MultipartUtility multipart = new MultipartUtility("http://34.74.243.55:5029/project5", charset);
+
+			multipart.addFormField("only_extract_html_line", "True");
+
+			multipart.addFilePart("file", uploadFile1);
+			// multipart.addFilePart("file", uploadFile2);
+
+			List<String> response1 = multipart.finish();
+
+			out.println("SERVER REPLIED:");
+
+			for (String line : response1) {
+				// System.out.println(line);
+				response.append(line);
+			}
+			responseString = response.toString();
+
+		} catch (Exception e) {
+//e.printStackTrace();
+			return "false";
+		}
+		return responseString;
+	}
+	
 
 }

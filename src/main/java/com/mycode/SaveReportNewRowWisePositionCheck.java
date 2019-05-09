@@ -17,6 +17,7 @@ import com.NewStructureScorpio.RateRegex;
 import com.anagha.CombineCharterer_Status_Rate;
 import com.readGmail.GmailMethods;
 import com.reportinformationsystem.SaveReportDataClass;
+import com.subjectheaders.QueryBoostForTitles;
 
 
 public class SaveReportNewRowWisePositionCheck {
@@ -528,6 +529,133 @@ public class SaveReportNewRowWisePositionCheck {
 	    	         					
 	    	         					
 	    	         					// //.....................status close here
+	    	         					
+	    	         					
+	    	         					//.....................Tc Unknown And Comments..............
+	    	         					
+	    	         					if(valuemaxJson.equals("Period")){
+	    	         						String Port="";
+	    	         						String dataRateValue=dataJSonObj.getString(JsonKey);
+	    	         						if( !GmailMethods.isNullString(dataRateValue) ){
+	    	         							
+	    	         							if(valuemaxJson.contains("unknown")){
+	    	         								if(dataJSonObj.has(JsonKey)){
+	    	         									String max_keyValeu_original=dataJSonObj.getString(JsonKey);
+	    	         									 JSONObject dataAndRateJsonObj=TcMethods.Timechartere_combine_Rate_Date(max_keyValeu_original);
+	  		   	         							   String rateJsonObj="";
+	  		   	         							   String dateJsonObj="";
+	  		   	         							   
+	  		   	         						 if( dataAndRateJsonObj!=null && dataAndRateJsonObj.length()!=0 ){
+		   	         							        if(dataAndRateJsonObj.has("Rate")){
+		   	         							            rateJsonObj= dataAndRateJsonObj.getString("Rate");
+		   	         							        }if(dataAndRateJsonObj.has("Date")){
+		   	         							            dateJsonObj= dataAndRateJsonObj.getString("Date");
+			   	         							        }
+		   	         							    }// dataAndRateJsonObj check
+	  		   	         						 
+	  		   	         					         if( !valuemaxJson.equals("Rate") ){
+		   	         							            int rateNotFoundPosition= newHeader.length();
+		   	         								       
+		   	         								       newHeader.put(String.valueOf(rateNotFoundPosition), "Rate");
+		   	         								       dataJSonObj.put(String.valueOf(rateNotFoundPosition), rateJsonObj);
+		   	         							 } // rate check
+	  		   	         					         
+	  		   	         					   if( !valuemaxJson.equalsIgnoreCase("Port") ){
+  	         							            int portNotFoundPosition= newHeader.length();
+ 	    	         							    JSONObject deliveryPlaceobj=QueryBoostForTitles.SubjectData(max_keyValeu_original,out);
+ 	    	         							if(deliveryPlaceobj!=null && deliveryPlaceobj.length()!=0){
+ 	    	         								if(deliveryPlaceobj.has("RepositionRegion")){
+ 	    	         									Port=deliveryPlaceobj.getString("RepositionRegion");
+ 	    	         									
+ 	    	         									if( !GmailMethods.isNullString(Port) ){
+ 	    	         										newHeader.put(String.valueOf(portNotFoundPosition), "Port");
+ 	      	         								        dataJSonObj.put(String.valueOf(portNotFoundPosition), Port);
+ 	    	         									}
+ 	    	         								}
+ 	    	         							}
+  	         							            
+  	         								       
+  	         							 } // delivery place check
+	  		   	         					   
+	  		   	         					   if( !GmailMethods.isNullString(dateJsonObj) ){
+	  		   	         						    int dateNotFoundPosition= newHeader.length();
+	         								       
+	         								       newHeader.put(String.valueOf(dateNotFoundPosition), "Date");
+	         								       dataJSonObj.put(String.valueOf(dateNotFoundPosition), dateJsonObj);
+	  		   	         						   
+	  		   	         					   } // date 
+	  		   	         					         
+	  		   	         					   
+	  		   	         							   
+	    	         								} // has jsonkey check
+	    	         								
+	    	         							} // unknown check
+	    	         							
+	    	         							
+	    	         							if(valuemaxJson.contains("Comment") || valuemaxJson.contains("Comments")){
+	    	         								if(dataJSonObj.has(JsonKey)){
+	    	         									String max_keyValeu_original=dataJSonObj.getString(JsonKey);
+	    	         									 JSONObject dataAndRateJsonObj=TcMethods.Timechartere_combine_Rate_Date(max_keyValeu_original);
+	  		   	         							   String rateJsonObj="";
+	  		   	         							   String dateJsonObj="";
+	  		   	         							   
+	  		   	         						 if( dataAndRateJsonObj!=null && dataAndRateJsonObj.length()!=0 ){
+		   	         							        if(dataAndRateJsonObj.has("Rate")){
+		   	         							            rateJsonObj= dataAndRateJsonObj.getString("Rate");
+		   	         							        }if(dataAndRateJsonObj.has("Date")){
+		   	         							            dateJsonObj= dataAndRateJsonObj.getString("Date");
+			   	         							        }
+		   	         							    }// dataAndRateJsonObj check
+	  		   	         						 
+	  		   	         					         if( !valuemaxJson.equals("Rate") ){
+		   	         							            int rateNotFoundPosition= newHeader.length();
+		   	         								       
+		   	         								       newHeader.put(String.valueOf(rateNotFoundPosition), "Rate");
+		   	         								       dataJSonObj.put(String.valueOf(rateNotFoundPosition), rateJsonObj);
+		   	         							 } // rate check
+	  		   	         					         
+	  		   	         					   if( !valuemaxJson.equalsIgnoreCase("Port") ){
+  	         							            int portNotFoundPosition= newHeader.length();
+ 	    	         							    JSONObject deliveryPlaceobj=QueryBoostForTitles.SubjectData(max_keyValeu_original,out);
+ 	    	         							if(deliveryPlaceobj!=null && deliveryPlaceobj.length()!=0){
+ 	    	         								if(deliveryPlaceobj.has("RepositionRegion")){
+ 	    	         									Port=deliveryPlaceobj.getString("RepositionRegion");
+ 	    	         									
+ 	    	         									if( !GmailMethods.isNullString(Port) ){
+ 	    	         										newHeader.put(String.valueOf(portNotFoundPosition), "Port");
+ 	      	         								        dataJSonObj.put(String.valueOf(portNotFoundPosition), Port);
+ 	    	         									}
+ 	    	         								}
+ 	    	         							}
+  	         							            
+  	         								       
+  	         							 } // delivery place check
+	  		   	         					   
+	  		   	         					   if( !GmailMethods.isNullString(dateJsonObj) ){
+	  		   	         						    int dateNotFoundPosition= newHeader.length();
+	         								       
+	         								       newHeader.put(String.valueOf(dateNotFoundPosition), "Date");
+	         								       dataJSonObj.put(String.valueOf(dateNotFoundPosition), dateJsonObj);
+	  		   	         						   
+	  		   	         					   } // date 
+	  		   	         					         
+	  		   	         					   
+	  		   	         							   
+	    	         								} // has jsonkey check
+	    	         								
+	    	         							} // comment check
+	    	         							
+	    	         							
+	    	         							
+	    	         						} // blank check period here
+	    	         						
+	    	         						
+	    	         						
+	    	         					} // period check here
+	    	         					
+	    	         					
+	    	         					//............Tc Unknown And Comments end..................
+	    	         					
 	    	         					
 	    	         					
 	                    			} // while close

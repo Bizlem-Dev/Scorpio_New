@@ -137,6 +137,17 @@ public class ReportTypeIdentify {
 	                    				String ReportTypePos="";
 	                    				String OPENPos="";
 	                    				String RateTypePos="";
+	                    				String DeliveryPos="";
+	                    				String DeliveryPlacePos="";
+	                    				String RedeliveryPos="";
+	                    				String PeriodPos="";
+	                    				String OperatorsPos="";
+	                    				String VesselTypePos="";
+	                    				String one_yearPos="";
+	                    				String second_yearPos="";
+	                    				String third_yearPos="";
+	                    				String fifth_YearPos="";
+	                    				String Month_YearPos="";
 	                    				
 	                    				boolean vesselHas=false;
 	                    				boolean LCStartHas=false;
@@ -154,6 +165,17 @@ public class ReportTypeIdentify {
 	                    				boolean ReportTypePoss=false;
 	                    				boolean OPENPoss=false;
 	                    				boolean RateTypePoss=false;
+	                    				boolean DeliveryPoss=false;
+	                    				boolean DeliveryPlacePoss=false;
+	                    				boolean RedeliveryPoss=false;
+	                    				boolean PeriodPoss=false;
+	                    				boolean OperatorsPoss=false;
+	                    				boolean VesselTypePoss=false;
+	                    				boolean one_yearPoss=false;
+	                    				boolean second_yearPoss=false;
+	                    				boolean third_yearPoss=false;
+	                    				boolean fifth_YearPoss=false;
+	                    				boolean Month_YearPoss=false;
 	                    				
 	                    			 
 	                    		 for (Map.Entry<String, String> entry : g.entrySet())
@@ -210,8 +232,40 @@ public class ReportTypeIdentify {
 	                    				}if(entry.getValue().equalsIgnoreCase("RateType")){
 	                    					RateTypePos=entry.getKey();
 	                    					RateTypePoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("Delivery")){
+	                    					DeliveryPos=entry.getKey();
+	                    					DeliveryPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("DeliveryPlace")){
+	                    					DeliveryPlacePos=entry.getKey();
+	                    					DeliveryPlacePoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("Redelivery")){
+	                    					RedeliveryPos=entry.getKey();
+	                    					RedeliveryPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("Period")){
+	                    					PeriodPos=entry.getKey();
+	                    					PeriodPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("Operators")){
+	                    					OperatorsPos=entry.getKey();
+	                    					OperatorsPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("VesselType")){
+	                    					VesselTypePos=entry.getKey();
+	                    					VesselTypePoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("1yr")){
+	                    					one_yearPos=entry.getKey();
+	                    					one_yearPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("2yr")){
+	                    					second_yearPos=entry.getKey();
+	                    					second_yearPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("3yr")){
+	                    					third_yearPos=entry.getKey();
+	                    					third_yearPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("5yr")){
+	                    					fifth_YearPos=entry.getKey();
+	                    					fifth_YearPoss=true;
+	                    				}if(entry.getValue().equalsIgnoreCase("Month_Year")){
+	                    					Month_YearPos=entry.getKey();
+	                    					Month_YearPoss=true;
 	                    				}
-	                    				
 	                    			
 								  } // map for loop close
 	                    		 
@@ -413,6 +467,9 @@ public class ReportTypeIdentify {
 	    	                    				 
 	                    						 
 	                    					 } // spot equal check
+	                    				 
+	                    				 
+	                    				 
 //	                    				 }
 	                    			 }
 	                    			 // ................... header and table reporttype check
@@ -774,7 +831,9 @@ public class ReportTypeIdentify {
 	     		                    						
 	     		                    						
 	     		                    					} // json null check
-	     		                    				 
+	     		                    					if(ChartererPoss){
+	   		                    						 newHeader.put(ChartererPos, "Operators");
+	   		                    				 } //  Operators
 	                    							 
 	                    						 }else{
 		                    					 if(!ETABasisPoss){
@@ -839,6 +898,207 @@ public class ReportTypeIdentify {
 	                    				 
 //	                    			 } // tonnage
                  				
+	                    			 //............................tc...................
+	                    			 
+	                    				 else if( portCount>=1 && dateCount>=1 && RateHas && PeriodPoss ){
+	                    					 JSONObject comparePortAndDate=null;
+	                    					 if(DateHas){ // if date has
+    	                    					 comparePortAndDate=new JSONObject();
+    	    	                    			 comparePortAndDate=TcMethods.delivery_Date_Redelivery_RedeliveryPlace(g);
+    	    	                    			 
+    	    	                    			 if(comparePortAndDate!=null){
+    	    	                    				 if(comparePortAndDate.has("Delivery")){
+    	    	                    					String DeliveryPossobj= comparePortAndDate.getString("Delivery");
+    	    	                    					 newHeader.put(DeliveryPossobj, "Delivery");
+    	    	                    				 }if(comparePortAndDate.has("Redelivery")){
+    	    	                    					String RedeliveryPossobj= comparePortAndDate.getString("Redelivery");
+    	    	                    					 newHeader.put(RedeliveryPossobj, "Redelivery");
+    	    	                    				 }if(comparePortAndDate.has("Date")){
+     	    	                    					String DatePossobj= comparePortAndDate.getString("Date");
+   	    	                    					    newHeader.put(DatePossobj, "Date");
+   	    	                    				 }
+    	    	                    			 }
+    	                    					 
+    	                    				 } // date check (delivery, redelivery, date)
+    	                    				 
+    	                    				 if(PortHas){
+    	                    					 if(comparePortAndDate!=null){
+    	                    						 if(comparePortAndDate.has("DeliveryPlace")){
+    	    	                    					 String DeliveryPlacePossObj= comparePortAndDate.getString("DeliveryPlace");
+    	    	                    					 newHeader.put(DeliveryPlacePossObj, "DeliveryPlace");
+    	    	                    				 }
+    	                    					 }
+    	                    				 } // delivery place check
+    	                    				 
+    	                    				 if(OperatorsPoss){
+	                    						 newHeader.put(ChartererPos, "Charterer");
+	                    				 } //  Charterer
+    	                    				 
+    	                    				 if( LCStartHas ){
+    	                    					 newHeader.put(LCStartPos, "Delivery");
+    	                    				 }
+    	                    				 
+    	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+    	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "TimeCharterReports");
+    	                    				 
+	                    				 }else if( PeriodPoss && dateCount>=1 && RateHas ){
+	                    					 
+	                    					 JSONObject comparePortAndDate=null;
+	                    					 if(DateHas){ // if date has
+    	                    					 comparePortAndDate=new JSONObject();
+    	    	                    			 comparePortAndDate=TcMethods.delivery_Date_Redelivery_RedeliveryPlace(g);
+    	    	                    			 
+    	    	                    			 if(comparePortAndDate!=null){
+    	    	                    				 if(comparePortAndDate.has("Delivery")){
+    	    	                    					String DeliveryPossobj= comparePortAndDate.getString("Delivery");
+    	    	                    					 newHeader.put(DeliveryPossobj, "Delivery");
+    	    	                    				 }if(comparePortAndDate.has("Redelivery")){
+    	    	                    					String RedeliveryPossobj= comparePortAndDate.getString("Redelivery");
+    	    	                    					 newHeader.put(RedeliveryPossobj, "Redelivery");
+    	    	                    				 }if(comparePortAndDate.has("Date")){
+     	    	                    					String DatePossobj= comparePortAndDate.getString("Date");
+   	    	                    					    newHeader.put(DatePossobj, "Date");
+   	    	                    				 }
+    	    	                    			 }
+    	                    					 
+    	                    				 } // date check (delivery, redelivery, date)
+    	                    				 
+    	                    				 if(PortHas){
+    	                    					 if(comparePortAndDate!=null){
+    	                    						 if(comparePortAndDate.has("DeliveryPlace")){
+    	    	                    					 String DeliveryPlacePossObj= comparePortAndDate.getString("DeliveryPlace");
+    	    	                    					 newHeader.put(DeliveryPlacePossObj, "DeliveryPlace");
+    	    	                    				 }
+    	                    					 }
+    	                    				 } // delivery place check
+    	                    				 
+    	                    				 if(OperatorsPoss){
+	                    						 newHeader.put(ChartererPos, "Charterer");
+	                    				 } //  Charterer
+    	                    				 
+    	                    				 if( LCStartHas ){
+    	                    					 newHeader.put(LCStartPos, "Delivery");
+    	                    				 }
+	                    					 
+    	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+    	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "TimeCharterReports");
+    	                    				 
+	                    				 }else if( PeriodPoss && RateHas ){
+	                    					 
+	                    					 JSONObject comparePortAndDate=null;
+	                    					 if(DateHas){ // if date has
+    	                    					 comparePortAndDate=new JSONObject();
+    	    	                    			 comparePortAndDate=TcMethods.delivery_Date_Redelivery_RedeliveryPlace(g);
+    	    	                    			 
+    	    	                    			 if(comparePortAndDate!=null){
+    	    	                    				 if(comparePortAndDate.has("Delivery")){
+    	    	                    					String DeliveryPossobj= comparePortAndDate.getString("Delivery");
+    	    	                    					 newHeader.put(DeliveryPossobj, "Delivery");
+    	    	                    				 }if(comparePortAndDate.has("Redelivery")){
+    	    	                    					String RedeliveryPossobj= comparePortAndDate.getString("Redelivery");
+    	    	                    					 newHeader.put(RedeliveryPossobj, "Redelivery");
+    	    	                    				 }if(comparePortAndDate.has("Date")){
+     	    	                    					String DatePossobj= comparePortAndDate.getString("Date");
+   	    	                    					    newHeader.put(DatePossobj, "Date");
+   	    	                    				 }
+    	    	                    			 }
+    	                    					 
+    	                    				 } // date check (delivery, redelivery, date)
+    	                    				 
+    	                    				 if(PortHas){
+    	                    					 if(comparePortAndDate!=null){
+    	                    						 if(comparePortAndDate.has("DeliveryPlace")){
+    	    	                    					 String DeliveryPlacePossObj= comparePortAndDate.getString("DeliveryPlace");
+    	    	                    					 newHeader.put(DeliveryPlacePossObj, "DeliveryPlace");
+    	    	                    				 }
+    	                    					 }
+    	                    				 } // delivery place check
+    	                    				 
+    	                    				 if(OperatorsPoss){
+	                    						 newHeader.put(ChartererPos, "Charterer");
+	                    				 } //  Charterer
+    	                    				 
+    	                    				 if( LCStartHas ){
+    	                    					 newHeader.put(LCStartPos, "Delivery");
+    	                    				 }
+    	                    				 
+    	                    				 if( RedeliveryPoss && DeliveryPoss ){
+    	                    					 
+    	                    				 }else{
+    	                    					 newHeader.put(datePos, "Date");
+    	                    				 }
+    	                    				 
+    	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+    	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "TimeCharterReports");
+	                    					 
+	                    				 }else if( PeriodPoss && portCount>=1 && RateHas ){
+	                    					 
+	                    					 JSONObject comparePortAndDate=null;
+	                    					 if(DateHas){ // if date has
+    	                    					 comparePortAndDate=new JSONObject();
+    	    	                    			 comparePortAndDate=TcMethods.delivery_Date_Redelivery_RedeliveryPlace(g);
+    	    	                    			 
+    	    	                    			 if(comparePortAndDate!=null){
+    	    	                    				 if(comparePortAndDate.has("Delivery")){
+    	    	                    					String DeliveryPossobj= comparePortAndDate.getString("Delivery");
+    	    	                    					 newHeader.put(DeliveryPossobj, "Delivery");
+    	    	                    				 }if(comparePortAndDate.has("Redelivery")){
+    	    	                    					String RedeliveryPossobj= comparePortAndDate.getString("Redelivery");
+    	    	                    					 newHeader.put(RedeliveryPossobj, "Redelivery");
+    	    	                    				 }if(comparePortAndDate.has("Date")){
+     	    	                    					String DatePossobj= comparePortAndDate.getString("Date");
+   	    	                    					    newHeader.put(DatePossobj, "Date");
+   	    	                    				 }
+    	    	                    			 }
+    	                    					 
+    	                    				 } // date check (delivery, redelivery, date)
+    	                    				 
+    	                    				 if(PortHas){
+    	                    					 if(comparePortAndDate!=null){
+    	                    						 if(comparePortAndDate.has("DeliveryPlace")){
+    	    	                    					 String DeliveryPlacePossObj= comparePortAndDate.getString("DeliveryPlace");
+    	    	                    					 newHeader.put(DeliveryPlacePossObj, "DeliveryPlace");
+    	    	                    				 }
+    	                    					 }
+    	                    				 } // delivery place check
+    	                    				 
+    	                    				 if(OperatorsPoss){
+	                    						 newHeader.put(ChartererPos, "Charterer");
+	                    				 } //  Charterer
+    	                    				 
+    	                    				 if( LCStartHas ){
+    	                    					 newHeader.put(LCStartPos, "Delivery");
+    	                    				 }
+    	                    				 
+    	                    				 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+    	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "TimeCharterReports");
+	                    					 
+	                    				 } 
+	                    			 
+	                    			 
+	                    			 
+	                    			 //...................tc end..........................
+	                    			 
+	                    			 
+	                    			 
+	                    			 //......................brokertcrate.....................
+	                    			 
+	                    				 else if( VesselTypePoss && !PeriodPoss  && ( one_yearPoss || second_yearPoss || third_yearPoss || fifth_YearPoss ) ){
+	                    					 
+	                    					 if(DateHas){
+	                    						 
+	                    						 if( !Month_YearPoss ){
+		                    						 newHeader.put(datePos, "Month_Year");
+	                    						 }
+	                    					 }// date
+	                    					 
+	                    					 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
+    	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "BrokerTcRate");
+	                    					 
+	                    				 }
+	                    				
+	                    			 
+	                    			 //....................end brokertcrate..................
 	                    			
 	                    		 }// check null map
 	                    			

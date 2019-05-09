@@ -15,7 +15,7 @@ import com.reportinformationsystem.SaveReportDataClass;
 public class QueryBoostForTitles {
 
 	public static void main(String[] args) {
-		 String q="EASTPORT CLEAN MARKET REPORT DATED 08TH APR 2019";
+		 String q="CLEAN";
 		// q = q.replaceAll("((?<![A-Za-z])(AND|and|And))","");
 		// System.out.println("q:: "+q);
 		 JSONObject s=SubjectData(q, null);

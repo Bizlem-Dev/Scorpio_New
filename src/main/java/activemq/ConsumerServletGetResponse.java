@@ -76,7 +76,14 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 				
 				boolean isjsonValid=SaveReportDataClass.isJSONValid(producerData);
 				if( isjsonValid ){
+					Node cronSubNode=null;
 					JSONObject producerJsonObj=new JSONObject(producerData);
+					
+					if(producerJsonObj.has("subjectNodeNode")){
+						subjectNodeNode=producerJsonObj.getString("subjectNodeNode");
+						cronSubNode=session.getNode(subjectNodeNode);
+					}
+					
 					if( producerJsonObj!=null && producerJsonObj.length()!=0 ){
 						
 						if(producerJsonObj.has("emailUrl")){
@@ -93,21 +100,13 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 							timestampDateAndTime=producerJsonObj.getString("timestampDateAndTime");
 						}if(producerJsonObj.has("extension")){
 							extension=producerJsonObj.getString("extension");
-						}if(producerJsonObj.has("subjectNodeNode")){
-							subjectNodeNode=producerJsonObj.getString("subjectNodeNode");
 						}if(producerJsonObj.has("ExpertScriptCallHere")){
 							ExpertScriptCallHere=producerJsonObj.getString("ExpertScriptCallHere");
 						}if(producerJsonObj.has("finalwithQty")){
 							finalwithQty=producerJsonObj.getString("finalwithQty");
 						}
 						
-						
 						SaveReportDataClassNewStr.parseAllReportFromJsonToSave(out, session, finalwithQty, emailUrl, textSentMailTime,subjectNodePath, from_Source, timestampDate, timestampDateAndTime, extension, ExpertScriptCallHere);
-						
-						
-						if( !GmailMethods.isNullString(subjectNodeNode) ){
-							
-							Node cronSubNode=session.getNode(subjectNodeNode);
 							
 							 Date date = new Date();
 							 SimpleDateFormat formatter2 = new SimpleDateFormat("dd-MM-yyyy hh:mm");
@@ -118,17 +117,18 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 							
 						boolean reportCheck=StatusForUi.statusCheckReportForUi(finalwithQty);
 						if(reportCheck==true){
-							cronSubNode.setProperty("Ui_Update", "YES");
+							cronSubNode.setProperty("Ui_Update", "RECOGNIZED REPORT");
 							String allreport=StatusForUi.getReportTypeUi(finalwithQty);
 							cronSubNode.setProperty("Type", allreport);
 						}else{
-							cronSubNode.setProperty("Ui_Update", "NO");
-							
+							cronSubNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED REPORT");
 						}
-					}// null check nodepath cronnode
 						
 						
 					} // json check null and length!=0
+					else{
+						cronSubNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+					}
 					
 				} // is json valid check
 				
