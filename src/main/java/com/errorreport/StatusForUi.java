@@ -55,7 +55,7 @@ public class StatusForUi {
 	
 	public static Node collectProcessDataStatus(PrintWriter out, Session session, String cronNodeName, String sentMailTime
 			, String subject, String Attachment,String nlp1, String nlp2, String nlp3andnlp4qc, String Ui_Update_show_Data
-			, String mailLink, String mainNodeName, String jsonString, String brokerName
+			, String mailLink, String mainNodeName, String jsonString, String brokerName, String textFileLink
 			){
 		Node subjectNodeNode=null;
 		try {
@@ -107,7 +107,7 @@ public class StatusForUi {
 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "");
 					subjectNodeNode.setProperty("Ui_Update", "");
 					subjectNodeNode.setProperty("brokerName", brokerName);
-					
+					subjectNodeNode.setProperty("textFileLink", textFileLink);
 					
 				} // !node check in cronnode
 				

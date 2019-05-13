@@ -17,7 +17,9 @@ import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 import com.abhishek.VinayaScript;
 import com.errorreport.StatusForUi;
+import com.mongocode.MongoDbConnection;
 import com.mongocode.PdfErrorInMongoDb;
+import com.mycode.LogProcessed_REjected_Reason_Rows;
 import com.mycode.MethodJsonOnlyInsert;
 import com.mycode.Methods;
 import com.mycode.OutputReasponse;
@@ -91,6 +93,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 	  String timestampDate="";
 	  String timestampDateAndTime="";
 	  String attachmentNodeFlag="";
+	  int countMongoUpDate=0; 
 	
 		try {
 			
@@ -154,17 +157,20 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 										     String receivedDate= formatter1.format(date1);
 											
 										  if (schedulerReadMail == true) {
-											  
+											  boolean mongoupdateCollectionFlag=false;
 										      String nodeNameRepaceunderscore=subjectNode.getName().toString();
 										      nodeNameRepaceunderscore=nodeNameRepaceunderscore.replaceAll("_", " ");
 											  
 											  if(htmlSize==1){
+												  mongoupdateCollectionFlag=true;
+												  countMongoUpDate++;
 												  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
 														  from_Source, timestampDate, timestampDateAndTime, receivedDate,
 														  nodeNameRepaceunderscore, cronNodeName);
 
 											  } else if(htmlSize>1){
-										  
+												  mongoupdateCollectionFlag=true;
+												  countMongoUpDate++;
 										 NodeIterator textNodeItr=textNode.getNodes();
 										 while(textNodeItr.hasNext()){
 											 Node textInsideAttachmentFolderNode=textNodeItr.nextNode();
@@ -205,7 +211,6 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																  } // excel close here contains xls
 															  
 															  if(!(attachmentFlag)){
-
 																  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
 																		  from_Source, timestampDate, timestampDateAndTime, receivedDate,
 																		  nodeNameRepaceunderscore, cronNodeName);
@@ -223,7 +228,13 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 											 
 										 }// textNodeItr while close
 										 
-                                       } // textNode hasnode check
+                                       } 
+										//check mongo here
+											  
+											  if( !GmailMethods.isNullString(receivedDate) ){
+													MongoDbConnection.saveGmailReadCount("ProcessedMail", receivedDate, String.valueOf(countMongoUpDate));
+												}
+											  
                                     }
 								 }// null take
 							 }else{
@@ -276,6 +287,7 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 	
 	String emailUrl="";
 	String finalwithQty="";
+	int mongoUpdateFailedCount=0;
 	
 	try{
 		JSONObject producerJSonObj=new JSONObject();
@@ -308,7 +320,7 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 	  Node clarksonChekNode=null;
 	  
 	  if(clarksonCOunt>700){
-		  clarksonChekNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+		  clarksonChekNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 		  clarksonChekNode.setProperty("Ui_Update", "Rejected Due To Size");
 		  clarksonChekNode.setProperty("Nlp1", "Rejected Due To Size");
 		  clarksonChekNode.setProperty("Nlp2", "Rejected Due To Size");
@@ -316,7 +328,8 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		  attachmentNode.setProperty("Flag", "1");
 		  session.save();
 	  }else{
-	        subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+		  
+	        subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 	        producerJSonObj.put("subjectNodeNode", subjectNodeNode.getPath());
 	        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 	        String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
@@ -330,6 +343,8 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 					subjectNodeNode.setProperty("Nlp1", "YES");
 				}else{
 					subjectNodeNode.setProperty("Nlp1", "NO");
+					mongoUpdateFailedCount++;
+					
 				}
 				  
 				  attachmentNode.setProperty("Flag", "1");
@@ -345,11 +360,39 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		        if(checkjsonStringAbhishek){
 		        	out.println("pallaviCodeHere_excel: "+pallaviCodeHere);
 		        	
+		        	String totalNoOfRows=LogProcessed_REjected_Reason_Rows.rowsCount(pallaviCodeHere, out);
+		        	String allJson=LogProcessed_REjected_Reason_Rows.processed_rejected_reason(pallaviCodeHere, out);
+		        	 boolean allJsonCheck=SaveReportDataClass.isJSONValid(allJson);
+		        	 
+		        	String processedDataCount="";
+		        	String rejectedDataCount="";
+		        	String rejectedReason="";
+		        	String rejectedJsonData="";
+		        	
+		        	 if(allJsonCheck){
+		        		 
+		        		 JSONObject allJSonObj=new JSONObject();
+		        		 
+		        		 if( allJSonObj.has("processedDataCount") ){
+		        			 processedDataCount= allJSonObj.getString("processedDataCount");
+		        		 }if( allJSonObj.has("rejectedDataCount") ){
+		        			 rejectedDataCount=allJSonObj.getString("rejectedDataCount");
+		        		 }if( allJSonObj.has("rejectedReason") ){
+		        			 rejectedReason=allJSonObj.getString("rejectedReason");
+		        		 }if( allJSonObj.has("rejectedJsonData") ){
+		        			 rejectedJsonData=allJSonObj.getString("rejectedJsonData");
+		        		 }
+		        	 }
+		        	 
+		        	 if( !GmailMethods.isNullString(totalNoOfRows) ){
+		        	      MongoDbConnection.table3Data("table3", timestampDate, processedDataCount, subjectNode.getName().toString(), emailUrl, rejectedDataCount, rejectedReason, rejectedJsonData, totalNoOfRows);
+		        	 }
 		        	JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
 					if( pallaviCodeHereJsonObj.length()>0 ){
 						subjectNodeNode.setProperty("Nlp2", "YES");
 					}else{
 						subjectNodeNode.setProperty("Nlp2", "NO");
+						mongoUpdateFailedCount++;
 					}
 		        	
 		        	attachmentNode.setProperty("Flag", "1");
@@ -362,11 +405,12 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		        		 JSONObject firstMethodAbhishekJsonObj=new JSONObject(firstMethod);
 		 				if( firstMethodAbhishekJsonObj.length()==0 ){
 		 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+		 					mongoUpdateFailedCount++;
 		 					 attachmentNode.setProperty("Flag", "1");
-		 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+		 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 		 				}
 		        		 
-		        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+		        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, attachmentNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 		        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 		        		 if(secondMethodAbhishek){
 		        			 out.println("secondMethodAbhishek_excel: "+secondMethodAbhishek);
@@ -374,8 +418,9 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		        			 JSONObject secondMethodAbhishekJsonObj=new JSONObject(secondMethod);
 				 				if( secondMethodAbhishekJsonObj.length()==0 ){
 				 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				 					mongoUpdateFailedCount++;
 				 					 attachmentNode.setProperty("Flag", "1");
-				 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				 				}
 		        			 
 		        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
@@ -389,7 +434,8 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 		        				JSONObject finalJsonAbhishekJsonObj=new JSONObject(finalJson);
 				 				if( finalJsonAbhishekJsonObj.length()==0 ){
 				 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-				 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				 					mongoUpdateFailedCount++;
+				 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				 					 attachmentNode.setProperty("Flag", "1");
 				 				}
 		        				
@@ -407,6 +453,7 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 			    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 			    					}else{
 			    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+			    						mongoUpdateFailedCount++;
 			    					}
 			        				
 			        				attachmentNode.setProperty("Flag", "1");
@@ -422,30 +469,39 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 			        				
 			        			}else{
 			        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+			        				mongoUpdateFailedCount++;
 			        			}
 		        				} //
 		        			}
 		        		 }//
 		        		 }else {
 		        			 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-		        			 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+		        			 mongoUpdateFailedCount++;
+		        			 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 		        			 attachmentNode.setProperty("Flag", "1");
 		        		 }
 		        	 }else {
 		        		 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-		        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+		        		 mongoUpdateFailedCount++;
+		        		 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 		        		 attachmentNode.setProperty("Flag", "1");
 		        	 }
 	                
 		        }else{
 		        	subjectNodeNode.setProperty("Nlp2", "NO");
+		        	mongoUpdateFailedCount++;
 		        	attachmentNode.setProperty("Flag", "1");
+		        	subjectNodeNode.setProperty("Ui_Update", "FAILED");
 		        }
 	             
 			}else{
 				  subjectNodeNode.setProperty("Nlp1", "NO");
+				  mongoUpdateFailedCount++;
 				  attachmentNode.setProperty("Flag", "1");
+				  subjectNodeNode.setProperty("Ui_Update", "FAILED");
 			}
+			
+			
 			
 		      session.save();
 			
@@ -460,6 +516,12 @@ public static void excelProcessData(Session session, PrintWriter out, String cro
 	}finally {
 		 emailUrl=null;
 		 finalwithQty=null;
+		 
+		 if( mongoUpdateFailedCount>0 ){
+			 if( !GmailMethods.isNullString(timestampDate) ){
+					MongoDbConnection.saveGmailReadCount("FailedMail", timestampDate, String.valueOf(mongoUpdateFailedCount));
+				}
+		 }
 	}
 }
 
@@ -471,6 +533,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 	attachmentFlag=true;
 	String finalwithQty="";
 	String emailUrl="";
+	int mongoUpdateFailedCount=0;
 	
 	try{
 		JSONObject producerJSonObj=new JSONObject();
@@ -492,7 +555,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 	 	  producerJSonObj.put("timestampDateAndTime", timestampDateAndTime);
 	 	  producerJSonObj.put("extension", "pdf");
 	  
-	  subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+	  subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 	  producerJSonObj.put("subjectNodeNode", subjectNodeNode.getPath());
 	  String svgUrl = DateFromToApiReport.processPdftoSvg(attachmentTomcatFilePath);
 	 String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
@@ -510,6 +573,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 								subjectNodeNode.setProperty("Nlp1", "YES");
 							}else{
 								subjectNodeNode.setProperty("Nlp1", "NO");
+								mongoUpdateFailedCount++;
 							}
 				    	 
 				    	 //........................................
@@ -523,7 +587,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				    			 vinayaScriptCall=nujanScripPdf;
 				    		 }
 				    		 
-				    		 PdfErrorInMongoDb.storePdfErrorMongo("PDFERRORDATABASE", "PdfCollection", timestampDateAndTime, attachmentNode.getName().toString(), "BlankJSOn");
+				    		// PdfErrorInMongoDb.storePdfErrorMongo("PDFERRORDATABASE", "PdfCollection", timestampDateAndTime, attachmentNode.getName().toString(), "BlankJSOn");
 				    	 }
 				    	 
 				    	 //......................
@@ -535,11 +599,40 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				    	 if(checkjsonStringAbhishek){
 				    		 out.println("pallaviCodeHere_pdf_newCode: "+pallaviCodeHere);
 				    		 
+				    		     String totalNoOfRows=LogProcessed_REjected_Reason_Rows.rowsCount(pallaviCodeHere, out);
+					        	 String allJson=LogProcessed_REjected_Reason_Rows.processed_rejected_reason(pallaviCodeHere, out);
+					        	 boolean allJsonCheck=SaveReportDataClass.isJSONValid(allJson);
+					        	 
+					        	String processedDataCount="";
+					        	String rejectedDataCount="";
+					        	String rejectedReason="";
+					        	String rejectedJsonData="";
+					        	
+					        	 if(allJsonCheck){
+					        		 
+					        		 JSONObject allJSonObj=new JSONObject();
+					        		 
+					        		 if( allJSonObj.has("processedDataCount") ){
+					        			 processedDataCount= allJSonObj.getString("processedDataCount");
+					        		 }if( allJSonObj.has("rejectedDataCount") ){
+					        			 rejectedDataCount=allJSonObj.getString("rejectedDataCount");
+					        		 }if( allJSonObj.has("rejectedReason") ){
+					        			 rejectedReason=allJSonObj.getString("rejectedReason");
+					        		 }if( allJSonObj.has("rejectedJsonData") ){
+					        			 rejectedJsonData=allJSonObj.getString("rejectedJsonData");
+					        		 }
+					        	 }
+					        	 
+					        	 if( !GmailMethods.isNullString(totalNoOfRows) ){
+					        	      MongoDbConnection.table3Data("table3", timestampDate, processedDataCount, subjectNode.getName().toString(), emailUrl, rejectedDataCount, rejectedReason, rejectedJsonData, totalNoOfRows);
+					        	 }
+				    		 
 				    		 JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
 								if( pallaviCodeHereJsonObj.length()>0 ){
 									subjectNodeNode.setProperty("Nlp2", "YES");
 								}else{
 									subjectNodeNode.setProperty("Nlp2", "NO");
+									mongoUpdateFailedCount++;
 								}
 				    		 
 				    		 attachmentNode.setProperty("Flag", "1");
@@ -552,11 +645,12 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				        		 JSONObject firstMethodAbhishekJsonObj=new JSONObject(firstMethod);
 					 				if( firstMethodAbhishekJsonObj.length()==0 ){
 					 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-					 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+					 					mongoUpdateFailedCount++;
+					 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 					 					 attachmentNode.setProperty("Flag", "1");
 					 				}
 				        		 
-				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+					 				 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, attachmentNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 
@@ -565,7 +659,8 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				        			 JSONObject secondMethodAbhishekJsonObj=new JSONObject(secondMethod);
 						 				if( secondMethodAbhishekJsonObj.length()==0 ){
 						 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-						 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+						 					mongoUpdateFailedCount++;
+						 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 						 					 attachmentNode.setProperty("Flag", "1");
 						 				}
 				        			 
@@ -580,7 +675,8 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 						        				JSONObject finalJsonAbhishekJsonObj=new JSONObject(finalJson);
 								 				if( finalJsonAbhishekJsonObj.length()==0 ){
 								 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-								 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+								 					mongoUpdateFailedCount++;
+								 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 								 					 attachmentNode.setProperty("Flag", "1");
 								 				}
 						        				
@@ -598,6 +694,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 								    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 								    					}else{
 								    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+								    						mongoUpdateFailedCount++;
 								    					}
 								        				
 								        				attachmentNode.setProperty("Flag", "1");
@@ -613,6 +710,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 								        				
 								        			}else{
 								        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+								        				mongoUpdateFailedCount++;
 								        				attachmentNode.setProperty("Flag", "1");
 								        			}
 								        			
@@ -621,34 +719,41 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				        				 
 				        			 }else{
 				        				 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-					        			 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        				 mongoUpdateFailedCount++;
+					        			 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 					        			 attachmentNode.setProperty("Flag", "1");
 				        			 }
 				        			 
 				        		 }else{
 				        			 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-				        			 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        			 mongoUpdateFailedCount++;
+				        			 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				        			 attachmentNode.setProperty("Flag", "1");
 				        		 }
 				        		 
 				        		 
 				        	 }else{
 				        		 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+				        		 mongoUpdateFailedCount++;
 				        		 attachmentNode.setProperty("Flag", "1");
-				        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        		 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				        	 }
 				    		 
 				    		 
 				    	 } else{
 				    		 subjectNodeNode.setProperty("Nlp2", "NO");
+				    		 mongoUpdateFailedCount++;
 				    		 attachmentNode.setProperty("Flag", "1");
+				    		 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				    	 }
 				        
 				    	 
 				    	 
 				     }else{
 						  subjectNodeNode.setProperty("Nlp1", "NO");
+						  mongoUpdateFailedCount++;
 						  attachmentNode.setProperty("Flag", "1");
+						  subjectNodeNode.setProperty("Ui_Update", "FAILED");
 						}
 				     
 				    
@@ -669,6 +774,12 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 	}finally {
 		 emailUrl=null;
 		 finalwithQty=null;
+		 if( mongoUpdateFailedCount>0 ){
+			 if( !GmailMethods.isNullString(timestampDate) ){
+					MongoDbConnection.saveGmailReadCount("FailedMail", timestampDate, String.valueOf(mongoUpdateFailedCount));
+				}
+		 }
+
 	}
 	return attachmentFlag;
 }
@@ -679,6 +790,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 	
 	String emailUrl="";
     String finalwithQty="";
+    int mongoUpdateFailedCount=0;
 	
 	try {
 		JSONObject producerJSonObj=new JSONObject();
@@ -701,7 +813,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 		     	  producerJSonObj.put("timestampDateAndTime", timestampDateAndTime);
 		     	  producerJSonObj.put("extension", "html");
 		      
-		      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+		      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, textNode.getName().toString());
 		      producerJSonObj.put("subjectNodeNode", subjectNodeNode.getPath());
 		      String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 		    
@@ -715,6 +827,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 						subjectNodeNode.setProperty("Nlp1", "YES");
 					}else{
 						subjectNodeNode.setProperty("Nlp1", "NO");
+						mongoUpdateFailedCount++;
 					}
 			    	
 			    	textNode.setProperty("Flag", "1");
@@ -730,11 +843,40 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 			        if(checkjsonStringAbhishek){
 						  out.println("pallaviCodeHereHtml: "+pallaviCodeHere);
 						  
-						  JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
+						     String totalNoOfRows=LogProcessed_REjected_Reason_Rows.rowsCount(pallaviCodeHere, out);
+				        	 String allJson=LogProcessed_REjected_Reason_Rows.processed_rejected_reason(pallaviCodeHere, out);
+				        	 boolean allJsonCheck=SaveReportDataClass.isJSONValid(allJson);
+				        	 
+				        	String processedDataCount="";
+				        	String rejectedDataCount="";
+				        	String rejectedReason="";
+				        	String rejectedJsonData="";
+				        	
+				        	 if(allJsonCheck){
+				        		 
+				        		 JSONObject allJSonObj=new JSONObject();
+				        		 
+				        		 if( allJSonObj.has("processedDataCount") ){
+				        			 processedDataCount= allJSonObj.getString("processedDataCount");
+				        		 }if( allJSonObj.has("rejectedDataCount") ){
+				        			 rejectedDataCount=allJSonObj.getString("rejectedDataCount");
+				        		 }if( allJSonObj.has("rejectedReason") ){
+				        			 rejectedReason=allJSonObj.getString("rejectedReason");
+				        		 }if( allJSonObj.has("rejectedJsonData") ){
+				        			 rejectedJsonData=allJSonObj.getString("rejectedJsonData");
+				        		 }
+				        	 }
+				        	 
+				        	 if( !GmailMethods.isNullString(totalNoOfRows) ){
+				        	      MongoDbConnection.table3Data("table3", timestampDate, processedDataCount, subjectNode.getName().toString(), emailUrl, rejectedDataCount, rejectedReason, rejectedJsonData, totalNoOfRows);
+				        	 }
+						  
+						    JSONObject pallaviCodeHereJsonObj=new JSONObject(pallaviCodeHere);
 							if( pallaviCodeHereJsonObj.length()>0 ){
 								subjectNodeNode.setProperty("Nlp2", "YES");
 							}else{
 								subjectNodeNode.setProperty("Nlp2", "NO");
+								mongoUpdateFailedCount++;
 							}
 						  
 						  textNode.setProperty("Flag", "1");
@@ -747,10 +889,11 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        		 JSONObject firstMethodAbhishekJsonObj=new JSONObject(firstMethod);
 					 				if( firstMethodAbhishekJsonObj.length()==0 ){
 					 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-					 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+					 					mongoUpdateFailedCount++;
+					 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 					 				}
 				        		 
-				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+					 				 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, textNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 out.println("secondMethodAbhishek_html: "+secondMethodAbhishek);
@@ -758,7 +901,8 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        			 JSONObject secondMethodAbhishekJsonObj=new JSONObject(secondMethod);
 						 				if( secondMethodAbhishekJsonObj.length()==0 ){
 						 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-						 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+						 					mongoUpdateFailedCount++;
+						 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 						 				}
 				        			 
 				        			 String reportThird=ReportTypeCorrection.ReportTypeRemaining(secondMethod, out, nodeNameRepaceunderscore);
@@ -773,7 +917,8 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        				JSONObject finalJsonAbhishekJsonObj=new JSONObject(finalJson);
 						 				if( finalJsonAbhishekJsonObj.length()==0 ){
 						 					subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-						 					subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+						 					mongoUpdateFailedCount++;
+						 					subjectNodeNode.setProperty("Ui_Update", "FAILED");
 						 				}
 				        				
 				        				String remainingDataCorrectedHere=MethodJsonOnlyInsert.applyToAllJsonAsSameReport(finalJson);
@@ -793,6 +938,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 					    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "YES");
 					    					}else{
 					    						subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					    						mongoUpdateFailedCount++;
 					    					}
 					        				
 					        				ActiveMQCall amq=new ActiveMQCall();
@@ -803,30 +949,39 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 					        				textNode.setProperty("Flag", "1");
 					        			}else{
 					        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
+					        				mongoUpdateFailedCount++;
 					        				textNode.setProperty("Flag", "1");
 					        			}
 				        				}
 				        			}else{
 				        				subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-						        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        				mongoUpdateFailedCount++;
+						        		 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				        			}
 				        			 }
 				        		 }else{
 				        			 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-					        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        			 mongoUpdateFailedCount++;
+					        		 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				        		 }
 				        	 }else {
 				        		 subjectNodeNode.setProperty("Nlp3_and_4_QC", "NO");
-				        		 subjectNodeNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED THE REPORT");
+				        		 mongoUpdateFailedCount++;
+				        		 subjectNodeNode.setProperty("Ui_Update", "FAILED");
 				        	 }
 			        	 
 			        }else{
 			        	subjectNodeNode.setProperty("Nlp2", "NO");
+			        	mongoUpdateFailedCount++;
+			        	subjectNodeNode.setProperty("Ui_Update", "FAILED");
 			        	textNode.setProperty("Flag", "1");
+			        	subjectNodeNode.setProperty("Ui_Update", "FAILED");
 			        }
 			    }else{
 			    	subjectNodeNode.setProperty("Nlp1", "NO");
+			    	mongoUpdateFailedCount++;
 			    	textNode.setProperty("Flag", "1");
+			    	subjectNodeNode.setProperty("Ui_Update", "FAILED");
 			    }
 		  
 			    session.save();
@@ -842,6 +997,12 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 	}finally {
 		 emailUrl=null;
 	     finalwithQty=null;
+	     if( mongoUpdateFailedCount>0 ){
+			 if( !GmailMethods.isNullString(timestampDate) ){
+					MongoDbConnection.saveGmailReadCount("FailedMail", timestampDate, String.valueOf(mongoUpdateFailedCount));
+				}
+		 }
+	     
 	}
 }
 

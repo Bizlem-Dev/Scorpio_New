@@ -37,7 +37,10 @@ public class Methods {
 	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
 	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
-	                    		 } // data close
+	                    		 } else if(tableinsideDataOnlyJonObj.has("data")){ 
+	                    			   dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+	                        			 
+	                      		 }
 	                    		 JSONObject headerJSonObj=null;
 	                    		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
 	                    			 headerJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_header_data");
@@ -173,9 +176,14 @@ public class Methods {
        			 
        			 for(int i=0;i<header_data.length();i++){
        				JSONObject headerJsonObj=header_data.getJSONObject(i);
-       				
-       				if(headerJsonObj.has("new_data")){
-       					JSONArray data=headerJsonObj.getJSONArray("new_data");
+       				JSONArray data=null;
+       				if( headerJsonObj.has("new_data") ){
+       					 data=headerJsonObj.getJSONArray("new_data");
+       				}else if( headerJsonObj.has("data") ){
+       	      			   data= headerJsonObj.getJSONArray("data");
+       				}
+       				if( data!=null && data.length()>0 ){
+       	      			 
        					//System.out.println(data);
        					for(int j=0;j<data.length();j++){
        						JSONObject dataArrayObj=data.getJSONObject(j);

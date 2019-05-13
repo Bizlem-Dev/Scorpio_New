@@ -333,7 +333,11 @@ rateTypeVal = "WS";
 	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
 	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
-	                    		 } // data close
+	                    		 }else if(tableinsideDataOnlyJonObj.has("data")){ //data
+	                    			   dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+		                    			 
+	                    		 }
+	                    		 
 	                    		 JSONObject headerJSonObj=null;
 	                    		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
 	                    			 headerJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_header_data");
@@ -445,7 +449,10 @@ rateTypeVal = "WS";
 				if(tableinsideDataOnlyJonObj.has("new_data")){
         			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
         			 
-        		 } // data close
+        		 } else if(tableinsideDataOnlyJonObj.has("data")){ 
+      			   dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+      			 
+      		 }
         		 JSONObject headerJSonObj=null;
         		 JSONObject newHeader=new JSONObject();
         		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
@@ -685,7 +692,10 @@ rateTypeVal = "WS";
 				if(tableinsideDataOnlyJonObj.has("new_data")){
         			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
         			 
-        		 } // data close
+        		 } else if(tableinsideDataOnlyJonObj.has("data")){ 
+        			   dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+            			 
+          		 }
         		 JSONObject headerJSonObj=null;
         		 JSONObject newHeader=new JSONObject();
         		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
@@ -877,7 +887,10 @@ rateTypeVal = "WS";
 				if(tableinsideDataOnlyJonObj.has("new_data")){
         			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
         			 
-        		 } // data close
+        		 } else if(tableinsideDataOnlyJonObj.has("data")){ 
+        			   dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+            			 
+          		 }
         		 JSONObject headerJSonObj=null;
         		 JSONObject newHeader=new JSONObject();
         		 if(tableinsideDataOnlyJonObj.has("new_header_data")){

@@ -352,7 +352,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 															  String subjectNodePath= subjectNode.getPath();
 															  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 															 // out.println("subjectNodePath: "+subjectNodePath);
-															     Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+															     Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 															        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 															       // System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 															       // logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
@@ -379,7 +379,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 																        	 if(firstMethodAbhishek){
 																        		 out.println("firstMethod_excel: "+firstMethod);
-																        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+																        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, textNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 																        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 																        		 if(secondMethodAbhishek){
 																        			 out.println("secondMethodAbhishek_excel: "+secondMethodAbhishek);
@@ -518,7 +518,7 @@ try {
 	      out.println("subjectNodePath: "+subjectNodePath);
 	  
 	     // lastProcessedTimeForUi(session, textSentMailTime);
-	      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+	      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, textNode.getName().toString());
 	      
 	    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 	    
@@ -542,7 +542,7 @@ try {
 			        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 			        	 if(firstMethodAbhishek){
 			        		 out.println("firstMethod_html: "+firstMethod);
-			        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+			        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, textNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 			        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 			        		 if(secondMethodAbhishek){
 			        			 out.println("secondMethodAbhishek_html: "+secondMethodAbhishek);

@@ -235,5 +235,71 @@ public class MongoDbConnection {
 		e.printStackTrace();
 	}
  }
+ 
+ public static DBCollection saveFailedDataTable2( String Dbname ,String collectionname
+			, String timeStamp, String subject, String emailUrl, String reportIdentiyFailedReason
+			) {
+		 
+		   DBCollection collection=null;
+		   MongoClient mongoClient=null;
+	    try {
+	 	   
+	 	     BasicDBObject obj = new BasicDBObject();
+	 	   
+	         mongoClient = new MongoClient("localhost", 27017);
+	         DB mongoDataBase = mongoClient.getDB(Dbname); // databasename
+	         
+	         collection = mongoDataBase.getCollection(collectionname);
+	         
+	    	 obj.put("timeStamp", timeStamp);
+	    	 obj.put("subject", subject);
+	    	 obj.put("emailUrl", emailUrl);
+	    	 obj.put("reportIdentiyFailedReason", reportIdentiyFailedReason);
+	    	 
+	    	 collection.insert(obj);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally{
+	 	   mongoClient.close();
+	    }
+	    return collection;
+
+	}
+ 
+ public static DBCollection table3Data( String Dbname ,String collectionname, String processedDataCount
+			, String subject, String emailUrl, String rejectedDataCount, String rejectedReason, String rejectedJsonData, String totalNoOfRows
+			) {
+		 
+		   DBCollection collection=null;
+		   MongoClient mongoClient=null;
+	    try {
+	 	   
+	 	     BasicDBObject obj = new BasicDBObject();
+	 	   
+	         mongoClient = new MongoClient("localhost", 27017);
+	         DB mongoDataBase = mongoClient.getDB(Dbname); // databasename
+	         
+	         collection = mongoDataBase.getCollection(collectionname);
+	         
+	         obj.put("processedDataCount", processedDataCount);
+	    	 obj.put("rejectedDataCount", rejectedDataCount);
+	    	 obj.put("rejectedReason", rejectedReason);
+	    	 obj.put("rejectedJsonData", rejectedJsonData);
+	    	 obj.put("emailUrl", emailUrl);
+	    	 obj.put("subject", subject);
+	    	 obj.put("totalNoOfRows", totalNoOfRows);
+	    	 
+	    	 collection.insert(obj);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally{
+	 	   mongoClient.close();
+	    }
+	    return collection;
+
+	}
+ 
 
 }

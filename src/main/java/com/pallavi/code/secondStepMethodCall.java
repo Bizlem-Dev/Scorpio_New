@@ -251,7 +251,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																  Node clarksonChekNode=null;
 																  
 																  if(clarksonCOunt>700){
-																	  clarksonChekNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+																	  clarksonChekNode=StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 																	  clarksonChekNode.setProperty("Ui_Update", "Rejected Due To Size");
 																	  clarksonChekNode.setProperty("Nlp1", "Rejected Due To Size");
 																	  clarksonChekNode.setProperty("Nlp2", "Rejected Due To Size");
@@ -261,7 +261,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																  }else{
 																  
 																 // out.println("subjectNodePath: "+subjectNodePath);
-																        subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+																        subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 																        String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(attachmentTomcatFilePath, out);
 																       // System.out.println("ExpertScriptCallHere:: "+ExpertScriptCallHere+ " "+attachmentNode.getName().toString()+ " "+textSentMailTime);
 																       // logger.info("ExpertScriptCallHere_Excel:: "+ExpertScriptCallHere);
@@ -289,7 +289,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																	        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 																	        	 if(firstMethodAbhishek){
 																	        		 out.println("firstMethod_excel: "+firstMethod);
-																	        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+																	        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, attachmentNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 																	        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 																	        		 if(secondMethodAbhishek){
 																	        			 out.println("secondMethodAbhishek_excel: "+secondMethodAbhishek);
@@ -440,7 +440,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 	  String subjectNodePath= subjectNode.getPath();
 	  subjectNodePath = (GmailMethods.isNullString(subjectNodePath)) ? "" : subjectNodePath;
 	  
-	  subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+	  subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, attachmentNode.getName().toString());
 	  
 	  String svgUrl = DateFromToApiReport.processPdftoSvg(attachmentTomcatFilePath);
 	 String filepathfromourside="/home/ubuntu/TestedMailJSon/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
@@ -476,7 +476,7 @@ public static boolean pdfProcessData(Session session, PrintWriter out, String cr
 				        	 if(firstMethodAbhishek){
 				        		 out.println("firstMethod_pdf: "+firstMethod);
 				        		 
-				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, attachmentNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 
@@ -574,7 +574,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 		      out.println("subjectNodePath: "+subjectNodePath);
 		  
 		     // lastProcessedTimeForUi(session, textSentMailTime);
-		      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source);
+		      Node subjectNodeNode= StatusForUi.collectProcessDataStatus(out, session, cronNodeName, textSentMailTime, subjectNode.getName().toString(), "YES", "", "", "", "", emailUrl, subjectNodePath,"", from_Source, textNode.getName().toString());
 		      
 		    String ExpertScriptCallHere=ExpertScriptCall.postExpertScript(textTomcatFilePath, out);
 		    
@@ -599,7 +599,7 @@ public static void htmlParser(Session session, PrintWriter out, SaveReportDataCl
 				        	 boolean firstMethodAbhishek=SaveReportDataClass.isJSONValid(firstMethod);
 				        	 if(firstMethodAbhishek){
 				        		 out.println("firstMethod_html: "+firstMethod);
-				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore);
+				        		 String secondMethod= ReportTypeIdentify.ReportTypeAndFinalJson(firstMethod, out, nodeNameRepaceunderscore, textNode,  timestampDateAndTime,  timestampDate,  subjectNode.getName().toString(),  emailUrl);
 				        		 boolean secondMethodAbhishek=SaveReportDataClass.isJSONValid(secondMethod);
 				        		 if(secondMethodAbhishek){
 				        			 out.println("secondMethodAbhishek_html: "+secondMethodAbhishek);

@@ -13,10 +13,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.jcr.Node;
+
 import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONObject;
 
 import com.abhishek.ConvertDate;
+import com.mongocode.MongoDbConnection;
+import com.pallavi.code.pallavi_WriteFile;
 import com.readGmail.GmailMethods;
 
 public class ReportTypeIdentify {
@@ -56,10 +60,11 @@ public class ReportTypeIdentify {
         return value.substring(0, posA);
     }
 	
-	public static String ReportTypeAndFinalJson(String myjson, PrintWriter out, String subjectLinePass){
+	public static String ReportTypeAndFinalJson(String myjson, PrintWriter out, String subjectLinePass, Node attachmentNode, String timestampDateAndTime, String DateandTime, String Subject, String emailUrl){
 		String finalJsonString="";
 		try {
 			//System.out.println("json my");
+			 String reportIdentiyFailedReason="";
 			JSONObject jsonStringInput=new JSONObject(myjson);
 			Iterator<String> jsonObjkeys=jsonStringInput.keys();
 			while(jsonObjkeys.hasNext()){
@@ -82,7 +87,11 @@ public class ReportTypeIdentify {
 	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
 	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
-	                    		 } // data close
+	                    		 } else if(tableinsideDataOnlyJonObj.has("data")){ //data
+		                    			   dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+		                    			 
+		                    		 }
+	                    		
 	                    		 JSONObject headerJSonObj=null;
 	                    		 JSONObject newHeader=new JSONObject();
 	                    		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
@@ -468,6 +477,19 @@ public class ReportTypeIdentify {
 	                    						 
 	                    					 } // spot equal check
 	                    				 
+	                    				 else{
+	                    					 /*String filepathfromourside="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/FailedMailJson/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
+		                    					
+	                    					 pallavi_WriteFile.writeUsingOutputStream( "FailedJSON ::=== "+g.toString() ,filepathfromourside );
+	                    					 */
+	                    					// String textFileLink= "https://dev.bizlem.io:8082/FailedMailJson/" + attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
+	                    					 //MongoDbConnection.saveFailedData("ReportIdentifiedFailedMailJson", DateandTime, String.valueOf(0), timestampDateAndTime, Subject, emailUrl, textFileLink);
+	                    					
+	                    					 reportIdentiyFailedReason=reportIdentiyFailedReason + "\n" + dataJSonObj.toString();
+	                    					 
+	                    					 MongoDbConnection.saveFailedDataTable2("ReportIdentifiedFailedMailJson", DateandTime, timestampDateAndTime, Subject, emailUrl, reportIdentiyFailedReason);
+	                    				 }
+	                    				 
 	                    				 
 	                    				 
 //	                    				 }
@@ -732,7 +754,7 @@ public class ReportTypeIdentify {
 	                    					 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "Tonnage");
 	                    					 
 	                    					 if(DateHas){
-	                    						 System.out.println("date inside:: "+DateHas+"date pos::  "+datePos);
+	                    						 out.println("date inside:: "+DateHas+"date pos::  "+datePos);
 		                    					 if(!ETABasisPoss){
 		                    						 newHeader.put(datePos, "ETABasis");
 		                    					 }else if(!OpenDatePoss){
@@ -1094,6 +1116,17 @@ public class ReportTypeIdentify {
 	                    					 
 	                    					 newHeader.put(String.valueOf(dataJSonObj.length()), "ReportType");
     	                    				 dataJSonObj.put(String.valueOf(dataJSonObj.length()), "BrokerTcRate");
+	                    					 
+	                    				 }else{
+	                    					 
+	                    					 /*String filepathfromourside="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/FailedMailJson/"+attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
+	                    					
+	                    					 pallavi_WriteFile.writeUsingOutputStream( "FailedJSON ::=== "+g.toString() ,filepathfromourside );
+	                    					 
+	                    					 String textFileLink= "https://dev.bizlem.io:8082/FailedMailJson/" + attachmentNode.getName().toString()+"_"+timestampDateAndTime+".txt";
+	                    					 */
+	                    					 reportIdentiyFailedReason=reportIdentiyFailedReason + "\n" + dataJSonObj.toString();
+	                    					 MongoDbConnection.saveFailedDataTable2("ReportIdentifiedFailedMailJson", DateandTime, timestampDateAndTime, Subject, emailUrl, reportIdentiyFailedReason);
 	                    					 
 	                    				 }
 	                    				

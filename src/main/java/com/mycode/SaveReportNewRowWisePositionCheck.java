@@ -124,7 +124,7 @@ public class SaveReportNewRowWisePositionCheck {
      if(datacheck){
     	 String subjectdata="CPP_MR_BSS_SPORE_35-55_DWT_TONNAGE_LIST_20.03.2019";
     	 subjectdata=subjectdata.replaceAll("_", " ");
-      String finaldata= ReportTypeIdentify.ReportTypeAndFinalJson(data, null, "");
+      String finaldata= ReportTypeIdentify.ReportTypeAndFinalJson(data, null, "",null, "", "","","");
      // System.out.println("finaldata:: "+finaldata);
       String f= ReportTypeCorrection.ReportTypeRemaining(finaldata, null, "");
      // System.out.println("f:: "+f);
@@ -169,7 +169,11 @@ public class SaveReportNewRowWisePositionCheck {
 	                    		 if(tableinsideDataOnlyJonObj.has("new_data")){ //data
 	                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("new_data");
 	                    			 
-	                    		 } // data close 
+	                    		 }else if(tableinsideDataOnlyJonObj.has("data")){ //data
+		                    			dataJSonObj= tableinsideDataOnlyJonObj.getJSONObject("data");
+		                    			 
+		                    		 }
+	                    		 
 	                    		 JSONObject headerJSonObj=null;
 	                    		
 	                    		 if(tableinsideDataOnlyJonObj.has("new_header_data")){
