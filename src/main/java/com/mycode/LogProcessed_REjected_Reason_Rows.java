@@ -50,7 +50,7 @@ public class LogProcessed_REjected_Reason_Rows {
 			if( GmailMethods.isNullString(finalString) ){
 				finalString=null;
 			}
-			out.close();
+//			out.close();
 		}
 		return finalString;
 	}
@@ -159,7 +159,7 @@ public class LogProcessed_REjected_Reason_Rows {
 			if( GmailMethods.isNullString(finalJsonString) ){
 				finalJsonString=null;
 			}
-			out.close();
+//			out.close();
 		}
 		return finalJsonString;
 	}
