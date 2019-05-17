@@ -3166,7 +3166,7 @@ String timechartereSolr="";
 
 		try {
 
-			String url1 = "http://34.73.112.165:8983/solr/Report/update/json/docs?commit=true";
+			String url1 = "http://35.231.163.191:8983/solr/Report/update/json/docs?commit=true";
 			URL url = new URL(url1);
 
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();

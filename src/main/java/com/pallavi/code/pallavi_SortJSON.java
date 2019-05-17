@@ -39,6 +39,7 @@ import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 
+import com.readGmail.GmailMethods;
 import com.reportinformationsystem.SaveReportDataClass;
 
 public class pallavi_SortJSON {
@@ -412,12 +413,12 @@ public class pallavi_SortJSON {
 		try {
 
 			// String url1 =
-			// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
+			// "http://35.231.163.191:8983/solr/Vessel/update/json/docs?commit=true";
 			 data = URLEncoder.encode(data, "UTF-8");
 
-			//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
+			//String url1 = "http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
 					
-			String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+			String url1="http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 			//	 param = URLEncoder.encode(param, "UTF-8");
 
 			URL url = new URL(url1);
@@ -455,16 +456,18 @@ public class pallavi_SortJSON {
        		data=data.replace("00:00:00", "");
        		data=data.trim();
         	}
-
+       	URL url = null;
+       	HttpURLConnection con = null;
 			try {
-				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://35.231.163.191:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
-				String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";	
-				//String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+				String url1 = "http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";	
+				//String url1="http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
-				URL url = new URL(url1);				
+				url = new URL(url1);				
 				//System.out.println("url ****  "+url1);
-				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				System.setProperty("http.keepAlive","false");
+				con = (HttpURLConnection) url.openConnection();
 				con.setRequestMethod("GET");
 				con.setRequestProperty("Content-Type", "application/json");
 				con.setDoOutput(true);			
@@ -476,7 +479,9 @@ public class pallavi_SortJSON {
 					response.append(inputLine);
 				}
 				in.close();
+				con.disconnect();
 				//System.out.println(response.toString());
+				
 			}
 			catch (Exception e) {
 
@@ -491,30 +496,34 @@ public class pallavi_SortJSON {
 
 			int responseCode = 0;
 			String MethodName="Blank";
+			HttpURLConnection con=null;
+			BufferedReader in=null;
 			StringBuffer response = new StringBuffer();
        	String data="JSONHEADER_str:\""+jsonheader+"\" AND SYNONYMS_str:\""+synonyms+"\" AND REGAXMATCH_str:\""+regexmatch+"\" AND SOLRMATCH_str:\""+solrmatch+"\"";
        //	System.out.println("data "+data);
 			try {
-				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://35.231.163.191:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
-				//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";
-				//String url1="http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+				//String url1 = "http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data_str:"+data+"&rows=3";
+				//String url1="http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
-                 String url1="http://34.73.112.165:8983/solr/RegexMatch/select?fl=*,score&q="+data;
+                 String url1="http://35.231.163.191:8983/solr/RegexMatch/select?fl=*,score&q="+data;
 				URL url = new URL(url1);
+				System.setProperty("http.keepAlive","false");
 				System.out.println("url ****  "+url1);
-				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				 con = (HttpURLConnection) url.openConnection();
 				con.setRequestMethod("GET");
 				con.setRequestProperty("Content-Type", "application/json");
 				con.setDoOutput(true);
 				responseCode = con.getResponseCode();
-				BufferedReader in = new BufferedReader(
+				 in = new BufferedReader(
 						new InputStreamReader(con.getInputStream(), Charset.forName("UTF-8")));
 				String inputLine;
 				while ((inputLine = in.readLine()) != null) {
 					response.append(inputLine);
 				}
-				in.close();
+//				in.close();
+				con.disconnect();
 				//System.out.println(response.toString());
 				 JSONObject sorrespobj = new JSONObject(response.toString());
 		         if(sorrespobj.has("response") && sorrespobj.getJSONObject("response").has("maxScore") && sorrespobj.getJSONObject("response").has("docs")) {
@@ -538,6 +547,15 @@ public class pallavi_SortJSON {
 			catch (Exception e) {
 				//e.printStackTrace();
 			 System.out.println(e.getMessage());
+			}finally {
+				      try {
+						in.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+//						e.printStackTrace();
+						System.out.println(e.getMessage());
+					}
+					con.disconnect();
 			}
 			return MethodName;
 		}
@@ -551,17 +569,18 @@ public class pallavi_SortJSON {
 			try {
 
 				// String url1 =
-				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://35.231.163.191:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
 
-				//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
+				//String url1 = "http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
 						
-					//String url1="http://34.73.112.165:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
-String url1="http://34.73.112.165:8983/solr/ColumnMatch/select?fl=score,ReportType,RequiredColumns&q=("+data+")&rows=3";
-				// String url1="http://34.73.112.165:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+					//String url1="http://35.231.163.191:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+String url1="http://35.231.163.191:8983/solr/ColumnMatch/select?fl=score,ReportType,RequiredColumns&q=("+data+")&rows=3";
+				// String url1="http://35.231.163.191:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
 
 				URL url = new URL(url1);
+				System.setProperty("http.keepAlive","false");
 				
 				System.out.println("url ****  "+url1);
 
@@ -579,6 +598,7 @@ String url1="http://34.73.112.165:8983/solr/ColumnMatch/select?fl=score,ReportTy
 					response.append(inputLine);
 				}
 				in.close();
+				con.disconnect();
 				//System.out.println(response.toString());
 			}
 			catch (Exception e) {
@@ -599,17 +619,18 @@ String url1="http://34.73.112.165:8983/solr/ColumnMatch/select?fl=score,ReportTy
 			try {
 
 				// String url1 =
-				// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
+				// "http://35.231.163.191:8983/solr/Vessel/update/json/docs?commit=true";
 				 data = URLEncoder.encode(data, "UTF-8");
 
-				//String url1 = "http://34.73.112.165:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
+				//String url1 = "http://35.231.163.191:8983/solr/AllReport/select?fl=score,DocumentName,url&q=Data:"+data+"&rows=3";
 						
-					String url1="http://34.73.112.165:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+					String url1="http://35.231.163.191:8983/solr/ReportType_Recognizer/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 
-				// String url1="http://34.73.112.165:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
+				// String url1="http://35.231.163.191:8983/solr/AllReportData/select?fl=score,ReportType&defType=dismax&mm="+mm+"&pf=Data&&q=Data:("+data+")&&qf=Data";		
 				//	 param = URLEncoder.encode(param, "UTF-8");
 
 				URL url = new URL(url1);
+				System.setProperty("http.keepAlive","false");
 				
 				System.out.println("url ****  "+url1);
 
@@ -627,6 +648,7 @@ String url1="http://34.73.112.165:8983/solr/ColumnMatch/select?fl=score,ReportTy
 					response.append(inputLine);
 				}
 				in.close();
+				con.disconnect();
 				//System.out.println(response.toString());
 			}
 			catch (Exception e) {
@@ -683,6 +705,7 @@ String url1="http://34.73.112.165:8983/solr/ColumnMatch/select?fl=score,ReportTy
 			 }
 		}catch(Exception e) {
 			//e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 
 		}

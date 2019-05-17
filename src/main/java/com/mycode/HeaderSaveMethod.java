@@ -68,7 +68,7 @@ public class HeaderSaveMethod {
 	        // ................. close headers data..........
 			
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		return dataall;
 	}

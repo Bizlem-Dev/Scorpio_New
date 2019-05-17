@@ -1335,7 +1335,8 @@ public class DateFromToApiReport {
 				}
 
 			} catch (Exception e) {
-				out.println(e.getMessage());
+//				out.println(e.getMessage());
+				System.out.println(e.getMessage());
 
 			}
 			return mainJsonobj;
@@ -1356,6 +1357,7 @@ public class DateFromToApiReport {
 	   			url = url.replace(" ", "%20");
 	   			
 	   			URL url1 = new URL(url);
+	   			System.setProperty("http.keepAlive","false");
 	   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 	   			int responseCode = con.getResponseCode();
 //	   			System.out.println("responseCode: "+responseCode);
@@ -1368,9 +1370,9 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
-
+                con.disconnect();
 	   		} catch (Exception e) {
-//	   			System.out.println(e.getMessage());
+	   			System.out.println(e.getMessage());
 //	   			out.println(e.getMessage());
 	   			return "";
 	   			
@@ -1396,6 +1398,7 @@ public class DateFromToApiReport {
 	   			url = url.replace(" ", "%20");
 	   			
 	   			URL url1 = new URL(url);
+	   			System.setProperty("http.keepAlive","false");
 	   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 	   			con.setConnectTimeout(900000);
 	   			con.setReadTimeout(900000); // minute to milliseconds
@@ -1410,7 +1413,7 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
-
+                con.disconnect();
 	   		} catch (Exception e) {
 	   			//System.out.println(e.getMessage());
 //	   			out.println(e.getMessage());
@@ -1450,7 +1453,7 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
-
+                con.disconnect();
 	   		} catch (Exception e) {
 	   			//System.out.println(e.getMessage());
 //	   			out.println(e.getMessage());
@@ -1477,6 +1480,7 @@ public class DateFromToApiReport {
 	   			url = url.replace(" ", "%20");
 	   			
 	   			URL url1 = new URL(url);
+	   			System.setProperty("http.keepAlive","false");
 	   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 	   			int responseCode = con.getResponseCode();
 //	   			System.out.println("responseCode: "+responseCode);
@@ -1489,9 +1493,10 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
-
+con.disconnect();
 	   		} catch (Exception e) {
 //	   			out.println(e.getMessage());
+	   			System.out.println(e.getMessage());
 	   		}
 	   		
 	   		return response1.toString();
@@ -1511,6 +1516,7 @@ public class DateFromToApiReport {
 	   			url = url.replace(" ", "%20");
 	   			
 	   			URL url1 = new URL(url);
+	   			System.setProperty("http.keepAlive","false");
 	   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 	   			int responseCode = con.getResponseCode();
 //	   			System.out.println("responseCode: "+responseCode);
@@ -1523,9 +1529,10 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
-
+                con.disconnect();
 	   		} catch (Exception e) {
 //	   			out.println(e.getMessage());
+	   			System.out.println(e.getMessage());
 	   		}
 	   		
 	   		return response1.toString();
@@ -1547,6 +1554,7 @@ public class DateFromToApiReport {
 	   			url = url.replace(" ", "%20");
 	   			
 	   			URL url1 = new URL(url);
+	   			System.setProperty("http.keepAlive","false");
 	   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 	   			int responseCode = con.getResponseCode();
 //	   			System.out.println("responseCode: "+responseCode);
@@ -1559,7 +1567,7 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
-
+con.disconnect();
 	   		} catch (Exception e) {
 //	   			out.println(e.getMessage());
 	   			return "false";
@@ -1583,6 +1591,7 @@ public class DateFromToApiReport {
 	   			url = url.replace(" ", "%20");
 	   			
 	   			URL url1 = new URL(url);
+	   			System.setProperty("http.keepAlive","false");
 	   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 //	   		     con.setRequestMethod("HEAD");
 //	   		     con.setConnectTimeout(480000); // minute to  milliseconds
@@ -1603,6 +1612,7 @@ public class DateFromToApiReport {
 	   				response1.append(inputLine);
 	   			}
 	   			in.close();
+	   			con.disconnect();
 
 	   		} catch (Exception e) {
 	   			return "false";
@@ -1619,7 +1629,7 @@ public class DateFromToApiReport {
 		  try {
 		   String url="http://dev.bizlem.io:8181/pdf-path-to-coors-path";
 		   URL object=new URL(url);
-
+		   System.setProperty("http.keepAlive","false");
 		   HttpURLConnection con = (HttpURLConnection) object.openConnection();
 		   con.setDoOutput(true);
 		   con.setDoInput(true);
@@ -1650,12 +1660,14 @@ public class DateFromToApiReport {
 		           sb.append(line + "\n");  
 		       }
 		       br.close();
+		       con.disconnect();
 		       //System.out.println("" + sb.toString());  
 		   } else {
 		       //System.out.println(con.getResponseMessage());  
 		   }
 		   }catch (Exception e) {
 		  // TODO: handle exception
+			   System.out.println(e.getMessage());
 		 }
 		   return outpathpath;
 		  }

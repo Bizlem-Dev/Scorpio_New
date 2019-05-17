@@ -693,7 +693,8 @@ public class SaveReportNewRowWisePositionCheck {
 			
 					
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return jsonString;
 		

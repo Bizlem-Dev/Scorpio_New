@@ -301,7 +301,7 @@ public class StatusForUi {
 			
 			
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		return cronDataFinal;
 	}
@@ -355,7 +355,8 @@ public class StatusForUi {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return reportFound;
 	}
@@ -438,7 +439,8 @@ public class StatusForUi {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return allReport;
 	}
@@ -579,7 +581,8 @@ public class StatusForUi {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace(out);
+//			e.printStackTrace(out);
+			System.out.println(e.getMessage());
 		}
 		return cronDataFinal;
 	}
@@ -603,7 +606,9 @@ public class StatusForUi {
 			}
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+		
 		return returnTimerange;
 	}
 	

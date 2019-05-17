@@ -1,4 +1,4 @@
-package activemq;
+package com.readGmail;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,13 +36,15 @@ import com.reportinformationsystem.ExpertScriptCall;
 import com.reportinformationsystem.FifteenMinuteClass;
 import com.reportinformationsystem.SaveReportDataClass;
 
+import activemq.ActiveMQCall;
+
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest; 
 import org.apache.sling.api.SlingHttpServletResponse;
 
-@SlingServlet(paths = "/getProducerResponse")
-public class ProducerServletGetResponse extends SlingAllMethodsServlet {
+@SlingServlet(paths = "/mailpassnewStructure")
+public class MailPassNewSructure extends SlingAllMethodsServlet {
 	private static final long serialVersionUID = 1;
 	@Reference
 	private SlingRepository repo;
@@ -50,42 +52,44 @@ public class ProducerServletGetResponse extends SlingAllMethodsServlet {
 	
 	@Override
 	public void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-		
+		 PrintWriter out = response.getWriter();
+			
+			try {
+				
+				session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
+				 String subject=request.getParameter("subject");
+				 String sentMailTime=request.getParameter("date");
+			    
+				  String datePass=StatusForUi.cronCurrentTimeParseHere();
+					if( (datePass!=null) && (!GmailMethods.isNullString(datePass)) ){
+						out.println("uidatePass:: "+datePass);
+						 String cronNodeName=StatusForUi.nodeCreateCronInSling(out, session, datePass);
+						 
+						 if( (cronNodeName!=null) && (!GmailMethods.isNullString(cronNodeName)) ){
+							 out.println("uidatecronNodeName:: "+cronNodeName);
+							 ReadGmailDataToPassPythonApi(session, out, cronNodeName, subject , sentMailTime);
+						 }
+						 
+					}
+			        
+				
+			} catch (Exception e) {
+				e.printStackTrace(out);
+//				out.println(e.getMessage());
+			}finally {
+				out.close();
+			}
+			
 	}
 	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		
-          PrintWriter out = response.getWriter();
-		
-		try {
-			
-			session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
-		    
-			  String datePass=StatusForUi.cronCurrentTimeParseHere();
-				if( (datePass!=null) && (!GmailMethods.isNullString(datePass)) ){
-					out.println("uidatePass:: "+datePass);
-					 String cronNodeName=StatusForUi.nodeCreateCronInSling(out, session, datePass);
-					 
-					 if( (cronNodeName!=null) && (!GmailMethods.isNullString(cronNodeName)) ){
-						 out.println("uidatecronNodeName:: "+cronNodeName);
-						 ReadGmailDataToPassPythonApi(session, out, cronNodeName);
-					 }
-					 
-				}
-		        
-			
-		} catch (Exception e) {
-			//e.printStackTrace(out);
-			System.out.println(e.getMessage());
-		}finally {
-			out.close();
-		}
-		
+         
 	}
 	
-public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out, String cronNodeName){
+public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out, String cronNodeName, String subject, String date){
 		
 	  String textSentMailTime="";
 	  String textXmlFileLink="";
@@ -146,6 +150,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 								  if(textNode.hasNodes()){
 									  try {
 										  htmlSize= textNode.getNodes().getSize();
+										  if( subject.equals(textNode.getName().toString()) && date.equals(textSentMailTime)){
 										
 										  if(!GmailMethods.isNullString(textSentMailTime)){
 											  SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
@@ -165,6 +170,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 										      int countMongoUpDate=0; 
 										      
 											  if(htmlSize==1){
+												  out.println("entered html");
 												  mongoupdateCollectionFlag=true;
 												  countMongoUpDate++;
 												  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
@@ -243,8 +249,9 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 							 }else{
 								out.println("nulldateFound: "+textNode.getName().toString());
 										  }
+										  }// check date and subject
 									} catch (Exception e) {
-									//	e.printStackTrace(out);
+										e.printStackTrace(out);
 									}
 								  }
 								  }

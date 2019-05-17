@@ -26,7 +26,7 @@ public class ReportTypeSynomesCheckSolr {
 			passvalue = URLEncoder.encode(passvalue, "UTF-8");
 			
 			String url = "";
-			url = "http://34.73.112.165:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
+			url = "http://35.231.163.191:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
 			
 			URL url1 = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
@@ -42,7 +42,7 @@ public class ReportTypeSynomesCheckSolr {
 			in.close();
 
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		return response1.toString();
 	}

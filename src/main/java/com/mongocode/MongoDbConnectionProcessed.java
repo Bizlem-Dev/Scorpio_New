@@ -19,11 +19,11 @@ import com.readGmail.Gmail_Pojo;
 
 import ChangedStructureCurrent.GmailReadMailChanged;
 
-public class MongoDbConnection {
+public class MongoDbConnectionProcessed {
 
 	
 	public static void main(String[] args) {
-		MongoDbConnection MDC=new MongoDbConnection();
+		MongoDbConnectionProcessed MDC=new MongoDbConnectionProcessed();
 	//	MDC.getMongoDbAnyConn("ReadmailDataBase", "ReadMailCollection", "24-04-2019", "0", "data ukc position list");
 		//MDC.getReadMailCollectionData(null, "ReadmailDataBase", "ReadMailCollection", null, null);
 		saveGmailReadCount("GmailReadCountDataBase", "23-04-2019", "5");
@@ -48,8 +48,7 @@ public class MongoDbConnection {
 			 collection.insert(obj);
 
        } catch (Exception e) {
-//           e.printStackTrace();
-    	   System.out.println(e.getMessage());
+           e.printStackTrace();
        } finally{
     	   mongoClient.close();
     	   System.out.println("insertCatchReadMailData Method Executed Successfully!");
@@ -106,8 +105,7 @@ public class MongoDbConnection {
 			 
 			 
 		} catch (Exception e) {
-//			e.printStackTrace();
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		 finally{
 	    	   mongoClient.close();
@@ -130,8 +128,7 @@ public class MongoDbConnection {
 			 
 			
 		} catch (Exception e) {
-//			e.printStackTrace();
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	 }
 	 
@@ -166,14 +163,13 @@ public class MongoDbConnection {
 	            }else{
 	            	collection=mongoDataBase.createCollection(collectionname,new BasicDBObject());
 	            	
-	            	 obj.put("UnRecognized", passNewCount);
+	            	 obj.put("Processed", passNewCount);
 					 collection.insert(obj);
 	            }
 	            
 
 	       } catch (Exception e) {
-//	           e.printStackTrace();
-	    	   System.out.println(e.getMessage());
+	           e.printStackTrace();
 	       } finally{
 	    	   mongoClient.close();
 	       }
@@ -198,7 +194,7 @@ public class MongoDbConnection {
 	         DBCursor collection_cursor = collection.find();
 	         while(collection_cursor.hasNext()){
 	        	 DBObject db_obj=collection_cursor.next();
-	        	 Count= db_obj.get("UnRecognized").toString();
+	        	 Count= db_obj.get("Processed").toString();
 	        	// System.out.println(Count);
 	        	 mongoId= db_obj.get("_id").toString();
 	        	// System.out.println("mongoId: "+mongoId);
@@ -214,8 +210,7 @@ public class MongoDbConnection {
 			 
 			 
 		} catch (Exception e) {
-//			e.printStackTrace();
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		 finally{
 	    	   mongoClient.close();
@@ -232,13 +227,12 @@ public class MongoDbConnection {
 		 
 		 mongoDataBase.getCollection(collectionName).update(
 				    new BasicDBObject("_id", new ObjectId(mongoId)),
-				    new BasicDBObject("$set", new BasicDBObject("UnRecognized", passNewCount))
+				    new BasicDBObject("$set", new BasicDBObject("Processed", passNewCount))
 				);
 		 
 		
 	} catch (Exception e) {
-//		e.printStackTrace();
-		System.out.println(e.getMessage());
+		e.printStackTrace();
 	}
  }
  
@@ -260,13 +254,12 @@ public class MongoDbConnection {
 	    	 obj.put("timeStamp", timeStamp);
 	    	 obj.put("subject", subject);
 	    	 obj.put("emailUrl", emailUrl);
-	    	 obj.put("reportNotIdentifiedReason", reportIdentiyFailedReason);
+	    	 obj.put("reportIdentiyFailedReason", reportIdentiyFailedReason);
 	    	 
 	    	 collection.insert(obj);
 
 	    } catch (Exception e) {
-//	        e.printStackTrace();
-	    	System.out.println(e.getMessage());
+	        e.printStackTrace();
 	    } finally{
 	 	   mongoClient.close();
 	    }
@@ -289,19 +282,18 @@ public class MongoDbConnection {
 	         
 	         collection = mongoDataBase.getCollection(collectionname);
 	         
-	         obj.put("Processed", processedDataCount);
-	    	 obj.put("Rejects", rejectedDataCount);
-	    	 obj.put("Reason", rejectedReason);
+	         obj.put("processedDataCount", processedDataCount);
+	    	 obj.put("rejectedDataCount", rejectedDataCount);
+	    	 obj.put("rejectedReason", rejectedReason);
 	    	 obj.put("rejectedJsonData", rejectedJsonData);
 	    	 obj.put("emailUrl", emailUrl);
 	    	 obj.put("subject", subject);
-	    	 obj.put("Total_No_of_rows", totalNoOfRows);
+	    	 obj.put("totalNoOfRows", totalNoOfRows);
 	    	 
 	    	 collection.insert(obj);
 
 	    } catch (Exception e) {
-//	        e.printStackTrace();
-	    	System.out.println(e.getMessage());
+	        e.printStackTrace();
 	    } finally{
 	 	   mongoClient.close();
 	    }

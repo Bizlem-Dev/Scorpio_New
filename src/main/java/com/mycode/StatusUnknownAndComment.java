@@ -83,11 +83,12 @@ public class StatusUnknownAndComment {
 			String fl="Key,value,score";
 			String q="value:("+passvalue+")^2";
 
-			url="http://34.73.112.165:8983/solr/StatusUNComm/select?q="+q+"&fl="+fl+"";
+			url="http://35.231.163.191:8983/solr/StatusUNComm/select?q="+q+"&fl="+fl+"";
 			
 			url = url.replace(" ", "%20");
 			
 			URL url1 = new URL(url);
+			System.setProperty("http.keepAlive","false");
 			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -99,9 +100,10 @@ public class StatusUnknownAndComment {
 			}
 //			System.out.println(response1);
 			in.close();
+			con.disconnect();
 
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		return response1.toString();
 	}
@@ -224,6 +226,7 @@ public class StatusUnknownAndComment {
 		} catch (Exception e) {
 			//return allData;
                 //e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 		return keyValue;

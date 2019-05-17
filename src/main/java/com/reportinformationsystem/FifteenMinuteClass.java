@@ -280,6 +280,7 @@ public class FifteenMinuteClass {
 			}
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		return returnTimerange;
 	}
@@ -1531,8 +1532,8 @@ public class FifteenMinuteClass {
 		try {
 
 			// String url1 =
-			// "http://34.73.112.165:8983/solr/Vessel/update/json/docs?commit=true";
-			String url1 = "http://34.73.112.165:8983/solr/AllReport/update/json/docs?commit=true";
+			// "http://35.231.163.191:8983/solr/Vessel/update/json/docs?commit=true";
+			String url1 = "http://35.231.163.191:8983/solr/AllReport/update/json/docs?commit=true";
 			URL url = new URL(url1);
 
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -1598,7 +1599,7 @@ public class FifteenMinuteClass {
 				} // while vessel close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/vesselName");
+				obj.put("url", "http://35.231.163.191:8983/solr/#/AllReport/vesselName");
 				obj.put("DocumentName", "vesselName");
 
 				postSolr(obj, out);
@@ -1630,7 +1631,7 @@ public class FifteenMinuteClass {
 				} // while CargoGrade close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/CargoGrade");
+				obj.put("url", "http://35.231.163.191:8983/solr/#/AllReport/CargoGrade");
 				obj.put("DocumentName", "CargoGrade");
 
 				postSolr(obj, out);
@@ -1663,7 +1664,7 @@ public class FifteenMinuteClass {
 				} // while Owners close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Owners");
+				obj.put("url", "http://35.231.163.191:8983/solr/#/AllReport/Owners");
 				obj.put("DocumentName", "Owners");
 
 				postSolr(obj, out);
@@ -1698,7 +1699,7 @@ public class FifteenMinuteClass {
 				} // while Operators close
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Operators");
+				obj.put("url", "http://35.231.163.191:8983/solr/#/AllReport/Operators");
 				obj.put("DocumentName", "Operators");
 
 				postSolr(obj, out);
@@ -1732,7 +1733,7 @@ public class FifteenMinuteClass {
 				} // while Operators closeobj = new JSONObject();
 				obj = new JSONObject();
 				obj.put("Data", s);
-				obj.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Port");
+				obj.put("url", "http://35.231.163.191:8983/solr/#/AllReport/Port");
 				obj.put("DocumentName", "Port");
 
 				postSolr(obj, out);
@@ -1753,7 +1754,7 @@ public class FifteenMinuteClass {
 			JSONArray arr = new FormatDate().formatDateMain();
 			JSONObject obj1 = new JSONObject();
 			obj1.put("Data", arr);
-			obj1.put("url", "http://34.73.112.165:8983/solr/#/AllReport/Date");
+			obj1.put("url", "http://35.231.163.191:8983/solr/#/AllReport/Date");
 			obj1.put("DocumentName", "Date");
 
 			postSolr(obj1, out);

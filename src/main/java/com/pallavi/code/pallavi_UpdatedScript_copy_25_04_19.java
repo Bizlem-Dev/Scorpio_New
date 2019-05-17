@@ -967,18 +967,18 @@ JSONObject objheader=null;
 
 			String url = "";
 
-			// url = "http://34.73.112.165:8983/solr/TemplateCore/select?q=" + q
+			// url = "http://35.231.163.191:8983/solr/TemplateCore/select?q=" + q
 			// + "&fl=" + f1 + "&df=" + df;
 
-			// url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=" +
+			// url = "http://35.231.163.191:8983/solr/Header_Synomes/select?q=" +
 			// q + "&fl=" + f1;
 			// url =
-			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" +
+			// "http://35.231.163.191:8983/solr/Header_Synomes/select?q=Data:" +
 			// q + "&fl=" + "HeaderName";
-			url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data_str:" + q
+			url = "http://35.231.163.191:8983/solr/Header_Synomes/select?q=Data_str:" + q
 					+ "&fl=score,HeaderName,Extrakey";
 			// url =
-			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
+			// "http://35.231.163.191:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
 
 			// url = url.replace(" ", "%20");
 
@@ -1158,7 +1158,7 @@ JSONObject objheader=null;
 			// String url1 =
 			// "http://35.186.170.65:8983/solr/HSN_Code/update/json/docs?commit=true";
 			// String url1 =
-			// "http://34.73.112.165:8983/solr/PO_FlatteningTemplate/update/json/docs?commit=true";
+			// "http://35.231.163.191:8983/solr/PO_FlatteningTemplate/update/json/docs?commit=true";
 			String url1 = "http://dev.bizlem.io:5032/date";
 
 			URL url = new URL(url1);
@@ -1359,7 +1359,7 @@ if((line_index< oneless) || (line_index< twoless) || (line_index < threeless)) {
 		passvalue = URLEncoder.encode(passvalue, "UTF-8");
 
 		String url = "";
-		url = "http://34.73.112.165:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
+		url = "http://35.231.163.191:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
 
 		URL url1 = new URL(url);
 		//System.out.println("url1 "+url1);
@@ -1393,8 +1393,8 @@ e.printStackTrace();
 		////System.out.println(passvalue);
 			synonym = URLEncoder.encode(synonym, "UTF-8");
 		String url = "";
-		url="http://34.73.112.165:8983/solr/HeaderAndDataValidation/select?fl=score,DataType&q=Headersynonyms:"+synonym;
-		//url = "http://34.73.112.165:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
+		url="http://35.231.163.191:8983/solr/HeaderAndDataValidation/select?fl=score,DataType&q=Headersynonyms:"+synonym;
+		//url = "http://35.231.163.191:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
 		//System.out.println("url " +url);
 		URL url1 = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) url1.openConnection();

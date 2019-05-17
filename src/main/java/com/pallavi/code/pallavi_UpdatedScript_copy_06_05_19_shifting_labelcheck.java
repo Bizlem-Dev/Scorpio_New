@@ -767,7 +767,8 @@ JSONObject labelsInfo=null;
 			pallavi_WriteFile.writeUsingOutputStream( "SCRIPTJSON ::====== "+pythonScriptApiData.toString() +
 					"\n OUTPUTJSON::====== "+returnobj .toString() +"\n error"+ e.getMessage(), 
 					filepath);
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
    //System.out.println("error  "+e.getMessage());
 			return returnobj.toString();
 		}
@@ -812,7 +813,8 @@ JSONObject labelsInfo=null;
 			}
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}finally {
 			solrres=null;
 		}
@@ -1234,7 +1236,8 @@ JSONObject labelsInfo=null;
 			}
 			////System.out.println("end ofblank method");
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}finally {index=null;
 		
 		}
@@ -1251,23 +1254,24 @@ JSONObject labelsInfo=null;
 
 			String url = "";
 
-			// url = "http://34.73.112.165:8983/solr/TemplateCore/select?q=" + q
+			// url = "http://35.231.163.191:8983/solr/TemplateCore/select?q=" + q
 			// + "&fl=" + f1 + "&df=" + df;
 
-			// url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=" +
+			// url = "http://35.231.163.191:8983/solr/Header_Synomes/select?q=" +
 			// q + "&fl=" + f1;
 			// url =
-			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:" +
+			// "http://35.231.163.191:8983/solr/Header_Synomes/select?q=Data:" +
 			// q + "&fl=" + "HeaderName";
-			url = "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data_str:" + q
+			url = "http://35.231.163.191:8983/solr/Header_Synomes/select?q=Data_str:" + q
 					+ "&fl=score,HeaderName,Extrakey";
 			// url =
-			// "http://34.73.112.165:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
+			// "http://35.231.163.191:8983/solr/Header_Synomes/select?q=Data:("+q+")&fl=HeaderName";
 
 			// url = url.replace(" ", "%20");
 
 			// ////System.out.println("url " + url);
 			URL url1 = new URL(url);
+			System.setProperty("http.keepAlive","false");
 			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 			// int responseCode = con.getResponseCode();
 
@@ -1280,7 +1284,7 @@ JSONObject labelsInfo=null;
 			}
 			// ////System.out.println(response1);
 			in.close();
-
+con.disconnect();
 		} catch (Exception e) {
 			// e.printStackTrace();
 			// ////System.out.println(e.getMessage());
@@ -1369,7 +1373,7 @@ JSONObject labelsInfo=null;
 
 			//URL url = new URL("http://35.227.82.195:8080/enhancer/chain/scorpiosvchain2");
 			URL url = new URL("http://35.227.82.195:8080/enhancer/chain/scorpiosvchain2");
-
+			System.setProperty("http.keepAlive","false");
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 
 			httpConn.setUseCaches(false);
@@ -1413,11 +1417,12 @@ JSONObject labelsInfo=null;
 				}
 				// ////System.out.println(sb.toString());
 				res = sb.toString();
+				httpConn.disconnect();
 			}
 			// ////System.out.println(res);
 
 		} catch (Exception e) {
-			////System.out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 		return res;
 	}
@@ -1443,10 +1448,11 @@ JSONObject labelsInfo=null;
 			// String url1 =
 			// "http://35.186.170.65:8983/solr/HSN_Code/update/json/docs?commit=true";
 			// String url1 =
-			// "http://34.73.112.165:8983/solr/PO_FlatteningTemplate/update/json/docs?commit=true";
+			// "http://35.231.163.191:8983/solr/PO_FlatteningTemplate/update/json/docs?commit=true";
 			String url1 = "http://dev.bizlem.io:5032/date";
 
 			URL url = new URL(url1);
+			System.setProperty("http.keepAlive","false");
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
 			con.setRequestProperty("Content-Type", "application/json");
@@ -1466,6 +1472,7 @@ JSONObject labelsInfo=null;
 				response.append(inputLine);
 			}
 			in.close();
+			con.disconnect();
 			// out.println(response.toString());
 		//System.out.println(" response "+response.toString());
 			if (!response.toString().equalsIgnoreCase("")) {
@@ -1496,7 +1503,8 @@ JSONObject labelsInfo=null;
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 			// out.println(e.getMessage());
 		}
 		return rtnobj;
@@ -1627,7 +1635,8 @@ if((line_index< oneless) || (line_index< twoless) || (line_index < threeless)) {
 		
 	} catch (JSONException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+//		e.printStackTrace();
+		System.out.println(e.getMessage());
 	}
 	
 	}
@@ -1644,9 +1653,10 @@ if((line_index< oneless) || (line_index< twoless) || (line_index < threeless)) {
 		passvalue = URLEncoder.encode(passvalue, "UTF-8");
 
 		String url = "";
-		url = "http://34.73.112.165:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
+		url = "http://35.231.163.191:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
 
 		URL url1 = new URL(url);
+		System.setProperty("http.keepAlive","false");
 		////System.out.println("url1 "+url1);
 		HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 
@@ -1659,9 +1669,10 @@ if((line_index< oneless) || (line_index< twoless) || (line_index < threeless)) {
 		}
 		//////System.out.println(response1);
 		in.close();
-
+        con.disconnect();
 		} catch (Exception e) {
-e.printStackTrace();
+//e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return response1.toString();
 		}
@@ -1678,9 +1689,10 @@ e.printStackTrace();
 		//////System.out.println(passvalue);
 			synonym = URLEncoder.encode(synonym, "UTF-8");
 		String url = "";
-		url="http://34.73.112.165:8983/solr/HeaderAndDataValidation/select?fl=score,DataType&q=Headersynonyms:"+synonym;
-		//url = "http://34.73.112.165:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
+		url="http://35.231.163.191:8983/solr/HeaderAndDataValidation/select?fl=score,DataType&q=Headersynonyms:"+synonym;
+		//url = "http://35.231.163.191:8983/solr/ReportType_Synomes/select?q=Data_str:" + passvalue + "&fl=score,HeaderName";
 		////System.out.println("url " +url);
+		System.setProperty("http.keepAlive","false");
 		URL url1 = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -1691,6 +1703,7 @@ e.printStackTrace();
 		}
 		//////System.out.println(response1);
 		in.close();
+		con.disconnect();
 		 JSONObject sorrespobj = new JSONObject(response1.toString());
       if(sorrespobj.has("response") && sorrespobj.getJSONObject("response").has("maxScore") && sorrespobj.getJSONObject("response").has("docs")) {
     // ////System.out.println("in parse json ********");
@@ -1873,7 +1886,8 @@ returnobj.put("new_header", header);// as new_header is blank
 		 return returnobj;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
+				System.out.println(e.getMessage());
 				return returnobj;
 			}
 	 }
@@ -1958,13 +1972,15 @@ returnobj.put("new_header", header);// as new_header is blank
     			}
 		}		
 } catch (JSONException e) {
-	e.printStackTrace();
+//	e.printStackTrace();
+	System.out.println(e.getMessage());
 	try {
 		rtnobj.put("error", e.getMessage());
 		return rtnobj;
 	} catch (Exception e1) {
 		// TODO Auto-generated catch block
-		e1.printStackTrace();
+//		e1.printStackTrace();
+		System.out.println(e.getMessage());
 	}
 
 }
@@ -2001,6 +2017,7 @@ return rtnobj;
 				alldata_return =alldata_return.toUpperCase();
 				String url1 = "http://dev.bizlem.io:5030/date";
 				URL url = new URL(url1);
+				System.setProperty("http.keepAlive","false");
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();
 				con.setRequestMethod("POST");
 				con.setRequestProperty("Content-Type", "application/json");
@@ -2017,6 +2034,7 @@ return rtnobj;
 				String inputLine;
 				while ((inputLine = in.readLine()) != null) {response.append(inputLine);}
 				in.close();
+				con.disconnect();
 				// out.println(response.toString());
 				////System.out.println(" response "+response.toString());
 				if (!response.toString().equalsIgnoreCase("")) {
@@ -2086,7 +2104,8 @@ return rtnobj;
 				//////System.out.println("alldata_return "+alldata_return);
                 // ////System.out.println("datearr  "+datearr);
 			} catch (Exception e) {
-				e.printStackTrace();
+//				e.printStackTrace();
+				System.out.println(e.getMessage());
 				// out.println(e.getMessage());
 			}finally {
 				
@@ -2205,7 +2224,7 @@ public static JSONObject labelrecognize(String data) {
 		}
 		
 	} catch (Exception e) {
-		////System.out.println(e.getMessage());
+		System.out.println(e.getMessage());
 	}
 	
 	return returnjson;
@@ -2284,12 +2303,14 @@ public static String getlabelsByStanbol(String adata) {
 			}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 			try {
 				//return urlnadvalue.put("error", e.getMessage());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+//				e1.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 
 		}
@@ -2367,7 +2388,8 @@ public static JSONObject  replaceLabels(JSONObject header) {
 	return obj;
 
 	}catch(Exception e) {
-		e.printStackTrace();
+//		e.printStackTrace();
+		System.out.println(e.getMessage());
 		return header;
 
 	}

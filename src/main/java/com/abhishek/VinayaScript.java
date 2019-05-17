@@ -35,7 +35,8 @@ public class VinayaScript {
 	public static String vinayaScript(String fileName, String timestampDateAndTime){
    		
    		StringBuffer response1=null;
-   		
+   		URL url1 = null;
+   		HttpURLConnection con = null;
    		try {
 
    			fileName=URLEncoder.encode(fileName, "UTF-8");
@@ -48,8 +49,9 @@ public class VinayaScript {
    			
 //   			url = url.replace(" ", "%20");
    			
-   			URL url1 = new URL(url);
-   			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
+   		    url1 = new URL(url);
+   		 System.setProperty("http.keepAlive","false");
+   			con = (HttpURLConnection) url1.openConnection();
    			/*con.setConnectTimeout(900000);
    			con.setReadTimeout(900000);*/ // minute to milliseconds
 //   			int responseCode = con.getResponseCode();
@@ -64,9 +66,10 @@ public class VinayaScript {
    			}
    			in.close();
 
+   			con.disconnect();
    		} catch (Exception e) {
-//   			System.out.println(e.getMessage());
-   			e.printStackTrace();
+  			System.out.println(e.getMessage());
+   		//	e.printStackTrace();
 //   			out.println(e.getMessage());
    		  /* String forpdfOnly="/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/pdfErrorStored/"+fileName+"_"+timestampDateAndTime+".txt";
    		  // writeUsingOutputStream("pdfError::  "+fileName, forpdfOnly);
@@ -91,7 +94,7 @@ public class VinayaScript {
             try {
                 os.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }

@@ -49,7 +49,7 @@ public class QueryBoostForTitles {
 		      }
 			
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		return s;
 	}
@@ -67,8 +67,8 @@ public class QueryBoostForTitles {
 			String fl="Key,value,score";
 			String q="value_str:("+passvalue+")^2";
 
-//			url="http://34.73.112.165:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
-			url="http://34.73.112.165:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
+//			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
+			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
 			
 			url = url.replace(" ", "%20");
 			
@@ -84,9 +84,9 @@ public class QueryBoostForTitles {
 			}
 			System.out.println(response1);
 			in.close();
-
+            con.disconnect();
 		} catch (Exception e) {
-			
+			System.out.println(e.getMessage());
 		}
 		return response1.toString();
 	}

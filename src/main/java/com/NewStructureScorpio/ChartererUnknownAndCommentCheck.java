@@ -49,6 +49,7 @@ public class ChartererUnknownAndCommentCheck {
 			//System.out.println(finaldata);
 			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		
 		return finaldata;
@@ -97,6 +98,7 @@ public class ChartererUnknownAndCommentCheck {
 		} catch (Exception e) {
 			//return allData;
                 //e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 		return keyValue;
@@ -111,9 +113,10 @@ public class ChartererUnknownAndCommentCheck {
 				 q = URLEncoder.encode(q, "UTF-8");
 				 String url = "";
 
-				url = "http://34.73.112.165:8983/solr/Charterer/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
+				url = "http://35.231.163.191:8983/solr/Charterer/select?fl=score,Key,value&defType=dismax&mm=1&pf=q&&q=value:("+q+")&&qf=value";
 				
 				URL url1 = new URL(url);
+				System.setProperty("http.keepAlive","false");
 				HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -125,6 +128,7 @@ public class ChartererUnknownAndCommentCheck {
 				}
 				//System.out.println(response1.toString());
 				in.close();
+				con.disconnect();
 
 			} catch (Exception e) {
 				return e.getMessage();

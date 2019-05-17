@@ -2771,6 +2771,7 @@ public class SaveReportDataClassNewStr {
 
 		} catch (Exception e) {
 			//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -2935,7 +2936,8 @@ public class SaveReportDataClassNewStr {
 			}
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -3099,7 +3101,8 @@ public class SaveReportDataClassNewStr {
 			}
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -3250,7 +3253,8 @@ public class SaveReportDataClassNewStr {
 
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -3310,7 +3314,8 @@ public class SaveReportDataClassNewStr {
 
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -3369,7 +3374,8 @@ public class SaveReportDataClassNewStr {
 
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -3746,7 +3752,8 @@ public class SaveReportDataClassNewStr {
 			} // node check close if
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -4079,7 +4086,8 @@ public class SaveReportDataClassNewStr {
 			} // node check close if
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -4420,7 +4428,8 @@ public class SaveReportDataClassNewStr {
 			} // node check close if
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -4615,7 +4624,8 @@ public class SaveReportDataClassNewStr {
 			} // node check close if
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -5024,7 +5034,8 @@ public class SaveReportDataClassNewStr {
 			}
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -5356,8 +5367,9 @@ public class SaveReportDataClassNewStr {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace(out);
-			out.println(e.getMessage());
+//			e.printStackTrace(out);
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -5698,7 +5710,8 @@ public class SaveReportDataClassNewStr {
 			}
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -5887,7 +5900,8 @@ public class SaveReportDataClassNewStr {
 			}
 
 		} catch (Exception e) {
-			out.println(e.getMessage());
+//			out.println(e.getMessage());
+			System.out.println(e.getMessage());
 
 		}
 		return mainJsonobj;
@@ -5927,7 +5941,8 @@ public class SaveReportDataClassNewStr {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 
 		}	
 
@@ -6204,7 +6219,7 @@ public class SaveReportDataClassNewStr {
 			// ................. close headers data..........
 
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
 		}
 		return dataall;
 	}
@@ -6275,7 +6290,7 @@ public class SaveReportDataClassNewStr {
 
 
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
 		}
 		return dataall;
 	}

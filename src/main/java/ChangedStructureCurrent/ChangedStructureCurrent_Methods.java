@@ -3516,7 +3516,8 @@ public void parseAllReportUsingApi(PrintWriter out, Session session){
 		
 		
 	} catch (Exception e) {
-		out.println(e.getMessage());
+//		out.println(e.getMessage());
+		System.out.println(e.getMessage());
 	}
 }
 
@@ -3625,7 +3626,8 @@ public void saveAllReportDataInSling(PrintWriter out, Session session, JSONObjec
 		
 		
 	} catch (Exception e) {
-		out.println("message: "+e.getMessage());
+//		out.println("message: "+e.getMessage());
+		System.out.println(e.getMessage());
 	}
 }
 
@@ -3705,7 +3707,8 @@ public void callSaveMethods(PrintWriter out, Session session,Node dayNode, Strin
 	    session.save();
 		
 	} catch (Exception e) {
-		out.println(e.getMessage());
+//		out.println(e.getMessage());
+		System.out.println(e.getMessage());
 	}
 }
 

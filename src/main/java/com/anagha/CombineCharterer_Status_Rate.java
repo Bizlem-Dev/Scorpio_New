@@ -239,6 +239,7 @@ public class CombineCharterer_Status_Rate {
 		String count="";
 		try {
 						URL obj = new URL("http://dev.bizlem.io:5030/date");
+						System.setProperty("http.keepAlive","false");
 						HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
 						postConnection.setRequestMethod("POST");
 						postConnection.setRequestProperty("Content-Type", "application/json");
@@ -247,6 +248,7 @@ public class CombineCharterer_Status_Rate {
 						os.write(rateApi.getBytes());
 						os.flush();
 						os.close();
+						
 						int responseCode = postConnection.getResponseCode();
 						//System.out.println("POST Response Code :  " + responseCode);
 						//System.out.println("POST Response Message : " + postConnection.getResponseMessage());
@@ -260,6 +262,7 @@ public class CombineCharterer_Status_Rate {
 								count=response.toString();
 							}
 							in.close();
+							postConnection.disconnect();
 							// print result
 //							System.out.println(response.toString());
 						} else {

@@ -75,13 +75,15 @@ public class ActiveMQCall {
 			producer.send(textMessage);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}finally {
 			try {
 			connection.close();
 			connection=null;
 			}catch (Exception e) {
 				// TODO: handle exception
+				System.out.println(e.getMessage());
 			}
 		}
   		System.out.println("correlationId Producer :: "+correlationId);

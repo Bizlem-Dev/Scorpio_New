@@ -1158,7 +1158,8 @@ public class ReportTypeIdentify {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return finalJsonString;
 	}
@@ -1323,7 +1324,8 @@ public class ReportTypeIdentify {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return allArrayDataDAteTonnage;
 	}
@@ -1379,7 +1381,8 @@ public class ReportTypeIdentify {
     			 
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return countObj;
 	}
@@ -1413,7 +1416,8 @@ public class ReportTypeIdentify {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return countObj;
 	}

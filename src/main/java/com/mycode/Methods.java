@@ -134,7 +134,8 @@ public class Methods {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return finalJsonString;
 	}
@@ -397,7 +398,8 @@ public class Methods {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return headerFinalArray;
 	}

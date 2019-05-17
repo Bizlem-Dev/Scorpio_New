@@ -16,7 +16,7 @@ import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
 import com.errorreport.StatusForUi;
-import com.mongocode.MongoDbConnection;
+import com.mongocode.MongoDbConnectionSuccessFullyProcessed;
 import com.mycode.SaveReportDataClassNewStr;
 import com.readGmail.GmailMethods;
 import com.reportinformationsystem.SaveReportDataClass;
@@ -60,15 +60,16 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 		 String finalwithQty="";
 		 String formatedDate="";
 		 int mongoUpdateSuccessCount=0;
-		 int mongoUpdateFailedCount=0;
+		 BufferedReader br=null;
+		 StringBuffer sb=null;
 		 
       try {
 			
 			session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
 		        
-              BufferedReader br = request.getReader();
+               br = request.getReader();
 			
-			StringBuffer sb = new StringBuffer();
+			 sb = new StringBuffer();
 			while((line = br.readLine()) != null){
 				sb.append(line);
 			}
@@ -125,16 +126,12 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 							cronSubNode.setProperty("Type", allreport);
 							mongoUpdateSuccessCount++;
 							
-						}else{
-							cronSubNode.setProperty("Ui_Update", "FAILED");
-							mongoUpdateFailedCount++;
-							
 						}
 						
 						
 					} // json check null and length!=0
 					else{
-						cronSubNode.setProperty("Ui_Update", "FAILED");
+						cronSubNode.setProperty("Ui_Update", "FAILED TO RECOGNIZED REPORT");
 					}
 					
 				} // is json valid check
@@ -144,7 +141,8 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 			session.save();
 			
 		} catch (Exception e) {
-			e.printStackTrace(out);
+//			e.printStackTrace(out);
+			System.out.println(e.getMessage());
 		}finally{
 			 if( GmailMethods.isNullString(line) ){
 				 line=null;
@@ -174,15 +172,10 @@ public class ConsumerServletGetResponse extends SlingAllMethodsServlet {
 			 
 			 if( mongoUpdateSuccessCount>0 ){
 				 if( !GmailMethods.isNullString(timestampDate) ){
-						MongoDbConnection.saveGmailReadCount("SuccessMail", timestampDate, String.valueOf(mongoUpdateSuccessCount));
-					}
-			 }if( mongoUpdateFailedCount>0 ){
-				 if( !GmailMethods.isNullString(timestampDate) ){
-						MongoDbConnection.saveGmailReadCount("FailedMail", timestampDate, String.valueOf(mongoUpdateFailedCount));
+						MongoDbConnectionSuccessFullyProcessed.saveGmailReadCount("SuccessMail", timestampDate, String.valueOf(mongoUpdateSuccessCount));
 					}
 			 }
-			 
-			 
+			 br.close();
 			 out.close();
 			 
 		}

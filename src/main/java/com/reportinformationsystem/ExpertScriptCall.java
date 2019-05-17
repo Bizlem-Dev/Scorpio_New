@@ -57,6 +57,7 @@ public class ExpertScriptCall {
 			responseString = response.toString();
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 //e.printStackTrace();
 			return "false";
 		}

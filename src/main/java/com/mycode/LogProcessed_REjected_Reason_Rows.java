@@ -45,7 +45,8 @@ public class LogProcessed_REjected_Reason_Rows {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}finally {
 			if( GmailMethods.isNullString(finalString) ){
 				finalString=null;
@@ -125,14 +126,14 @@ public class LogProcessed_REjected_Reason_Rows {
 	                    			
 	                    				// processed data
 	                    				processedDataCount++;
-	                    				countall.put("processedDataCount", String.valueOf(processedDataCount));
+	                    				countall.put("Processed", String.valueOf(processedDataCount));
 	                    		 
 	                    		} // vesselname check blank
 	                    			else {
 	                    				// rejected data and reason
 	                    				rejectedDataCount++;
-	                    				countall.put("rejectedDataCount", String.valueOf(rejectedDataCount));
-	                    				countall.put("rejectedReason", "Vessel Not Found");
+	                    				countall.put("Rejects", String.valueOf(rejectedDataCount));
+	                    				countall.put("Reason", "Vessel Not Found");
 	                    				countall.put("rejectedJsonData", rejectedJsonData);
 	                    				//System.out.println(rejectedJsonData);
 	                    			}
@@ -154,7 +155,8 @@ public class LogProcessed_REjected_Reason_Rows {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}finally {
 			if( GmailMethods.isNullString(finalJsonString) ){
 				finalJsonString=null;

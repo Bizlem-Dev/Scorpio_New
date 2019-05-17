@@ -173,7 +173,7 @@ public class ReportTypeCorrection {
 
 
 		} catch (Exception e) {
-
+          System.out.println(e.getMessage());
 		}
 		return reportChange;
 	}
@@ -190,6 +190,7 @@ public class ReportTypeCorrection {
 			url = url.replace(" ", "%20");
 
 			URL url1 = new URL(url);
+			System.setProperty("http.keepAlive","false");
 			HttpURLConnection con = (HttpURLConnection) url1.openConnection();
 			//			int responseCode = con.getResponseCode();
 
@@ -201,9 +202,10 @@ public class ReportTypeCorrection {
 				response1.append(inputLine);
 			}
 			in.close();
+			con.disconnect();
 
 		} catch (Exception e) {
-
+           System.out.println(e.getMessage());
 		}
 
 		return response1.toString();
@@ -433,7 +435,8 @@ rateTypeVal = "WS";
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return finalJsonString;
 	}
@@ -677,7 +680,8 @@ rateTypeVal = "WS";
 			}// for loop close // first loop
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return table_dataArray;
 	}
@@ -872,7 +876,8 @@ rateTypeVal = "WS";
 			}// for loop close // first loop
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return table_dataArray;
 	}
@@ -944,7 +949,8 @@ rateTypeVal = "WS";
 			}// for loop close // first loop
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return table_dataArray;
 	}

@@ -38,12 +38,14 @@ public class pallavi_WriteFile {
             os.write(data.getBytes(), 0, data.length());
             
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+        	System.out.println(e.getMessage());
         }finally{
             try {
                 os.close();
             } catch (IOException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+            	System.out.println(e.getMessage());
             }
         }
     }
