@@ -69,7 +69,7 @@ public class QueryBoostForTitles {
 
 //			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
 			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
-			
+			//url="http://172.31.0.3:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
 			url = url.replace(" ", "%20");
 			
 			URL url1 = new URL(url);
