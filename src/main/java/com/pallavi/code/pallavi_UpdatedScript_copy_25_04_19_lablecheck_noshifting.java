@@ -91,8 +91,17 @@ JSONObject objheader=null;
 				String TableName = (String) mainitr.next();
 				 Tableobj = obj.getJSONObject(TableName);
 				 Tableobj_new=new JSONObject();
-				 table_dataobj = Tableobj.getJSONArray("table_data");
-				 header_dataobj = Tableobj.getJSONArray("header_data");
+				 
+				 if(Tableobj.has("table_data")){
+				    table_dataobj = Tableobj.getJSONArray("table_data");
+				 }else{
+					 table_dataobj=new JSONArray();
+				 }
+				 if(Tableobj.has("header_data")){
+				     header_dataobj = Tableobj.getJSONArray("header_data");
+				 }else{
+					 table_dataobj=new JSONArray();
+				 }
 				 table_dataobj_new=new JSONArray();
 				// header_dataobj_new = new JSONArray();
 				 
@@ -142,9 +151,9 @@ JSONObject objheader=null;
 
 
 				 objheader = new JSONObject();
-				objheader.put("RepositionRegion", "");
-				objheader.put("ReportType", "");
-				objheader.put("CargoType", "");
+				 objheader.put("RepositionRegion", "");
+				 objheader.put("ReportType", "");
+				 objheader.put("CargoType", "");
 				int previousvessellineindex=vesselline_line_index;	
 
 				if(vesseljson_count==0) {
@@ -162,16 +171,16 @@ JSONObject objheader=null;
 						//System.out.println("previousvessellineindex "+previousvessellineindex);
 						//System.out.println("difference "+difference);
 						if(difference<0) {difference=0;}else if(difference>4) {difference=4;}else if(difference==1) {difference=0;}
-						findheaderdata(vesselline_line_index, objheader, header_dataobj, difference);
+						   findheaderdata(vesselline_line_index, objheader, header_dataobj, difference);
 						//System.out.println("objheader "+objheader);
-						previousvessellineindex=Integer.parseInt(eachrowobj.getString("line_index"));
+						 previousvessellineindex=Integer.parseInt(eachrowobj.getString("line_index"));
 						 data = eachrowobj.getJSONObject("data");
 						 header = eachrowobj.getJSONObject("header");
 						//System.out.println("header " + header);
 						 new_data = new JSONObject();
 						 new_header = new JSONObject();
 					
-					 JSONObject newDataHeaderObj=singleStringParsingmethod(data, header, new_header, objheader);
+					    JSONObject newDataHeaderObj=singleStringParsingmethod(data, header, new_header, objheader);
 						if(newDataHeaderObj.has("data")){data=newDataHeaderObj.getJSONObject("data");}
 						if(newDataHeaderObj.has("header")){header=newDataHeaderObj.getJSONObject("header");}
 						if(newDataHeaderObj.has("new_header")){new_header=newDataHeaderObj.getJSONObject("new_header");}

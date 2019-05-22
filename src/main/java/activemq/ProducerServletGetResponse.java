@@ -170,7 +170,12 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 												  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
 														  from_Source, timestampDate, timestampDateAndTime, receivedDate,
 														  nodeNameRepaceunderscore, cronNodeName);
-
+												  
+												  if( !GmailMethods.isNullString(receivedDate) ){
+														saveProcCount(receivedDate, countMongoUpDate);
+													}
+			
+											  
 											  } else if(htmlSize>1){
 												  mongoupdateCollectionFlag=true;
 												  countMongoUpDate++;
@@ -199,6 +204,11 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																		from_Source, timestampDate,
 																		timestampDateAndTime, nodeNameRepaceunderscore,
 																		attachmentNode, attachmentTomcatFilePath);
+																  
+																  if( !GmailMethods.isNullString(receivedDate) ){
+																		saveProcCount(receivedDate, countMongoUpDate);
+																	}
+							
 															  }// pdf close	
 															  
 									//............................................pdf close here...................................	
@@ -211,13 +221,21 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 																		nodeNameRepaceunderscore, attachmentNode,
 																		attachmentTomcatFilePath);
 																  
+																  if( !GmailMethods.isNullString(receivedDate) ){
+																		saveProcCount(receivedDate, countMongoUpDate);
+																	}
+							
 																  } // excel close here contains xls
 															  
 															  if(!(attachmentFlag)){
 																  htmlParser(session, out, SDC, subjectNode, textNode, textSentMailTime,
 																		  from_Source, timestampDate, timestampDateAndTime, receivedDate,
 																		  nodeNameRepaceunderscore, cronNodeName);
-
+																  
+																  if( !GmailMethods.isNullString(receivedDate) ){
+																		saveProcCount(receivedDate, countMongoUpDate);
+																	}
+							
 															    
 															  }
 															  
@@ -234,10 +252,7 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
                                        } 
 										//check mongo here
 											  
-											  if( !GmailMethods.isNullString(receivedDate) ){
-													MongoDbConnectionProcessed.saveGmailReadCount("ProcessedMail", receivedDate, String.valueOf(countMongoUpDate));
-												}
-											  
+																				  
                                     }
 								 }// null take
 							 }else{
@@ -283,6 +298,10 @@ public static void ReadGmailDataToPassPythonApi(Session session, PrintWriter out
 			   out.close();
 		}
 	}
+
+public static void saveProcCount(String receivedDate, int countMongoUpDate) {
+	MongoDbConnectionProcessed.saveGmailReadCount("ProcessedMail", receivedDate, String.valueOf(countMongoUpDate));
+}
 
 public static void excelProcessData(Session session, PrintWriter out, String cronNodeName, Node subjectNode,
 		String textSentMailTime, String from_Source, String timestampDate, String timestampDateAndTime,

@@ -107,8 +107,19 @@ JSONObject labelsInfo=null;
 				////System.out.println("TableName "+TableName );
 				 Tableobj = obj.getJSONObject(TableName);
 				 Tableobj_new=new JSONObject();
-				 table_dataobj = Tableobj.getJSONArray("table_data");
-				 header_dataobj = Tableobj.getJSONArray("header_data");
+				 
+				 if(Tableobj.has("table_data")){
+				    table_dataobj = Tableobj.getJSONArray("table_data");
+				 }else{
+					 table_dataobj=new JSONArray();
+				 }
+				 
+				 if(Tableobj.has("header_data")){
+				    header_dataobj = Tableobj.getJSONArray("header_data");
+				 }else{
+					 table_dataobj=new JSONArray();
+				 }
+				 
 				 table_dataobj_new=new JSONArray();
 				// header_dataobj_new = new JSONArray();
 				 
@@ -120,8 +131,10 @@ JSONObject labelsInfo=null;
 				String value = null;
 				String solrres= null;
 				
+				
 				for (int i = 0; i < table_dataobj.length(); i++) {
 					 eachrowobj = table_dataobj.getJSONObject(i);
+					 
 					 data = eachrowobj.getJSONObject("data");
 					 header = eachrowobj.getJSONObject("header");
 					Iterator itr = data.keys();
@@ -160,9 +173,9 @@ JSONObject labelsInfo=null;
                 //System.out.println("vesseljson_count "+vesseljson_count);
 
 				 objheader = new JSONObject();
-				objheader.put("RepositionRegion", "");
-				objheader.put("ReportType", "");
-				objheader.put("CargoType", "");
+				 objheader.put("RepositionRegion", "");
+				 objheader.put("ReportType", "");
+				 objheader.put("CargoType", "");
 				int previousvessellineindex=vesselline_line_index;	
 
 				if(vesseljson_count==0) {
