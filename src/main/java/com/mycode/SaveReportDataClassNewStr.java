@@ -2223,6 +2223,10 @@ public class SaveReportDataClassNewStr {
 							fifth_yrString=allReportJsonArrayInsideJSonobject.getString("http://www.semanticweb.org/user/ontologies/2018/10/scorpio-12-11-2018#5yr");
 							fifth_yrString = urlValue(fifth_yrString);
 						}
+						String Extra_Column="";
+						if(allReportJsonArrayInsideJSonobject.has("Extra_Column")){
+							Extra_Column=allReportJsonArrayInsideJSonobject.getString("Extra_Column");
+						}
 
 						/*Date date=GmailMethods.parseDate(textSentMailTime);
 							    dateJson=SlingMethods.formatDate_Month_Year_Day(date, out);
@@ -2452,7 +2456,7 @@ public class SaveReportDataClassNewStr {
 						out.println("CargoQtyString_outside: "+CargoQtyString);
 						out.println("vessel_outside: "+VesselNameString);
 						
-						callReportwiseReortsaveInSling(out, session, ReportTypeString, check_Port_repositionRegion_id, check_CargoType_cargotype_id, vessel_Id, vesselType_id, built, dwt, cubics, loa, ice, sternline, owners_id, check_Operators_id, check_EmployementStatus, check_OpenPort_id, OpenDateString, ETABasisString, CommentString, check_Source, ReportTimestampString, check_Information, check_FixturetType_id, check_Charterer, check_Status, CargoQtyString, check_CargoGrade, LCStartString, LCEndString, check_LoadPort_id, check_DiscPort_id, check_RateType, RateString, ReportDateString, check_Spot_TCS_id, DateString, check_CPP_DPP_id, DeliveryString, check_DeliveryPlace, PeriodString, check_Periodunit, RedeliveryString, TCRateString, check_currencyUnit, CommentString,Month_YearString,first_yrString,second_yrString,third_yrString,fifth_yrString, emailUrl, subjectNodePath,textSentMailTime,from_Source,timestampDate,timestampDateAndTime, Flag, flagPort1, flagPortOpen1, reportcomesFrom, allReport, allReportJsonArrayInsideJSonobject.toString());
+						callReportwiseReortsaveInSling(out, session, ReportTypeString, check_Port_repositionRegion_id, check_CargoType_cargotype_id, vessel_Id, vesselType_id, built, dwt, cubics, loa, ice, sternline, owners_id, check_Operators_id, check_EmployementStatus, check_OpenPort_id, OpenDateString, ETABasisString, CommentString, check_Source, ReportTimestampString, check_Information, check_FixturetType_id, check_Charterer, check_Status, CargoQtyString, check_CargoGrade, LCStartString, LCEndString, check_LoadPort_id, check_DiscPort_id, check_RateType, RateString, ReportDateString, check_Spot_TCS_id, DateString, check_CPP_DPP_id, DeliveryString, check_DeliveryPlace, PeriodString, check_Periodunit, RedeliveryString, TCRateString, check_currencyUnit, CommentString,Month_YearString,first_yrString,second_yrString,third_yrString,fifth_yrString, emailUrl, subjectNodePath,textSentMailTime,from_Source,timestampDate,timestampDateAndTime, Flag, flagPort1, flagPortOpen1, reportcomesFrom, allReport, allReportJsonArrayInsideJSonobject.toString(), Extra_Column);
 						//session.save();
 
 					}//  for 
@@ -2536,7 +2540,7 @@ public class SaveReportDataClassNewStr {
 			,String Operators,String EmploymentStatus,String OpenPort,String OpenDate,String ETABasis,String Comment,String Source,String ReportTimestamp, String Information, String FixtureType
 			,String Charterer,String Status, String CargoQty, String CargoGrade, String LCStart, String LCEnd, String LoadPort, String DiscPort, String RateType, String Rate, String ReportDate, String Spot_TC
 			, String Date, String CPP_DPP, String Delivery, String DeliveryPlace, String Period, String Periodunit, String Redelivery, String TCRate, String Unit, String Comments,
-			String Month_Year, String first_yr, String second_yr, String third_yr, String fifth_yr, String emailUrl, String subjectNodePath, String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject){
+			String Month_Year, String first_yr, String second_yr, String third_yr, String fifth_yr, String emailUrl, String subjectNodePath, String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject, String Extra_Column){
 
 		try {
 			ChangedStructureCurrent_Methods CSC=new ChangedStructureCurrent_Methods();
@@ -2554,7 +2558,7 @@ public class SaveReportDataClassNewStr {
 					ErrorNodeReportwise.callCheckBlankNodeError(out, session, emailUrl, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, timestampDateAndTime);
 				}else{
 					out.println("Tonnage Called here");
-					callTonnageReport(out, session, ReportTypeString, RepositionRegion, CargoType, VesselName, VesselType, Built, DWT, Cubics, LOA, ICE, SternLine, Owners, Operators, EmploymentStatus, OpenPort, OpenDate, ETABasis, Comment, Source, ReportTimestamp, emailUrl,subjectNodePath,textSentMailTime,  from_Source,timestampDate,timestampDateAndTime, Flag,flagPort, flagPortOpen1, reportcomesFrom, data,  allReportJsonArrayInsideJSonobject);
+					callTonnageReport(out, session, ReportTypeString, RepositionRegion, CargoType, VesselName, VesselType, Built, DWT, Cubics, LOA, ICE, SternLine, Owners, Operators, EmploymentStatus, OpenPort, OpenDate, ETABasis, Comment, Source, ReportTimestamp, emailUrl,subjectNodePath,textSentMailTime,  from_Source,timestampDate,timestampDateAndTime, Flag,flagPort, flagPortOpen1, reportcomesFrom, data,  allReportJsonArrayInsideJSonobject, Extra_Column);
 				}
 
 			}else if( ReportTypeString.equals("Spot") ){
@@ -2564,7 +2568,7 @@ public class SaveReportDataClassNewStr {
 					ErrorNodeReportwise.callCheckBlankNodeError(out, session, emailUrl, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, timestampDateAndTime);
 				
 				}else{
-					callSpotReport(out, session, Information, FixtureType, Charterer, Status, CargoQty, CargoGrade, LCStart, LCEnd, LoadPort, DiscPort, VesselName, RateType, Rate, Comment, ReportDate, Source, VesselType, ReportTimestamp, emailUrl, subjectNodePath, textSentMailTime, CargoType,  from_Source,timestampDate,timestampDateAndTime, Flag, flagPort, flagPortOpen1, reportcomesFrom, data, allReportJsonArrayInsideJSonobject);
+					callSpotReport(out, session, Information, FixtureType, Charterer, Status, CargoQty, CargoGrade, LCStart, LCEnd, LoadPort, DiscPort, VesselName, RateType, Rate, Comment, ReportDate, Source, VesselType, ReportTimestamp, emailUrl, subjectNodePath, textSentMailTime, CargoType,  from_Source,timestampDate,timestampDateAndTime, Flag, flagPort, flagPortOpen1, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, Extra_Column);
 				}
 			}else if( ReportTypeString.toLowerCase().equals("timecharterreports") || ReportTypeString.toLowerCase().equals("timecharter")){
 				//				ReportTypeString="Time";
@@ -2573,7 +2577,7 @@ public class SaveReportDataClassNewStr {
 					ErrorNodeReportwise.callCheckBlankNodeError(out, session, emailUrl, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, timestampDateAndTime);
 				
 				}else{
-					callTimecharterReport(out, session, Information, Spot_TC, Date, VesselName, CPP_DPP, Charterer, Delivery, DeliveryPlace, Period, Periodunit, Redelivery, TCRate, Rate, Unit, Comments, ReportTimestamp, Source, VesselType,emailUrl, subjectNodePath, textSentMailTime,  from_Source,timestampDate,timestampDateAndTime, Flag, flagPort, flagPortOpen1, reportcomesFrom, data, allReportJsonArrayInsideJSonobject);
+					callTimecharterReport(out, session, Information, Spot_TC, Date, VesselName, CPP_DPP, Charterer, Delivery, DeliveryPlace, Period, Periodunit, Redelivery, TCRate, Rate, Unit, Comments, ReportTimestamp, Source, VesselType,emailUrl, subjectNodePath, textSentMailTime,  from_Source,timestampDate,timestampDateAndTime, Flag, flagPort, flagPortOpen1, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, Extra_Column);
 				}
 
 			}else if( ReportTypeString.toLowerCase().equals("brokertcrate") || ReportTypeString.toLowerCase().equals("brokerrate") ){
@@ -2582,7 +2586,7 @@ public class SaveReportDataClassNewStr {
 					//callCheckBlankNodeError(out, session, emailUrl, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, timestampDateAndTime);
 					ErrorNodeReportwise.callCheckBlankNodeError(out, session, emailUrl, reportcomesFrom, data, allReportJsonArrayInsideJSonobject, timestampDateAndTime);
 				}else{
-					callBrokerTcRateReport(out, session, Source, VesselType, Month_Year, first_yr, second_yr, third_yr, fifth_yr,ReportTimestamp, emailUrl, subjectNodePath, textSentMailTime,  from_Source,timestampDate,timestampDateAndTime, Flag, flagPort, flagPortOpen1, reportcomesFrom, data,  allReportJsonArrayInsideJSonobject);
+					callBrokerTcRateReport(out, session, Source, VesselType, Month_Year, first_yr, second_yr, third_yr, fifth_yr,ReportTimestamp, emailUrl, subjectNodePath, textSentMailTime,  from_Source,timestampDate,timestampDateAndTime, Flag, flagPort, flagPortOpen1, reportcomesFrom, data,  allReportJsonArrayInsideJSonobject, Extra_Column);
 				}
 			}else {
 
@@ -2602,7 +2606,7 @@ public class SaveReportDataClassNewStr {
 
 	public static void callTonnageReport(PrintWriter out, Session session, String ReportType, String RepositionRegion, String CargoType
 			,String VesselName, String VesselType,String Built,String DWT,String Cubics,String LOA,String ICE,String SternLine,String Owners
-			,String Operators,String EmploymentStatus,String OpenPort,String OpenDate,String ETABasis,String Comment,String Source,String ReportTimestamp, String emailUrl,String subjectNodePath,String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject){
+			,String Operators,String EmploymentStatus,String OpenPort,String OpenDate,String ETABasis,String Comment,String Source,String ReportTimestamp, String emailUrl,String subjectNodePath,String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject, String Extra_Column){
 
 		try {
 			out.println("Tonnage Entered");
@@ -2745,7 +2749,7 @@ public class SaveReportDataClassNewStr {
 					subNode.setProperty("flagOpenPort", flagPortOpen1);
 					subNode.setProperty("reportcomesFrom", reportcomesFrom); //
 					subNode.setProperty("SingleJson",  allReportJsonArrayInsideJSonobject);
-
+					subNode.setProperty("Extra_Column",  Extra_Column);
 					/*if("pdf".equals(reportcomesFrom)){
 					 subNode.setProperty("pdfJson", data);
 				 }*/
@@ -2777,7 +2781,7 @@ public class SaveReportDataClassNewStr {
 
 	public static void callSpotReport(PrintWriter out, Session session, String Information, String FixtureType, String Charterer, String Status
 			,String CargoQty, String CargoGrade, String LCStart, String LCEnd, String LoadPort, String DiscPort, String VesselName
-			,String RateType, String Rate, String Comment, String ReportDate, String Source, String VesselType, String ReportTimestamp, String emailUrl, String subjectNodePath, String textSentMailTime, String CargoType, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject){
+			,String RateType, String Rate, String Comment, String ReportDate, String Source, String VesselType, String ReportTimestamp, String emailUrl, String subjectNodePath, String textSentMailTime, String CargoType, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject, String Extra_Column){
 
 		try {
 			if( !GmailMethods.isNullString(VesselName) ){
@@ -2924,6 +2928,7 @@ public class SaveReportDataClassNewStr {
 					subNode.setProperty("from_Source", from_Source);
 					subNode.setProperty("timestampDate", timestampDate);
 					subNode.setProperty("timestampDateAndTime", timestampDateAndTime);
+					subNode.setProperty("Extra_Column", Extra_Column);
 					/*subNode.setProperty("excelUrl", "");
 				 subNode.setProperty("Error", "");
 				 subNode.setProperty("attachment", "");*/
@@ -2943,7 +2948,7 @@ public class SaveReportDataClassNewStr {
 
 	public static  void callTimecharterReport(PrintWriter out, Session session, String Information, String Spot_TC, String Date, String VesselName
 			, String CPP_DPP, String Charterer, String Delivery, String DeliveryPlace, String Period, String Periodunit, String Redelivery
-			, String TCRate, String Rate, String Unit, String Comments, String TimeStamp, String Source, String Vesseltype, String emailUrl, String subjectNodePath, String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1,  String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject){
+			, String TCRate, String Rate, String Unit, String Comments, String TimeStamp, String Source, String Vesseltype, String emailUrl, String subjectNodePath, String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1,  String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject, String Extra_Column){
 
 		try {
 
@@ -3078,7 +3083,7 @@ public class SaveReportDataClassNewStr {
 					subNode.setProperty("reportcomesFrom", reportcomesFrom);
 					//				 subNode.setProperty("flagPort", flagPort);
 					subNode.setProperty("SingleJson",  allReportJsonArrayInsideJSonobject);
-
+					subNode.setProperty("Extra_Column",  Extra_Column);
 					/*if("pdf".equals(reportcomesFrom)){
 					 subNode.setProperty("pdfJson", data);
 				 }*/
@@ -3107,7 +3112,7 @@ public class SaveReportDataClassNewStr {
 	}
 
 	public static void callBrokerTcRateReport(PrintWriter out, Session session, String Broker, String VesselType, String Month_Year, String first_yr,
-			String second_yr, String third_yr, String fifth_yr, String ReportTimestamp, String emailUrl, String subjectNodePath, String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject){
+			String second_yr, String third_yr, String fifth_yr, String ReportTimestamp, String emailUrl, String subjectNodePath, String textSentMailTime, String from_Source, String timestampDate,String timestampDateAndTime, String Flag, String flagPort, String flagPortOpen1, String reportcomesFrom, String data, String allReportJsonArrayInsideJSonobject, String Extra_Column){
 
 		try {
 
@@ -3227,7 +3232,7 @@ public class SaveReportDataClassNewStr {
 					//				 subNode.setProperty("vesselFlag", Flag);//flagPort
 					subNode.setProperty("reportcomesFrom", reportcomesFrom);  //vinayaJson
 					subNode.setProperty("SingleJson", allReportJsonArrayInsideJSonobject);
-
+					subNode.setProperty("Extra_Column", Extra_Column);
 					/*if("pdf".equals(reportcomesFrom)){
 					 subNode.setProperty("pdfJson", data);
 				 }*/

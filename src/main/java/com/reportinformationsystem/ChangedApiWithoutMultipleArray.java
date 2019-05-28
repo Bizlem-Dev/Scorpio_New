@@ -534,7 +534,12 @@ public class ChangedApiWithoutMultipleArray {
 						flagPort = nextnode.getProperty("flagOpenPort").getString();
 
 					}
-					
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 
 					keyNameObject = new JSONObject();
 
@@ -575,6 +580,7 @@ public class ChangedApiWithoutMultipleArray {
 						keyNameObject.put("emailClientNodeId", emailClientNodeId);
 						keyNameObject.put("vesselFlag", vesselFlag);
 						keyNameObject.put("flagOpenPort", flagPort);
+						keyNameObject.put("Extra_Column", Extra_Column);
 //					}
 					
 					
@@ -1163,7 +1169,12 @@ public class ChangedApiWithoutMultipleArray {
 						flagPort = nextnode.getProperty("flagPort").getString();
 
 					}
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
 
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 					
 					
 					
@@ -1201,6 +1212,7 @@ public class ChangedApiWithoutMultipleArray {
 					keyNameObject.put("vesselFlag", vesselFlag);
 					keyNameObject.put("flagPort", flagPort);
 					keyNameObject.put("ReportTimestamp", ReportTimestamp);
+					keyNameObject.put("Extra_Column", Extra_Column);
 
 					if (keyNameObject.length() > 0) {
 						keyNameObjectJsonarray.put(keyNameObject);
@@ -1703,7 +1715,12 @@ public class ChangedApiWithoutMultipleArray {
 						vesselFlag = nextnode.getProperty("vesselFlag").getString();
 
 					}
-					
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 
 					keyNameObject = new JSONObject();
 
@@ -1735,6 +1752,7 @@ public class ChangedApiWithoutMultipleArray {
 					keyNameObject.put("emailUrl", emailUrl);
 					keyNameObject.put("emailClientNodeId", emailClientNodeId);
 					keyNameObject.put("vesselFlag", vesselFlag);
+					keyNameObject.put("Extra_Column", Extra_Column);
 					
 
 					if (keyNameObject.length() > 0) {
@@ -2260,7 +2278,12 @@ public class ChangedApiWithoutMultipleArray {
 						emailClientNodeId = nextnode.getProperty("emailClientNodeId").getString();
 
 					}
-					
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 
 					keyNameObject = new JSONObject();
 
@@ -2281,6 +2304,7 @@ public class ChangedApiWithoutMultipleArray {
 					keyNameObject.put("Sr_No", Sr_No);
 					keyNameObject.put("emailUrl", emailUrl);
 					keyNameObject.put("emailClientNodeId", emailClientNodeId);
+					keyNameObject.put("Extra_Column", Extra_Column);
 					
 
 					if (keyNameObject.length() > 0) {

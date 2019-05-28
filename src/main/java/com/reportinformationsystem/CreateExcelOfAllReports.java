@@ -3,6 +3,8 @@ package com.reportinformationsystem;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -161,6 +163,18 @@ public class CreateExcelOfAllReports {
 			Cell ICE = brokertcratedatarow.createCell(17);
 			ICE.setCellValue("TimeStamp");
 			ICE.setCellStyle(headerCellStyle);
+			
+			Cell emailUrl = brokertcratedatarow.createCell(18);
+			emailUrl.setCellValue("emailUrl");
+			emailUrl.setCellStyle(headerCellStyle); //SingleJson
+			
+			Cell SingleJson = brokertcratedatarow.createCell(19);
+			SingleJson.setCellValue("SingleJson");
+			SingleJson.setCellStyle(headerCellStyle);
+			
+			Cell Extra_Column = brokertcratedatarow.createCell(20);
+			Extra_Column.setCellValue("Extra_Column");
+			Extra_Column.setCellStyle(headerCellStyle);
 
 			if (Tonnagejsonobj.has("TimeCharterReportsList")) {
 				JSONArray combinebrokerjsonarray = new JSONArray();
@@ -276,6 +290,24 @@ public class CreateExcelOfAllReports {
 					if (BrokerTcRateList_inside_jsonobj.has("TimeStamp")) {
 						firstyr_value5 = BrokerTcRateList_inside_jsonobj.getString("TimeStamp");
 						combinebrokerobj.put("TimeStampobj", firstyr_value5);
+					}
+					
+					String firstyr_value144 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("SingleJson")) {
+						firstyr_value144 = BrokerTcRateList_inside_jsonobj.getString("SingleJson");
+						combinebrokerobj.put("SingleJsonobj", firstyr_value144);
+					}
+					
+					
+					String emailUrl1 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("emailUrl")) {
+						emailUrl1 = BrokerTcRateList_inside_jsonobj.getString("emailUrl");
+						combinebrokerobj.put("emailurlobj", emailUrl1);
+					}
+					String Extra_Column12 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("Extra_Column")) {
+						Extra_Column12 = BrokerTcRateList_inside_jsonobj.getString("Extra_Column");
+						combinebrokerobj.put("Extra_ColumnObj", Extra_Column12);
 					}
 
 					if (combinebrokerobj.length() > 0) {
@@ -519,24 +551,55 @@ public class CreateExcelOfAllReports {
 						broker_value = brokerrow.createCell(17);
 						broker_value.setCellValue(vesseltypeobj7);
 						
+						String vesseltypeobj1712 = "";
+						if (brokercombineobj.has("emailurlobj")) {
+							vesseltypeobj1712 = brokercombineobj.getString("emailurlobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(18);
+						broker_value.setCellValue(vesseltypeobj1712);
+
+						String vesseltypeobj1713 = "";
+						if (brokercombineobj.has("SingleJsonobj")) {
+							vesseltypeobj1713 = brokercombineobj.getString("SingleJsonobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(19);
+						broker_value.setCellValue(vesseltypeobj1713);
+						
+						String vesseltypeobj17134 = "";
+						if (brokercombineobj.has("Extra_ColumnObj")) {
+							vesseltypeobj17134 = brokercombineobj.getString("Extra_ColumnObj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(20);
+						broker_value.setCellValue(vesseltypeobj17134);
+						
 					}
 				} //
 
 			} // main if
 
-			Calendar cal = null;
-			cal = Calendar.getInstance();
-			Date minDate = new Date(cal.getTimeInMillis());
+			Date currentdate = new Date();
+			DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			String day_month_year=sdf.format(currentdate);
 
-			JSONObject dateJson = new JSONObject();
-			Date date = GmailMethods.parseDate(minDate.toString());
-			dateJson = SlingMethods.formatDate_Month_Year_Day(date, out);
-
-			int day = dateJson.getInt("day");
-			int month = dateJson.getInt("month");
-			int year = dateJson.getInt("year");
-
-			String fileName="TimeCharterReports"+"Data"+"_"+day+"-"+month+"-"+year+".xls";
+			String fileName="TimeCharterReports"+"Data"+"_"+day_month_year+".xls";
 			fileName = fileName.replace(" ", "-");
 
 			File linuxdirectory = new File("/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpioexcel");
@@ -770,6 +833,17 @@ public class CreateExcelOfAllReports {
 			ReportTimestampSpot.setCellValue("ReportTimestamp");
 			ReportTimestampSpot.setCellStyle(headerCellStyle);
 			
+			Cell emailUrl = brokertcratedatarow.createCell(19);
+			emailUrl.setCellValue("emailUrl");
+			emailUrl.setCellStyle(headerCellStyle); //SingleJson
+			
+			Cell SingleJson = brokertcratedatarow.createCell(20);
+			SingleJson.setCellValue("SingleJson");
+			SingleJson.setCellStyle(headerCellStyle);
+			
+			Cell Extra_Column = brokertcratedatarow.createCell(21);
+			Extra_Column.setCellValue("Extra_Column");
+			Extra_Column.setCellStyle(headerCellStyle);
 			
 			
 			if (Tonnagejsonobj.has("spotList")) {
@@ -892,6 +966,24 @@ public class CreateExcelOfAllReports {
 					if (BrokerTcRateList_inside_jsonobj.has("ReportTimestamp")) {
 						firstyr_value81 = BrokerTcRateList_inside_jsonobj.getString("ReportTimestamp");
 						combinebrokerobj.put("ReportTimestampobj", firstyr_value81);
+					}
+					
+					String firstyr_value144 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("SingleJson")) {
+						firstyr_value144 = BrokerTcRateList_inside_jsonobj.getString("SingleJson");
+						combinebrokerobj.put("SingleJsonobj", firstyr_value144);
+					}
+					
+					
+					String emailUrl1 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("emailUrl")) {
+						emailUrl1 = BrokerTcRateList_inside_jsonobj.getString("emailUrl");
+						combinebrokerobj.put("emailurlobj", emailUrl1);
+					}
+					String Extra_Column12 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("Extra_Column")) {
+						Extra_Column12 = BrokerTcRateList_inside_jsonobj.getString("Extra_Column");
+						combinebrokerobj.put("Extra_ColumnObj", Extra_Column12);
 					}
 
 					if (combinebrokerobj.length() > 0) {
@@ -1148,24 +1240,56 @@ public class CreateExcelOfAllReports {
 						broker_value = brokerrow.createCell(18);
 						broker_value.setCellValue(vesseltypeobj9);
 
+						String vesseltypeobj1712 = "";
+						if (brokercombineobj.has("emailurlobj")) {
+							vesseltypeobj1712 = brokercombineobj.getString("emailurlobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(19);
+						broker_value.setCellValue(vesseltypeobj1712);
+
+						String vesseltypeobj1713 = "";
+						if (brokercombineobj.has("SingleJsonobj")) {
+							vesseltypeobj1713 = brokercombineobj.getString("SingleJsonobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(20);
+						broker_value.setCellValue(vesseltypeobj1713);
+						
+						
+						String vesseltypeobj17134 = "";
+						if (brokercombineobj.has("Extra_ColumnObj")) {
+							vesseltypeobj17134 = brokercombineobj.getString("Extra_ColumnObj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(21);
+						broker_value.setCellValue(vesseltypeobj17134);
+						
 					}
 				} //
 
 			} // main if
 
-			Calendar cal = null;
-			cal = Calendar.getInstance();
-			Date minDate = new Date(cal.getTimeInMillis());
+			Date currentdate = new Date();
+			DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			String day_month_year=sdf.format(currentdate);
 
-			JSONObject dateJson = new JSONObject();
-			Date date = GmailMethods.parseDate(minDate.toString());
-			dateJson = SlingMethods.formatDate_Month_Year_Day(date, out);
-
-			int day = dateJson.getInt("day");
-			int month = dateJson.getInt("month");
-			int year = dateJson.getInt("year");
-
-			String fileName = "Spot" + "Data" + "_" + day + "-" + month + "-" + year + ".xls";
+			String fileName = "Spot" + "Data" + "_" + day_month_year + ".xls";
 			fileName = fileName.replace(" ", "-");
 
 			File linuxdirectory = new File("/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpioexcel");
@@ -1420,6 +1544,18 @@ public class CreateExcelOfAllReports {
 			Cell VesselType = brokertcratedatarow.createCell(19);
 			VesselType.setCellValue("ReportTimestamp");
 			VesselType.setCellStyle(headerCellStyle);
+			
+			Cell emailUrl = brokertcratedatarow.createCell(20);
+			emailUrl.setCellValue("emailUrl");
+			emailUrl.setCellStyle(headerCellStyle); 
+			
+			Cell SingleJson = brokertcratedatarow.createCell(21);
+			SingleJson.setCellValue("SingleJson");
+			SingleJson.setCellStyle(headerCellStyle);
+			
+			Cell Extra_Column = brokertcratedatarow.createCell(22);
+			Extra_Column.setCellValue("Extra_Column");
+			Extra_Column.setCellStyle(headerCellStyle);
 
 			if (Tonnagejsonobj.has("tonnageList")) {
 				JSONArray combinebrokerjsonarray = new JSONArray();
@@ -1545,6 +1681,25 @@ public class CreateExcelOfAllReports {
 					if (BrokerTcRateList_inside_jsonobj.has("VesselType")) {
 						firstyr_value12 = BrokerTcRateList_inside_jsonobj.getString("VesselType");
 						combinebrokerobj.put("VesselTypeeobj", firstyr_value12);
+					}
+					
+					String emailUrl1 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("emailUrl")) {
+						emailUrl1 = BrokerTcRateList_inside_jsonobj.getString("emailUrl");
+						combinebrokerobj.put("emailurlobj", emailUrl1);
+					}
+					
+					
+					String firstyr_value13 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("SingleJson")) {
+						firstyr_value13 = BrokerTcRateList_inside_jsonobj.getString("SingleJson");
+						combinebrokerobj.put("SingleJsonobj", firstyr_value13);
+					}
+					
+					String Extra_Column12 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("Extra_Column")) {
+						Extra_Column12 = BrokerTcRateList_inside_jsonobj.getString("Extra_Column");
+						combinebrokerobj.put("Extra_ColumnObj", Extra_Column12);
 					}
 
 					if (combinebrokerobj.length() > 0) {
@@ -1821,27 +1976,57 @@ public class CreateExcelOfAllReports {
 						broker_value = brokerrow.createCell(19);
 						broker_value.setCellValue(vesseltypeobj171);
 
+						String vesseltypeobj1712 = "";
+						if (brokercombineobj.has("emailurlobj")) {
+							vesseltypeobj1712 = brokercombineobj.getString("emailurlobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(20);
+						broker_value.setCellValue(vesseltypeobj1712);
+
+						String vesseltypeobj1713 = "";
+						if (brokercombineobj.has("SingleJsonobj")) {
+							vesseltypeobj1713 = brokercombineobj.getString("SingleJsonobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(21);
+						broker_value.setCellValue(vesseltypeobj1713);
+						
+						
+						String vesseltypeobj17134 = "";
+						if (brokercombineobj.has("Extra_ColumnObj")) {
+							vesseltypeobj17134 = brokercombineobj.getString("Extra_ColumnObj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(22);
+						broker_value.setCellValue(vesseltypeobj17134);
+						
 					}
 
 				} //
 
 			} // if
 
-			Calendar cal = null;
-			cal = Calendar.getInstance();
-			Date minDate = new Date(cal.getTimeInMillis());
+			Date currentdate = new Date();
+			DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			String day_month_year=sdf.format(currentdate);
 
-			JSONObject dateJson = new JSONObject();
-			Date date = GmailMethods.parseDate(minDate.toString());
-			dateJson = SlingMethods.formatDate_Month_Year_Day(date, out);
-
-			int day = dateJson.getInt("day");
-			int month = dateJson.getInt("month");
-			int year = dateJson.getInt("year");
-
-			// String fileName = "broker" + "tcrate" + "_" + day + "-" + month +
-			// "-" + year + ".xls";
-			String fileName = "Tonnage" + "Data" + "_" + day + "-" + month + "-" + year + ".xls";
+			String fileName = "Tonnage" + "Data" + "_" + day_month_year + ".xls";
 			fileName = fileName.replace(" ", "-");
 
 			File linuxdirectory = new File("/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpioexcel");
@@ -1945,6 +2130,18 @@ public class CreateExcelOfAllReports {
 			Cell fifthYear = brokertcratedatarow.createCell(6);
 			fifthYear.setCellValue("5yr");
 			fifthYear.setCellStyle(headerCellStyle);
+			
+			Cell emailUrl = brokertcratedatarow.createCell(7);
+			emailUrl.setCellValue("emailUrl");
+			emailUrl.setCellStyle(headerCellStyle); //SingleJson
+			
+			Cell SingleJson = brokertcratedatarow.createCell(8);
+			SingleJson.setCellValue("SingleJson");
+			SingleJson.setCellStyle(headerCellStyle);
+			
+			Cell Extra_Column = brokertcratedatarow.createCell(9);
+			Extra_Column.setCellValue("Extra_Column");
+			Extra_Column.setCellStyle(headerCellStyle);
 
 			if (brokertcratejsonobj.has("BrokerTcRateList")) {
 				JSONArray combinebrokerjsonarray = new JSONArray();
@@ -1989,6 +2186,24 @@ public class CreateExcelOfAllReports {
 					if (BrokerTcRateList_inside_jsonobj.has("fifth_yr")) {
 						fifth_value = BrokerTcRateList_inside_jsonobj.getString("fifth_yr");
 						combinebrokerobj.put("fifthyrobj", fifth_value);
+					}
+					
+					String firstyr_value144 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("SingleJson")) {
+						firstyr_value144 = BrokerTcRateList_inside_jsonobj.getString("SingleJson");
+						combinebrokerobj.put("SingleJsonobj", firstyr_value144);
+					}
+					
+					
+					String emailUrl1 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("emailUrl")) {
+						emailUrl1 = BrokerTcRateList_inside_jsonobj.getString("emailUrl");
+						combinebrokerobj.put("emailurlobj", emailUrl1);
+					}
+					String Extra_Column12 = "";
+					if (BrokerTcRateList_inside_jsonobj.has("Extra_Column")) {
+						Extra_Column12 = BrokerTcRateList_inside_jsonobj.getString("Extra_Column");
+						combinebrokerobj.put("Extra_ColumnObj", Extra_Column12);
 					}
 
 					if (combinebrokerobj.length() > 0) {
@@ -2088,24 +2303,55 @@ public class CreateExcelOfAllReports {
 						broker_value = brokerrow.createCell(6);
 						broker_value.setCellValue(fifthyrobj);
 
+						String vesseltypeobj1712 = "";
+						if (brokercombineobj.has("emailurlobj")) {
+							vesseltypeobj1712 = brokercombineobj.getString("emailurlobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(7);
+						broker_value.setCellValue(vesseltypeobj1712);
+
+						String vesseltypeobj1713 = "";
+						if (brokercombineobj.has("SingleJsonobj")) {
+							vesseltypeobj1713 = brokercombineobj.getString("SingleJsonobj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(8);
+						broker_value.setCellValue(vesseltypeobj1713);
+						
+						String vesseltypeobj17134 = "";
+						if (brokercombineobj.has("Extra_ColumnObj")) {
+							vesseltypeobj17134 = brokercombineobj.getString("Extra_ColumnObj");
+						}
+
+						brokerrow = sheet.getRow((rowIndex + 1 + j));
+						if (brokerrow == null) {
+							brokerrow = sheet.createRow((rowIndex + 1 + j));
+						}
+
+						broker_value = brokerrow.createCell(9);
+						broker_value.setCellValue(vesseltypeobj17134);
+						
 					}
 				} // length check zero
 
 			} // main if
 
-			Calendar cal = null;
-			cal = Calendar.getInstance();
-			Date minDate = new Date(cal.getTimeInMillis());
+			Date currentdate = new Date();
+			DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+			String day_month_year=sdf.format(currentdate);
 
-			JSONObject dateJson = new JSONObject();
-			Date date = GmailMethods.parseDate(minDate.toString());
-			dateJson = SlingMethods.formatDate_Month_Year_Day(date, out);
-
-			int day = dateJson.getInt("day");
-			int month = dateJson.getInt("month");
-			int year = dateJson.getInt("year");
-
-			String fileName = "broker" + "tcrate" + "_" + day + "-" + month + "-" + year + ".xls";
+			String fileName = "broker" + "tcrate" + "_" +day_month_year+ ".xls";
 			fileName = fileName.replace(" ", "-");
 
 			File linuxdirectory = new File("/usr/local/tomcat8/apache-tomcat-8.5.35/webapps/ROOT/scorpioexcel");

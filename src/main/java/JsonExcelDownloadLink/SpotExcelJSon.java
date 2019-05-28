@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
@@ -13,7 +12,6 @@ import javax.servlet.ServletException;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.api.SlingRepository;
 
 import com.reportinformationsystem.fetchAllReport;
@@ -24,6 +22,7 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.felix.scr.annotations.Properties;
 
+@SuppressWarnings("deprecation")
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ 
@@ -58,8 +57,6 @@ public class SpotExcelJSon extends SlingAllMethodsServlet {
 			
 		session = repo.login(new SimpleCredentials("admin", "admin".toCharArray()));
 	
-		//fetchAllReport.fetchTonnage_37KData(out, session);
-		
 		fetchAllReport.fetchSpotDataChangedNew(out, session);
 
 		}catch(Exception e){
@@ -79,45 +76,6 @@ public class SpotExcelJSon extends SlingAllMethodsServlet {
 	public static void rename(Node node, String newName) throws RepositoryException 
 	{
 		node.getSession().move(node.getPath(), node.getParent().getPath() + "/" + newName);
-	}
-	
-	public static JSONObject fetchCronWiseDataForUi(PrintWriter out, Session session){
-		JSONObject cronDataFinal=new JSONObject();
-		try {
-			Node scorpioDataBase=null;
-			Node StatusUIProcess=null;
-			Node cronNodeFifty=null;
-			
-			if( session.getRootNode().hasNode("scorpioDataBase") ){
-				scorpioDataBase=session.getRootNode().getNode("scorpioDataBase");
-			}if( scorpioDataBase.hasNode("StatusUIProcess") ){
-				StatusUIProcess=scorpioDataBase.getNode("StatusUIProcess");
-			}
-			
-			if(StatusUIProcess.hasNode("50")){
-				cronNodeFifty=StatusUIProcess.getNode("50");
-				if(cronNodeFifty.hasNodes()){
-					NodeIterator itr=cronNodeFifty.getNodes();
-					while(itr.hasNext()){
-						Node nextNode=itr.nextNode();
-						if(nextNode.hasProperty("Ui_Update")){
-							String uiupdate=nextNode.getProperty("Ui_Update").getString();
-							if("NO".equalsIgnoreCase(uiupdate)){
-								nextNode.remove();
-								session.save();
-							}
-						}
-					}
-				}
-			}
-			
-			
-				
-			
-		} catch (Exception e) {
-			
-		}
-		return cronDataFinal;
 	}
 	
 }

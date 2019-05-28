@@ -211,10 +211,24 @@ public class SaveReportNewRowWisePositionCheck {
 	    	         						Rate_Position=tabledataJsonObj.getString("Rate_Position");
 	    	         					}
 	    	         					
+	    	         					boolean rateposiotioncheck=false;
+	    	         					
 	    	         					if( !GmailMethods.isNullString(Rate_Position) ){
-	    	         						 newHeader.put(Rate_Position, "Rate");
+	    	         						 //newHeader.put(Rate_Position, "Rate");
+	    	         						if(headerJSonObj.has(Rate_Position)){
+	    	         							Rate_Position=headerJSonObj.getString(Rate_Position);
+	    	         						}
+	    	         						 if(Rate_Position.equalsIgnoreCase("Rate")){
+	    	         							newHeader.put(Rate_Position, "Rate");
+	    	         							rateposiotioncheck =true;
+	    	         						 }
 	    	         						
-	    	         					}else{
+	    	         						 
+	    	         					} // null check
+	    	         					
+	    	         					if(!rateposiotioncheck){
+	    	         						
+//	    	         					else{
 	    	         						if(valuemaxJson.equals("Rate")){
 		    	         						 String dataRateValue=dataJSonObj.getString(JsonKey);
 		    	         						if( !GmailMethods.isNullString(dataRateValue) ){

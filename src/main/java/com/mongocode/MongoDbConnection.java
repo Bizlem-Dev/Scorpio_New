@@ -309,5 +309,37 @@ public class MongoDbConnection {
 
 	}
  
+ public static DBCollection reportNotRecognizedMongo( String Dbname ,String collectionname
+			, String timeStamp, String subject, String emailUrl, String reportIdentiyFailedReason
+			) {
+		 
+		   DBCollection collection=null;
+		   MongoClient mongoClient=null;
+	    try {
+	 	   
+	 	     BasicDBObject obj = new BasicDBObject();
+	 	   
+	         mongoClient = new MongoClient("localhost", 27017);
+	         DB mongoDataBase = mongoClient.getDB(Dbname); // databasename
+	         
+	         collection = mongoDataBase.getCollection(collectionname);
+	         
+	    	 obj.put("timeStamp", timeStamp);
+	    	 obj.put("subject", subject);
+	    	 obj.put("emailUrl", emailUrl);
+	    	 obj.put("reportNotIdentifiedReason", reportIdentiyFailedReason);
+	    	 
+	    	 collection.insert(obj);
+
+	    } catch (Exception e) {
+//	        e.printStackTrace();
+	    	System.out.println(e.getMessage());
+	    } finally{
+	 	   mongoClient.close();
+	    }
+	    return collection;
+
+	}
+ 
 
 }

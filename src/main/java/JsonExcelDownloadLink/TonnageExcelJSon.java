@@ -24,6 +24,7 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.felix.scr.annotations.Properties;
 
+@SuppressWarnings("deprecation")
 @Component(immediate = true, metatype = false)
 @Service(value = javax.servlet.Servlet.class)
 @Properties({ 

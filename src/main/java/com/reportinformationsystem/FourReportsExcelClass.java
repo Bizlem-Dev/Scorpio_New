@@ -708,7 +708,18 @@ public class FourReportsExcelClass {
 						flagPort = nextnode.getProperty("flagOpenPort").getString();
 
 					}
-					
+					String SingleJson = "";
+					if (nextnode.hasProperty("SingleJson")) {
+
+						SingleJson = nextnode.getProperty("SingleJson").getString();
+
+					}
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 
 					keyNameObject = new JSONObject();
 
@@ -743,6 +754,8 @@ public class FourReportsExcelClass {
 					keyNameObject.put("emailClientNodeId", emailClientNodeId);
 					keyNameObject.put("vesselFlag", vesselFlag);
 					keyNameObject.put("flagOpenPort", flagPort);
+					keyNameObject.put("SingleJson", SingleJson);
+					keyNameObject.put("Extra_Column", Extra_Column);
 					
                     // boolean datFormate=AuthHelper.etaBasisCheckDAteformate(OpenDate, out, ReportTimestamp1, year);
 					
@@ -829,7 +842,7 @@ public class FourReportsExcelClass {
 			if (Spot.hasNodes()) {
 				long size = Spot.getNodes().getSize();
 				
-				String Id = "";
+				
 
 				JSONObject keyNameObject = null;
 				JSONArray keyNameObjectJsonarray = new JSONArray();
@@ -843,7 +856,7 @@ public class FourReportsExcelClass {
 					int parseId = 0;
 					i++;
 					String subNodeName = nextnode.getName();
-
+					String Id = "";
 					String Information = "";
 					String FixtureType = "";
 					String Charterer = "";
@@ -1119,7 +1132,19 @@ public class FourReportsExcelClass {
 						}
 						
 					}
+					String SingleJson = "";
+					if (nextnode.hasProperty("SingleJson")) {
 
+						SingleJson = nextnode.getProperty("SingleJson").getString();
+
+					}
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
+					
 					keyNameObject = new JSONObject();
 
 					keyNameObject.put("spotId", Id);
@@ -1152,6 +1177,8 @@ public class FourReportsExcelClass {
 					keyNameObject.put("vesselFlag", vesselFlag);
 					keyNameObject.put("flagPort", flagPort);
 					keyNameObject.put("ReportTimestamp", ReportTimestamp);
+					keyNameObject.put("SingleJson", SingleJson);
+					keyNameObject.put("Extra_Column", Extra_Column);
 
 					if (keyNameObject.length() > 0) {
 						keyNameObjectJsonarray.put(keyNameObject);
@@ -1236,7 +1263,7 @@ public class FourReportsExcelClass {
 
 			if (TimeCharterReports.hasNodes()) {
 				long size = TimeCharterReports.getNodes().getSize();
-				String Id = "";
+				
 
 				JSONObject keyNameObject = null;
 				JSONArray keyNameObjectJsonarray = new JSONArray();
@@ -1250,6 +1277,7 @@ public class FourReportsExcelClass {
 					int parseId = 0;
 					String subNodeName = nextnode.getName();
 
+					String Id = "";
 					String Information = "";
 					String Charterer = "";
 					String Source = "";
@@ -1506,6 +1534,18 @@ public class FourReportsExcelClass {
 
 					}
 					
+					String SingleJson = "";
+					if (nextnode.hasProperty("SingleJson")) {
+
+						SingleJson = nextnode.getProperty("SingleJson").getString();
+
+					}
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 
 					keyNameObject = new JSONObject();
 
@@ -1537,6 +1577,8 @@ public class FourReportsExcelClass {
 					keyNameObject.put("emailUrl", emailUrl);
 					keyNameObject.put("emailClientNodeId", emailClientNodeId);
 					keyNameObject.put("vesselFlag", vesselFlag);
+					keyNameObject.put("SingleJson", SingleJson);
+					keyNameObject.put("Extra_Column", Extra_Column);
 					
 
 					if (keyNameObject.length() > 0) {
@@ -1739,7 +1781,18 @@ public class FourReportsExcelClass {
 						emailClientNodeId = nextnode.getProperty("emailClientNodeId").getString();
 
 					}
-					
+					String SingleJson = "";
+					if (nextnode.hasProperty("SingleJson")) {
+
+						SingleJson = nextnode.getProperty("SingleJson").getString();
+
+					}
+					String Extra_Column = "";
+					if (nextnode.hasProperty("Extra_Column")) {
+
+						Extra_Column = nextnode.getProperty("Extra_Column").getString();
+
+					}
 
 					keyNameObject = new JSONObject();
 
@@ -1760,6 +1813,8 @@ public class FourReportsExcelClass {
 					keyNameObject.put("Sr_No", Sr_No);
 					keyNameObject.put("emailUrl", emailUrl);
 					keyNameObject.put("emailClientNodeId", emailClientNodeId);
+					keyNameObject.put("SingleJson", SingleJson);
+					keyNameObject.put("Extra_Column", Extra_Column);
 					
 
 					if (keyNameObject.length() > 0) {

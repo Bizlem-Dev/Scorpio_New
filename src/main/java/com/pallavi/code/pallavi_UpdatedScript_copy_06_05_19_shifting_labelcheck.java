@@ -117,7 +117,7 @@ JSONObject labelsInfo=null;
 				 if(Tableobj.has("header_data")){
 				    header_dataobj = Tableobj.getJSONArray("header_data");
 				 }else{
-					 table_dataobj=new JSONArray();
+					 header_dataobj=new JSONArray();
 				 }
 				 
 				 table_dataobj_new=new JSONArray();
@@ -1842,6 +1842,7 @@ return DataType;
         	////System.out.println("index "+index);
             JSONObject valuejson=entry.getValue();
             ////System.out.println("valuejson "+valuejson);
+            if(valuejson.has("key") && valuejson.has("value")) {
         	String key=valuejson.getString("key");
         	String value= valuejson.getString("value");
         	int valuelength=valuejson.getInt("valuelength");
@@ -1882,7 +1883,7 @@ return DataType;
             }
             count++;}
         	previousend_index=index+valuelength;
-           } 
+           } }
         String index=data.length()+"";
         data.put(index, alldata_return);
         header.put(index, "unknown_"+index);

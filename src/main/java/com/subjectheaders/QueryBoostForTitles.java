@@ -15,7 +15,7 @@ import com.reportinformationsystem.SaveReportDataClass;
 public class QueryBoostForTitles {
 
 	public static void main(String[] args) {
-		 String q="CLEAN";
+		 String q="CLARKSON USA - DTY CARIBS HANDY MR PANAMAX LIST (ATTACHED)";
 		// q = q.replaceAll("((?<![A-Za-z])(AND|and|And))","");
 		// System.out.println("q:: "+q);
 		 JSONObject s=SubjectData(q, null);
@@ -68,7 +68,7 @@ public class QueryBoostForTitles {
 			String q="value_str:("+passvalue+")^2";
 
 //			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
-			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
+			url="http://35.231.163.191:8983/solr/subject_data/select?q="+q+"&fl="+fl;
 			//url="http://172.31.0.3:8983/solr/subject_data/select?q="+q+"&fl="+fl+"";
 			url = url.replace(" ", "%20");
 			
